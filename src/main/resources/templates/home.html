@@ -4,24 +4,24 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <title>Home Page</title>
 </head>
 <body>
 
-	<div class="jumbotron">
-		<div class="container">
-  			<div class="page-header">
-<!--   				<img src="/static/images/book_icon.png" /> -->
-  				Lingua
+	<div class="jumbotron" style="heigth: 150px;">
+		<div class="container" style="height: 60px;">
+  			<div style="float: left; position: relative;">
+  				<img th:src="@{/images/book_icon.png}" />
+  			</div>
+  			<div class="login-header">
   				<input type="text" placeholder="Username" />
   				<input type="text" placeholder="Password" />
+  				<input type="submit" class="btn btn-info btn-sm" value="Login" /><br />
+  				<a th:href="@{/}"><small>Not a member? Register</small></a>
   			</div>
-<!--   			<div style="float: right;"> -->
-<!--   				<input type="text" placeholder="Username" /> -->
-<!--   				<input type="text" placeholder="Password" /> -->
-<!--   			</div> -->
 		</div>
 	</div>
 
