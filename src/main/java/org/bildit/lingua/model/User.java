@@ -4,31 +4,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
 	@Id
 	@GeneratedValue
 	private long id;
-	
-	private String username;
-	private String password;
+
+	@Size(min = 4, max = 25)
 	private String firstName;
+
+	@Size(min = 4, max = 25)
 	private String lastName;
+
+	@Size(min = 4, max = 25)
+	private String username;
+
+	@Size(min = 4, max = 25)
+	private String password;
+
+	@Size(min = 4, max = 30)
+	private String email;
 	
+	private int authority;
+	
+	private boolean enabled;
+
 	public User() {
-		
+
 	}
-	
-	public User(String username, String password, String firstName, String lastName) {
+
+	public User(String username, String password, String firstName, String lastName, String email, int authority, boolean enabled) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
+		this.authority = authority;
+		this.enabled = enabled;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -40,7 +58,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -64,5 +82,35 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + "]";
+	}
+
 }
