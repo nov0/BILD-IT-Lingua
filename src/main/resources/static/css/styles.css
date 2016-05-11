@@ -1,0 +1,24 @@
+/********* Header *********/
+
+.jumbotron {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.login-header {
+	float: right;
+}
+
+.login-header input {
+	position: relative;
+	height: 32px;
+	top: 5px;
+	padding-left: 10px;
+}
+
+.login-header a {
+	position: relative;
+	float: right;
+	top: 5px;
+	right: 60px;
+}
