@@ -5,8 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.bildit.lingua.common.BaseEntity;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -15,10 +18,18 @@ public class BaseUser extends BaseEntity {
 	
 private static final long serialVersionUID = 1L;
 	
-	private String username;
-	private String password;
+	@Size(min = 2, max = 25)
 	private String firstName;
+	@Size(min = 2, max = 25)
 	private String lastName;
+	@Size(min = 4, max = 25)
+	private String username;
+	@Size(min = 6, max = 80)
+	@NotNull
+	private String password;
+	@Email
+	@Size(min = 8, max=40)
+	private String email;
 	
 	@Column(columnDefinition="TINYINT(1)")
 	private boolean enabled;
@@ -83,5 +94,12 @@ private static final long serialVersionUID = 1L;
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}	
 }
