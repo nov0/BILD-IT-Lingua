@@ -6,5 +6,4 @@ import org.bildit.lingua.model.User;
 public interface UserRepository extends BaseRepository <User, Long> {
 	
 	List<User> findAll();
-	
 }
