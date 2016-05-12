@@ -19,6 +19,16 @@
 .login-header a {
 	position: relative;
 	float: right;
-	top: 5px;
-	right: 60px;
+	top: 10px;
+	right: 73px;
+    color: #1898b0;
+}
+
+.btn-info {
+/*  background-image: url('images/login-icon.png'); */
+    background-repeat: no-repeat;
+    background-position: 5px 8px;
+    width: 65px; 
+    height: 30px; 
+    padding: 0px 3px;
 }
