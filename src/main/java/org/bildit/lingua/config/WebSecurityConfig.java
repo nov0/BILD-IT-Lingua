@@ -15,6 +15,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/jdbc").permitAll()
 		.antMatchers("/get-users").permitAll()
 		.antMatchers("/user-account").permitAll()
+		.antMatchers("/registration-page").permitAll()
+		.antMatchers("/registration").permitAll()
+		.antMatchers("/register-admin").permitAll()
 		.anyRequest().denyAll()
 		.and()
 		.formLogin().and().logout();
