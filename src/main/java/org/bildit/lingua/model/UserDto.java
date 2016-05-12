@@ -1,10 +1,11 @@
 package org.bildit.lingua.model;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-
 public class UserDto {
+
+	private long id;
 
 	@Size(min = 2, max = 25)
 	private String firstName;
@@ -15,45 +16,45 @@ public class UserDto {
 	@Size(min = 4, max = 25)
 	private String username;
 
-	@Size(min = 6, max = 40)
+	@Size(min = 6, max = 80)
+	@NotNull
 	private String password;
-
-	@Size(min = 6, max = 40)
-	private String passwordRe;
-
-	@Email
-	@Size(min = 4, max = 30)
+	
+	@NotNull
+	@Size(min = 6, max = 80)
+	private String passwordTransient;
+	
+	@Size(min = 8, max = 30)
 	private String email;
+	
+	private int authority;
+	
+	private boolean enabled;
+	
+	public String getPasswordTransient() {
+		return passwordTransient;
+	}
+
+	public void setPasswordTransient(String passwordTransient) {
+		this.passwordTransient = passwordTransient;
+	}
 
 	public UserDto() {
 
 	}
 
-	public UserDto(String firstName, String lastName, String username, String password, String passwordRe,
-			String email) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public UserDto(String username, String password, String firstName, String lastName, String email, int authority, boolean enabled) {
 		this.username = username;
 		this.password = password;
-		this.passwordRe = passwordRe;
-		this.email = email;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
 		this.lastName = lastName;
+		this.email = email;
+		this.authority = authority;
+		this.enabled = enabled;
+	}
+
+	public long getId() {
+		return id;
 	}
 
 	public String getUsername() {
@@ -72,12 +73,20 @@ public class UserDto {
 		this.password = password;
 	}
 
-	public String getPasswordRe() {
-		return passwordRe;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setPasswordRe(String passwordRe) {
-		this.passwordRe = passwordRe;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -88,10 +97,27 @@ public class UserDto {
 		this.email = email;
 	}
 
+	public int getAuthority() {
+		return authority;
+	}
+
+	public void setAuthority(int authority) {
+		this.authority = authority;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+	
+
 	@Override
 	public String toString() {
-		return "UserDto [firstName=" + firstName + ", lastName=" + lastName + ", username=" + username + ", password="
-				+ password + ", passwordRe=" + passwordRe + ", email=" + email + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + "]";
 	}
 
 }

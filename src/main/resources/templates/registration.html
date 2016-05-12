@@ -18,7 +18,7 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<form action="#" th:action="@{/registration-form}" th:object="${userDto}" method="post">
+			<form action="#" th:action="@{/registration-form}" th:object="${user}" method="post">
 				<table>
 					<tr>
 						<td th:text="#{form.field.name}">First Name: </td>
@@ -40,8 +40,12 @@
 						<td th:text="#{form.field.password}">Password: </td>
 						<td><input type="password" th:field="*{password}" /></td>
 						<th th:if="${#fields.hasErrors('password')}" th:text="#{form.invalid.password}" class="error">FirstName error message</th>
-					</tr>
-					
+					</tr>					
+					<tr>
+						<td th:text="#{form.field.passwordre}">Password: </td>
+						<td><input type="password" th:field="*{passwordTransient}" /></td>
+						<th th:if="${#fields.hasErrors('passwordMatch')}" th:text="#{form.invalid.password.match}" class="error">FirstName error message</th>
+					</tr>					
 					<tr>
 						<td th:text="#{form.field.email}">Email: </td>
 						<td><input type="text" th:field="*{email}" /></td>

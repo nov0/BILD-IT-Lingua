@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.AssertFalse;
+import javax.validation.constraints.AssertTrue;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -14,24 +18,74 @@ public class User {
 	@GeneratedValue
 	private long id;
 
-	@Size(min = 4, max = 25)
+	@Size(min = 2, max = 25)
 	private String firstName;
 
-	@Size(min = 4, max = 25)
+	@Size(min = 2, max = 25)
 	private String lastName;
 
 	@Size(min = 4, max = 25)
 	private String username;
 
-	@Size(min = 4, max = 25)
+	@Size(min = 6, max = 80)
+	@NotNull
 	private String password;
+	
+	@Transient
+	@NotNull
+	@Size(min = 6, max = 80)
+	private String passwordTransient;
+	
+	@Transient
+	@AssertTrue
+	private boolean passwordMatch;
+	
+	public boolean isPasswordMatch() {
+		this.passwordMatch = true;
+		System.out.println(password);
+		System.out.println(passwordTransient);
+		System.out.println(passwordMatch);
+		
+		if((password == null || password.isEmpty()) || (passwordTransient == null || passwordTransient.isEmpty())) {
+			this.passwordMatch = false;
+		} else {
+			this.passwordMatch = password.equals(passwordTransient);			
+		}
+		
+		
+		return this.passwordMatch = true;
+	}
 
-	@Size(min = 4, max = 30)
+//	public void setPasswordMatch(boolean passwordMatch) {
+//		if((password == null || password.isEmpty()) || (passwordTransient == null || passwordTransient.isEmpty())) {
+//			this.passwordMatch = false;
+//		} else {
+//			this.passwordMatch = password.equals(passwordTransient);			
+//		}
+//	}
+
+
+	@Size(min = 8, max = 30)
 	private String email;
 	
 	private int authority;
 	
 	private boolean enabled;
+	
+	@AssertTrue
+	private boolean isValid() {
+		return this.password.equals(this.passwordTransient);
+	}
+
+	
+	
+	public String getPasswordTransient() {
+		return passwordTransient;
+	}
+
+	public void setPasswordTransient(String passwordTransient) {
+		this.passwordTransient = passwordTransient;
+	}
 
 	public User() {
 
@@ -106,6 +160,7 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
 
 	@Override
 	public String toString() {
