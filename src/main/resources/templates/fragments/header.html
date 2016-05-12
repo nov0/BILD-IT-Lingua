@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 </head>
 <body>
@@ -10,15 +11,25 @@
   			<div style="float: left; position: relative;">
   				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
   			</div>
-  			<div class="login-header">
-  				<input type="text" placeholder="Username" />
-  				<input type="text" placeholder="Password" />
-  				<input type="submit" class="btn btn-info btn-sm" value="Login" style="position: relative; top: 4px;" 
-  				th:style="'background-image: url(' + @{images/login-icon.png} + ');'" /><br />
-  				<a th:href="@{/registration}">
-  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
-  					<small>Not a member? Register</small>
-  				</a>
+  			<div sec:authorize="isAnonymous()">
+  				<div class="login-header">
+	  				<input type="text" placeholder="Username" />
+	  				<input type="text" placeholder="Password" />
+	  				<input type="submit" class="btn btn-info btn-sm" value="Login" style="position: relative; top: 4px;" 
+	  				th:style="'background-image: url(' + @{images/login-icon.png} + ');'" /><br />
+	  				<a th:href="@{/registration}">
+	  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
+	  					<small>Not a member? Register</small>
+	  				</a>
+  				</div>
+  			</div>
+  			<div sec:authorize="isAuthenticated()">
+  				<div class="login-header">
+  					<img th:src="@{/images/login-icon.png}" />
+  					<span sec:authentication="name">Current Logged User</span>
+  					<span sec:authentication="principal.authorities"></span>
+  					<span><a th:href="@{/logout}">(Logout)</a></span>
+  				</div>
   			</div>
 		</div>
 	</div>

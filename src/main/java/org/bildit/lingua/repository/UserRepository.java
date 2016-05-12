@@ -1,11 +1,9 @@
 package org.bildit.lingua.repository;
 
 import java.util.List;
-
 import org.bildit.lingua.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends BaseRepository <User, Long> {
 	
 	List<User> findAll();
 }
