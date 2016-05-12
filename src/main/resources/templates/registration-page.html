@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Registration Page</title>
+
+</head>
+<body>
+	<div>
+		<form action="/register-admin" th:action="@{/register-admin}" th:object="${user}" method="post" >
+			<table>
+				<tr>
+	<!-- 				<td th:text="#{form.field.name}">Name:</td> -->
+					<td>Name: </td>
+					<td><input type="text" th:field="*{firstName}" /></td>
+	<!-- 				<td th:if="${#fields.hasErrors('')}" th:errors="*{}">error message</td> -->
+				</tr>
+				<tr>
+					<td>Last name: </td>
+					<td><input type="text" th:field="*{lastName}" /></td>
+				</tr>
+				<tr>
+					<td>Username: </td>
+					<td><input type="text" th:field="*{username}" /></td>
+				</tr>
+				<tr>
+					<td>Password: </td>
+					<td><input type="text" th:field="*{password}" /></td>
+				</tr>
+			</table>
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+</body>
+</html>
