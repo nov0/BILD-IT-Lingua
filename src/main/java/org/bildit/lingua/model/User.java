@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.AssertFalse;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -16,7 +13,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private long id;
+	private Long id;
 
 	@Size(min = 2, max = 25)
 	private String firstName;
@@ -30,40 +27,6 @@ public class User {
 	@Size(min = 6, max = 80)
 	@NotNull
 	private String password;
-	
-	@Transient
-	@NotNull
-	@Size(min = 6, max = 80)
-	private String passwordTransient;
-	
-	@Transient
-	@AssertTrue
-	private boolean passwordMatch;
-	
-	public boolean isPasswordMatch() {
-		this.passwordMatch = true;
-		System.out.println(password);
-		System.out.println(passwordTransient);
-		System.out.println(passwordMatch);
-		
-		if((password == null || password.isEmpty()) || (passwordTransient == null || passwordTransient.isEmpty())) {
-			this.passwordMatch = false;
-		} else {
-			this.passwordMatch = password.equals(passwordTransient);			
-		}
-		
-		
-		return this.passwordMatch = true;
-	}
-
-//	public void setPasswordMatch(boolean passwordMatch) {
-//		if((password == null || password.isEmpty()) || (passwordTransient == null || passwordTransient.isEmpty())) {
-//			this.passwordMatch = false;
-//		} else {
-//			this.passwordMatch = password.equals(passwordTransient);			
-//		}
-//	}
-
 
 	@Size(min = 8, max = 30)
 	private String email;
@@ -72,20 +35,7 @@ public class User {
 	
 	private boolean enabled;
 	
-	@AssertTrue
-	private boolean isValid() {
-		return this.password.equals(this.passwordTransient);
-	}
 
-	
-	
-	public String getPasswordTransient() {
-		return passwordTransient;
-	}
-
-	public void setPasswordTransient(String passwordTransient) {
-		this.passwordTransient = passwordTransient;
-	}
 
 	public User() {
 
@@ -100,9 +50,22 @@ public class User {
 		this.authority = authority;
 		this.enabled = enabled;
 	}
+	public User(Long id, String username, String password, String firstName, String lastName, String email, int authority, boolean enabled) {
+		this.username = username;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.authority = authority;
+		this.enabled = enabled;
+	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getUsername() {

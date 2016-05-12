@@ -16,46 +16,59 @@
 	
 </head>
 <body>
+	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
+		<div class="container" style="height: 60px;">
+  			<div style="float: left; position: relative;">
+  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
+  			</div>
+		</div>
+	</div>
+
 	<div class="container">
 		<div class="row">
-			<form action="#" th:action="@{/registration-form}" th:object="${user}" method="post">
-				<table>
-					<tr>
-						<td th:text="#{form.field.name}">First Name: </td>
-						<td><input type="text" th:field="*{firstName}" /></td>
-						<th th:if="${#fields.hasErrors('firstName')}" th:text="#{form.invalid.name}" class="error">FirstName error message</th>
-					</tr>
-					<tr>
-						<td th:text="#{form.field.lastname}">Last Name: </td>
-						<td><input type="text" th:field="*{lastName}" /></td>
-						<th th:if="${#fields.hasErrors('lastName')}" th:text="#{form.invalid.lastname}" class="error">FirstName error message</th>
+            <form data-toggle="validator" role="form" action="#" th:action="@{/registration-check}" th:object="${userDto}" method="post">
+                <div class="form-group">
+                    <label for="inputFirstName" class="control-label" th:text="#{form.field.name}">First Name: </label>
+				    <input type="text" th:field="*{firstName}" th:placeholder="#{form.field.name}" class="form-control" id="inputFirstName" required="required" />
+				    <label th:if="${#fields.hasErrors('firstName')}" th:text="#{form.invalid.name}" class="error">FirstName error message</label>
+                </div>
+				<div class="form-group">
+                    <label for="inputLastName" class="control-label" th:text="#{form.field.lastname}">Last Name: </label>
+				    <input type="text" th:field="*{lastName}" th:placeholder="#{form.field.lastname}" class="form-control" id="inputLastName" required="required"/>
+				    <label th:if="${#fields.hasErrors('lastName')}" th:text="#{form.invalid.lastname}" class="error">FirstName error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="username" class="control-label" th:text="#{form.field.username}">Username: </label>
+					<input type="text" th:field="*{username}" th:placeholder="#{form.field.username}" class="form-control" id="username" required="required"/>
+					<label th:if="${#fields.hasErrors('username')}" th:text="#{form.invalid.username}" class="error">FirstName error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="password" class="control-label" th:text="#{form.field.password}">Password: </label>
+					<input type="password" th:field="*{password}" th:placeholder="#{form.field.password}" class="form-control" id="password" required="required"/>
+					<label th:if="${#fields.hasErrors('password')}" th:text="#{form.invalid.password}" class="error">FirstName error message</label>
 					
-					</tr>
-					<tr>
-						<td th:text="#{form.field.username}">Username: </td>
-						<td><input type="text" th:field="*{username}" /></td>
-						<th th:if="${#fields.hasErrors('username')}" th:text="#{form.invalid.username}" class="error">FirstName error message</th>
-					</tr>
-					<tr>
-						<td th:text="#{form.field.password}">Password: </td>
-						<td><input type="password" th:field="*{password}" /></td>
-						<th th:if="${#fields.hasErrors('password')}" th:text="#{form.invalid.password}" class="error">FirstName error message</th>
-					</tr>					
+                </div>
+                <table>				
 					<tr>
 						<td th:text="#{form.field.passwordre}">Password: </td>
-						<td><input type="password" th:field="*{passwordTransient}" /></td>
-						<th th:if="${#fields.hasErrors('passwordMatch')}" th:text="#{form.invalid.password.match}" class="error">FirstName error message</th>
+						<td><input type="password" name="repeatpassword" /></td>
+						<th th:if="${repassword}" th:text="#{form.invalid.password.match}" class="error">FirstName error message</th>
 					</tr>					
 					<tr>
 						<td th:text="#{form.field.email}">Email: </td>
 						<td><input type="text" th:field="*{email}" /></td>
 						<th th:if="${#fields.hasErrors('email')}" th:text="#{form.invalid.email}" class="error">FirstName error message</th>
 					</tr>
+					<tr>
+						<td th:text="#{form.field.emailre}">Email: </td>
+						<td><input type="text" name="repeatemail" /></td>
+						<th th:if="${reemail}" th:text="#{form.invalid.email}" class="error">FirstName error message</th>
+					</tr>
 				</table>
 				<button type="submit" th:text="#{form.field.button.register}"></button>
 			</form>
-			<p th:text="#{lang}">Test</p>
+			</div>
 		</div>
-	</div>
+	
 </body>
 </html>
