@@ -16,6 +16,7 @@ public class HomeController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	@RequestMapping("/")
 	public String goToHome(Model model) {
 		return "home";
