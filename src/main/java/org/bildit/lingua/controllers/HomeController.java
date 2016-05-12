@@ -22,6 +22,7 @@ public class HomeController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	
 	@RequestMapping("/")
 	public String goToHome(Model model) {
 		return "home";
@@ -47,8 +48,8 @@ public class HomeController {
 		if(auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-//		return "redirect:/login?logout";
 		return "home";
+//		return "redirect:/login?logout";
 	}
 
 }

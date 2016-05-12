@@ -26,9 +26,9 @@
   			<div sec:authorize="isAuthenticated()">
   				<div class="login-header">
   					<img th:src="@{/images/login-icon.png}" />
-  					<span sec:authentication="name">Bob</span>
+  					<span sec:authentication="name">Current Logged User</span>
   					<span sec:authentication="principal.authorities"></span>
-  					<a th:href="@{/logout}">Logout</a>
+  					<span><a th:href="@{/logout}">(Logout)</a></span>
   				</div>
   			</div>
 		</div>

@@ -1,68 +1,57 @@
 package org.bildit.lingua.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
-public class User {
-
-	@Id
-	@GeneratedValue
-	private long id;
+@Table(name = "users")
+public class User extends BaseUser {
 	
-	private String username;
-	private String password;
-	private String firstName;
-	private String lastName;
+	private static final long serialVersionUID = 1L;
+	
+	@Column(columnDefinition="TINYINT(1)")
+	private boolean votingBan = false;
+	
+	@Column(columnDefinition="TINYINT(1)")
+	private boolean addingBan = false;
+	
+	@Column(columnDefinition="TINYINT(1)")
+	private boolean loginBan = false;
 	
 	public User() {
-		
+		/** Empty default constructor */
 	}
 	
-	public User(String username, String password, String firstName, String lastName) {
-		this.username = username;
-		this.password = password;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
-	
-	public long getId() {
-		return id;
+	/** Constructor with params */
+	public User(boolean votingBan, boolean addingBan, boolean loginBan) {
+		this.votingBan = votingBan;
+		this.addingBan = addingBan;
+		this.loginBan = loginBan;
 	}
 
-	public String getUsername() {
-		return username;
+	public boolean isVotingBan() {
+		return votingBan;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	
-	public String getPassword() {
-		return password;
+	public void setVotingBan(boolean votingBan) {
+		this.votingBan = votingBan;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public boolean isAddingBan() {
+		return addingBan;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public void setAddingBan(boolean addingBan) {
+		this.addingBan = addingBan;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public boolean isLoginBan() {
+		return loginBan;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLoginBan(boolean loginBan) {
+		this.loginBan = loginBan;
 	}
 	
 }
