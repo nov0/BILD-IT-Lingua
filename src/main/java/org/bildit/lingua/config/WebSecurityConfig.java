@@ -11,6 +11,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
+		.antMatchers("/add-newlanguage").permitAll()
+		.antMatchers("/add-language").permitAll()
 		.antMatchers("/logout").permitAll()
 		.antMatchers("/jdbc").permitAll()
 		.antMatchers("/get-users").permitAll()
