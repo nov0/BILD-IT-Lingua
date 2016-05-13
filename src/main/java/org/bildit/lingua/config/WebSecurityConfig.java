@@ -24,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user-account").permitAll()
 			.antMatchers("/registration-page").permitAll()
 			.antMatchers("/registration").permitAll()
+			.antMatchers("/registration1").permitAll()
+			.antMatchers("/registration-check").permitAll()
 			.antMatchers("/register-admin").permitAll()
 			.anyRequest().denyAll()
 		.and()

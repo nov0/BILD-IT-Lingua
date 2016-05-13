@@ -53,5 +53,5 @@ public class User extends BaseUser {
 	public void setLoginBan(boolean loginBan) {
 		this.loginBan = loginBan;
 	}
-	
+
 }
