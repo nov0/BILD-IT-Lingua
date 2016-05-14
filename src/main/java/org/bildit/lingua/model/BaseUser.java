@@ -5,11 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.bildit.lingua.common.BaseEntity;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -18,17 +19,25 @@ public class BaseUser extends BaseEntity {
 	
 private static final long serialVersionUID = 1L;
 	
+	@NotBlank
 	@Size(min = 2, max = 25)
+	@Pattern(regexp = "^[A-Z][a-z]{2,25}$")
 	private String firstName;
+	@NotBlank
 	@Size(min = 2, max = 25)
+	@Pattern(regexp = "^[A-Z][a-z]{2,25}$")
 	private String lastName;
-	@Size(min = 4, max = 25)
+	@NotBlank
+	@Size(min = 5, max = 25)
+	@Pattern(regexp = "^[a-z0-9]{5,25}$")
 	private String username;
-	@Size(min = 6, max = 80)
-	@NotNull
+	@Size(min = 5, max = 50)
+	@NotBlank
+	@Pattern(regexp = "^[a-z0-9]{5,50}$")
 	private String password;
+	@NotBlank
 	@Email
-	@Size(min = 8, max=40)
+	@Size(min = 8, max=50)
 	private String email;
 	
 	@Column(columnDefinition="TINYINT(1)")
@@ -40,11 +49,12 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	/** Constructor with params */
-	public BaseUser(String username, String password, String firstName, String lastName) {
+	public BaseUser(String username, String password, String firstName, String lastName, String email) {
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 	}
 
 	public String getUsername() {
