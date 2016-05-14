@@ -17,6 +17,7 @@ public class Admin extends BaseUser {
 		this.setPassword(user.getPassword());
 		this.setFirstName(user.getFirstName());
 		this.setLastName(user.getLastName());
+		this.setEmail(user.getEmail());
 	}
 
 }

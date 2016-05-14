@@ -3,7 +3,7 @@ package org.bildit.lingua.controllers;
 
 
 /**
- * @author NuLL
+ * @author NuLL, Djomla79
  * 
  *         Controller for registering and editing users information.
  *
@@ -33,25 +33,45 @@ public class RegistrationController {
 	private UserRepository userRepository;
 	
 	
-	@RequestMapping(value="/registration1", method=RequestMethod.GET)
-	public String registerUser(BaseUser user, Model model) {
-		model.addAttribute("user", user);
+	@RequestMapping(value="/register", method=RequestMethod.GET)
+	public String registerUser(BaseUser baseUser, Model model) {
+		model.addAttribute("baseUser", baseUser);
 		return "registration-page";
 	}
 	
 	/** Registering administrator */
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
-	public String registerAdmin(BaseUser user, Model model) {
-		Admin admin = new Admin(user);
-		admin.setEnabled(true);
-		admin.setAuthority("ADMIN");
-		adminRepository.save(admin);
+	public String registerAdmin(
+			@RequestParam("repeatpassword") String repeatPassword,
+			@RequestParam("repeatemail") String repeatEmail, 
+			@Valid BaseUser baseUser,
+			BindingResult result,
+			Model model) {
+
+		if (!baseUser.getPassword().equals(repeatPassword)) {
+			model.addAttribute("repassword", true);
+			return "registration-page";
+		}
+		
+		if (!baseUser.getEmail().equals(repeatEmail)) {
+			return "registration-page";
+		}
+
+		if (result.hasErrors()) {
+			return "registration-page";
+		} else {
+			Admin admin = new Admin(baseUser);
+			admin.setEnabled(true);
+			admin.setAuthority("ADMIN");
+			adminRepository.save(admin);
+		}
+		
 		return "home";
 	}
 	
 	@RequestMapping("/registration")
-	public String goToRegistration(Model model, User user) {
-		model.addAttribute("user", user);
+	public String goToRegistration(Model model, BaseUser baseUser) {
+		model.addAttribute("baseUser", baseUser);
 		return "registration";
 	}
 	
@@ -59,22 +79,28 @@ public class RegistrationController {
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
 			@RequestParam("repeatemail") String repeatEmail, 
-			@Valid User user,
+			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
-		if (!user.getPassword().equals(repeatPassword)) {
+		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
 			return "registration";
 		}
 		
-		if (!user.getEmail().equals(repeatEmail)) {
+		if (!baseUser.getEmail().equals(repeatEmail)) {
 			return "registration";
 		}
 
 		if (result.hasErrors()) {
 			return "registration";
 		} else {
+			User user = new User(baseUser);
+			user.setEnabled(true);
+			user.setAddingBan(false);
+			user.setLoginBan(false);
+			user.setVotingBan(false);
+			user.setAuthority("USER");
 			userRepository.save(user);
 		}
 
