@@ -8,13 +8,13 @@ public class User extends BaseUser {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean votingBan = false;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean addingBan = false;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
 	public User() {

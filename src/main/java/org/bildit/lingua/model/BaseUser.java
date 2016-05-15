@@ -40,7 +40,7 @@ private static final long serialVersionUID = 1L;
 	@Size(min = 8, max=50)
 	private String email;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean enabled;
 	private String authority;
 	
