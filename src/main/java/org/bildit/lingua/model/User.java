@@ -2,25 +2,33 @@ package org.bildit.lingua.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "users")
 public class User extends BaseUser {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean votingBan = false;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean addingBan = false;
 	
-	@Column(columnDefinition="TINYINT(1)")
+	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
 	public User() {
 		/** Empty default constructor */
+	}
+	
+	/** Constructor with params */
+	public User(BaseUser user) {
+		this.setId(user.getId());
+		this.setUsername(user.getUsername());
+		this.setPassword(user.getPassword());
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setEmail(user.getEmail());
 	}
 	
 	/** Constructor with params */

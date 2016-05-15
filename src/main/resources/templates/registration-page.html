@@ -1,36 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Registration Page</title>
-
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Registration Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	
+	<style type="text/css">
+		.error {
+			color: red;
+		}
+	</style>
+	
 </head>
 <body>
-	<div>
-		<form action="/register-admin" th:action="@{/register-admin}" th:object="${user}" method="post" >
-			<table>
-				<tr>
-	<!-- 				<td th:text="#{form.field.name}">Name:</td> -->
-					<td>Name: </td>
-					<td><input type="text" th:field="*{firstName}" /></td>
-	<!-- 				<td th:if="${#fields.hasErrors('')}" th:errors="*{}">error message</td> -->
-				</tr>
-				<tr>
-					<td>Last name: </td>
-					<td><input type="text" th:field="*{lastName}" /></td>
-				</tr>
-				<tr>
-					<td>Username: </td>
-					<td><input type="text" th:field="*{username}" /></td>
-				</tr>
-				<tr>
-					<td>Password: </td>
-					<td><input type="text" th:field="*{password}" /></td>
-				</tr>
-			</table>
-			<button type="submit">Submit</button>
-		</form>
+	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
+		<div class="container" style="height: 60px;">
+  			<div style="float: left; position: relative;">
+  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
+  			</div>
+		</div>
 	</div>
+
+	<div class="container">
+		<div class="row">
+            <form data-toggle="validator" role="form" action="#" th:action="@{/register-admin}" th:object="${baseUser}" method="post">
+                <div class="form-group">
+                    <label for="inputFirstName" class="control-label" th:text="#{form.field.name}">First Name: </label>
+				    <input type="text" th:field="*{firstName}" th:placeholder="#{form.field.name}" class="form-control" id="inputFirstName" required="required" />
+				    <label th:if="${#fields.hasErrors('firstName')}" th:text="#{form.invalid.name}" class="error">Error message</label>
+                </div>
+				<div class="form-group">
+                    <label for="inputLastName" class="control-label" th:text="#{form.field.lastname}">Last Name: </label>
+				    <input type="text" th:field="*{lastName}" th:placeholder="#{form.field.lastname}" class="form-control" id="inputLastName" required="required"/>
+				    <label th:if="${#fields.hasErrors('lastName')}" th:text="#{form.invalid.lastname}" class="error">Error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="username" class="control-label" th:text="#{form.field.username}">Username: </label>
+					<input type="text" th:field="*{username}" th:placeholder="#{form.field.username}" class="form-control" id="username" required="required"/>
+					<label th:if="${#fields.hasErrors('username')}" th:text="#{form.invalid.username}" class="error">Error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="password" class="control-label" th:text="#{form.field.password}">Password: </label>
+					<input type="password" th:field="*{password}" th:placeholder="#{form.field.password}" class="form-control" id="password" required="required"/>
+					<label th:if="${#fields.hasErrors('password')}" th:text="#{form.invalid.password}" class="error">Error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="repassword" class="control-label" th:text="#{form.field.passwordre}">Repeat Password: </label>
+					<input type="password" name="repeatpassword" th:placeholder="#{form.field.passwordre}" class="form-control" id="repeatpassword" required="required"/>
+					<label th:if="${repassword}" th:text="#{form.invalid.password.match}" class="error">Error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="email" class="control-label" th:text="#{form.field.email}">Email: </label>
+					<input type="text" th:field="*{email}" th:placeholder="#{form.field.email}" class="form-control" id="email" required="required"/>
+					<label th:if="${#fields.hasErrors('email')}" th:text="#{form.invalid.email}" class="error">Error message</label>
+                </div>
+                <div class="form-group">
+                	<label for="reemail" class="control-label" th:text="#{form.field.emailre}">Repeat Email: </label>
+					<input type="text" name="repeatemail" th:placeholder="#{form.field.emailre}" class="form-control" id="repeatemail" required="required"/>
+					<label th:if="${reemail}" th:text="#{form.invalid.email.match}" class="error">Error message</label>
+                </div>
+				<div class="form-group">
+					<button type="submit" th:text="#{form.field.button.register}" class="form-control"></button>
+				</div>
+			</form>
+			</div>
+		</div>
+	
 </body>
 </html>
