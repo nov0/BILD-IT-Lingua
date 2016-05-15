@@ -1,0 +1,16 @@
+LOCK TABLES `base_users` WRITE;
+/*!40000 ALTER TABLE `base_users` DISABLE KEYS */;
+INSERT INTO `base_users` VALUES (1,'ADMIN','admin@admin.com','','Admin','Adminic','admin','admin');
+/*!40000 ALTER TABLE `base_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
