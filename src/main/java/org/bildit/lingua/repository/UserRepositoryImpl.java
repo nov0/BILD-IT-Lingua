@@ -1,7 +1,11 @@
 package org.bildit.lingua.repository;
 
-public abstract class UserRepositoryImpl implements UserRepository {
+import org.bildit.lingua.model.User;
 
+public abstract class UserRepositoryImpl implements UserRepositoryCustom {
 	
+	/** Temporary (empty) method */
+	public void customMethod(User user) {
+	}
 
 }
