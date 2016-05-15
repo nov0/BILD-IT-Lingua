@@ -28,6 +28,12 @@ public class HomeController {
 		return "home";
 	}
 	
+	/**
+	 * @Author Bojan Aleksic
+	 * @param model
+	 * @return
+	 * List all users. Modify or delete later.
+	 */
 	@RequestMapping("/get-users")
 	public String getAllUsers(Model model) {
 		List<User> users = userRepository.findAll();
@@ -35,6 +41,14 @@ public class HomeController {
 		return "users";
 	}
 	
+	/**
+	 * @Author Bojan Aleksic
+	 * @param id
+	 * @param model
+	 * @return
+	 * Method for testing user-account purposes.
+	 * Modify or delete later 
+	 */
 	@RequestMapping("/user-account")
 	public String userAccount(@RequestParam("id") Long id, Model model) {
 		User user = userRepository.getOne(id);
@@ -42,6 +56,13 @@ public class HomeController {
 		return "user-account";
 	}
 	
+	/**
+	 * @Author Bojan Aleksic
+	 * @param request
+	 * @param response
+	 * @return
+	 * redirect:/login?logout to implement later
+	 */
 	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();

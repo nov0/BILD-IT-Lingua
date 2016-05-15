@@ -24,6 +24,21 @@
     color: #1898b0;
 }
 
+.logged-user {
+    float: right;
+}
+
+.logged-user img {
+    position: relative;
+    bottom: 1px;
+}
+
+/* Logged user */
+.dropdown-menu {
+    min-width: 120px;
+    padding: 2px 0;
+}
+
 .btn-info {
 /*  background-image: url('images/login-icon.png'); */
     background-repeat: no-repeat;
@@ -31,4 +46,24 @@
     width: 65px; 
     height: 30px; 
     padding: 0px 3px;
+}
+
+#eng-flag {
+    background-image: url('images/eng-flag.png');
+    background-position: 5px 7px;
+    background-repeat: no-repeat;
+}
+
+#sr-flag {
+    background-image: url('images/serbia-flag.png');
+    background-position: 5px 7px;
+    background-repeat: no-repeat;
+}
+
+#select-lang a {
+    padding-left: 30px;
+}
+
+#chosen-lang {
+    padding-left: 20px;
 }
