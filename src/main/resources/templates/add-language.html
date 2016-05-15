@@ -5,21 +5,16 @@
 <title>Add new language</title>
 </head>
 <body>
-	<form action="#" th:action="@{/add-newlanguage}" th:object="${language}" method="post">
+	<form action="#" th:action="@{/add-newlanguage}" method="post" enctype="multipart/form-data">
 
-		<p>Id: <input type="text" th:field="*{languageId}" /></p>
+		<p>Id: <input type="text" name="languageId" /></p>
 		
-		<p>Language title: <input type="text" th:field="*{languageTitle}" /></p>
+		<p>Language title: <input type="text" name="languageTitle" /></p>
 		
-		<p>Language icon: <input type="file" th:field="*{languageIcon}" /></p>
+		<p>Language icon: <input type="file" name="languageIcon" /></p>
 	
 		<input type="submit" name="Submit" />
 	</form>
-	
-	
-	<p th:text="'id: ' + ${language.languageId}" />
-    <p th:text="'title: ' + ${language.languageTitle}" />
-  	
 	
 </body>
 </html>

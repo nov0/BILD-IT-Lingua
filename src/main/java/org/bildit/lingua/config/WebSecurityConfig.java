@@ -20,6 +20,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/logout").permitAll()
+			.antMatchers("/image/*").permitAll()
+			.antMatchers("/list-languages").permitAll()
 			.antMatchers("/add-newlanguage").permitAll()
 			.antMatchers("/add-language").permitAll()
 			.antMatchers("/get-users").permitAll()
