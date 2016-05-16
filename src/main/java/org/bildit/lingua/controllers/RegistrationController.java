@@ -43,17 +43,12 @@ public class RegistrationController {
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
 	public String registerAdmin(
 			@RequestParam("repeatpassword") String repeatPassword,
-			@RequestParam("repeatemail") String repeatEmail, 
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
-			return "registration-page";
-		}
-		
-		if (!baseUser.getEmail().equals(repeatEmail)) {
 			return "registration-page";
 		}
 
@@ -78,7 +73,6 @@ public class RegistrationController {
 	@RequestMapping("/registration-check")
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
-			@RequestParam("repeatemail") String repeatEmail, 
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
@@ -87,15 +81,22 @@ public class RegistrationController {
 			model.addAttribute("repassword", true);
 			return "registration";
 		}
-		
-		if (!baseUser.getEmail().equals(repeatEmail)) {
-			return "registration";
-		}
 
 		if (result.hasErrors()) {
 			return "registration";
 		} else {
 			User user = new User(baseUser);
+				
+			/* setting first letter to upper case in first name and last name */
+			String firstName = user.getFirstName();
+			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1, firstName.length() - 1);
+			String lastName = user.getLastName();
+			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1, lastName.length() - 1);
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			// setting username to lower case
+			user.setUsername(user.getUsername().toLowerCase());
+			
 			user.setEnabled(true);
 			user.setAddingBan(false);
 			user.setLoginBan(false);
