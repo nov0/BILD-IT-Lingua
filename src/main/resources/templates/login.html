@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<title>Login Page</title>
+</head>
+<body>
+
+<!-- Include header from fragments --> 
+<!-- 	<div th:replace="fragments/header :: header">...</div> -->
+	
+	<!-- JavaScript for changing languages --> 
+<!-- 	<script type="text/javascript" th:src="@{/js/language-btn.js}"></script> -->
+
+	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
+		<div class="container" style="height: 60px;">
+  			<div style="float: left; position: relative;">
+  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
+  			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+		<div class="col-xs-10 col-sm-4 col-xs-offset-1 col-sm-offset-4">
+            <form role="form" action="#" th:action="@{/login}" method="post">
+                <div class="form-group">
+                    <label class="control-label" th:text="#{form.field.username}">Username: </label>
+				    <input type="text" th:placeholder="#{form.field.username}" class="form-control" name="username" />
+                </div>
+				<div class="form-group">
+                    <label class="control-label" th:text="#{form.field.password}">Password: </label>
+				    <input type="password" th:placeholder="#{form.field.password}" class="form-control" name="password"/>
+                </div>
+				<div class="form-group">
+					<button type="submit" th:text="#{form.login.button.value}" class="btn btn-primary"></button>
+					<a class="btn btn-warning" href="/" th:href="@{/}" th:text="#{form.field.button.cancel}"></a>
+				</div>
+			</form>
+			<br />
+			<div th:if="${param.error}">
+				<div class="alert alert-danger fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<p th:text="#{login.error.message}">Login error message</p>
+				</div>
+			</div>
+			</div>
+		</div>
+		</div>
+</body>
+</html>
