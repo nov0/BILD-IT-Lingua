@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS `base_users`;
 CREATE TABLE `base_users` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `authority` varchar(255) DEFAULT NULL,
-  `email` varchar(50) NOT NULL,
+  `email` varchar(80) NOT NULL,
   `enabled` bit(1) DEFAULT NULL,
   `first_name` varchar(25) NOT NULL,
   `last_name` varchar(25) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `username` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

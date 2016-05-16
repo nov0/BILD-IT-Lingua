@@ -31,13 +31,12 @@ private static final long serialVersionUID = 1L;
 	@Size(min = 5, max = 25)
 	@Pattern(regexp = "^[a-z0-9]{5,25}$")
 	private String username;
-	@Size(min = 5, max = 50)
+	@Size(min = 5, max = 40)
 	@NotBlank
-	@Pattern(regexp = "^[a-z0-9]{5,50}$")
 	private String password;
 	@NotBlank
 	@Email
-	@Size(min = 8, max=50)
+	@Size(min = 8, max = 80)
 	private String email;
 	
 	@Column(columnDefinition = "BIT", length = 1)
