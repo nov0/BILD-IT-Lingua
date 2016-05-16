@@ -70,6 +70,16 @@ public class RegistrationController {
 		return "registration";
 	}
 	
+
+	/**
+	 * Method for validating user fields.
+	 * 
+	 * @param repeatPassword
+	 * @param baseUser
+	 * @param result
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/registration-check")
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
