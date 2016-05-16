@@ -43,17 +43,12 @@ public class RegistrationController {
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
 	public String registerAdmin(
 			@RequestParam("repeatpassword") String repeatPassword,
-			@RequestParam("repeatemail") String repeatEmail, 
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
-			return "registration-page";
-		}
-		
-		if (!baseUser.getEmail().equals(repeatEmail)) {
 			return "registration-page";
 		}
 
@@ -78,17 +73,12 @@ public class RegistrationController {
 	@RequestMapping("/registration-check")
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
-			@RequestParam("repeatemail") String repeatEmail, 
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
-			return "registration";
-		}
-		
-		if (!baseUser.getEmail().equals(repeatEmail)) {
 			return "registration";
 		}
 
