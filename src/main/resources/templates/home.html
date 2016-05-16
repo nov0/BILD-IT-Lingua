@@ -15,6 +15,9 @@
 	<!-- Include header from fragments -->
 	<div th:replace="fragments/header :: header">...</div>
 	
+	<!-- JavaScript for changing languages -->
+	<script type="text/javascript" th:src="@{/js/language-btn.js}"></script>
+	
 	<!-- Bootstrap Carousel -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin: 0 auto; width: 1284px;">
         <!-- Indicators -->
@@ -70,6 +73,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
+    
 </body>
 </html>

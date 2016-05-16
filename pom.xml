@@ -59,10 +59,16 @@
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
 			<groupId>org.scala-lang</groupId>
 			<artifactId>scala-library</artifactId>
 			<version>2.11.0</version>
 		</dependency>
+=======
+		    <groupId>org.flywaydb</groupId>
+		    <artifactId>flyway-core</artifactId>
+    	</dependency>
+>>>>>>> c5b403bd5c2086280fc870facb4d27a82ccd6409
 	</dependencies>
 	
 	<build>
