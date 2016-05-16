@@ -13,12 +13,12 @@
   			</div>
   			<div sec:authorize="isAnonymous()">
   				<div class="login-header">
-	  				<form th:action="@{/login-check}" th:object="${user}" class="form-inline">
+	  				<form th:action="@{/login}" class="form-inline" method="post">
 	  					<div class="form-group">
-	  						<input type="text" th:placeholder="#{form.field.username}" class="form-control" />
+	  						<input type="text" th:placeholder="#{form.field.username}" class="form-control" name="username" />
 	  					</div>
 	  					<div class="form-group">
-	  						<input type="text" th:placeholder="#{form.field.password}" class="form-control" />
+	  						<input type="password" th:placeholder="#{form.field.password}" class="form-control" name="password" />
 	  					</div>
 	  					<input type="submit" class="btn btn-info btn-sm" value="Login" style="position: relative; top: 4px;" 
 	  				 	th:style="'background-image: url(' + @{images/login-icon.png} + ');'" />
@@ -27,6 +27,7 @@
 	  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
 	  					<small th:text="#{form.not.registered}">Not a member? Register</small>
 	  				</a>
+	  				<small th:if="${param.logout}" th:text="#{logout.success.message}" style="position: relative; bottom: 2px;">Logout message</small>
   				</div>
   			</div>
   			<div sec:authorize="isAuthenticated()">
