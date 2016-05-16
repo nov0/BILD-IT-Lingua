@@ -9,7 +9,7 @@
 	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
 		<div class="container" style="height: 60px;">
   			<div style="float: left; position: relative;">
-  				<a th:href="@{/?lang=}"><img th:src="@{/images/book_icon.png}" /></a>
+  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
   			</div>
   			<div sec:authorize="isAnonymous()">
   				<div class="login-header">
