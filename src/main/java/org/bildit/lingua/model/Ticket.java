@@ -1,6 +1,7 @@
 package org.bildit.lingua.model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -26,9 +27,9 @@ public class Ticket extends BaseEntity {
 	private User user;
 	
 	@OneToMany
-	List<Vote> votesUp = new Arraylist<>();
+	List<Vote> votesUp = new ArrayList<>();
 	@OneToMany
-	List<Vote> votesDown = new Arraylist<>();
+	List<Vote> votesDown = new ArrayList<>();
 	
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;

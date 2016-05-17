@@ -1,7 +1,8 @@
 package org.bildit.lingua.model;
 
+import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import org.bildit.lingua.model.Ticket;
+import javax.persistence.Table;
 
 import org.bildit.lingua.common.BaseEntity;
 
@@ -9,17 +10,19 @@ import org.bildit.lingua.common.BaseEntity;
  * @author Novislav Sekulic
  *
  */
-public class Vote extends BaseEntity{
+@Entity
+@Table(name = "vote")
+public class Vote extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private int voteValue;
-	
+
 	@OneToOne
 	private Ticket ticket;
-	
+
 	public Vote() {
-		
+
 	}
 
 	public int getVoteValue() {
