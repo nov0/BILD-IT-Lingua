@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 //import javax.persistence.JoinColumn;
 //import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
@@ -39,13 +41,13 @@ public class Ticket extends BaseEntity {
 	private User user;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-//	@JoinTable(name="TICKET_VOTE_UP", 
-//	   		   joinColumns=@JoinColumn(name="ticket_id"),
-//	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
+	@JoinTable(name="TICKET_VOTE_UP", 
+	   		   joinColumns=@JoinColumn(name="ticket_id"),
+	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
 	List<Vote> votesUp = new ArrayList<>();
-//	@JoinTable(name="TICKET_VOTE_DOWN", 
-//	   		   joinColumns=@JoinColumn(name="ticket_id"),
-//	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
+	@JoinTable(name="TICKET_VOTE_DOWN", 
+	   		   joinColumns=@JoinColumn(name="ticket_id"),
+	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	List<Vote> votesDown = new ArrayList<>();
 	

@@ -7,6 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -33,9 +35,12 @@ public class User extends BaseUser {
 	private boolean loginBan = false;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinTable(name="USER_TICKETS", 
+	   joinColumns=@JoinColumn(name="user_id"),
+	   inverseJoinColumns=@JoinColumn(name="ticket_id"))
 	List<Ticket> tickets = new ArrayList<>();
 	
-	@OneToOne(mappedBy="user", cascade=CascadeType.ALL)
+	@OneToOne
 	private Language defaultLanguage;
 	
 	public User() {
