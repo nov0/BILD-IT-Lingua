@@ -12,6 +12,14 @@ import org.bildit.lingua.common.BaseEntity;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+/**
+ * 
+ * BaseUser model
+ * 
+ * @author Mladen Todorovic
+ * 
+ * */
+
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name = "base_users")

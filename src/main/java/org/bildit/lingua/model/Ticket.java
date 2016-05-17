@@ -1,17 +1,29 @@
 package org.bildit.lingua.model;
 
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.bildit.lingua.common.BaseEntity;
+
+/**
+ * 
+ * Ticket model
+ * 
+ * @author Mladen Todorovic
+ * 
+ * */
 
 @Entity
 @Table(name = "ticket")
@@ -23,12 +35,18 @@ public class Ticket extends BaseEntity {
 	
 	private String textForeign;
 	
-	@OneToOne
+	@ManyToOne
 	private User user;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+//	@JoinTable(name="TICKET_VOTE_UP", 
+//	   		   joinColumns=@JoinColumn(name="ticket_id"),
+//	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
 	List<Vote> votesUp = new ArrayList<>();
-	@OneToMany
+//	@JoinTable(name="TICKET_VOTE_DOWN", 
+//	   		   joinColumns=@JoinColumn(name="ticket_id"),
+//	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	List<Vote> votesDown = new ArrayList<>();
 	
 	@Temporal(TemporalType.DATE)
