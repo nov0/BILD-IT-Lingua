@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,13 +10,6 @@
 <title>Login Page</title>
 </head>
 <body>
-
-<!-- Include header from fragments --> 
-<!-- 	<div th:replace="fragments/header :: header">...</div> -->
-	
-	<!-- JavaScript for changing languages --> 
-<!-- 	<script type="text/javascript" th:src="@{/js/language-btn.js}"></script> -->
-
 	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
 		<div class="container" style="height: 60px;">
   			<div style="float: left; position: relative;">
@@ -48,6 +40,12 @@
 				<div class="alert alert-danger fade in">
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<p th:text="#{login.error.message}">Login error message</p>
+				</div>
+			</div>
+			<div th:if="${param.logout}">
+				<div class="alert alert-success fade in">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<p th:text="#{logout.success.message}">Logout message</p>
 				</div>
 			</div>
 			</div>
