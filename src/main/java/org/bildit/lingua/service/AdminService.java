@@ -1,5 +1,6 @@
 package org.bildit.lingua.service;
 
+import org.bildit.lingua.model.Admin;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +12,6 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AdminService {
 
+	void saveAdmin(Admin newAdmin);
+	
 }
