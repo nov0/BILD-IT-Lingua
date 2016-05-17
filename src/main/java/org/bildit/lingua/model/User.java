@@ -1,7 +1,11 @@
 package org.bildit.lingua.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User extends BaseUser {
@@ -16,6 +20,11 @@ public class User extends BaseUser {
 	
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
+	
+	@OneToMany
+	List<Ticket> tickets = new ArrayList<>();
+	
+	private Language language;
 	
 	public User() {
 		/** Empty default constructor */
@@ -36,6 +45,10 @@ public class User extends BaseUser {
 		this.votingBan = votingBan;
 		this.addingBan = addingBan;
 		this.loginBan = loginBan;
+	}
+	
+	public List<Ticket> getTickets() {
+		return tickets;
 	}
 
 	public boolean isVotingBan() {

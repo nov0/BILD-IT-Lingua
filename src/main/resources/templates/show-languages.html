@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	
+		<div th:each="language:${languages}" >
+		    <p th:text="${language.id}"/>
+			<p th:text="${language.languageTitle}"/>
+			<img th:src="@{'/image/' + ${language.id}}"/>
+		</div>
+	
+</body>
+</html>
