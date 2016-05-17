@@ -3,7 +3,7 @@ package org.bildit.lingua.controllers;
 
 
 /**
- * @author NuLL, Djomla79
+ * @author Novislav Sekulic, Mladen Todorovic
  * 
  *         Controller for registering and editing users information.
  *

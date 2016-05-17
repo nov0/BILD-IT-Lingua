@@ -2,6 +2,7 @@ package org.bildit.lingua.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.bildit.lingua.common.BaseEntity;
@@ -15,13 +16,16 @@ import org.bildit.lingua.common.BaseEntity;
 
 @Entity
 @Table(name = "languages")
-public class Language extends BaseEntity{
+public class Language extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private String languageTitle;
 	@Lob
 	private byte[] languageIcon;
+	
+	@OneToOne
+	private User user;
 	
 	//constructors
 	public Language() {
