@@ -34,10 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().denyAll()
 		.and()
 			.formLogin()
+			.loginPage("/login").permitAll()
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login");
+			.logoutSuccessUrl("/login?logout=true").permitAll();
 	}
 	
 	@Override
