@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Add new language</title>
+</head>
+<body>
+	<form action="#" th:action="@{/add-newlanguage}" method="post" enctype="multipart/form-data">
+		
+		<p>Language title: <input type="text" name="languageTitle" /></p>
+		
+		<p>Language icon: <input type="file" name="languageIcon" /></p>
+	
+		<input type="submit" name="Submit" />
+	</form>
+	
+</body>
+</html>

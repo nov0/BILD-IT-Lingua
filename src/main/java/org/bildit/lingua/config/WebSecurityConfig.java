@@ -20,6 +20,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
 			.antMatchers("/logout").permitAll()
+			.antMatchers("/image/*").permitAll()
+			.antMatchers("/list-languages").permitAll()
+			.antMatchers("/add-newlanguage").permitAll()
+			.antMatchers("/add-language").permitAll()
 			.antMatchers("/get-users").permitAll()
 			.antMatchers("/user-account").permitAll()
 			.antMatchers("/registration-page").permitAll()
@@ -30,10 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().denyAll()
 		.and()
 			.formLogin()
+			.loginPage("/login").permitAll()
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login");
+			.logoutSuccessUrl("/login?logout=true").permitAll();
 	}
 	
 	@Override

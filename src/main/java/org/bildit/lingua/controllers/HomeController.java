@@ -14,6 +14,7 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -23,7 +24,7 @@ public class HomeController {
 	private UserRepository userRepository;
 	
 	
-	@RequestMapping("/")
+	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String goToHome(Model model) {
 		return "home";
 	}
@@ -63,14 +64,19 @@ public class HomeController {
 	 * @return
 	 * redirect:/login?logout to implement later
 	 */
-	@RequestMapping("/logout")
+	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "home";
+		return "login";
 //		return "redirect:/login?logout";
+	}
+	
+	@RequestMapping(value="/login")
+	public String goToLogin() {
+		return "login";
 	}
 
 }

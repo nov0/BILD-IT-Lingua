@@ -21,22 +21,23 @@ private static final long serialVersionUID = 1L;
 	
 	@NotBlank
 	@Size(min = 2, max = 25)
-	@Pattern(regexp = "^[A-Z][a-z]{2,25}$")
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String firstName;
 	@NotBlank
 	@Size(min = 2, max = 25)
-	@Pattern(regexp = "^[A-Z][a-z]{2,25}$")
+	//@Pattern(regexp = "^[A-Za-z]$")
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String lastName;
 	@NotBlank
 	@Size(min = 5, max = 25)
-	@Pattern(regexp = "^[a-z0-9]{5,25}$")
+	@Pattern(regexp = "^[\\p{L}0-9]*$")
 	private String username;
-	@Size(min = 5, max = 40)
 	@NotBlank
+	@Size(min = 5, max = 40)
 	private String password;
 	@NotBlank
-	@Email
 	@Size(min = 8, max = 80)
+	@Email
 	private String email;
 	
 	@Column(columnDefinition = "BIT", length = 1)
