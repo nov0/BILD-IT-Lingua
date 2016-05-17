@@ -1,5 +1,8 @@
 package org.bildit.lingua.service;
 
+import java.util.List;
+
+import org.bildit.lingua.model.Language;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,4 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface LanguageService {
 
+	List<Language> findAllLanguages();
+	Language findLanguage(Long id);
+	void saveLanguage(Language newLanguage);
+	
 }

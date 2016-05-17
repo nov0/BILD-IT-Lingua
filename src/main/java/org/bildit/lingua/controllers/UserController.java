@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserController {
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 	
 	/**
 	 * @Author Bojan Aleksic
@@ -39,7 +39,7 @@ public class UserController {
 	 */
 	@RequestMapping("/user-account")
 	public String userAccount(@RequestParam("id") Long id, Model model) {
-		User user = userService.getUser(id);
+		User user = userService.findUser(id);
 		model.addAttribute("user", user);
 		return "user-account";
 	}

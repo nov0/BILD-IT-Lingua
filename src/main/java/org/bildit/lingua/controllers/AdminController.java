@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 
 import org.bildit.lingua.model.Language;
-import org.bildit.lingua.repository.LanguageRepository;
+import org.bildit.lingua.service.LanguageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class AdminController {
 
 	@Autowired
-	LanguageRepository languageRepository;
+	private LanguageService languageService;
 
 	@RequestMapping(value = "/add-language", method = RequestMethod.GET)
 	public String showAddLanguage() {
@@ -60,14 +60,14 @@ public class AdminController {
 			System.err.println("Image can not be uploaded");
 		}
 
-		languageRepository.save(newLanguage);
+		languageService.saveLanguage(newLanguage);
 
 		return "redirect:/add-language";
 	}
 	@RequestMapping("/list-languages")
 	public String showLanguages(Model model) {
 		
-		model.addAttribute("languages", languageRepository.findAll());
+		model.addAttribute("languages", languageService.findAllLanguages());
 		
 		return "show-languages";
 	}
@@ -77,7 +77,7 @@ public class AdminController {
                          HttpServletResponse resp)
     {
         
-        Language language = languageRepository.findOne(id);
+        Language language = languageService.findLanguage(id);
 
        
         try {

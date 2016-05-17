@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 public interface UserService {
 
 	List<User> findeAllUsers();
-	User getUser(Long id);
+	User findUser(Long id);
+	void saveUser(User newUser);
 	
 }
