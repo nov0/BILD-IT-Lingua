@@ -1,9 +1,10 @@
 package org.bildit.lingua.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import org.bildit.lingua.common.BaseEntity;
 
 /**
  * Language model
@@ -14,14 +15,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "languages")
-public class Language {
+public class Language extends BaseEntity{
 	
-	@Id
-	private long languageId;
+	private static final long serialVersionUID = 1L;
+	
 	private String languageTitle;
 	@Lob
 	private byte[] languageIcon;
-		
+	
 	//constructors
 	public Language() {
 	
@@ -33,12 +34,7 @@ public class Language {
 	
 	
 	//getters & setters
-	public long getLanguageId() {
-		return languageId;
-	}
-	public void setLanguageId(long languageId) {
-		this.languageId = languageId;
-	}
+	
 	public String getLanguageTitle() {
 		return languageTitle;
 	}

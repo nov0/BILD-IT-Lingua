@@ -15,6 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+/**
+ * Administrator controllers
+ * 
+ * @author Goran Arsenic
+ *
+ */
+
 @Controller
 public class AdminController {
 
@@ -25,10 +32,17 @@ public class AdminController {
 	public String showAddLanguage() {
 		return "add-language";
 	}
-
+	
+	/**
+	 * Controller for adding new language to database
+	 * 
+	 * @param languageTitle
+	 * @param files
+	 * @return view "add-language"
+	 */
+	
 	@RequestMapping(value = "/add-newlanguage", method = RequestMethod.POST)
 	public String adddNewLanguage(
-			@RequestParam("languageId") long languageId,
 			@RequestParam("languageTitle") String languageTitle, 
 			@RequestParam("languageIcon") MultipartFile files[]) {
 
@@ -36,7 +50,6 @@ public class AdminController {
 		try {
 			for (MultipartFile file : files) {
 				if (!file.isEmpty()) {
-					newLanguage.setLanguageId(languageId);
 					newLanguage.setLanguageTitle(languageTitle);
 
 					newLanguage.setLanguageIcon(file.getBytes());

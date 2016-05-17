@@ -7,9 +7,9 @@
 <body>
 	
 		<div th:each="language:${languages}" >
-		    <p th:text="${language.languageId}"/>
+		    <p th:text="${language.id}"/>
 			<p th:text="${language.languageTitle}"/>
-			<img th:src="@{'/image/' + ${language.languageId}}"/>
+			<img th:src="@{'/image/' + ${language.id}}"/>
 		</div>
 	
 </body>
