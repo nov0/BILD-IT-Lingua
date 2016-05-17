@@ -27,7 +27,6 @@
 	  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
 	  					<small th:text="#{form.not.registered}">Not a member? Register</small>
 	  				</a>
-	  				<small th:if="${param.logout}" th:text="#{logout.success.message}" style="position: relative; bottom: 2px;">Logout message</small>
   				</div>
   			</div>
   			<div sec:authorize="isAuthenticated()">
