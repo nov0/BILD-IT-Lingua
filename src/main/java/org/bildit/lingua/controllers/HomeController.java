@@ -70,13 +70,18 @@ public class HomeController {
 		if(auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "login";
+		return "redirect:/login";
 //		return "redirect:/login?logout";
 	}
 	
 	@RequestMapping(value="/login")
 	public String goToLogin() {
 		return "login";
+	}
+	
+	@RequestMapping("/my-lingua")
+	public String loginSuccessfull() {
+		return "my-lingua";
 	}
 
 }

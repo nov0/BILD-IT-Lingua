@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/my-lingua-styles.css}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<title>My Lingua</title>
+</head>
+<body>
+
+	<!-- Include header from fragments -->
+	<div th:replace="fragments/header :: header">...</div>
+	
+	<!-- JavaScript for changing languages -->
+	<script type="text/javascript" th:src="@{/js/language-btn.js}"></script>
+	
+	<!-- Body of the Lingua -->
+	<div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#my-lingua">My Lingua</a></li>
+            <li><a data-toggle="tab" href="#practice-lingua">Practice Lingua</a></li>
+        </ul>
+        <div class="lingua-container-body">
+        	<div class="btn-group">
+  				<button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>All
+                </button>
+  				<button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>Active
+                </button>
+                <button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span>Deleted
+                </button>
+  				<button type="button" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>Moderated
+                </button>
+			</div>
+			<button type="button" class="btn btn-primary add-lingua">
+                <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>Add new Lingua
+            </button>
+            <div class="tab-content" style="padding: 50px;">
+                <div id="my-lingua" class="tab-pane fade in active">
+                    <h3>My Lingua</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                </div>
+                <div id="practice-lingua" class="tab-pane fade">
+                    <h3>Practice Lingua</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</body>
+</html>
