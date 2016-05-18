@@ -3,7 +3,7 @@ package org.bildit.lingua.controllers;
 
 
 /**
- * @author NuLL, Djomla79
+ * @author Novislav Sekulic, Mladen Todorovic
  * 
  *         Controller for registering and editing users information.
  *
@@ -13,8 +13,8 @@ import javax.validation.Valid;
 import org.bildit.lingua.model.Admin;
 import org.bildit.lingua.model.BaseUser;
 import org.bildit.lingua.model.User;
-import org.bildit.lingua.repository.AdminRepository;
-import org.bildit.lingua.repository.UserRepository;
+import org.bildit.lingua.service.AdminService;
+import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class RegistrationController {
 	
 	@Autowired
-	private AdminRepository adminRepository;
+	private AdminService adminService;
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 	
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
@@ -58,7 +58,7 @@ public class RegistrationController {
 			Admin admin = new Admin(baseUser);
 			admin.setEnabled(true);
 			admin.setAuthority("ADMIN");
-			adminRepository.save(admin);
+			adminService.saveAdmin(admin);
 		}
 		
 		return "home";
@@ -112,7 +112,7 @@ public class RegistrationController {
 			user.setLoginBan(false);
 			user.setVotingBan(false);
 			user.setAuthority("USER");
-			userRepository.save(user);
+			userService.saveUser(user);
 		}
 
 		return "home";
