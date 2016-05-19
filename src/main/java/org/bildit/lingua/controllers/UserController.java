@@ -1,8 +1,10 @@
 package org.bildit.lingua.controllers;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.bildit.lingua.model.User;
+import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,22 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	@Autowired
+	UserRepository userRepository;
+	
+
+	/**
+	 * @Author Mladen Todorovic
+	 * @param model
+	 * @return User page.
+	 */
+	@RequestMapping("/user-account")
+	public String accountUser(Principal principal, Model model) {
+		User user = userRepository.getOneByUsername(principal.getName());
+		model.addAttribute("user", user);
+		return "account-user";
+	}
+	
 	
 	/**
 	 * @Author Bojan Aleksic
