@@ -1,6 +1,4 @@
-package org.bildit.lingua.repository.impl;
-
-import org.bildit.lingua.repository.LanguageRepository;
+package org.bildit.lingua.repository;
 
 /**
  * 

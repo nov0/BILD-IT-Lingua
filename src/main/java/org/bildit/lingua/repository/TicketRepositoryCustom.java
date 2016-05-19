@@ -11,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
  * */
 
 @NoRepositoryBean
-public interface CustomTicketRepository {
+public interface TicketRepositoryCustom {
 	
 	/** Temporary unused method */
 	String customTicketMethod();

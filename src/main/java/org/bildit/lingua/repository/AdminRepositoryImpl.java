@@ -1,6 +1,4 @@
-package org.bildit.lingua.repository.impl;
-
-import org.bildit.lingua.repository.CustomAdminRepository;
+package org.bildit.lingua.repository;
 
 /**
  * 
@@ -10,7 +8,7 @@ import org.bildit.lingua.repository.CustomAdminRepository;
  * 
  * */
 
-public abstract class AdminRepositoryImpl implements CustomAdminRepository {
+public abstract class AdminRepositoryImpl implements AdminRepositoryCustom {
 	
 	/** Temporary unused method */
     @Override

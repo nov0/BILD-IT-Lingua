@@ -10,6 +10,6 @@ import org.bildit.lingua.model.Ticket;
  * 
  * */
 
-public interface TicketRepository extends BaseRepository <Ticket, Long>, CustomTicketRepository {
+public interface TicketRepository extends BaseRepository <Ticket, Long>, TicketRepositoryCustom {
 	
 }

@@ -4,16 +4,16 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  CustomLanguageRepository
+ * @interface  CustomUserRepository
  * 
- * @author Goran Arsenic
+ * @author Mladen Todorovic
  * 
  * */
 
 @NoRepositoryBean
-public interface CustomLanguageRepository {
+public interface UserRepositoryCustom {
 	
 	/** Temporary unused method */
-	String customLanguageMethod();
+	public String customUserMethod();
 	
 }

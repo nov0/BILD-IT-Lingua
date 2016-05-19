@@ -10,7 +10,7 @@ import org.bildit.lingua.model.User;
  * 
  * */
 
-public interface UserRepository extends BaseRepository <User, Long>, CustomUserRepository {
+public interface UserRepository extends BaseRepository <User, Long>, UserRepositoryCustom {
 	
 	User findOneByUsername(String username);
 	

@@ -1,6 +1,4 @@
-package org.bildit.lingua.repository.impl;
-
-import org.bildit.lingua.repository.CustomTicketRepository;
+package org.bildit.lingua.repository;
 
 /**
  * 
@@ -10,7 +8,7 @@ import org.bildit.lingua.repository.CustomTicketRepository;
  * 
  * */
 
-public abstract class TicketRepositoryImpl implements CustomTicketRepository {
+public abstract class TicketRepositoryImpl implements TicketRepositoryCustom {
 	
 	/** Temporary unused method */
 	public String customTicketMethod() {
