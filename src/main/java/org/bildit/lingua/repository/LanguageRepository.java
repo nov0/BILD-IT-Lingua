@@ -1,8 +1,15 @@
 package org.bildit.lingua.repository;
 
 import org.bildit.lingua.model.Language;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LanguageRepository extends JpaRepository<Language, Long>{
+/**
+ * 
+ * @interface  LanguageRepository
+ * 
+ * @author Goran Arsenic
+ * 
+ * */
 
+public interface LanguageRepository extends BaseRepository <Language, Long>, CustomLanguageRepository {
+	
 }

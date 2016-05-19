@@ -15,8 +15,8 @@ import org.springframework.data.repository.NoRepositoryBean;
  * */
 
 @NoRepositoryBean
-public interface BaseRepository <T extends BaseEntity, K extends Serializable> extends JpaRepository <T, Long> {
-	
-	T save(T entity);
+public interface BaseRepository <T extends BaseEntity, K extends Serializable> extends JpaRepository <T, K> {
+
+	String customBaseMethod();
 	  
 }

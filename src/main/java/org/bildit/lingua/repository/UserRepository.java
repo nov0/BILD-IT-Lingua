@@ -1,6 +1,5 @@
 package org.bildit.lingua.repository;
 
-import java.util.List;
 import org.bildit.lingua.model.User;
 
 /**
@@ -11,11 +10,10 @@ import org.bildit.lingua.model.User;
  * 
  * */
 
-public interface UserRepository extends BaseRepository <User, Long> {
+public interface UserRepository extends BaseRepository <User, Long>, CustomUserRepository {
 	
-	List<User> findAll();
+	User findOneByUsername(String username);
 	
-	@SuppressWarnings("unchecked")
-	User save(User user);
+	User getOneByUsername(String username);
 	
 }
