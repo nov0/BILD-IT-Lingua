@@ -11,7 +11,7 @@ import org.springframework.data.repository.NoRepositoryBean;
  * */
 
 @NoRepositoryBean
-public interface CustomAdminRepository {
+public interface AdminRepositoryCustom {
 	
 	/** Temporary unused method */
 	public String customAdminMethod();

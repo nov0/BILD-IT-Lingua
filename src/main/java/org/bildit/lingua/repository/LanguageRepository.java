@@ -10,6 +10,6 @@ import org.bildit.lingua.model.Language;
  * 
  * */
 
-public interface LanguageRepository extends BaseRepository <Language, Long>, CustomLanguageRepository {
+public interface LanguageRepository extends BaseRepository <Language, Long>, LanguageRepositoryCustom {
 	
 }

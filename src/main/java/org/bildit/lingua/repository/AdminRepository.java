@@ -10,6 +10,6 @@ import org.bildit.lingua.model.Admin;
  * 
  * */
 
-public interface AdminRepository extends BaseRepository <Admin, Long>, CustomAdminRepository {
+public interface AdminRepository extends BaseRepository <Admin, Long>, AdminRepositoryCustom {
 	
 }

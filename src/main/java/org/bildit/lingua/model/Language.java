@@ -24,7 +24,7 @@ public class Language extends BaseEntity {
 	@Lob
 	private byte[] languageIcon;
 	
-	@OneToOne(mappedBy="defaultLanguage")
+	@OneToOne(mappedBy = "defaultLanguage")
 	private User user;
 	
 	//constructors

@@ -1,6 +1,4 @@
-package org.bildit.lingua.repository.impl;
-
-import org.bildit.lingua.repository.CustomUserRepository;
+package org.bildit.lingua.repository;
 
 /**
  * 
@@ -10,7 +8,7 @@ import org.bildit.lingua.repository.CustomUserRepository;
  * 
  * */
 
-public abstract class UserRepositoryImpl implements CustomUserRepository {
+public abstract class UserRepositoryImpl implements UserRepositoryCustom {
     
     /** Temporary unused method */
     @Override
