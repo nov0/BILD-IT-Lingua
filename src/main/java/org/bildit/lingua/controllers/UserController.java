@@ -33,7 +33,6 @@ public class UserController {
 		return "account-user";
 	}
 	
-	
 	/**
 	 * @Author Bojan Aleksic
 	 * @param model
@@ -57,7 +56,7 @@ public class UserController {
 	 */
 	@RequestMapping("/user-account")
 	public String userAccount(@RequestParam("id") Long id, Model model) {
-		User user = userService.getUser(id);
+		User user = userService.findUser(id);
 		model.addAttribute("user", user);
 		return "user-account";
 	}
