@@ -1,19 +1,19 @@
 package org.bildit.lingua.repository;
 
-import org.bildit.lingua.model.User;
-
 /**
  * 
- * @class UserRepositoryImpl
+ * @abstract class UserRepositoryImpl
  * 
  * @author Bojan Aleksic, Mladen Todorovic
  * 
  * */
 
-public abstract class UserRepositoryImpl implements UserRepository {
-	
-	/** Temporary (empty) method */
-	public void customMethod(User user) {
-	}
-
+public abstract class UserRepositoryImpl implements UserRepositoryCustom {
+    
+    /** Temporary unused method */
+    @Override
+    public String customUserMethod() {
+    	return "";
+    }
+    
 }
