@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<body>
+	<div th:fragment="validation">
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			    $( document ).ready(function() {
+			    	$("#register").formValidation({
+			            framework: 'bootstrap',
+			            icon: {
+			                valid: 'glyphicon glyphicon-ok',
+			                invalid: 'glyphicon glyphicon-remove',
+			                validating: 'glyphicon glyphicon-refresh'
+			            },
+			            fields: {
+			                firstName: {
+			                    validators: {
+			                        notEmpty: {
+			                            message: /*[[#{NotBlank.baseUser.firstName}]]*/ 'Can not be empty!'
+			                        },
+			                        stringLength: {
+			                            min: 2,
+			                            max: 25,
+			                            message: /*[[#{Size.baseUser.firstName}]]*/'Please input minimal'
+			                        },
+			                        regexp: {
+			                            regexp: /^[a-zA-z]+$/,
+			                            message: /*[[#{Pattern.baseUser.firstName}]]*/ 'Only letters'
+			                        }
+			                    }
+			                },
+			                lastName: {
+			                    validators: {
+			                        notEmpty: {
+			                            message: /*[[#{NotBlank.baseUser.lastName}]]*/ 'Can not be empty!'
+			                        },
+			                        stringLength: {
+			                            min: 2,
+			                            max: 25,
+			                            message: /*[[#{Size.baseUser.lastName}]]*/'Please input minimal'
+			                        },
+			                        regexp: {
+			                            regexp: /^[a-zA-z]+$/,
+			                            message: /*[[#{Pattern.baseUser.lastName}]]*/ 'Only letters'
+			                        }
+			                    }
+			                },
+			                
+			                email: {
+			                	validators: {
+			                        notEmpty: {
+			                            message: /*[[#{NotBlank.baseUser.email}]]*/ 'Can not be empty!'
+			                        },
+			                        stringLength: {
+			                            min: 8,
+			                            max: 25,
+			                            message: /*[[#{Size.baseUser.email}]]*/ 'Please input minimal'
+			                        },
+			                        regexp: {
+			                            regexp: /\S+@\S+\.\S+/,
+			                            message: /*[[#{Email.baseUser.email}]]*/ 'Pattern done match'
+			                        }
+			                    }
+			                },
+			                password: {
+			                	validators: {
+			                		notEmpty: {
+		                           		message: /*[[#{NotBlank.baseUser.password}]]*/ 'Can not be empty!'
+		                        	},
+		                        	stringLength: {
+		                          		min: 5,
+		                            	max: 40,
+		                            	message: /*[[#{Size.baseUsers.password}]]*/ 'Please input minimal'
+		                        	}
+			                	}
+			                },
+			                repeatpassword: {
+			                	validators: {
+			                		notEmpty: {
+			                			message: /*[[#{NotBlank.baseUser.password}]]*/ 'Can not be empty!'
+			                		},
+			                		stringLength: {
+		                        	    min: 5,
+		                        	    max: 40,
+		                            	message: /*[[#{Size.baseUsers.password}]]*/ 'Please input minimal'
+		                        	},
+		                        	callback: {
+		                        		callback: function(value, validator, $field) {
+		                        			var passwordFirst = $("#password").val();
+		                        			var passwordSecond = $field.val();
+		                        			if(passwordFirst === passwordSecond) {
+		                        				return true;
+		                        			} else {
+		                        				return {
+		                        					valid: false,
+		                        					message: /*[[#{form.invalid.password.match}]]*/ 'not valid'
+		                        				}
+		                        			}
+		                        			return true;
+		                        		}
+		                        	}
+			                	}
+			                },
+			                username: {
+			                    validators: {
+			                        notEmpty: {
+			                            message: /*[[#{NotBlank.baseUser.username}]]*/ 'Can not be empty!'
+			                        },
+			                        stringLength: {
+			                            min: 5,
+			                            max: 25,
+			                            message: /*[[#{Size.baseUser.username}]]*/'Please input minimal'
+			                        },
+			                        regexp: {
+			                            regexp: /^[a-zA-z0-9]+$/,
+			                            message: /*[[#{Pattern.baseUser.username}]]*/ 'Only letters'
+			                        },
+			                        callback: {
+			                        	callback: function(value, validator, $field){
+			                        		var usernameField = $field.val();
+			                        		
+			                        		var isValid = false;
+			                        		if(usernameField.length > 4) {
+			                        			$.ajax({
+			                        				type: 'GET',
+			                        				url: 'existusername',
+			                        				async: false,
+			                        				data: "username=" + usernameField,
+			                        				success: function(resp) {
+			                        					isValid = resp;
+			                        				}
+			                        			}); // end ajax
+			                        		}
+
+			                        		if(isValid) {
+	                        					return {
+	                        						valid: false,
+	                        						message: /*[[#{exist.baseUser.username.exist}]]*/ 'Username ocupied'
+	                        					}
+	                        				} else {
+	                        					return true;
+	                        				}
+			                        	} // end callback : function
+			                        } //end callback
+			                    } // end validators
+			                } // end username
+			            }
+			        }); // end form validation
+				}); // end ready
+			/*]]>*/
+		</script>
+		
+	</div>
+</body>
+</html>

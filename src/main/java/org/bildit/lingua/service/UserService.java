@@ -17,5 +17,6 @@ public interface UserService {
 	List<User> findeAllUsers();
 	User findUser(Long id);
 	void saveUser(User newUser);
+	boolean isUsernameExist(String username);
 	
 }

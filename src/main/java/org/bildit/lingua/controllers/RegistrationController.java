@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegistrationController {
@@ -99,9 +100,9 @@ public class RegistrationController {
 				
 			/* setting first letter to upper case in first name and last name */
 			String firstName = user.getFirstName();
-			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1, firstName.length() - 1);
+			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1, firstName.length());
 			String lastName = user.getLastName();
-			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1, lastName.length() - 1);
+			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1, lastName.length());
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			// setting username to lower case
@@ -116,5 +117,18 @@ public class RegistrationController {
 		}
 
 		return "home";
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * @param username
+	 * @return
+	 * Method for checking is username exist in database.
+	 */
+	@RequestMapping(value="/existusername", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean isUsernameExist(@RequestParam(name="username") String username) {
+		System.out.println(username);
+		return userService.isUsernameExist(username);
 	}
 }
