@@ -1,0 +1,27 @@
+.modal-header {
+	background-color: #f2f2f2;
+}
+
+.categories {
+	float: right;
+	margin-right: 30px;
+}
+
+.languages {
+	float: right;
+	margin-right: 10px;
+}
+
+.modal-title {
+	color: #1898b0;
+}
+
+.modal-body {
+	background-color: #f2f2f2;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.modal-footer {
+	background-color: #f2f2f2;
+}

@@ -45,9 +45,7 @@
   				<div class="logged-user">
   			    	<div class="dropdown">
   		            	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-  		            		<span style="color: #1898b0; font-size: 14px;" id="chosen-lang">
-  		            			
-                            </span>
+  		            		<span id="selected-language"></span>
                         	<span class="caret"></span>
   		            	</button>
   		            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
@@ -66,6 +64,8 @@
   		    	</div>
   			</div>
 		</div>
+		<!-- JavaScript for locale language -->
+		<script type="text/javascript" th:src="@{/js/locale-language-btn.js}"></script>
 	</div>
 	
 </body>

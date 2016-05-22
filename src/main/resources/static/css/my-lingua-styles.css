@@ -6,8 +6,8 @@
 }
 
 .btn-group {
-	padding-top: 30px;
-	padding-left: 50px;
+/* 	padding-top: 30px; */
+/* 	padding-left: 50px; */
 }
 
 .btn-glyphicons {
@@ -16,11 +16,28 @@
 
 .add-lingua {
 	float: right;
-	margin-top: 30px;
-	margin-right: 50px;
+/* 	margin-top: 30px; */
+/* 	margin-right: 50px; */
 	background-color: #1898b0;
 }
 
 .btn-primary {
     background-color: #1898b0;
+}
+
+.tab-btn-group {
+	position: relative;
+    right: 4px;
+}
+
+.my-lingua-content {
+	padding-top: 30px;
+}
+
+.lingua-language {
+    background-color: #204d74;
+}
+
+.lingua-language > li > a {
+    color: white;
 }

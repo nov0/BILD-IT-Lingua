@@ -2,25 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org" 
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
-<link rel="stylesheet" type="text/css" th:href="@{/css/my-lingua-styles.css}" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<title>My Lingua</title>
 </head>
 <body>
 
-	<!-- Include header from fragments -->
-	<div th:replace="fragments/header :: header">...</div>
-	
-	<!-- JavaScript for changing languages -->
-	<script type="text/javascript" th:src="@{/js/language-btn.js}"></script>
-	
-	<!-- Body of the Lingua -->
-	<div class="container">
+	<!-- User Account fragment -->
+	<div class="container" th:fragment="user-account">
         <ul class="nav nav-tabs">
             <li class="active"><a th:text="#{tab.my.lingua}" data-toggle="tab" href="#my-lingua">My Lingua</a></li>
             <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" href="#practice-lingua">Practice Lingua</a></li>
@@ -45,22 +31,27 @@
 		                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>
 		                    <span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
 		                </button>
-		                <button type="button" class="btn btn-primary">
-		                	<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>
-		               		<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
-		            	</button>
+		                <!-- ************ Bootstrap's Modal Button *************** -->
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#gridSystemModal">
+			                <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>
+                            <span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
+			            </button>
 					</div>
 					<div class="btn-group add-lingua" role="group">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-			               	<span th:text="#{tab.choose.language}" id="choose-practice-lang" class="tab-btn-group">Choose Language</span>
+			               	<span th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
 			               	<span class="caret"></span>
 			            </button>
-			            <ul class="dropdown-menu">
+			            <ul class="dropdown-menu lingua-language select-language">
 	     					<li><a href="#">German</a></li>
 	      					<li><a href="#">Italian</a></li>
 	    				</ul>
-	    			</div>	
+	    			</div>
+	    			
+	    			<!-- Include Modal from fragments -->
+	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
+	    			
                     <div class="my-lingua-content">
                     	<h3>My Lingua</h3>
                     	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
@@ -72,7 +63,43 @@
                 </div>
             </div>
         </div>
+        <script>
+	        $(document).ready(function() {
+	        	$(".select-language li > a").click(function() {
+	                $(".select-practice-lang").text(this.innerHTML);
+	            });
+	            
+	            $(".select-category li > a").click(function() {
+	                $(".category").text(this.innerHTML);
+	            });
+	        });
+    	</script>
     </div>
     
+    <!-- Administrator Account fragment -->
+	<div class="container" th:fragment="admin-account">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#moderate-users">Moderate Users</a></li>
+            <li><a data-toggle="tab" href="#moderate-lingua">Moderate Lingua</a></li>
+            <li><a data-toggle="tab" href="#reports">Reports</a></li>
+        </ul>
+        <div class="lingua-container-body">
+            <div class="tab-content" style="padding: 50px;">
+            	<div id="moderate-users" class="tab-pane fade in active">
+            		<h3>Moderate Users</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+                <div id="moderate-lingua" class="tab-pane fade">
+                    <h3>Moderate Lingua</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+                <div id="reports" class="tab-pane fade">
+                    <h3>Reports</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+	
 </body>
 </html>
