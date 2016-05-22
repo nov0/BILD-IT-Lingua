@@ -5,6 +5,8 @@
 </head>
 <body>
 
+	<!-- @author Bojan Aleksic -->
+
 	<!-- User Account fragment -->
 	<div class="container" th:fragment="user-account">
         <ul class="nav nav-tabs">
@@ -15,10 +17,10 @@
             <div class="tab-content" style="padding: 50px;">
             	<div id="my-lingua" class="tab-pane fade in active">
 	            	<div class="btn-group">
-	  					<button type="button" class="btn btn-primary">
+	  					<a th:href="@{/get-all-tickets}" type="button" class="btn btn-primary">
 	                    	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>
 	                    	<span th:text="#{tab.all}" class="tab-btn-group">All</span>
-	                	</button>
+	                	</a>
 		  				<button type="button" class="btn btn-primary">
 		                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>
 		                    <span th:text="#{tab.active}" class="tab-btn-group">Active</span>

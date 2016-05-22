@@ -2,7 +2,9 @@ package org.bildit.lingua.controllers;
 
 import java.util.List;
 
+import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
+import org.bildit.lingua.repository.TicketRepository;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TicketRepository ticketRepository;
 	
 	/**
 	 * @Author Bojan Aleksic
@@ -42,6 +47,13 @@ public class UserController {
 		User user = userService.findUser(id);
 		model.addAttribute("user", user);
 		return "user-account";
+	}
+	
+	@RequestMapping("/get-all-tickets")
+	public String getAllTickets(Model model) {
+		List<Ticket> tickets = ticketRepository.findAll();
+		model.addAttribute("tickets", tickets);
+		return "home";
 	}
 	
 }
