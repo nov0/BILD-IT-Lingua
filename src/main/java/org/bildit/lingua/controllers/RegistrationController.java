@@ -130,4 +130,5 @@ public class RegistrationController {
 	public boolean isUsernameExist(@RequestParam(name="username") String username) {
 		return userRepository.existByUsername(username);
 	}
+
 }

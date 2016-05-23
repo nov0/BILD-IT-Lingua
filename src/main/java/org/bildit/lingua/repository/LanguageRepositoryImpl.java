@@ -1,5 +1,4 @@
 package org.bildit.lingua.repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 

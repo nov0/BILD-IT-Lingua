@@ -11,29 +11,27 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+/**
+ * @author Bojan Aleksic
+ */
 @Controller
 public class HomeController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
-	public String goToHome(Model model) {
+	public String goToHome(Model model, Authentication auth) {
+		if(auth != null) {
+			model.addAttribute("authority", auth.getName());
+		}
 		return "home";
 	}
 	
-	/**
-	 * @Author Bojan Aleksic
-	 * @param request
-	 * @param response
-	 * @return
-	 * redirect:/login?logout to implement later
-	 */
 	@RequestMapping(value="/logout")
 	public String logout(HttpServletRequest request, HttpServletResponse response) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if(auth != null) {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
-		return "redirect:/login";
-//		return "redirect:/login?logout";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value="/login")

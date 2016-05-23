@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<!-- User Account fragment -->
+	<div class="container" th:fragment="user-account">
+        <ul class="nav nav-tabs">
+            <li class="active"><a th:text="#{tab.my.lingua}" data-toggle="tab" href="#my-lingua">My Lingua</a></li>
+            <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" href="#practice-lingua">Practice Lingua</a></li>
+        </ul>
+        <div class="lingua-container-body">
+            <div class="tab-content" style="padding: 50px;">
+            	<div id="my-lingua" class="tab-pane fade in active">
+	            	<div class="btn-group">
+	  					<a th:href="@{/get-all-tickets}" type="button" class="btn btn-primary">
+	                    	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>
+	                    	<span th:text="#{tab.all}" class="tab-btn-group">All</span>
+	                	</a>
+		  				<button type="button" class="btn btn-primary">
+		                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>
+		                    <span th:text="#{tab.active}" class="tab-btn-group">Active</span>
+		                </button>
+		                <button type="button" class="btn btn-primary">
+		                    <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span>
+		                    <span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
+		                </button>
+		  				<button type="button" class="btn btn-primary">
+		                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>
+		                    <span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
+		                </button>
+		                <!-- ************ Bootstrap's Modal Button *************** -->
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#gridSystemModal">
+			                <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>
+                            <span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
+			            </button>
+					</div>
+					<div class="btn-group add-lingua" role="group">
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+			               	<span th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
+			               	<span class="caret"></span>
+			            </button>
+			            <ul class="dropdown-menu lingua-language select-language">
+	     					<li><a href="#">German</a></li>
+	      					<li><a href="#">Italian</a></li>
+	    				</ul>
+	    			</div>
+	    			
+	    			<!-- Include Modal from fragments -->
+	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
+	    			
+                    <div class="my-lingua-content">
+                    	<div th:if="${all != null}">
+                    		<div class="ticket-container" th:each="ticket : ${all}">
+                    			<div class="row ticket-header">
+                                    <div class="col-md-2">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <span th:text="${ticket.dateCreated}"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="glyphicon glyphicon-tag"></span> 
+                                        <span data-toggle="tooltip" title="Category">Verbs</span>
+                                    </div>
+                                    <div class="col-md-4 like-dislike-btn">
+                                        <a href="#">
+                                        	<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+                                        </a> 31 &nbsp;
+                                        <a href="#">
+                                        	<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+                                        </a> 5
+                                    </div>
+                                </div>
+                                <div class="row domestic-foreign-row">
+                                    <div th:text="${ticket.textDomestic}" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+                                    <div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+                                </div>
+                    		</div>
+                    	</div>
+                    </div>
+                </div>
+                <div id="practice-lingua" class="tab-pane fade">
+                    <h3>Practice Lingua</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </div>
+        </div>
+        <script>
+	        $(document).ready(function() {
+	        	$(".select-language li > a").click(function() {
+	                $(".select-practice-lang").text(this.innerHTML);
+	            });
+	            
+	            $(".select-category li > a").click(function() {
+	                $(".category").text(this.innerHTML);
+	            });
+	            
+	            $('[data-toggle="tooltip"]').tooltip();
+	        });
+    	</script>
+    </div>
+    
+    <!-- Administrator Account fragment -->
+	<div class="container" th:fragment="admin-account">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#moderate-users">Moderate Users</a></li>
+            <li><a data-toggle="tab" href="#moderate-lingua">Moderate Lingua</a></li>
+            <li><a data-toggle="tab" href="#reports">Reports</a></li>
+        </ul>
+        <div class="lingua-container-body">
+            <div class="tab-content" style="padding: 50px;">
+            	<div id="moderate-users" class="tab-pane fade in active">
+            		<h3>Moderate Users</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+                <div id="moderate-lingua" class="tab-pane fade">
+                    <h3>Moderate Lingua</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+                <div id="reports" class="tab-pane fade">
+                    <h3>Reports</h3>
+                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+</body>
+</html>
