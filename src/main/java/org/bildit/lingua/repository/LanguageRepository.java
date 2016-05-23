@@ -9,7 +9,8 @@ import org.bildit.lingua.model.Language;
  * @author Mladen Todorovic
  * 
  * */
+public interface LanguageRepository extends BaseRepository<Language, Long>, LanguageRepositoryCustom {
 
-public interface LanguageRepository extends BaseRepository <Language, Long>, LanguageRepositoryCustom {
+	
 	
 }

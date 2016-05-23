@@ -1,5 +1,7 @@
 package org.bildit.lingua.repository;
 
+import java.util.List;
+
 import org.bildit.lingua.model.Ticket;
 
 /**
@@ -9,7 +11,9 @@ import org.bildit.lingua.model.Ticket;
  * @author Mladen Todorovic
  * 
  * */
+public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRepositoryCustom {
 
-public interface TicketRepository extends BaseRepository <Ticket, Long>, TicketRepositoryCustom {
+	List<Ticket> findAll();
+	List<Ticket> findAllByUserId(Long id);
 	
 }
