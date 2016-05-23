@@ -6,5 +6,6 @@ import org.bildit.lingua.model.User;
 public interface UserService extends BaseService<User, Long> {
 
 	boolean existByUsername(String username);
+	User findUserByUsername(String username);
 	
 }

@@ -1,7 +1,14 @@
 /* @author Bojan Aleksic */
 
+html {
+	height: 100%;
+  	box-sizing: border-box;
+}
+
 body {
+	position: relative;
 	font-family: Helvetica, sans-serif;
+	min-height: 100%;
 }
 
 .jumbotron {
@@ -75,12 +82,13 @@ body {
 }
 
 .footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    /* Set the fixed height of the footer here */
-    height: 60px;
-    background-color: #204d74;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #204d74;
+  padding-bottom: 60px;
+  height: 60px;
 }
 
 .text-footer {

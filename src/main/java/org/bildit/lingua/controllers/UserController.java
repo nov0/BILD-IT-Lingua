@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
-import org.bildit.lingua.repository.TicketRepository;
-import org.bildit.lingua.repository.UserRepository;
+import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
 	
 	@Autowired
-	private TicketRepository ticketRepository;
-	
-	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private TicketService ticketService;
 	
 	/**
 	 * @author Bojan Aleksic
@@ -34,8 +30,8 @@ public class UserController {
 	 */
 	@RequestMapping("/get-all-tickets")
 	public String getAllTickets(Model model, Principal principal) {
-		User user = userRepository.findUserByUsername(principal.getName());
-		List<Ticket> all = ticketRepository.findAllByUserId(user.getId());
+		User user = userService.findUserByUsername(principal.getName());
+		List<Ticket> all = ticketService.getAllTicketsByUserId(user.getId());
 		model.addAttribute("all", all);
 		return "home";
 	}
