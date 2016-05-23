@@ -41,7 +41,7 @@ public class User extends BaseUser {
 	List<Ticket> tickets = new ArrayList<>();
 	
 	@OneToOne
-	private Language defaultLanguage;
+	private Language domesticLanguage;
 	
 	public User() {
 		/** Empty default constructor */
@@ -64,12 +64,12 @@ public class User extends BaseUser {
 		this.loginBan = loginBan;
 	}
 	
-	public Language getDefaultLanguage() {
-		return defaultLanguage;
+	public Language getDomesticLanguage() {
+		return domesticLanguage;
 	}
 
-	public void setDefaultLanguage(Language defaultLanguage) {
-		this.defaultLanguage = defaultLanguage;
+	public void setDomesticLanguage(Language domesticLanguage) {
+		this.domesticLanguage = domesticLanguage;
 	}
 
 	public List<Ticket> getTickets() {

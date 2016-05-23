@@ -13,8 +13,8 @@ import javax.validation.Valid;
 import org.bildit.lingua.model.Admin;
 import org.bildit.lingua.model.BaseUser;
 import org.bildit.lingua.model.User;
-import org.bildit.lingua.service.AdminService;
-import org.bildit.lingua.service.UserService;
+import org.bildit.lingua.repository.AdminRepository;
+import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,16 +22,16 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegistrationController {
 	
 	@Autowired
-	private AdminService adminService;
+	AdminRepository adminRepository;
 	
 	@Autowired
-	private UserService userService;
-	
+	UserRepository userRepository;
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String registerUser(BaseUser baseUser, Model model) {
@@ -58,7 +58,7 @@ public class RegistrationController {
 			Admin admin = new Admin(baseUser);
 			admin.setEnabled(true);
 			admin.setAuthority("ADMIN");
-			adminService.saveAdmin(admin);
+			adminRepository.save(admin);
 		}
 		
 		return "home";
@@ -99,22 +99,36 @@ public class RegistrationController {
 				
 			/* setting first letter to upper case in first name and last name */
 			String firstName = user.getFirstName();
-			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1, firstName.length() - 1);
+			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
 			String lastName = user.getLastName();
-			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1, lastName.length() - 1);
+			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			// setting username to lower case
 			user.setUsername(user.getUsername().toLowerCase());
 			
 			user.setEnabled(true);
+			user.setDomesticLanguage(null);
 			user.setAddingBan(false);
 			user.setLoginBan(false);
 			user.setVotingBan(false);
 			user.setAuthority("USER");
-			userService.saveUser(user);
+			userRepository.save(user);
 		}
 
 		return "home";
 	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * @param username
+	 * @return
+	 * Method for checking is username exist in database.
+	 */
+	@RequestMapping(value="/existusername", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean isUsernameExist(@RequestParam(name="username") String username) {
+		return userRepository.existByUsername(username);
+	}
+
 }

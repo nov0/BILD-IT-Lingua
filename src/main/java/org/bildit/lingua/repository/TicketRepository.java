@@ -4,7 +4,14 @@ import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
 
-public interface TicketRepository extends BaseRepository<Ticket, Long> {
+/**
+ * 
+ * @interface TicketRepository
+ * 
+ * @author Mladen Todorovic
+ * 
+ * */
+public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRepositoryCustom {
 
 	List<Ticket> findAll();
 	List<Ticket> findAllByUserId(Long id);

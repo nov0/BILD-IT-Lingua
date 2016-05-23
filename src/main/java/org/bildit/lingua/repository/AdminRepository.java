@@ -2,9 +2,8 @@ package org.bildit.lingua.repository;
 
 import org.bildit.lingua.model.Admin;
 
-public interface AdminRepository extends BaseRepository<Admin, Long> {
+public interface AdminRepository extends BaseRepository<Admin, Long>, AdminRepositoryCustom {
 	
-	@SuppressWarnings("unchecked")
-	Admin save(Admin entity);
+	
 	
 }

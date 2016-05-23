@@ -38,5 +38,5 @@ public class HomeController {
 	public String goToLogin() {
 		return "login";
 	}
-	
+
 }

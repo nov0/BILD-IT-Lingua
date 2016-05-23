@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.bildit.lingua.common.BaseEntity;
 
@@ -28,11 +29,14 @@ import org.bildit.lingua.common.BaseEntity;
  * */
 
 @Entity
-@Table(name = "ticket")
+@Table(name = "tickets")
 public class Ticket extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Transient
+	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
+
 	private String textDomestic;
 	
 	private String textForeign;
