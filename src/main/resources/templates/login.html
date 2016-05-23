@@ -7,9 +7,14 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 <title>Login Page</title>
 </head>
 <body>
+
+	<!-- 	Include notification fragment -->
+	<div th:replace="fragments/notifications :: notifications">Notification frgment</div>
+
 	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
 		<div class="container" style="height: 60px;">
   			<div style="float: left; position: relative;">
