@@ -27,6 +27,12 @@ public class AdminController {
 
 	@Autowired
 	private LanguageService languageService;
+	
+	@RequestMapping("/admin-page")
+	public String showAdminPage() {
+		return "admin-page";
+	}
+	
 
 	@RequestMapping(value = "/add-language", method = RequestMethod.GET)
 	public String showAddLanguage() {
