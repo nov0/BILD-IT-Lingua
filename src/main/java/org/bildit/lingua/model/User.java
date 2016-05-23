@@ -1,6 +1,7 @@
 package org.bildit.lingua.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * 
@@ -28,20 +31,21 @@ public class User extends BaseUser {
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean votingBan = false;
 	
-	@Column(columnDefinition = "BIT", length = 1)
-	private boolean addingBan = false;
+	@Temporal(TemporalType.DATE)
+	private Date deactivated;
 	
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="USER_TICKETS", 
+	@JoinTable(name="user_tickets", 
 	   joinColumns=@JoinColumn(name="user_id"),
 	   inverseJoinColumns=@JoinColumn(name="ticket_id"))
 	List<Ticket> tickets = new ArrayList<>();
 	
 	@OneToOne
 	private Language domesticLanguage;
+	
 	
 	public User() {
 		/** Empty default constructor */
@@ -58,9 +62,9 @@ public class User extends BaseUser {
 	}
 	
 	/** Constructor with params */
-	public User(boolean votingBan, boolean addingBan, boolean loginBan) {
+	public User(boolean votingBan, Date deactivated, boolean loginBan) {
 		this.votingBan = votingBan;
-		this.addingBan = addingBan;
+		this.deactivated = deactivated;
 		this.loginBan = loginBan;
 	}
 	
@@ -83,13 +87,13 @@ public class User extends BaseUser {
 	public void setVotingBan(boolean votingBan) {
 		this.votingBan = votingBan;
 	}
-
-	public boolean isAddingBan() {
-		return addingBan;
+	
+	public Date getDeactivated() {
+		return deactivated;
 	}
 
-	public void setAddingBan(boolean addingBan) {
-		this.addingBan = addingBan;
+	public void setDeactivated(Date deactivated) {
+		this.deactivated = deactivated;
 	}
 
 	public boolean isLoginBan() {

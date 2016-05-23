@@ -9,8 +9,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-//import javax.persistence.JoinColumn;
-//import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -38,21 +36,21 @@ public class Ticket extends BaseEntity {
 	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
 
 	private String textDomestic;
-	
 	private String textForeign;
 	
 	@ManyToOne
 	private User user;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="TICKET_VOTE_UP", 
+	@JoinTable(name="ticket_votes_up", 
 	   		   joinColumns=@JoinColumn(name="ticket_id"),
 	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
 	List<Vote> votesUp = new ArrayList<>();
-	@JoinTable(name="TICKET_VOTE_DOWN", 
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinTable(name="ticket_votes_down", 
 	   		   joinColumns=@JoinColumn(name="ticket_id"),
 	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	List<Vote> votesDown = new ArrayList<>();
 	
 	@Temporal(TemporalType.DATE)
