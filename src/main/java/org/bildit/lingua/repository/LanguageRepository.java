@@ -4,12 +4,13 @@ import org.bildit.lingua.model.Language;
 
 /**
  * 
- * @interface  LanguageRepository
+ * @interface LanguageRepository
  * 
- * @author Goran Arsenic
+ * @author Mladen Todorovic
  * 
  * */
+public interface LanguageRepository extends BaseRepository<Language, Long>, LanguageRepositoryCustom {
 
-public interface LanguageRepository extends BaseRepository <Language, Long>, LanguageRepositoryCustom {
+	
 	
 }

@@ -1,14 +1,19 @@
 package org.bildit.lingua.repository;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * 
- * @abstract class LanguageRepositoryImpl
+ * @class LanguageRepositoryImpl
  * 
- * @author Goran Arsenic
+ * @author Mladen Todorovic
  * 
  * */
 
-public abstract class LanguageRepositoryImpl implements LanguageRepository {
+public class LanguageRepositoryImpl implements LanguageRepositoryCustom {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	/** Temporary unused method */
     @Override

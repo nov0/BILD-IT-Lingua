@@ -1,4 +1,8 @@
-/********* Header *********/
+/* @author Bojan Aleksic */
+
+body {
+	font-family: Helvetica, sans-serif;
+}
 
 .jumbotron {
 	padding-top: 30px;
@@ -64,6 +68,28 @@
     padding-left: 30px;
 }
 
-#chosen-lang {
+#selected-language {
     padding-left: 20px;
+    font-size: 14px;
+    color: #1898b0; 
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #204d74;
+}
+
+.text-footer {
+    color: #88f4f4;
+    margin: 20px;
+}
+
+.text-footer img {
+    position: relative;
+    left: 3px;
+    bottom: 1px;
 }

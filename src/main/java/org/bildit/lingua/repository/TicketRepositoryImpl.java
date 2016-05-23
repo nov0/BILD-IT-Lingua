@@ -1,14 +1,20 @@
 package org.bildit.lingua.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 /**
  * 
- * @abstract class TicketRepositoryImpl
+ * @class TicketRepositoryImpl
  * 
  * @author Mladen Todorovic
  * 
  * */
 
-public abstract class TicketRepositoryImpl implements TicketRepositoryCustom {
+public class TicketRepositoryImpl implements TicketRepositoryCustom {
+	
+	@PersistenceContext
+	private EntityManager entityManager;
 	
 	/** Temporary unused method */
 	public String customTicketMethod() {
