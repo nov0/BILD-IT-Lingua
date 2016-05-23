@@ -22,6 +22,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class RegistrationController {
@@ -116,5 +117,17 @@ public class RegistrationController {
 		}
 
 		return "home";
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * @param username
+	 * @return
+	 * Method for checking is username exist in database.
+	 */
+	@RequestMapping(value="/existusername", method=RequestMethod.GET)
+	@ResponseBody
+	public boolean isUsernameExist(@RequestParam(name="username") String username) {
+		return userRepository.existByUsername(username);
 	}
 }
