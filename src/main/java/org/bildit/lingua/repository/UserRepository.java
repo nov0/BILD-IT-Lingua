@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.Query;
 
 /**
  * 
- * @interface  UserRepository
+ * @interface UserRepository
  * 
  * @author Mladen Todorovic
  * 

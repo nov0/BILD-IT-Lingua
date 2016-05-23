@@ -4,7 +4,7 @@ import org.bildit.lingua.model.Ticket;
 
 /**
  * 
- * @interface  TicketRepository
+ * @interface TicketRepository
  * 
  * @author Mladen Todorovic
  * 

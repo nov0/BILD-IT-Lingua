@@ -4,7 +4,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  CustomUserRepository
+ * @interface UserRepositoryCustom
  * 
  * @author Mladen Todorovic
  * 

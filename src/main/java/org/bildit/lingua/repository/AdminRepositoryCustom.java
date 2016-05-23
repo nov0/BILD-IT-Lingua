@@ -4,7 +4,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  CustomAdminRepository
+ * @interface AdminRepositoryCustom
  * 
  * @author Mladen Todorovic
  * 

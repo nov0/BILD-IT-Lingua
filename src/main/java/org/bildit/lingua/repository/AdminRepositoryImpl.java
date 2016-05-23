@@ -1,14 +1,20 @@
 package org.bildit.lingua.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 /**
  * 
- * @abstract class AdminRepositoryImpl
+ * @class AdminRepositoryImpl
  * 
  * @author Mladen Todorovic
  * 
  * */
 
-public abstract class AdminRepositoryImpl implements AdminRepositoryCustom {
+public class AdminRepositoryImpl implements AdminRepositoryCustom {
+	
+	 @PersistenceContext
+	 private EntityManager entityManager;
 	
 	/** Temporary unused method */
     @Override

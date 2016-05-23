@@ -34,7 +34,7 @@ public class Ticket extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@Transient
-	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentence", "pronoun" };
+	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
 
 	private String textDomestic;
 	private String textForeign;

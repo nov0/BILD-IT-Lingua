@@ -4,9 +4,9 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  CustomLanguageRepository
+ * @interface LanguageRepositoryCustom
  * 
- * @author Goran Arsenic
+ * @author Mladen Todorovic
  * 
  * */
 
@@ -14,6 +14,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface LanguageRepositoryCustom {
 	
 	/** Temporary unused method */
-	String customLanguageMethod();
+	public String customLanguageMethod();
 	
 }
