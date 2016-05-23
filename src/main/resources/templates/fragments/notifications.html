@@ -5,7 +5,12 @@
 		<script type="text/javascript" th:inline="javascript">
 			/*<![CDATA[*/
 			    $( document ).ready(function() {
-			    	alert("test");
+			    	$.notify({
+			    		icon: 'glyphicon glyphicon-warning-sign',
+			    		title: 'Test',
+			    		message: "Neka porukakakakak",
+			    		target: '_blank'
+			    	}); // end notify
 				}); // end ready
 			/*]]>*/
 		</script>
