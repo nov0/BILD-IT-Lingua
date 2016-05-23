@@ -1,19 +1,6 @@
 package org.bildit.lingua.controllers;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
-import org.bildit.lingua.model.Language;
-import org.bildit.lingua.service.LanguageService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Administrator controllers
@@ -24,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 public class AdminController {
+<<<<<<< HEAD
 
 	@Autowired
 	private LanguageService languageService;
@@ -93,5 +81,7 @@ public class AdminController {
 		}
       
     }
+=======
+>>>>>>> 0da6da354c5a65f342fa12a68ac9f858b39dcaeb
 	
 }

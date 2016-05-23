@@ -11,7 +11,7 @@ import org.bildit.lingua.common.BaseEntity;
  *
  */
 @Entity
-@Table(name = "vote")
+@Table(name = "votes")
 public class Vote extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;

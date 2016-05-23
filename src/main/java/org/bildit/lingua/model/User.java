@@ -6,9 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -34,14 +31,14 @@ public class User extends BaseUser {
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="USER_TICKETS", 
-	   joinColumns=@JoinColumn(name="user_id"),
-	   inverseJoinColumns=@JoinColumn(name="ticket_id"))
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	List<Ticket> tickets = new ArrayList<>();
 	
 	@OneToOne
-	private Language defaultLanguage;
+	private Language domesticLanguage;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	List <Language> foreignLanguage = new ArrayList<>();
 	
 	public User() {
 		/** Empty default constructor */
@@ -64,12 +61,12 @@ public class User extends BaseUser {
 		this.loginBan = loginBan;
 	}
 	
-	public Language getDefaultLanguage() {
-		return defaultLanguage;
+	public Language getDomesticLanguage() {
+		return domesticLanguage;
 	}
 
-	public void setDefaultLanguage(Language defaultLanguage) {
-		this.defaultLanguage = defaultLanguage;
+	public void setDomesticLanguage(Language domesticLanguage) {
+		this.domesticLanguage = domesticLanguage;
 	}
 
 	public List<Ticket> getTickets() {
