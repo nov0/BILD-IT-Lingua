@@ -40,10 +40,5 @@ public class HomeController {
 	public String goToLogin() {
 		return "login";
 	}
-	
-	@RequestMapping("/my-lingua")
-	public String loginSuccessfull() {
-		return "my-lingua";
-	}
 
 }

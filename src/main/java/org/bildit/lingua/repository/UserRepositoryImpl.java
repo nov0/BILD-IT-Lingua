@@ -1,15 +1,21 @@
 package org.bildit.lingua.repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 /**
  * 
- * @abstract class UserRepositoryImpl
+ * @class UserRepositoryImpl
  * 
- * @author Bojan Aleksic, Mladen Todorovic
+ * @author Mladen Todorovic
  * 
  * */
 
-public abstract class UserRepositoryImpl implements UserRepositoryCustom {
+public class UserRepositoryImpl implements UserRepositoryCustom {
     
+	@PersistenceContext
+	private EntityManager entityManager;
+	
     /** Temporary unused method */
     @Override
     public String customUserMethod() {

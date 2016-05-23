@@ -4,9 +4,9 @@ import org.bildit.lingua.model.Language;
 
 /**
  * 
- * @interface  LanguageRepository
+ * @interface LanguageRepository
  * 
- * @author Goran Arsenic
+ * @author Mladen Todorovic
  * 
  * */
 

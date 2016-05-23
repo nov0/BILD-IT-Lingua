@@ -8,7 +8,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  BaseRepository
+ * @interface BaseRepository
  * 
  * @author Mladen Todorovic
  * 
@@ -16,7 +16,5 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface BaseRepository <T extends BaseEntity, K extends Serializable> extends JpaRepository <T, K> {
-
-	String customBaseMethod(); 
 	  
 }

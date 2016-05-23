@@ -4,7 +4,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 /**
  * 
- * @interface  CustomTicketRepository
+ * @interface TicketRepositoryCustom
  * 
  * @author Mladen Todorovic
  * 
@@ -14,6 +14,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 public interface TicketRepositoryCustom {
 	
 	/** Temporary unused method */
-	String customTicketMethod();
+	public String customTicketMethod();
 	
 }

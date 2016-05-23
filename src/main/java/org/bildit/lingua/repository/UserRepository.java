@@ -4,7 +4,7 @@ import org.bildit.lingua.model.User;
 
 /**
  * 
- * @interface  UserRepository
+ * @interface UserRepository
  * 
  * @author Mladen Todorovic
  * 
