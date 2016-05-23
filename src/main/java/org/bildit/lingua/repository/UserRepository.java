@@ -14,6 +14,7 @@ import org.bildit.lingua.model.User;
 public interface UserRepository extends BaseRepository <User, Long> {
 	
 	List<User> findAll();
+	User findUserByUsername(String username);
 	
 	@SuppressWarnings("unchecked")
 	User save(User user);

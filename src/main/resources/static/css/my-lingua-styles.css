@@ -1,3 +1,5 @@
+/* @author Bojan Aleksic */
+
 .lingua-container-body {
 	border-bottom: 1px solid #e5e5e5;
 	border-left: 1px solid #e5e5e5;
@@ -40,4 +42,34 @@
 
 .lingua-language > li > a {
     color: white;
+}
+
+.ticket-container {
+	border: 1px solid #d1d1d1;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	padding-bottom: 30px;
+	background-color: #f2f2f2;
+	border-radius: 10px;
+}
+
+.ticket-header {
+	border-bottom: 1px solid #d1d1d1;
+	padding-bottom: 8px;
+}
+
+.domestic-foreign-row {
+	padding-top: 30px;
+}
+
+.domestic-foreign-text {
+	color: #1898b0;
+	text-align: center;
+	font-size: 18px;
+	font-family: 'Lobster', cursive;
+}
+
+.like-dislike-btn {
+	text-align: right;
 }

@@ -55,8 +55,32 @@
 	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
 	    			
                     <div class="my-lingua-content">
-                    	<h3>My Lingua</h3>
-                    	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+                    	<div th:if="${all != null}">
+                    		<div class="ticket-container" th:each="ticket : ${all}">
+                    			<div class="row ticket-header">
+                                    <div class="col-md-2">
+                                        <span class="glyphicon glyphicon-time"></span>
+                                        <span th:text="${ticket.dateCreated}"></span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="glyphicon glyphicon-tag"></span> 
+                                        <span data-toggle="tooltip" title="Category">Verbs</span>
+                                    </div>
+                                    <div class="col-md-4 like-dislike-btn">
+                                        <a href="#">
+                                        	<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+                                        </a> 31 &nbsp;
+                                        <a href="#">
+                                        	<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+                                        </a> 5
+                                    </div>
+                                </div>
+                                <div class="row domestic-foreign-row">
+                                    <div th:text="${ticket.textDomestic}" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+                                    <div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+                                </div>
+                    		</div>
+                    	</div>
                     </div>
                 </div>
                 <div id="practice-lingua" class="tab-pane fade">
@@ -74,6 +98,8 @@
 	            $(".select-category li > a").click(function() {
 	                $(".category").text(this.innerHTML);
 	            });
+	            
+	            $('[data-toggle="tooltip"]').tooltip();
 	        });
     	</script>
     </div>
