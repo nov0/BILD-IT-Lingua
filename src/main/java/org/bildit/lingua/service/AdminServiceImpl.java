@@ -23,4 +23,9 @@ public class AdminServiceImpl implements AdminService {
 		return adminRepository.getOne(id);
 	}
 
+	@Override
+	public void delete(Long id) {
+		adminRepository.delete(id);
+	}
+
 }

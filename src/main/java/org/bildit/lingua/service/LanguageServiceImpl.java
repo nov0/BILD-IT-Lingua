@@ -23,4 +23,10 @@ public class LanguageServiceImpl implements LanguageService {
 		return languageRepository.getOne(id);
 	}
 
+	@Override
+	public void delete(Long id) {
+		languageRepository.delete(id);
+	}
+	
+	
 }
