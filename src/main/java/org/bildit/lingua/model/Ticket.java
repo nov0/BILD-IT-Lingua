@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -34,9 +35,15 @@ public class Ticket extends BaseEntity {
 	
 	@Transient
 	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
-
+	
 	private String textDomestic;
 	private String textForeign;
+	
+	@Temporal(TemporalType.DATE)
+	private Date deactivated;
+	
+	@Column(columnDefinition = "BIT", length = 1)
+	private boolean edited;
 	
 	@ManyToOne
 	private User user;
@@ -56,6 +63,7 @@ public class Ticket extends BaseEntity {
 	@Temporal(TemporalType.DATE)
 	private Date dateCreated;
 
+	
 	public String getTextDomestic() {
 		return textDomestic;
 	}
@@ -70,6 +78,26 @@ public class Ticket extends BaseEntity {
 
 	public void setTextForeign(String textForeign) {
 		this.textForeign = textForeign;
+	}
+	
+	public Date getDeactivated() {
+		return deactivated;
+	}
+
+	public void setDeactivated(Date deactivated) {
+		this.deactivated = deactivated;
+	}
+
+	public boolean isEdited() {
+		return edited;
+	}
+
+	public void setEdited(boolean edited) {
+		this.edited = edited;
+	}
+
+	public static String[] getCategory() {
+		return CATEGORY;
 	}
 
 	public User getUser() {

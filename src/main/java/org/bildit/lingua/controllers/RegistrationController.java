@@ -109,7 +109,6 @@ public class RegistrationController {
 			
 			user.setEnabled(true);
 			user.setDomesticLanguage(null);
-			user.setDeactivated(null);
 			user.setLoginBan(false);
 			user.setVotingBan(false);
 			user.setAuthority("USER");
