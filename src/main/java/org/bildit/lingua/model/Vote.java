@@ -22,7 +22,7 @@ public class Vote extends BaseEntity {
 	private Ticket ticket;
 
 	public Vote() {
-
+		/** Empty default constructor */
 	}
 
 	public int getVoteValue() {

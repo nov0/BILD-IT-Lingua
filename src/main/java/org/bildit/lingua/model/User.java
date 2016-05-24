@@ -35,13 +35,14 @@ public class User extends BaseUser {
 	private boolean loginBan = false;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="USER_TICKETS", 
+	@JoinTable(name="user_tickets", 
 	   joinColumns=@JoinColumn(name="user_id"),
 	   inverseJoinColumns=@JoinColumn(name="ticket_id"))
 	List<Ticket> tickets = new ArrayList<>();
 	
 	@OneToOne
 	private Language domesticLanguage;
+	
 	
 	public User() {
 		/** Empty default constructor */
@@ -83,7 +84,7 @@ public class User extends BaseUser {
 	public void setVotingBan(boolean votingBan) {
 		this.votingBan = votingBan;
 	}
-
+	
 	public boolean isAddingBan() {
 		return addingBan;
 	}
