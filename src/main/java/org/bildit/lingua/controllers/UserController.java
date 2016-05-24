@@ -1,10 +1,7 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
-import java.util.List;
 
-import org.bildit.lingua.model.Ticket;
-import org.bildit.lingua.model.User;
 import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
