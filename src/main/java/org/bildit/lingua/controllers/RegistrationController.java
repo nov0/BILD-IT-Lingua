@@ -15,6 +15,7 @@ import org.bildit.lingua.model.BaseUser;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
+import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,9 @@ public class RegistrationController {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String registerUser(BaseUser baseUser, Model model) {
@@ -127,7 +131,7 @@ public class RegistrationController {
 	@RequestMapping(value="/existusername", method=RequestMethod.GET)
 	@ResponseBody
 	public boolean isUsernameExist(@RequestParam(name="username") String username) {
-		return userRepository.existByUsername(username);
+		return userService.existByUsername(username);
 	}
 
 }
