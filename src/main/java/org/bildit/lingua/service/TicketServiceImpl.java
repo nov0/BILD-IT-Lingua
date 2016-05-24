@@ -32,6 +32,5 @@ public class TicketServiceImpl implements TicketService {
 	public List<Ticket> getAllTicketsByUserId(Long id) {
 		return ticketRepository.findAllByUserId(id);
 	}
-
 	
 }

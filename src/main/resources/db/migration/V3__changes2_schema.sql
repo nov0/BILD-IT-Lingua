@@ -12,7 +12,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets` VALUES (6,'2016-05-20','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','0000-00-00','\0',2),(7,'2016-05-21','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','0000-00-00','\0',2),(8,'2016-05-22','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','0000-00-00','\0',2),(9,'2016-05-23','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','0000-00-00','\0',2);
+INSERT INTO `tickets` VALUES (6,'2016-05-20','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...',NULL,'\0',2),(7,'2016-05-21','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...',NULL,'\0',2),(8,'2016-05-22','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...',NULL,'\0',2),(9,'2016-05-23','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...',NULL,'\0',2);
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
