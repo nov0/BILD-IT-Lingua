@@ -4,7 +4,8 @@
 	border-bottom: 1px solid #e5e5e5;
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
-	position: relative; bottom: 0px;
+	position: relative; 
+	bottom: 0px;
 }
 
 .btn-group {
@@ -34,6 +35,7 @@
 
 .my-lingua-content {
 	padding-top: 30px;
+	padding-bottom: 50px;
 }
 
 .lingua-language {
@@ -52,6 +54,7 @@
 	padding-bottom: 30px;
 	background-color: #f2f2f2;
 	border-radius: 10px;
+	margin-top: 30px;
 }
 
 .ticket-header {

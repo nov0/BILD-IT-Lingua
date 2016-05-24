@@ -35,9 +35,7 @@
 		<div th:replace="fragments/carousel :: bootstrap-carousel"></div>
 	</div>
 		
-	<div sec:authorize="isAuthenticated()">
-		<div th:replace="fragments/footer :: footer"></div>
-	</div>
+	<div th:replace="fragments/footer :: footer"></div>
 	
 </body>
 </html>
