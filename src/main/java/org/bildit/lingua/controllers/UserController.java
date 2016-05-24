@@ -26,13 +26,11 @@ public class UserController {
 	 * @param model
 	 * @param principal
 	 * @return
-	 * Returns list of tickets by user ID
+	 * Returns list of tickets by user username
 	 */
 	@RequestMapping("/get-all-tickets")
 	public String getAllTickets(Model model, Principal principal) {
-		User user = userService.findUserByUsername(principal.getName());
-		List<Ticket> all = ticketService.getAllTicketsByUserId(user.getId());
-		model.addAttribute("all", all);
+		model.addAttribute("allTickets", ticketService.getAllTicketsByUsername(principal.getName()));
 		return "home";
 	}
 	
