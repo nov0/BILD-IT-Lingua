@@ -8,9 +8,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="js/formValidation.min.js"></script>
-	<script src="js/valid-bootstrap.min.js"></script>	
+	<script src="js/valid-bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 </head>
 <body>
+
+	<!-- @author Novislav Sekulic -->
+			 
 		<!-- including script for validating user form -->
 		<div th:replace="fragments/validation :: validation">...</div>
 
@@ -58,5 +62,7 @@
 			</form>
 			</div>
 		</div>
+		<!-- 		Including footer -->
+		<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
