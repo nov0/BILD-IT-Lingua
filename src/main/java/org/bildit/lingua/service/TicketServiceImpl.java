@@ -3,7 +3,9 @@ package org.bildit.lingua.service;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.TicketRepository;
+import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class TicketServiceImpl implements TicketService {
 
 	@Autowired
 	private TicketRepository ticketRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Override
 	public List<Ticket> getAll() {
@@ -29,8 +34,9 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public List<Ticket> getAllTicketsByUserId(Long id) {
-		return ticketRepository.findAllByUserId(id);
+	public List<Ticket> getAllTicketsByUsername(String username) {
+		User user = userRepository.findUserByUsername(username);
+		return ticketRepository.findAllByUserId(user.getId());
 	}
 	
 }
