@@ -1,20 +1,86 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <body>
 	<div th:fragment="notifications">
+		<!-- *
+			 * @author Novislav Sekulic
+			 * scripts for showing notifications
+			 *
+			 * -->
 		<script type="text/javascript" th:inline="javascript">
 			/*<![CDATA[*/
 			    $( document ).ready(function() {
-			    	$.notify({
-			    		icon: 'glyphicon glyphicon-warning-sign',
-			    		title: 'Test',
-			    		message: "Neka porukakakakak",
-			    		target: '_blank'
-			    	}); // end notify
+					if(isParamPresent("error")){
+			    		$.notify({
+			    			// options
+			    			icon: 'glyphicon glyphicon-warning-sign',
+			    			message: /*[[#{login.error.message}]]*/ 'message',
+			    			target: '_blank'
+			    		},{
+			    			// settings
+			    			element: 'form',
+			    			position: 'absolute',
+			    			type: "danger",
+			    			allow_dismiss: true,
+			    			newest_on_top: true,
+			    			placement: {
+			    				from: "top",
+			    				align: "right"
+			    			},
+			    			offset: {
+			    				x: 190,
+			    				y: 93
+			    			},
+			    			delay: 3000,
+			    			timer: 1000,
+			    			animate: {
+			    				enter: 'animated fadeInDown',
+			    				exit: 'animated fadeOutUp'
+			    			}
+			    		}); // end notify error
+			        } else if(isParamPresent("logout")){
+			        	$.notify({
+			    			// options
+			    			icon: 'glyphicon glyphicon-warning-sign',
+			    			message: /*[[#{logout.success.message}]]*/ 'message',
+			    			target: '_blank'
+			    		},{
+			    			// settings
+			    			element: 'body',
+			    			type: "success",
+			    			allow_dismiss: true,
+			    			newest_on_top: true,
+			    			placement: {
+			    				from: "top",
+			    				align: "right"
+			    			},
+			    			offset: {
+			    				x: 190,
+			    				y: 93
+			    			},
+			    			delay: 3000,
+			    			timer: 1000,
+			    			animate: {
+			    				enter: 'animated fadeInDown',
+			    				exit: 'animated fadeOutUp'
+			    			}
+			    		}); // end notify
+			        } else {
+			        	
+			        }
+			    	
 				}); // end ready
+			    
+			    function isParamPresent(urlParam) {
+				    var urlVariables = window.location.search;
+				    console.log(urlVariables);
+			        return urlVariables.indexOf("?" + urlParam) >= 0;
+			    }
+			    
+
 			/*]]>*/
 		</script>
-		
+
 	</div>
 </body>
 </html>

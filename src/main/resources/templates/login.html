@@ -7,10 +7,13 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
+
 <title>Login Page</title>
 </head>
 <body>
+	<!-- @author Novislav Sekulic -->
 
 	<!-- 	Include notification fragment -->
 	<div th:replace="fragments/notifications :: notifications">Notification frgment</div>
@@ -40,21 +43,10 @@
 					<a class="btn btn-warning" href="/" th:href="@{/}" th:text="#{form.field.button.cancel}"></a>
 				</div>
 			</form>
-			<br />
-			<div th:if="${param.error}">
-				<div class="alert alert-danger fade in">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<p th:text="#{login.error.message}">Login error message</p>
-				</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="alert alert-success fade in">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<p th:text="#{logout.success.message}">Logout message</p>
-				</div>
-			</div>
 			</div>
 		</div>
 		</div>
+		<!-- 		Including footer -->
+		<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
