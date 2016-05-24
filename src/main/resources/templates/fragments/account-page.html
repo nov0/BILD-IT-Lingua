@@ -55,8 +55,8 @@
 	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
 	    			
                     <div class="my-lingua-content">
-                    	<div th:if="${all != null}">
-                    		<div class="ticket-container" th:each="ticket : ${all}">
+                    	<div th:if="${allTickets != null}">
+                    		<div class="ticket-container" th:each="ticket : ${allTickets}">
                     			<div class="row ticket-header">
                                     <div class="col-md-2">
                                         <span class="glyphicon glyphicon-time"></span>
