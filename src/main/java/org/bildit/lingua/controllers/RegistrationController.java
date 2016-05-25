@@ -154,7 +154,7 @@ public class RegistrationController {
 			userRepository.save(user);
 		}
 
-		return "home";
+		return "redirect:/?register";
 	}
 	
 	/**

@@ -64,7 +64,7 @@
 			                        },
 			                        regexp: {
 			                            regexp: /\S+@\S+\.\S+/,
-			                            message: /*[[#{Email.baseUser.email}]]*/ 'Pattern done match'
+			                            message: /*[[#{Email.baseUser.email}]]*/ 'Pattern dont match'
 			                        }
 			                    }
 			                },
@@ -76,7 +76,7 @@
 		                        	stringLength: {
 		                          		min: 5,
 		                            	max: 40,
-		                            	message: /*[[#{Size.baseUsers.password}]]*/ 'Please input minimal'
+		                            	message: /*[[#{Size.baseUser.password}]]*/ 'Please input minimal'
 		                        	}
 			                	}
 			                },
@@ -88,7 +88,7 @@
 			                		stringLength: {
 		                        	    min: 5,
 		                        	    max: 40,
-		                            	message: /*[[#{Size.baseUsers.password}]]*/ 'Please input minimal'
+		                            	message: /*[[#{Size.baseUser.password}]]*/ 'Please input minimal'
 		                        	},
 		                        	callback: {
 		                        		callback: function(value, validator, $field) {
