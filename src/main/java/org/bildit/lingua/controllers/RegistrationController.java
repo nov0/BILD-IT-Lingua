@@ -15,6 +15,7 @@ import org.bildit.lingua.model.BaseUser;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
+import org.bildit.lingua.service.LanguageServiceImpl;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,9 @@ public class RegistrationController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private LanguageServiceImpl languageServices;
 	
 	/**
 	 * 
@@ -86,6 +90,7 @@ public class RegistrationController {
 	@RequestMapping("/registration")
 	public String goToRegistration(Model model, BaseUser baseUser) {
 		model.addAttribute("baseUser", baseUser);
+		model.addAttribute("allLanguages", languageServices.getAll());
 		return "registration";
 	}
 	
@@ -105,16 +110,25 @@ public class RegistrationController {
 	@RequestMapping("/registration-check")
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
+			@RequestParam("domestic") String domesticLanguage,
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
+			model.addAttribute("allLanguages", languageServices.getAll());
+			return "registration";
+		}
+		
+		if(userRepository.existByUsername(baseUser.getUsername())) {
+			model.addAttribute("usernameExist", true);
+			model.addAttribute("allLanguages", languageServices.getAll());
 			return "registration";
 		}
 
 		if (result.hasErrors()) {
+			model.addAttribute("allLanguages", languageServices.getAll());
 			return "registration";
 		} else {
 			User user = new User(baseUser);
@@ -128,6 +142,8 @@ public class RegistrationController {
 			user.setLastName(lastName);
 			// setting username to lower case
 			user.setUsername(user.getUsername().toLowerCase());
+
+			user.setDomesticLanguage(languageServices.getOneByLanguageTitle(domesticLanguage));
 			
 			user.setEnabled(true);
 			user.setDomesticLanguage(null);
