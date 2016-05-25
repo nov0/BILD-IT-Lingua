@@ -123,4 +123,9 @@ body {
     padding-top: 20px;
 }
 
+.error {
+	color: red;
+	font-size: 80%;
+}
+
 /********* end form style **********/

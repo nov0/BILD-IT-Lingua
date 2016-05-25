@@ -11,7 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 	<script src="js/formValidation.min.js"></script>
 	<script src="js/valid-bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="/css/styles.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="css/styles.css" />  
 </head>
 <body>
 
@@ -73,6 +73,7 @@
                 	<div class="form-group">
 						<input type="text" th:field="*{username}" th:placeholder="#{form.field.username}" class="form-control" />
 						<label th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="error">Error message</label>
+						<label th:if="${usernameExist}" th:text="#{exist.baseUser.username.exist}" class="error">Error message</label>
                 	</div>
                 	<div class="form-group">
 						<input type="password" th:field="*{password}" th:placeholder="#{form.field.password}" class="form-control" id="password"/>
@@ -86,6 +87,14 @@
 						<input type="text" th:field="*{email}" th:placeholder="#{form.field.email}" class="form-control" />
 						<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error">Error message</label>
                 	</div>
+                	<div class="form-goup">
+                		<label for="domestic" th:text="#{form.select.language}">Select your Language</label>
+                		<select class="form-control" id="domestic" name="domestic">
+                			<option th:each="language : ${allLanguages}" th:text="${language.languageTitle}">Lang</option>
+						</select>
+                	</div>
+                	<br />
+                	<br />                	
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">
 							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>

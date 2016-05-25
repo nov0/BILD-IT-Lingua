@@ -38,6 +38,11 @@ public class Language extends BaseEntity {
 	public void setLanguageTitle(String languageTitle) {
 		this.languageTitle = languageTitle;
 	}
+
+	@Override
+	public String toString() {
+		return "Language [languageTitle=" + languageTitle + "\nID=" + getId() + "]";
+	}
 	
 }
 
