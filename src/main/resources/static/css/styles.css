@@ -101,3 +101,26 @@ body {
     left: 3px;
     bottom: 1px;
 }
+
+/* @author Novislav Sekulic */
+/*********** form style ************/
+.form-style {
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    background-color: #eee;
+    padding-bottom: 20px;
+}
+
+.form-header {
+    padding-top: 20px;
+}
+
+.line {
+    border-top: 1px solid #d1d1d1;
+}
+
+.form-body {
+    padding-top: 20px;
+}
+
+/********* end form style **********/
