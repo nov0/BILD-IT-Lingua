@@ -37,13 +37,23 @@ public class RegistrationController {
 	@Autowired
 	private UserService userService;
 	
+	/**
+	 * 
+	 * @author Mladen Todorovic
+	 * 
+	 * */
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String registerUser(BaseUser baseUser, Model model) {
 		model.addAttribute("baseUser", baseUser);
 		return "registration-page";
 	}
-	
-	/** Registering administrator */
+	/**
+	 * 
+	 * @author Mladen Todorovic
+	 * 
+	 * Method for registering administrator 
+	 * 
+	 * */
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
 	public String registerAdmin(
 			@RequestParam("repeatpassword") String repeatPassword,
@@ -68,6 +78,11 @@ public class RegistrationController {
 		return "home";
 	}
 	
+	/**
+	 * 
+	 * @author Novislav Sekulic
+	 * 
+	 * */
 	@RequestMapping("/registration")
 	public String goToRegistration(Model model, BaseUser baseUser) {
 		model.addAttribute("baseUser", baseUser);
@@ -76,13 +91,16 @@ public class RegistrationController {
 	
 
 	/**
+	 * 
+	 * @author Novislav Sekulic
+	 * 
 	 * Method for validating user fields.
 	 * 
 	 * @param repeatPassword
 	 * @param baseUser
 	 * @param result
 	 * @param model
-	 * @return
+	 * 
 	 */
 	@RequestMapping("/registration-check")
 	public String goToRegistrationFail(

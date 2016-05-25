@@ -18,27 +18,27 @@ public class TicketController {
 	private TicketService ticketService;
 	
 
-	@RequestMapping(value = "/get-all-tickets", method = RequestMethod.POST)
+	@RequestMapping(value = "/ticket-all", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Ticket> getAllTickets(Principal principal) {
 		return ticketService.getAllTicketsByUsername(principal.getName());
 	}
 	
-	@RequestMapping(value = "/get-active-tickets", method = RequestMethod.POST)
+	@RequestMapping(value = "/ticket-active", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Ticket> getActiveTickets(Principal principal) {
-		return ticketService.getActiveTickets(principal.getName());
+		return ticketService.getAllActiveTicketsByUsername(principal.getName());
 	}
 	
-	@RequestMapping(value = "/get-deleted-tickets", method = RequestMethod.POST)
+	@RequestMapping(value = "/ticket-deleted", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Ticket> getDeletedTickets(Principal principal) {
-		return ticketService.getDeletedTickets(principal.getName());
+		return ticketService.getAllDeactivatedTicketsByUsername(principal.getName());
 	}
 	
-	@RequestMapping(value = "/get-moderated-tickets", method = RequestMethod.POST)
+	@RequestMapping(value = "/ticket-modified", method = RequestMethod.POST)
 	@ResponseBody
 	public List<Ticket> getModeratedTickets(Principal principal) {
-		return ticketService.getModeratedTickets(principal.getName());
+		return ticketService.getAllModeratedTicketsByUsername(principal.getName());
 	}
 }

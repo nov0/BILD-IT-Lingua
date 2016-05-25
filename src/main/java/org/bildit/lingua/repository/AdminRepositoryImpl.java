@@ -13,9 +13,14 @@ import javax.persistence.PersistenceContext;
 
 public class AdminRepositoryImpl implements AdminRepositoryCustom {
 	
-	 @PersistenceContext
-	 private EntityManager entityManager;
+	@PersistenceContext
+	private EntityManager entityManager;
 	
+	/** Configure the entity manager to be used */
+	public void setEntityManager(EntityManager entityManager) {
+		this.entityManager = entityManager;
+	}
+	 
 	/** Temporary unused method */
     @Override
     public String customAdminMethod() {

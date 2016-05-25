@@ -15,5 +15,8 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 
 	List<Ticket> findAll();
 	List<Ticket> findAllByUserId(Long id);
+	List<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id);
+	List<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id);
+	List<Ticket> findAllByUserIdAndEditedTrue(Long id);
 	
 }

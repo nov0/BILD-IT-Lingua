@@ -1,3 +1,5 @@
+/*! @author Mladen Todorovic */
+
 LOCK TABLES `languages` WRITE;
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
 INSERT INTO `languages` VALUES (3,'Serbian'),(4,'English'),(5,'German');
