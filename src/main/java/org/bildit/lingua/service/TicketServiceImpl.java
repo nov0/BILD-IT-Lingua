@@ -38,6 +38,7 @@ public class TicketServiceImpl implements TicketService {
 		User user = userRepository.findUserByUsername(username);
 		return ticketRepository.findAllByUserId(user.getId());
 	}
+
 	/**
 	 * @author Mladen Todorovic
 	 * 
