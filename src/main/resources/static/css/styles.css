@@ -11,11 +11,6 @@ body {
 	min-height: 100%;
 }
 
-.jumbotron {
-	padding-top: 30px;
-	padding-bottom: 30px;
-}
-
 .login-header {
 	float: right;
 }
@@ -130,3 +125,9 @@ body {
 }
 
 /********* end form style **********/
+
+/* @author Goran Arsenic */
+/*************Carousel**************/
+#myCarousel {
+	margin-top: -40px;
+}
