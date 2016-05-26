@@ -12,7 +12,6 @@ import javax.validation.Valid;
 
 import org.bildit.lingua.model.Admin;
 import org.bildit.lingua.model.BaseUser;
-import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.LanguageServiceImpl;
@@ -115,45 +114,7 @@ public class RegistrationController {
 			BindingResult result,
 			Model model) {
 
-		if (!baseUser.getPassword().equals(repeatPassword)) {
-			model.addAttribute("repassword", true);
-			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
-		}
-		
-		if(userRepository.existByUsername(baseUser.getUsername())) {
-			model.addAttribute("usernameExist", true);
-			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
-		}
-
-		if (result.hasErrors()) {
-			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
-		} else {
-			User user = new User(baseUser);
-				
-			/* setting first letter to upper case in first name and last name */
-			String firstName = user.getFirstName();
-			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
-			String lastName = user.getLastName();
-			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			// setting username to lower case
-			user.setUsername(user.getUsername().toLowerCase());
-
-			user.setDomesticLanguage(languageServices.getOneByLanguageTitle(domesticLanguage));
-			
-			user.setEnabled(true);
-			user.setLoginBan(false);
-			user.setAddingBan(false);
-			user.setVotingBan(false);
-			user.setAuthority("USER");
-			userRepository.save(user);
-		}
-
-		return "redirect:/?register";
+		return userService.userRegistration(repeatPassword, domesticLanguage, baseUser, result, model);
 	}
 	
 	/**
