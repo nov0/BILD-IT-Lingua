@@ -129,4 +129,8 @@ body {
 	font-style: italic;
 }
 
+.rowpadding {
+	padding-bottom: 75px;
+}
+
 /********* end form style **********/
