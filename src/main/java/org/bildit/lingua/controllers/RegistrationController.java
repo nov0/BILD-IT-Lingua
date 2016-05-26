@@ -146,7 +146,6 @@ public class RegistrationController {
 			user.setDomesticLanguage(languageServices.getOneByLanguageTitle(domesticLanguage));
 			
 			user.setEnabled(true);
-			user.setDomesticLanguage(null);
 			user.setLoginBan(false);
 			user.setAddingBan(false);
 			user.setVotingBan(false);
