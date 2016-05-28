@@ -37,5 +37,38 @@ public class TicketServiceImpl implements TicketService {
 		return userRepository.findUserByUsername(username).getTickets();
 	}
 
+	/**
+	 * @author Mladen Todorovic
+	 * 
+	 * Method for getting list of all active user tickets by username
+	 * 
+	 * */
+	@Override
+	public List<Ticket> getAllActiveTicketsByUsername(String username) {
+		User user = userRepository.findUserByUsername(username);
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(user.getId());
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * 
+	 * Method for getting list of all deleted (deactivated) user tickets by username
+	 * 
+	 * */
+	@Override
+	public List<Ticket> getAllDeactivatedTicketsByUsername(String username) {
+		User user = userRepository.findUserByUsername(username);
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(user.getId());
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * 
+	 * Method for getting list of all moderated user tickets by username
+	 * 
+	 * */
+	@Override
+	public List<Ticket> getAllModeratedTicketsByUsername(String username) {
+		User user = userRepository.findUserByUsername(username);
+		return ticketRepository.findAllByUserIdAndEditedTrue(user.getId());
+	}
 	
 }

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<div th:fragment="notifications">
+		<!-- *
+			 * @author Novislav Sekulic
+			 * scripts for showing notifications
+			 *
+			 * -->
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+			    $( document ).ready(function() {
+			    	
+					if(isParamPresent("error")){
+						
+			    		var message = /*[[#{login.error.message}]]*/ 'message';
+			    		var color = 'danger';
+			    		showNotification(message, color);
+			    		
+			        } else if(isParamPresent("logout")){
+			        	
+			        	var message = /*[[#{logout.success.message}]]*/ 'Logout message';
+			        	var color = 'success';
+			        	showNotification(message, color);
+			        	
+			        } else if(isParamPresent("lang")){
+			        	
+			        	var message = /*[[#{language.local.change}]]*/ 'Language cahange';
+			        	var color = 'success';
+			        	showNotification(message, color);
+			        } else if(isParamPresent("register")) {
+			        	var message = /*[[#{register.success.message}]]*/ 'Register message';
+			        	var color = 'success';
+			        	showNotification(message, color); 
+			        }
+			    	
+				}); // end ready
+			    
+			    function isParamPresent(urlParam) {
+				    var urlVariables = window.location.search;
+				    console.log(urlVariables);
+			        return urlVariables.indexOf("?" + urlParam) >= 0;
+			    }
+				
+				function showNotification(messageText, typeColor) {
+					$.notify({
+		    			// options
+		    			icon: 'glyphicon glyphicon-warning-sign',
+		    			message: messageText,
+		    			target: '_blank'
+		    		},{
+		    			// settings
+		    			element: 'body',
+		    			type: typeColor,
+		    			allow_dismiss: true,
+		    			newest_on_top: true,
+		    			placement: {
+		    				from: "top",
+		    				align: "right"
+		    			},
+		    			offset: {
+		    				x: 190,
+		    				y: 93
+		    			},
+		    			delay: 3000,
+		    			timer: 1000,
+		    			animate: {
+		    				enter: 'animated fadeInDown',
+		    				exit: 'animated fadeOutUp'
+		    			}
+		    		}); // end notify
+				}
+			/*]]>*/
+		</script>
+
+	</div>
+</body>
+</html>

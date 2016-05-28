@@ -7,20 +7,47 @@
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="css/styles.css"/>
+
 <title>Login Page</title>
 </head>
 <body>
+	<!-- @author Novislav Sekulic -->
+
+	<!-- 	Include notification fragment -->
+	<div th:replace="fragments/notifications :: notifications">Notification frgment</div>
+
 	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
 		<div class="container" style="height: 60px;">
   			<div style="float: left; position: relative;">
   				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
   			</div>
+  			<div class="logged-user">
+  				<br />
+				<a th:href="@{/registration}">
+	  				<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
+	  				<small th:text="#{form.not.registered}">Not a member? Register</small>
+	  			</a>
+  		    </div>
 		</div>
+		<!-- JavaScript for locale language -->
+		<script type="text/javascript" th:src="@{/js/locale-language-btn.js}"></script>
 	</div>
 	
 	<div class="container">
-		<div class="row">
-		<div class="col-xs-10 col-sm-4 col-xs-offset-1 col-sm-offset-4">
+		<div class="row rowpadding">
+		<div class="col-xs-10 col-sm-4 col-xs-offset-1 col-sm-offset-4 form-style">
+                <div class="col-xs-5 col-xs-offset-4 col-sm-5 col-sm-offset-4 form-header">
+                    <h4 th:text="#{form.login.button.value}">Login</h4>
+                </div>
+                <div class="col-xs-12 col-sm-12 line">
+                </div>
+            <br />
+            <br />
+            <br />
+            <br />
             <form role="form" action="#" th:action="@{/login}" method="post">
                 <div class="form-group">
                     <label class="control-label" th:text="#{form.field.username}">Username: </label>
@@ -31,25 +58,20 @@
 				    <input type="password" th:placeholder="#{form.field.password}" class="form-control" name="password"/>
                 </div>
 				<div class="form-group">
-					<button type="submit" th:text="#{form.login.button.value}" class="btn btn-primary"></button>
-					<a class="btn btn-warning" href="/" th:href="@{/}" th:text="#{form.field.button.cancel}"></a>
+					<button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+		                <span th:text="#{form.login.button.value}" class="tab-btn-group">Login</span>
+                    </button>
+					<a class="btn btn-warning" href="/" th:href="@{/}">
+                        <span class="glyphicon glyphicon-remove-circle btn-glyphicons" aria-hidden="true"></span>
+		                <span th:text="#{form.field.button.cancel}" class="tab-btn-group">Cancel</span>
+                    </a>
 				</div>
 			</form>
-			<br />
-			<div th:if="${param.error}">
-				<div class="alert alert-danger fade in">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<p th:text="#{login.error.message}">Login error message</p>
-				</div>
-			</div>
-			<div th:if="${param.logout}">
-				<div class="alert alert-success fade in">
-					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-					<p th:text="#{logout.success.message}">Logout message</p>
-				</div>
-			</div>
 			</div>
 		</div>
 		</div>
+		<!-- 		Including footer -->
+		<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

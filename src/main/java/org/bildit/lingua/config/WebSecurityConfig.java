@@ -33,12 +33,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.anyRequest().denyAll()
 		.and()
 			.formLogin()
+			.failureUrl("/?error=true").permitAll()
 			.loginPage("/login").permitAll()
 			.defaultSuccessUrl("/")
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/login?logout=true").permitAll();
+			.logoutSuccessUrl("/?logout=true").permitAll();
 	}
 	
 	@Override
