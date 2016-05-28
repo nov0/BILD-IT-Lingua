@@ -33,10 +33,13 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(id);
 	}
 
+	/** 
+	 * @author Bojan Aleksic
+	 * This method returns all tickets of current user by username
+	 */
 	@Override
 	public List<Ticket> getAllTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserId(user.getId());
+		return userRepository.findUserByUsername(username).getTickets();
 	}
 
 	/**

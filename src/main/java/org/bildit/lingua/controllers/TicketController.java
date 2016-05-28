@@ -1,44 +1,60 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TicketController {
 	
+	private static final String TICKETS = "ticketsList";
+	
 	@Autowired
 	private TicketService ticketService;
 	
 
-	@RequestMapping(value = "/ticket-all", method = RequestMethod.POST)
+	/**
+	 * @author Bojan Aleksic
+	 * @param principal
+	 * @return
+	 * Method receives all tickets by current user, and sends back data
+	 * in the JSON format to the server
+	 */
+	@RequestMapping("/ticket-all")
 	@ResponseBody
-	public List<Ticket> getAllTickets(Principal principal) {
-		return ticketService.getAllTicketsByUsername(principal.getName());
+	public Map<String, Object> getAllTickets(Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put(TICKETS, ticketService.getAllTicketsByUsername(principal.getName()));
+		return map;
 	}
 	
-	@RequestMapping(value = "/ticket-active", method = RequestMethod.POST)
+	@RequestMapping("/ticket-active")
 	@ResponseBody
-	public List<Ticket> getActiveTickets(Principal principal) {
-		return ticketService.getAllActiveTicketsByUsername(principal.getName());
+	public Map<String, Object> getActiveTickets(Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put(TICKETS, ticketService.getAllActiveTicketsByUsername(principal.getName()));
+		return map;
 	}
 	
-	@RequestMapping(value = "/ticket-deleted", method = RequestMethod.POST)
+	@RequestMapping("/ticket-deleted")
 	@ResponseBody
-	public List<Ticket> getDeletedTickets(Principal principal) {
-		return ticketService.getAllDeactivatedTicketsByUsername(principal.getName());
+	public Map<String, Object> getDeletedTickets(Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put(TICKETS, ticketService.getAllDeactivatedTicketsByUsername(principal.getName()));
+		return map;
 	}
 	
-	@RequestMapping(value = "/ticket-modified", method = RequestMethod.POST)
+	@RequestMapping("/ticket-moderated")
 	@ResponseBody
-	public List<Ticket> getModeratedTickets(Principal principal) {
-		return ticketService.getAllModeratedTicketsByUsername(principal.getName());
+	public Map<String, Object> getModeratedTickets(Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put(TICKETS, ticketService.getAllModeratedTicketsByUsername(principal.getName()));
+		return map;
 	}
 }

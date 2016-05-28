@@ -12,6 +12,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * 
  * User model
@@ -21,6 +24,7 @@ import javax.persistence.OneToOne;
  * */
 
 @Entity
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class User extends BaseUser {
 	
 	private static final long serialVersionUID = 1L;

@@ -19,6 +19,10 @@ import javax.persistence.Transient;
 
 import org.bildit.lingua.common.BaseEntity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * 
  * Ticket model
@@ -29,12 +33,13 @@ import org.bildit.lingua.common.BaseEntity;
 
 @Entity
 @Table(name = "tickets")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class Ticket extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Transient
-	private final static String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
+	private static final String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
 	
 	private String textDomestic;
 	private String textForeign;
@@ -46,6 +51,7 @@ public class Ticket extends BaseEntity {
 	private boolean edited;
 	
 	@ManyToOne
+	@JsonIgnore
 	private User user;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
