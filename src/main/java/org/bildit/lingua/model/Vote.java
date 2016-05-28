@@ -40,5 +40,5 @@ public class Vote extends BaseEntity {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
-
+	
 }

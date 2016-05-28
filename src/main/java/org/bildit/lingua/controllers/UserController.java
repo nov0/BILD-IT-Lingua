@@ -1,6 +1,8 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
@@ -8,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class UserController {
@@ -18,17 +21,12 @@ public class UserController {
 	@Autowired
 	private TicketService ticketService;
 	
-	/**
-	 * @author Bojan Aleksic
-	 * @param model
-	 * @param principal
-	 * @return
-	 * Returns list of tickets by user username
-	 */
-	@RequestMapping("/get-all-tickets")
-	public String getAllTickets(Model model, Principal principal) {
-		model.addAttribute("allTickets", ticketService.getAllTicketsByUsername(principal.getName()));
-		return "home";
+	@RequestMapping("/ticket-all")
+	@ResponseBody
+	public Map<String, Object> getAllTickets(Principal principal) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("ticketsList", ticketService.getAllTicketsByUsername(principal.getName()));
+		return map;
 	}
 	
 	@RequestMapping("/users")
