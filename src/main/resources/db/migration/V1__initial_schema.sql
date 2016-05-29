@@ -63,6 +63,7 @@ DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `date_created` date DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
   `text_domestic` varchar(255) DEFAULT NULL,
   `text_foreign` varchar(255) DEFAULT NULL,
   `deactivated` date DEFAULT NULL,
