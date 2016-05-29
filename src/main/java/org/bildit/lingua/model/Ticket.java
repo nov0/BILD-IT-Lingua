@@ -39,7 +39,9 @@ public class Ticket extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 	
 	@Transient
-	private static final String[] CATEGORY = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
+	private static final String[] CATEGORIES = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
+	
+	private String category;
 	
 	private String textDomestic;
 	private String textForeign;
@@ -101,9 +103,17 @@ public class Ticket extends BaseEntity {
 	public void setEdited(boolean edited) {
 		this.edited = edited;
 	}
+	
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	public String getCategory() {
+		return category;
+	}
 
-	public static String[] getCategory() {
-		return CATEGORY;
+	public static String[] getCategories() {
+		return CATEGORIES;
 	}
 
 	public User getUser() {
