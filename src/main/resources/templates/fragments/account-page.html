@@ -80,14 +80,14 @@
 	            
 	            $('[data-toggle="tooltip"]').tooltip();
 	            
-	            $(document).ajaxStart(function() {
-	        		$("#preloader").show();
-	        	});
+// 	            $(document).ajaxStart(function() {
+// 	        		$("#preloader").show();
+// 	        	});
 	            
-	            $(document).ajaxComplete(function() {
-	                $("#preloader").hide();
-	            });
-	            
+// 	            $(document).ajaxComplete(function() {
+// 	                $("#preloader").hide();
+// 	            });
+
 	            var urlRequest = $('.btn.active').attr('id'); // get ID value of active class
 	            
 	            /* When user is logged in, populate page with all tickets by default */
@@ -98,15 +98,19 @@
 	            /* Get active class on click in button group, and send request to the controller */
 				$('.btn-group .btn').click(function() {
 					
+					$("#preloader").show();
+					
 					$(this).addClass('active').siblings().removeClass('active'); // set active class on clicked btn
 					urlRequest = $('.btn.active').attr('id');
-					
+
 					$.getJSON(urlRequest, getTickets);
 					
 				});
 	            
 				/* Pass data-parsed object from the JSON server to the function */
 				function getTickets(data) {
+					
+					$("#preloader").hide();
 					
 					/* This is the parent div in which all content will be populated */
 					$(".my-lingua-content").html("");
