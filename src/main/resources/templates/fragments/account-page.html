@@ -103,14 +103,6 @@
 					
 					$.getJSON(urlRequest, getTickets);
 					
-					$(document).ajaxStart(function() {
-		        		$("#preloader").show();
-		        	});
-		            
-		            $(document).ajaxComplete(function() {
-		                $("#preloader").hide();
-		            });
-					
 				});
 	            
 				/* Pass data-parsed object from the JSON server to the function */
