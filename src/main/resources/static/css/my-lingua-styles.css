@@ -38,6 +38,10 @@
 	padding-bottom: 50px;
 }
 
+#preloader {
+	text-align: center;
+}
+
 .lingua-language {
     background-color: #204d74;
 }
