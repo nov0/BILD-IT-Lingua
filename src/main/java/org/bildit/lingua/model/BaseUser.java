@@ -12,6 +12,9 @@ import org.bildit.lingua.common.BaseEntity;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 /**
  * 
  * BaseUser model
@@ -23,6 +26,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @Table(name = "base_users")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class BaseUser extends BaseEntity {
 	
 private static final long serialVersionUID = 1L;

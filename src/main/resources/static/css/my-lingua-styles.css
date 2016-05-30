@@ -38,6 +38,10 @@
 	padding-bottom: 50px;
 }
 
+#preloader {
+	text-align: center;
+}
+
 .lingua-language {
     background-color: #204d74;
 }
@@ -62,6 +66,16 @@
 	padding-bottom: 8px;
 }
 
+#date-created {
+	position: relative;
+	left: 5px;
+}
+
+.category-ticket {
+	position: relative;
+	left: 5px;
+}
+
 .domestic-foreign-row {
 	padding-top: 30px;
 }
@@ -75,4 +89,18 @@
 
 .like-dislike-btn {
 	text-align: right;
+}
+
+.glyphicon-thumbs-up {
+	color: green;
+	padding-right: 3px;
+}
+
+.like-vote-value {
+	padding-right: 10px;
+}
+
+.glyphicon-thumbs-down {
+	color: red;
+	padding-right: 3px;
 }

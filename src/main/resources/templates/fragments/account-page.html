@@ -17,19 +17,19 @@
             <div class="tab-content" style="padding: 50px;">
             	<div id="my-lingua" class="tab-pane fade in active">
 	            	<div class="btn-group">
-	  					<a th:href="@{/get-all-tickets}" type="button" class="btn btn-primary">
+	  					<button type="button" class="btn btn-primary active" id="ticket-all">
 	                    	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>
 	                    	<span th:text="#{tab.all}" class="tab-btn-group">All</span>
-	                	</a>
-		  				<button type="button" class="btn btn-primary">
+	                	</button>
+		  				<button type="button" class="btn btn-primary" id="ticket-active">
 		                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>
 		                    <span th:text="#{tab.active}" class="tab-btn-group">Active</span>
 		                </button>
-		                <button type="button" class="btn btn-primary">
+		                <button type="button" class="btn btn-primary" id="ticket-deleted">
 		                    <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span>
 		                    <span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
 		                </button>
-		  				<button type="button" class="btn btn-primary">
+		  				<button type="button" class="btn btn-primary" id="ticket-moderated">
 		                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>
 		                    <span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
 		                </button>
@@ -55,32 +55,11 @@
 	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
 	    			
                     <div class="my-lingua-content">
-                    	<div th:if="${allTickets != null}">
-                    		<div class="ticket-container" th:each="ticket : ${allTickets}">
-                    			<div class="row ticket-header">
-                                    <div class="col-md-2">
-                                        <span class="glyphicon glyphicon-time"></span>
-                                        <span th:text="${ticket.dateCreated}"></span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <span class="glyphicon glyphicon-tag"></span> 
-                                        <span data-toggle="tooltip" title="Category">Verbs</span>
-                                    </div>
-                                    <div class="col-md-4 like-dislike-btn">
-                                        <a href="#">
-                                        	<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-                                        </a> 31 &nbsp;
-                                        <a href="#">
-                                        	<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-                                        </a> 5
-                                    </div>
-                                </div>
-                                <div class="row domestic-foreign-row">
-                                    <div th:text="${ticket.textDomestic}" class="col-md-6 domestic-foreign-text">Domestic Text</div>
-                                    <div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
-                                </div>
-                    		</div>
-                    	</div>
+                    
+                    	<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
+                    	
+                    	<!-- Here goes content loaded with JSON -->
+                    	
                     </div>
                 </div>
                 <div id="practice-lingua" class="tab-pane fade">
@@ -100,6 +79,125 @@
 	            });
 	            
 	            $('[data-toggle="tooltip"]').tooltip();
+	            
+// 	            $(document).ajaxStart(function() {
+// 	        		$("#preloader").show();
+// 	        	});
+	            
+// 	            $(document).ajaxComplete(function() {
+// 	                $("#preloader").hide();
+// 	            });
+
+	            var urlRequest = $('.btn.active').attr('id'); // get ID value of active class
+	            
+	            /* When user is logged in, populate page with all tickets by default */
+	            if(urlRequest == "ticket-all") {
+	            	$.getJSON(urlRequest, getTickets);
+	            }
+	
+	            /* Get active class on click in button group, and send request to the controller */
+				$('.btn-group .btn').click(function() {
+					
+					$("#preloader").show();
+					
+					$(this).addClass('active').siblings().removeClass('active'); // set active class on clicked btn
+					urlRequest = $('.btn.active').attr('id');
+
+					$.getJSON(urlRequest, getTickets);
+					
+				});
+	            
+				/* Pass data-parsed object from the JSON server to the function */
+				function getTickets(data) {
+					
+					$("#preloader").hide();
+					
+					/* This is the parent div in which all content will be populated */
+					$(".my-lingua-content").html("");
+					
+					/* Iterate through data object (list) */
+					$.each(data.ticketsList, function(index, ticket) {
+						
+						var ticketContainerDiv = document.createElement("div");
+						ticketContainerDiv.setAttribute("class", "ticket-container");
+						
+							var ticketHeaderDiv = document.createElement("div");
+							ticketHeaderDiv.setAttribute("class", "row ticket-header");
+							
+								var dateCreatedDiv = document.createElement("div");
+								dateCreatedDiv.setAttribute("class", "col-md-2");
+									var glyphiconDateSpan = document.createElement("span");
+									glyphiconDateSpan.setAttribute("class", "glyphicon glyphicon-time");
+									var dateCreatedSpan = document.createElement("span");
+									dateCreatedSpan.setAttribute("id", "date-created");
+									dateCreatedSpan.appendChild(document.createTextNode(ticket.dateCreated));
+							
+									dateCreatedDiv.appendChild(glyphiconDateSpan);
+									dateCreatedDiv.appendChild(dateCreatedSpan);
+							
+								var categoryDiv = document.createElement("div");
+								categoryDiv.setAttribute("class", "col-md-6");
+									var glyphiconCategorySpan = document.createElement("span");
+									glyphiconCategorySpan.setAttribute("class", "glyphicon glyphicon-tag");
+									var categoryTextSpan = document.createElement("span");
+									categoryTextSpan.setAttribute("class", "category-ticket");
+									categoryTextSpan.setAttribute("data-toggle", "tooltip");
+									categoryTextSpan.setAttribute("title", "Category");
+									categoryTextSpan.appendChild(document.createTextNode("Verbs"));
+									
+									categoryDiv.appendChild(glyphiconCategorySpan);
+									categoryDiv.appendChild(categoryTextSpan);
+									
+								var likeDislikeDiv = document.createElement("div");
+								likeDislikeDiv.setAttribute("class", "col-md-4 like-dislike-btn");
+									var likeSpan = document.createElement("span");
+									likeSpan.setAttribute("class", "glyphicon glyphicon-thumbs-up");
+									likeSpan.setAttribute("data-toggle", "tooltip");
+									likeSpan.setAttribute("title", "Like");
+									likeDislikeDiv.appendChild(likeSpan);
+									
+									var likeSpanVotes = document.createElement("span");
+									likeSpanVotes.setAttribute("class", "like-vote-value");
+									likeSpanVotes.appendChild(document.createTextNode(ticket.votesUp[0].voteValue));
+									likeDislikeDiv.appendChild(likeSpanVotes);
+									
+									var dislikeSpan = document.createElement("span");
+									dislikeSpan.setAttribute("class", "glyphicon glyphicon-thumbs-down");
+									dislikeSpan.setAttribute("data-toggle", "tooltip");
+									dislikeSpan.setAttribute("title", "Dislike");
+									likeDislikeDiv.appendChild(dislikeSpan);
+									
+									var dislikeSpanVotes = document.createElement("span");
+									dislikeSpanVotes.appendChild(document.createTextNode(ticket.votesDown[0].voteValue));
+									likeDislikeDiv.appendChild(dislikeSpanVotes);
+									
+								ticketHeaderDiv.appendChild(dateCreatedDiv);
+								ticketHeaderDiv.appendChild(categoryDiv);
+								ticketHeaderDiv.appendChild(likeDislikeDiv);
+								
+							ticketContainerDiv.appendChild(ticketHeaderDiv);
+								
+							var domesticForeignDiv = document.createElement("div");
+							domesticForeignDiv.setAttribute("class", "row domestic-foreign-row");
+							var domesticDiv = document.createElement("div");
+							domesticDiv.setAttribute("id", "text-domestic");
+							domesticDiv.setAttribute("class", "col-md-6 domestic-foreign-text");
+							domesticDiv.appendChild(document.createTextNode(ticket.textDomestic));
+							domesticForeignDiv.appendChild(domesticDiv);
+							
+							var foreignDiv = document.createElement("div");
+							foreignDiv.setAttribute("id", "text-foreign");
+							foreignDiv.setAttribute("class", "col-md-6 domestic-foreign-text");
+							foreignDiv.appendChild(document.createTextNode(ticket.textForeign));
+							domesticForeignDiv.appendChild(foreignDiv);
+							
+						ticketContainerDiv.appendChild(domesticForeignDiv);
+						
+						$(".my-lingua-content").append(ticketContainerDiv);
+						
+					});
+				}
+				
 	        });
     	</script>
     </div>
