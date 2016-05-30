@@ -1,74 +1,101 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
-<head>
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
-
+	
 	<!-- @author Bojan Aleksic -->
 
 	<!-- Header fragment -->
-	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
-		<div class="container" style="height: 60px;">
-  			<div style="float: left; position: relative;">
-  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
-  			</div>
-  			<div sec:authorize="isAnonymous()">
-  				<div class="login-header">
-	  				<form th:action="@{/login}" class="form-inline" method="post">
-	  					<div class="form-group">
-	  						<input type="text" th:placeholder="#{form.field.username}" class="form-control" name="username" />
-	  					</div>
-	  					<div class="form-group">
-	  						<input type="password" th:placeholder="#{form.field.password}" class="form-control" name="password" />
-	  					</div>
-	  					<input type="submit" class="btn btn-info btn-sm" value="Login" style="position: relative; top: 4px;" 
-	  				 	th:style="'background-image: url(' + @{images/login-icon.png} + ');'" />
-	  				</form>
-	  				<a th:href="@{/registration}">
-	  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
-	  					<small th:text="#{form.not.registered}">Not a member? Register</small>
-	  				</a>
-  				</div>
-  			</div>
-  			<div sec:authorize="isAuthenticated()">
-  				<div class="logged-user">
-  					<div class="dropdown">
-  						<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    						<img th:src="@{/images/logged-user.png}" />
-    						<span style="color: #1898b0; font-size: 14px;" sec:authentication="name">Current Logged User</span>
-    						<span class="caret"></span>
-  						</button>
-  						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    						<li><a th:href="@{/logout}">Logout</a></li>
- 						</ul>
+	<div class="jumbotron" th:fragment="header">
+
+		<!--class="jumbotron" style="heigth: 150px;" -->
+		<div class="container" style="background-color: #eee;">
+			<div style="float: left; position: relative;">
+				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
+			</div>
+			<div sec:authorize="isAnonymous()">
+				<div class="login-header">
+					<form th:action="@{/login}" class="form-inline" method="post">
+						<div class="form-group">
+							<input type="text" th:placeholder="#{form.field.username}"
+								class="form-control" name="username" />
+						</div>
+						<div class="form-group">
+							<input type="password" th:placeholder="#{form.field.password}"
+								class="form-control" name="password" />
+						</div>
+						<input type="submit" class="btn btn-info btn-sm" value="Login"
+							style="position: relative; top: 4px;"
+							th:style="'background-image: url(' + @{images/login-icon.png} + ');'" />
+					</form>
+					<a th:href="@{/registration}"> <img
+						th:src="@{/images/register-icon.png}"
+						style="position: relative; bottom: 2px;" /> <small
+						th:text="#{form.not.registered}">Not a member? Register</small>
+					</a>
+				</div>
+
+				<!-- Responsive by Goran Arsenic -->
+				<div style="float:right; width: 160px;">
+				<div id="menuSign" style="float: right;">
+					<a id="plus" href="#"> <span class="glyphicon glyphicon-plus"></span></a>
+					<a id="minus" href="#" style="display: none"><span class="glyphicon glyphicon-minus"></span></a>
+				</div>
+			
+				<div id="menu" style="display: none;">
+					<div class="container">
+						<ul class="nav nav-pills nav-stacked">
+							<li><a th:href="@{/login}">Login</a></li>
+							<li><a th:href="@{/registration}">Register</a></li>
+						</ul>
 					</div>
-  				</div>
-  				<div class="logged-user">
-  			    	<div class="dropdown">
-  		            	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-  		            		<span id="selected-language"></span>
-                        	<span class="caret"></span>
-  		            	</button>
-  		            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
-  		            		<li>
-  		            			<a th:href="@{/?lang=en}" th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'" id="eng-flag">
-  		            				English
-  		            			</a>
-  		            		</li>
-                        	<li>
-                        		<a th:href="@{/?lang=sr}" th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'" id="sr-flag">
-                        			Serbian
-                        		</a>
-                        	</li>
-                    	</ul>
+				</div>
+				</div>
+				<!-- end -->
+				
+			</div>
+			<div sec:authorize="isAuthenticated()">
+				<div class="logged-user">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button"
+							id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false">
+							<img th:src="@{/images/logged-user.png}" /> <span
+								style="color: #1898b0; font-size: 14px;"
+								sec:authentication="name">Current Logged User</span> <span
+								class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+							<li><a th:href="@{/logout}">Logout</a></li>
+						</ul>
 					</div>
-  		    	</div>
-  			</div>
+				</div>
+				<div class="logged-user">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button"
+							id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="true">
+							<span id="selected-language"></span> <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2"
+							id="select-lang">
+							<li><a th:href="@{/?lang=en}"
+								th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+								id="eng-flag"> English </a></li>
+							<li><a th:href="@{/?lang=sr}"
+								th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+								id="sr-flag"> Serbian </a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</div>
 		<!-- JavaScript for locale language -->
-		<script type="text/javascript" th:src="@{/js/locale-language-btn.js}"></script>
+		<script type="text/javascript" th:src="@{/js/locale-language-btn.js}">
+		</script>
+		<!-- JavaScript for responsive -->
+		<script type="text/javascript" th:src="@{/js/responsive.js}"></script>
 	</div>
-	
+
 </body>
 </html>
