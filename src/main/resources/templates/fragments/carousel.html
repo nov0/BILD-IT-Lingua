@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 </head>
 <body>
@@ -8,89 +8,73 @@
 	<!-- @author Bojan Aleksic -->
 
 	<!-- Bootstrap Carousel fragment -->
-	 <div th:fragment="bootstrap-carousel">
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" >
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-            <li data-target="#myCarousel" data-slide-to="1"></li>
-            <li data-target="#myCarousel" data-slide-to="2"></li>
-            <li data-target="#myCarousel" data-slide-to="3"></li>
-        </ol>
+	<div th:fragment="bootstrap-carousel">
+		<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img style="width: 100%" src="images/carousel/book1.png" alt="Lingua" />
-                <div class="carousel-caption">
-                    <h2>Lingua</h2>
-                    <p>Lorem ipsum, lorem ipsum, lorem ipsum.</p>
-                </div>
-            </div>
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner" role="listbox">
 
-            <div class="item">
-              <img style="width: 100%" src="images/carousel/book1.png" alt="Lingua" />
-              <div class="carousel-caption">
-                <h2>Lingua</h2>
-                <p>Lorem ipsum, lorem ipsum, lorem ipsum.</p>
-              </div>
-            </div>
+				<div class="item active">
+					<img style="width: 100%" src="images/carousel/book1.png"
+						alt="Lingua" />
+					<div class="carousel-caption">
+						<h2>Naučite strani jezik</h2>
+						<p>Želite da naučite strani jezik? Na pravom ste mjestu.</p>
+					</div>
+				</div>
 
-            <div class="item">
-                <img style="width: 100%" src="images/carousel/book1.png" alt="Lingua" />
-                <div class="carousel-caption">
-                    <h2>Lingua</h2>
-                    <p>Lorem ipsum, lorem ipsum, lorem ipsum.</p>
-                </div>
-            </div>
+				<div class="item">
+					<img style="width: 100%" src="images/carousel/book1.png"
+						alt="Lingua" />
+					<div class="carousel-caption">
+						<h2>Besplatno je</h2>
+						<p>Lingua je besplatna aplikacija i uvijek će da bude.</p>
+					</div>
+				</div>
 
-            <div class="item">
-                <img style="width: 100%" src="images/carousel/book1.png" alt="Lingua" />
-                <div class="carousel-caption">
-                    <h2>Lingua</h2>
-                    <p>Lorem ipsum, lorem ipsum, lorem ipsum.</p>
-                </div>
-            </div>
-        </div>
+				<div class="item">
+					<img style="width: 100%" src="images/carousel/book1.png"
+						alt="Lingua" />
+					<div class="carousel-caption">
+						<h2>Podjelite svoje znanje</h2>
+						<p>Pomozite drugima da nauče strani jezik. Sami stvarajte sadržaj i omogućite i drugima
+						da nauče ono što Vi znate.
+						</p>
+					</div>
+				</div>
+			</div>
 
-<!--         Left and right controls -->
-<!--         <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"> -->
-<!--             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Previous</span> -->
-<!--         </a> -->
-<!--         <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"> -->
-<!--             <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> -->
-<!--             <span class="sr-only">Next</span> -->
-<!--         </a> -->
-     </div>
-   <div class="container">
-  <h1>Grid</h1>
-  <p>This example demonstrates a 50%/50% split on small, medium and large devices. On extra small devices, it will stack (100% width).</p>      
-  <p>Resize the browser window to see the effect.</p>      
-  <div class="row">
-    <div class="col-sm-6" style="background-color:yellow;">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br/>
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-    <div class="col-sm-6" style="background-color:pink;">
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.    
-    </div>
-  </div>
-</div>
-<div class="container">
-  <h1>Grid</h1>
-  <p>This example demonstrates a 50%/50% split on small, medium and large devices. On extra small devices, it will stack (100% width).</p>      
-  <p>Resize the browser window to see the effect.</p>      
-  <div class="row">
-    <div class="col-sm-6" style="background-color:yellow;">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br/>
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-    </div>
-    <div class="col-sm-6" style="background-color:pink;">
-      Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.    
-    </div>
-  </div>
-</div>
-	 </div>
+		</div>
+		<div id="front-page-text">
+			<div class="container">
+			<div class="row">
+				<div class="col-sm-6">
+					<h1>Learn a language for free</h1>
+					<p>You choose the language. You choose the words. You choose the text. 
+					Language learning to match your interests and your life.
+					In the real world, everyone’s language journey is unique. Join the Lingua.ly community of 
+					learners and plot your own course. Discover a clever new way to learn, practice and master 
+					a language.</p>
+				
+				</div>
+				<div class="col-sm-6">
+					<img style="width: 95%" src="/images/language-bubbles.jpg" />
+				</div>
+			</div>
+			</div>
+			<div id="start-learning">
+				<div >
+					<h1>Lingua</h1>
+					<a class="btn btn-warning" th:href="@{/registration}">Start learning</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
