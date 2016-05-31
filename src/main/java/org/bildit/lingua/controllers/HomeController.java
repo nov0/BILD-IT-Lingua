@@ -20,7 +20,11 @@ public class HomeController {
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String goToHome(Model model, Authentication auth) {
 		if(auth != null) {
-			model.addAttribute("authority", auth.getName());
+			if("[ADMIN]".equals(auth.getAuthorities().toString())) {
+				model.addAttribute("authority", "admin");
+			} else {
+				model.addAttribute("authority", "user");
+			}
 		}
 		return "home";
 	}

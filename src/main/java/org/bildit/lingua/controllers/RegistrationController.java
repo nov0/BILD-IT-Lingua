@@ -10,10 +10,9 @@ package org.bildit.lingua.controllers;
  */
 import javax.validation.Valid;
 
-import org.bildit.lingua.model.Admin;
 import org.bildit.lingua.model.BaseUser;
-import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
+import org.bildit.lingua.service.AdminService;
 import org.bildit.lingua.service.LanguageServiceImpl;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RegistrationController {
 	
 	@Autowired
-	AdminRepository adminRepository;
+	private AdminService adminService;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -64,21 +63,7 @@ public class RegistrationController {
 			BindingResult result,
 			Model model) {
 
-		if (!baseUser.getPassword().equals(repeatPassword)) {
-			model.addAttribute("repassword", true);
-			return "registration-page";
-		}
-
-		if (result.hasErrors()) {
-			return "registration-page";
-		} else {
-			Admin admin = new Admin(baseUser);
-			admin.setEnabled(true);
-			admin.setAuthority("ADMIN");
-			adminRepository.save(admin);
-		}
-		
-		return "home";
+		return adminService.registerAdmin(repeatPassword, baseUser, result, model);
 	}
 	
 	/**
