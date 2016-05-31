@@ -124,8 +124,6 @@ body {
 	font-style: italic;
 }
 
-/********* end form style **********/
-
 /* @author Goran Arsenic */
 /*************Carousel**************/
 #myCarousel {
@@ -134,12 +132,25 @@ body {
 #front-page-text {
 	padding-bottom: 60px;
 }
+#responsive-design {
+	text-align: center;
+	padding-top: 20px;	
+}
 #start-learning {
 	background-color: #eee;
 	text-align: center;
-	height: 200px;
-	padding-top: 50px;
+	height: 349px;
+	padding-top: 100px;
 }
+#national-flags {
+	background-color: #fff;
+	height: 349px;
+	text-align: center;
+}
+.flag-image {
+	width: 50px;
+}
+/***header menu***/
 #menu {
 	padding-top: 20px; 
 	background-color: #ccc; 
