@@ -15,23 +15,27 @@
 						
 			    		var message = /*[[#{login.error.message}]]*/ 'message';
 			    		var color = 'danger';
-			    		showNotification(message, color);
+			    		var icon = 'glyphicon glyphicon-warning-sign';
+			    		showNotification(message, color, icon);
 			    		
 			        } else if(isParamPresent("logout")){
 			        	
 			        	var message = /*[[#{logout.success.message}]]*/ 'Logout message';
 			        	var color = 'success';
-			        	showNotification(message, color);
+			        	var icon = 'glyphicon glyphicon-ok';
+			        	showNotification(message, color, icon);
 			        	
 			        } else if(isParamPresent("lang")){
 			        	
 			        	var message = /*[[#{language.local.change}]]*/ 'Language cahange';
 			        	var color = 'success';
-			        	showNotification(message, color);
+			        	var icon = 'glyphicon glyphicon-ok';
+			        	showNotification(message, color, icon);
 			        } else if(isParamPresent("register")) {
 			        	var message = /*[[#{register.success.message}]]*/ 'Register message';
 			        	var color = 'success';
-			        	showNotification(message, color); 
+			        	var icon = 'glyphicon glyphicon-ok';
+			        	showNotification(message, color, icon); 
 			        }
 			    	
 				}); // end ready
@@ -42,10 +46,10 @@
 			        return urlVariables.indexOf("?" + urlParam) >= 0;
 			    }
 				
-				function showNotification(messageText, typeColor) {
+				function showNotification(messageText, typeColor, icon) {
 					$.notify({
 		    			// options
-		    			icon: 'glyphicon glyphicon-warning-sign',
+		    			icon: icon,
 		    			message: messageText,
 		    			target: '_blank'
 		    		},{
@@ -56,11 +60,7 @@
 		    			newest_on_top: true,
 		    			placement: {
 		    				from: "top",
-		    				align: "right"
-		    			},
-		    			offset: {
-		    				x: 190,
-		    				y: 93
+		    				align: "center"
 		    			},
 		    			delay: 3000,
 		    			timer: 1000,
