@@ -124,6 +124,22 @@ body {
 	font-style: italic;
 }
 
+.rowpadding {
+	padding-bottom: 75px;
+}
+
+.error-status {
+	font-size: 150px;
+}
+
+.cursive {
+	font-style: italic;
+}
+
+.bolded-text {
+	font-weight: bold;
+}
+
 /********* end form style **********/
 
 /* @author Goran Arsenic */
@@ -146,9 +162,4 @@ body {
 	padding-bottom: 15px; 
 	border-radius: 5px;
 }
-=======
-.rowpadding {
-	padding-bottom: 75px;
-}
-
 /********* end form style **********/

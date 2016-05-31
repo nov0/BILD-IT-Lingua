@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet"
+	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="css/styles.css"/>
+<link rel="stylesheet" type="text/css"
+	th:href="@{/css/my-lingua-styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}" />
+<link href='https://fonts.googleapis.com/css?family=Lobster'
+	rel='stylesheet' type='text/css' />
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script
+	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
+<title th:text="#{error.page.title}">Error!</title>
+</head>
+<body>
+
+	<!-- @author Novislav Sekulic -->
+
+	<!-- Include header from fragments -->
+	<div th:replace="fragments/header :: header">...</div>
+	
+	<div class="container">
+		<div class="row rowpadding">
+            <div class="col-xs-10 col-sm-6 col-xs-offset-1 col-sm-offset-3 form-style">
+                <div class="col-xs-5 col-xs-offset-4 col-sm-5 col-sm-offset-4 form-header">
+                    <h4 th:text="#{error.page.header.title}">Error title</h4>
+                </div>
+                <div class="col-xs-12 col-sm-12 line">
+                </div>
+                <div class="col-xs-6 col-xs-offset-3 col-sm-6 col-sm-offset-3">
+                    <p th:text="${status}" class="error-status">Status</p>
+                </div>
+                <div class="col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1">
+					<p><span th:text="#{error.page.type}" class="cursive">Error type:</span><span th:text="${error}" class="bolded-text">Error type</span></p>
+					<p><span th:text="#{error.page.message}" class="cursive">Error message:</span><span th:text="${message}" class="bolded-text">Error message</span></p>
+                </div>
+          	</div>
+         </div>
+     </div>
+     
+	<div th:replace="fragments/footer :: footer"></div>
+		
+</body>
+</html>
