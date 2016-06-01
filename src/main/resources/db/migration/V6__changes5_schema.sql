@@ -26,3 +26,5 @@ INSERT INTO `lingua_db`.`ticket_votes_up` (`ticket_id`, `vote_id`) VALUES ('8', 
 INSERT INTO `lingua_db`.`ticket_votes_up` (`ticket_id`, `vote_id`) VALUES ('9', '26');
 INSERT INTO `lingua_db`.`ticket_votes_up` (`ticket_id`, `vote_id`) VALUES ('10', '27');
 INSERT INTO `lingua_db`.`ticket_votes_up` (`ticket_id`, `vote_id`) VALUES ('11', '28');
+
+ALTER TABLE `lingua_db`.`user` ADD COLUMN `foreign_language` bigint(20) DEFAULT NULL, ADD FOREIGN KEY (`foreign_language`) REFERENCES `languages` (`id`); 

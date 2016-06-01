@@ -3,6 +3,7 @@ package org.bildit.lingua.service;
 import java.util.List;
 
 import org.bildit.lingua.model.BaseUser;
+import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,6 +100,18 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return "redirect:/?register";
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * This method saves user's foreign (learning) language
+	 */
+	@Override
+	public void setForeignLanguageForUser(String username, String languageTitle) {
+		User user = userRepository.findUserByUsername(username);
+		Language foreignLanguage = languageServices.getOneByLanguageTitle(languageTitle);
+		user.setForeignLanguage(foreignLanguage);
+		userRepository.updateForeignLanguageForUser(foreignLanguage, user.getId());
 	}
 
 	

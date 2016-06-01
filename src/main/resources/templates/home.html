@@ -4,22 +4,18 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet"
-	href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<meta name="_csrf" content="${_csrf.token}" />
+<meta name="_csrf_header" content="${_csrf.headerName}" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
-<link rel="stylesheet" type="text/css"
-	th:href="@{/css/my-lingua-styles.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/my-lingua-styles.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/modal.css}" />
-<link href='https://fonts.googleapis.com/css?family=Lobster'
-	rel='stylesheet' type='text/css' />
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-<script
-	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
+<link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 <title>Home Page</title>
 </head>
 <body>
@@ -29,14 +25,12 @@
 	<!-- Include header from fragments -->
 	<div th:replace="fragments/header :: header">...</div>
 
-	<!-- 	Include notification fragment -->
-	<div th:replace="fragments/notifications :: notifications">Notification
-		fragment</div>
+	<!-- Include notification fragment -->
+	<div th:replace="fragments/notifications :: notifications">Notification fragment</div>
 
 	<div sec:authorize="isAuthenticated()">
 		<!-- Include Account fragment by authority (User account or Admin account) -->
-		<div
-			th:replace="fragments/account-page :: (${authority} == 'admin' ? admin-account : user-account)"></div>
+		<div th:replace="fragments/account-page :: (${authority} == '[ADMIN]' ? admin-account : user-account)"></div>
 	</div>
 
 	<div sec:authorize="isAnonymous()">

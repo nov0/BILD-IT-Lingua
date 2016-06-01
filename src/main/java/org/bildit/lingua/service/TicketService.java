@@ -10,5 +10,6 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	List<Ticket> getAllActiveTicketsByUsername(String username);
 	List<Ticket> getAllDeactivatedTicketsByUsername(String username);
 	List<Ticket> getAllModeratedTicketsByUsername(String username);
+	Ticket saveTicket(Ticket ticket, String username);
 	
 }

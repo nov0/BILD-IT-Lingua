@@ -30,6 +30,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/ticket-active").permitAll()
 			.antMatchers("/ticket-deleted").permitAll()
 			.antMatchers("/ticket-moderated").permitAll()
+			.antMatchers("/set-foreign-language").permitAll()
+			.antMatchers("/create-ticket").permitAll()
 			.antMatchers("/get-all-tickets").permitAll()
 			.antMatchers("/existusername").permitAll()
 			.antMatchers("/login-success").authenticated()
@@ -42,7 +44,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.logout()
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-			.logoutSuccessUrl("/?logout=true").permitAll();
+			.logoutSuccessUrl("/?logout=true").permitAll()
+		.and()
+			.csrf().disable();
 	}
 	
 	@Override

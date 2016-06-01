@@ -14,7 +14,7 @@ UNLOCK TABLES;
 
 LOCK TABLES `tickets` WRITE;
 /*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-INSERT INTO `tickets`(`id`, `date_created`, `text_domestic`, `text_foreign`, `edited`, `user`) VALUES (6,'2016-05-20','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(7,'2016-05-21','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(8,'2016-05-22','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(9,'2016-05-23','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2);
+INSERT INTO `tickets`(`id`, `date_created`, `text_domestic`, `text_foreign`, `edited`, `user`) VALUES (6,'2016-05-20 23:14','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(7,'2016-05-21 09:35','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(8,'2016-05-22 13:56','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2),(9,'2016-05-23 17:10','Textic domestic lorem ipsum...','Textic foreign lorem ipsum...','\0',2);
 /*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
