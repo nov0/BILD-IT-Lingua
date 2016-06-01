@@ -12,8 +12,17 @@ body {
 }
 
 .jumbotron {
-	padding-top: 30px;
+	padding-top: 10px;
 	padding-bottom: 30px;
+}
+
+.logo-col-xs {
+	padding-top: 20px;
+	float: left;
+}
+
+.login-header-col {
+	
 }
 
 .login-header {
@@ -59,13 +68,13 @@ body {
     padding: 0px 3px;
 }
 
-#eng-flag {
+.eng-flag {
     background-image: url('images/eng-flag.png');
     background-position: 5px 7px;
     background-repeat: no-repeat;
 }
 
-#sr-flag {
+.sr-flag {
     background-image: url('images/serbia-flag.png');
     background-position: 5px 7px;
     background-repeat: no-repeat;
@@ -81,14 +90,43 @@ body {
     color: #1898b0; 
 }
 
+.select-language-home {
+	float: right;
+}
+
+.btn-default.language-selection-btn {
+	background-color: transparent;
+    border-color: transparent;
+    border-radius: 0px;
+    /* top-right-bottom-left */
+    padding: 0px 4px 0px 4px;
+}
+
+.btn-default.user-language-buttons {
+	background-color: white;
+    border-radius: 0px;
+}
+
+.not-a-member-register {
+	float: right;
+	position: relative;
+	top: 10px;
+	right: 85px;
+}
+
+.select-language-home img {
+    position: relative;
+    bottom: 1px;
+}
+
 .footer {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #204d74;
-  padding-bottom: 60px;
-  height: 60px;
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #204d74;
+	padding-bottom: 60px;
+	height: 60px;
 }
 
 .text-footer {
@@ -133,4 +171,51 @@ body {
 	padding-bottom: 75px;
 }
 
+.error-status {
+	font-size: 150px;
+}
+
+.cursive {
+	font-style: italic;
+}
+
+.bolded-text {
+	font-weight: bold;
+}
+
 /********* end form style **********/
+
+/* @author Goran Arsenic */
+/*************Carousel**************/
+#myCarousel {
+	margin-top: -40px;
+}
+#front-page-text {
+	padding-bottom: 60px;
+}
+#responsive-design {
+	text-align: center;
+	padding-top: 20px;	
+}
+#start-learning {
+	background-color: #eee;
+	text-align: center;
+	height: 349px;
+	padding-top: 100px;
+}
+#national-flags {
+	background-color: #fff;
+	height: 349px;
+	text-align: center;
+}
+.flag-image {
+	width: 50px;
+}
+/***header menu***/
+#menu {
+	padding-top: 20px; 
+	background-color: #ccc; 
+	padding-bottom: 15px; 
+	border-radius: 5px;
+}
+/********* end carousel **********/

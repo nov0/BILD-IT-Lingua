@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="_csrf" content="${_csrf.token}" />
 <meta name="_csrf_header" content="${_csrf.headerName}" />
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
 <link rel="stylesheet" type="text/css" th:href="@{/css/my-lingua-styles.css}" />
@@ -23,21 +24,21 @@
 
 	<!-- Include header from fragments -->
 	<div th:replace="fragments/header :: header">...</div>
-	
-	<!-- 	Include notification fragment -->
+
+	<!-- Include notification fragment -->
 	<div th:replace="fragments/notifications :: notifications">Notification fragment</div>
-	
+
 	<div sec:authorize="isAuthenticated()">
 		<!-- Include Account fragment by authority (User account or Admin account) -->
 		<div th:replace="fragments/account-page :: (${authority} == '[ADMIN]' ? admin-account : user-account)"></div>
 	</div>
-	
+
 	<div sec:authorize="isAnonymous()">
 		<!-- Bootstrap Carousel fragment -->
 		<div th:replace="fragments/carousel :: bootstrap-carousel"></div>
 	</div>
-		
+
 	<div th:replace="fragments/footer :: footer"></div>
-	
+		
 </body>
 </html>
