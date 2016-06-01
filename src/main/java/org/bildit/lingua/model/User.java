@@ -47,6 +47,8 @@ public class User extends BaseUser {
 	@OneToOne
 	private Language domesticLanguage;
 	
+	@OneToOne
+	private Language foreignLanguage;
 	
 	public User() {
 		/** Empty default constructor */
@@ -103,6 +105,14 @@ public class User extends BaseUser {
 
 	public void setLoginBan(boolean loginBan) {
 		this.loginBan = loginBan;
+	}
+
+	public Language getForeignLanguage() {
+		return foreignLanguage;
+	}
+
+	public void setForeignLanguage(Language foreignLanguage) {
+		this.foreignLanguage = foreignLanguage;
 	}
 
 }

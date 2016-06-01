@@ -25,17 +25,26 @@
 							<li><a th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
 							<li><a th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
 							<li><a th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
+							<li><a th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
+							<li><a th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
+							<li><a th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
+							<li><a th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
+							<li><a th:text="#{modal.categories.articles}" href="#">Articles</a></li>
+							<li><a th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
 						</ul>
 					</div>
 					<div class="btn-group languages" role="group">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<span style="padding-right: 5px;" class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-							<span th:text="#{modal.select.language}" class="tab-btn-group select-practice-lang">Select Language</span>
+<!-- 							<span th:text="#{modal.select.language}" class="tab-btn-group select-practice-lang">Select Language</span> -->
+							<span th:if="${session.foreignLanguage eq null}" th:text="#{modal.select.language}" class="tab-btn-group select-practice-lang">Select Language</span>
+			               	<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
 							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu select-language">
-							<li><a href="#">German</a></li>
-							<li><a href="#">Italian</a></li>
+							<li th:each="language : ${languages}">
+								<a id="selected-lang" href="#" th:text="${language}">Language</a>
+							</li>
 						</ul>
 					</div>
 					<h4 class="modal-title" id="gridModalLabel">
@@ -43,29 +52,32 @@
 						<span th:text="#{modal.title}">Add new Lingua</span>
 					</h4>
 				</div>
-				<div class="modal-body">
-					<!-- Bootstrap grid layout -->
-					<div class="row">
-						<div class="col-xs-6">
-							<div class="form-group">
-								<textarea th:placeholder="#{modal.placeholder.domestic}" class="form-control" id="domestic" rows="10"></textarea>
+				<form role="form" action="#" th:action="@{/create-ticket?ticket-added}" th:object="${ticket}" method="POST">
+					<div class="modal-body">
+						<!-- Bootstrap grid layout -->
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="form-group">
+									<textarea th:field="*{textDomestic}" th:placeholder="#{modal.placeholder.domestic}" class="form-control" id="domestic" rows="10"></textarea>
+								</div>
 							</div>
-						</div>
-						<div class="col-xs-6">
-							<div class="form-group">
-								<textarea th:placeholder="#{modal.placeholder.foreign}" class="form-control" id="foreign" rows="10"></textarea>
+							<div class="col-xs-6">
+								<div class="form-group">
+									<textarea th:field="*{textForeign}" th:placeholder="#{modal.placeholder.foreign}" class="form-control" id="foreign" rows="10"></textarea>
+								</div>
 							</div>
-						</div>
-					</div><!-- End of Bootstrap's grid layout -->
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-dismiss="modal">
-						<span class="glyphicon glyphicon-remove-circle"></span> Cancel
-					</button>
-					<button type="button" class="btn btn-success">
-						<span class="glyphicon glyphicon-floppy-disk"></span> Save Lingua
-					</button>
-				</div>
+							<input type="hidden" th:field="*{category}" class="selected-category" value="" />
+						</div><!-- End of Bootstrap's grid layout -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">
+							<span class="glyphicon glyphicon-remove-circle"></span> Cancel
+						</button>
+						<button type="submit" class="btn btn-success">
+							<span class="glyphicon glyphicon-floppy-disk"></span> Save Lingua
+						</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>

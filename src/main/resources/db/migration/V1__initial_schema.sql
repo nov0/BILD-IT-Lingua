@@ -62,7 +62,7 @@ DROP TABLE IF EXISTS `tickets`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tickets` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `date_created` date DEFAULT NULL,
+  `date_created` varchar(255) DEFAULT NULL,
   `category` varchar(255) DEFAULT NULL,
   `text_domestic` varchar(255) DEFAULT NULL,
   `text_foreign` varchar(255) DEFAULT NULL,
@@ -85,7 +85,7 @@ DROP TABLE IF EXISTS `votes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `votes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `vote_value` int(11) NOT NULL,
+  `vote_value` int(11) NOT NULL DEFAULT 0,
   `ticket` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_f78dg7c8e7y7ne8cfnevgd869` (`ticket`),

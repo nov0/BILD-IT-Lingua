@@ -32,6 +32,19 @@ public class LanguageServiceImpl implements LanguageService {
 	public Language getOneByLanguageTitle(String languageTitle) {
 		return languageRepository.getOneByLanguageTitle(languageTitle);
 	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns list of language titles
+	 */
+	@Override
+	public List<String> getAllLanguages() {
+		List<String> languages = new java.util.ArrayList<>();
+		for(Language language : languageRepository.findAll()) {
+			languages.add(language.getLanguageTitle());
+		}
+		return languages;
+	}
 	
 	
 	

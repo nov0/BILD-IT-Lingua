@@ -15,7 +15,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 import org.bildit.lingua.common.BaseEntity;
 
@@ -37,9 +36,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 public class Ticket extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
-	
-	@Transient
-	private static final String[] CATEGORIES = new String[] { "verbs", "nouns", "sentences", "pronouns", "adjectives", "prepositions", "adverbs", "articles", "interjections" };
 	
 	private String category;
 	
@@ -68,9 +64,7 @@ public class Ticket extends BaseEntity {
 	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
 	List<Vote> votesDown = new ArrayList<>();
 	
-	@Temporal(TemporalType.DATE)
-	private Date dateCreated;
-
+	private String dateCreated;
 	
 	public String getTextDomestic() {
 		return textDomestic;
@@ -112,10 +106,6 @@ public class Ticket extends BaseEntity {
 		return category;
 	}
 
-	public static String[] getCategories() {
-		return CATEGORIES;
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -124,11 +114,11 @@ public class Ticket extends BaseEntity {
 		this.user = user;
 	}
 
-	public Date getDateCreated() {
+	public String getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 

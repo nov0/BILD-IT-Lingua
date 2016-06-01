@@ -1,9 +1,12 @@
 package org.bildit.lingua.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
+import org.bildit.lingua.model.Vote;
 import org.bildit.lingua.repository.TicketRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +77,25 @@ public class TicketServiceImpl implements TicketService {
 	public List<Ticket> getAllModeratedTicketsByUsername(String username) {
 		User user = userRepository.findUserByUsername(username);
 		return ticketRepository.findAllByUserIdAndEditedTrue(user.getId());
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Save ticket into database
+	 */
+	@Override
+	public Ticket saveTicket(Ticket ticket, String username) {
+		User user = userRepository.findUserByUsername(username);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
+		String date = sdf.format(new Date());
+		ticket.setUser(user);
+		ticket.setDateCreated(date);
+		user.getTickets().add(ticket);
+		Vote vote = new Vote();
+		vote.setVoteValue(0);
+		ticket.getVotesUp().add(vote);
+		ticket.getVotesDown().add(vote);
+		return ticketRepository.save(ticket);
 	}
 	
 }
