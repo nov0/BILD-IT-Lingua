@@ -44,7 +44,8 @@ $(document).ready(function() {
 
 	$('[data-toggle="tooltip"]').tooltip();
 
-	var urlRequest = $('.btn.active').attr('id'); // get ID value of active class
+	// get ID value of active class
+	var urlRequest = $('.btn.active').attr('id');
 
 	/* When user is logged in, populate page with all tickets by default */
 	if(urlRequest == "ticket-all") {
@@ -57,8 +58,9 @@ $(document).ready(function() {
 		$("#preloader").show();
 		$(".ticket-container").hide();
 
-		$(this).addClass('active').siblings().removeClass('active'); // set active class on clicked btn
+		// set active class on clicked btn
 		urlRequest = $('.btn.active').attr('id');
+		$(this).addClass('active').siblings().removeClass('active');
 
 		$.getJSON(urlRequest, getTickets);
 
@@ -77,8 +79,8 @@ $(document).ready(function() {
 		$.each(data.ticketsList, function(index, ticket) {
 
 			var ticketClickable = document.createElement("a");
-			ticketClickable.setAttribute("href", "ticket-edit?id=" + ticket.id);
-			ticketClickable.setAttribute("class", "ticket-edit");
+			ticketClickable.setAttribute("href", "#");
+			ticketClickable.setAttribute("id", "ticket-edit");
 			ticketClickable.setAttribute("data-toggle", "modal");
 			ticketClickable.setAttribute("data-target", "#gridSystemModal2");
 
@@ -164,9 +166,5 @@ $(document).ready(function() {
 			});
 
 		}
-
-		$(".ticket-edit").click(function() {
-			console.log("Ticket clicked! ");
-		});
 
 	});

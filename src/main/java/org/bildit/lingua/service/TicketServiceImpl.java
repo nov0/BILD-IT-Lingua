@@ -95,6 +95,7 @@ public class TicketServiceImpl implements TicketService {
 		vote.setVoteValue(0);
 		ticket.getVotesUp().add(vote);
 		ticket.getVotesDown().add(vote);
+		
 		return ticketRepository.save(ticket);
 	}
 	

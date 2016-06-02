@@ -17,7 +17,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.bildit.lingua.common.BaseEntity;
-import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,13 +37,10 @@ public class Ticket extends BaseEntity {
 	
 	private static final long serialVersionUID = 1L;
 	
-	@NotBlank(message="Please select category")
 	private String category;
 	
-	@NotBlank(message="Please enter some text in domestic language")
 	private String textDomestic;
 	
-	@NotBlank(message="Please enter some text in foreign language")
 	private String textForeign;
 	
 	@Temporal(TemporalType.DATE)

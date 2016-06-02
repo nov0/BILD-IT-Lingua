@@ -4,14 +4,12 @@ import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.validation.Valid;
-
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -93,10 +91,7 @@ public class TicketController {
 	 * @return
 	 */
 	@RequestMapping("/create-ticket")
-	public String createNewTicket(@ModelAttribute("ticket") @Valid Ticket ticket, BindingResult result, Principal principal) {
-		if(result.hasErrors()) {
-			// Handle errors
-		}
+	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal) {
 		ticketService.saveTicket(ticket, principal.getName());
 		return "home";
 	}
@@ -105,15 +100,15 @@ public class TicketController {
 	 * @author Bojan Aleksic
 	 * @param id
 	 * @return
-	 * Not working at the moment. Still in proces...
+	 * Not working at the moment. Still in process...
 	 */
-	@RequestMapping("/ticket-edit")
-	@ResponseBody
-	public Map<String, Object> editTicket(@RequestParam("id") Long id) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("ticketEdit", ticketService.getOne(id));
-		System.out.println("TEST: " + ticketService.getOne(id).getId());
-		return map;
-	}
+//	@RequestMapping("/ticket-edit")
+//	@ResponseBody
+//	public Map<String, Object> editTicket(@RequestParam("id") Long id) {
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("ticketEdit", ticketService.getOne(id));
+//		System.out.println("TEST: " + ticketService.getOne(id).getId());
+//		return map;
+//	}
 	
 }
