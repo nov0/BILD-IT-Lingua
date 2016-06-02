@@ -83,13 +83,13 @@
 			</div>
 		</div>
 		<script th:inline="javascript">
+			/*<![CDATA[*/
 			$(document).ready(function() {
 				
 				var selectedCategory = "";
 				
-				/*<![CDATA[*/
 			    	var selectedLanguage = [[${session.foreignLanguage}]];
-			    /*]]>*/
+			    
 				
 				$('.select-category').click(function() {
 					selectedCategory = $('.select-category li a').text();
@@ -107,23 +107,23 @@
 					
 					if(domesticText == "") {
 						$('.form-group.domestic').addClass('has-error');
-						message = "Please enter some text in domestic language.";
+						message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
 					} 
 					
 					if(foreignText == "") {
 						$('.form-group.foreign').addClass('has-error');
-						message = "Please enter some text in foreign language.";
+						message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
 					} 
 					
 					if(selectedCategory == "") {
-						message = "Please select category for this ticket.";
+						message = /*[[#{modal.notifiction.message.category}]]*/ "Please select category for this ticket.";
 						event.preventDefault();
 					}
 					
 					if(selectedLanguage == null || selectedLanguage == "") {
-						message = "Please select language you want to practice.";
+						message = /*[[#{modal.notifiction.message.practice.language}]]*/ "Please select language you want to practice.";
 						event.preventDefault();
 					}
 					
@@ -138,6 +138,7 @@
 				});
 				
 			});
+			/*]]>*/
 		</script>
 	</div>
 

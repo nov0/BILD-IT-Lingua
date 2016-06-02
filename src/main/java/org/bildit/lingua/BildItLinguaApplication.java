@@ -38,7 +38,7 @@ public class BildItLinguaApplication extends WebMvcConfigurerAdapter {
 	@Bean
 	public CookieLocaleResolver localeResolver() {
 		CookieLocaleResolver localeResolver = new CookieLocaleResolver();
-		Locale defaultLocale = new Locale("sr");
+		Locale defaultLocale = new Locale("en");
 		localeResolver.setDefaultLocale(defaultLocale);
 		return localeResolver;
 	}
