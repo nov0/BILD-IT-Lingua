@@ -26,8 +26,13 @@
 
 	<!-- @author Novislav Sekulic -->
 
-	<!-- Include header from fragments -->
-	<div th:replace="fragments/header :: header">...</div>
+	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
+		<div class="container" style="height: 60px;">
+  			<div style="float: left; position: relative;">
+  				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
+  			</div>
+		</div>
+	</div>
 	
 	<div class="container">
 		<div class="row rowpadding">
