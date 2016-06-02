@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,6 +72,18 @@ public class Ticket extends BaseEntity {
 	
 	private String dateCreated;
 	
+	@OneToOne
+	private Language learningLanguage;
+	
+	
+	public Language getLearningLanguage() {
+		return learningLanguage;
+	}
+
+	public void setLearningLanguage(Language learningLanguage) {
+		this.learningLanguage = learningLanguage;
+	}
+
 	public String getTextDomestic() {
 		return textDomestic;
 	}
