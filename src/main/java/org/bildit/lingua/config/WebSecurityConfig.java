@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/ticket-moderated").permitAll()
 			.antMatchers("/set-foreign-language").permitAll()
 			.antMatchers("/create-ticket").permitAll()
+			.antMatchers("/ticket-edit").permitAll()
 			.antMatchers("/get-all-tickets").permitAll()
 			.antMatchers("/existusername").permitAll()
 			.antMatchers("/login-success").authenticated()
