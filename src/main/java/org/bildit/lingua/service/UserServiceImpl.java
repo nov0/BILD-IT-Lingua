@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 	 * 
 	 */
 	@Override
-	public String userRegistration(String repeatPassword, String domesticLanguage, BaseUser baseUser,
+	public String userRegistration(String repeatPassword, String domesticLanguage, String foreignLanguage, BaseUser baseUser,
 			BindingResult result, Model model) {
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
@@ -90,6 +90,7 @@ public class UserServiceImpl implements UserService {
 			user.setUsername(user.getUsername().toLowerCase());
 
 			user.setDomesticLanguage(languageServices.getOneByLanguageTitle(domesticLanguage));
+			user.setForeignLanguage(languageServices.getOneByLanguageTitle(foreignLanguage));
 			
 			user.setEnabled(true);
 			user.setLoginBan(false);

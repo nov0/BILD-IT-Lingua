@@ -99,6 +99,13 @@
 						</select>
                 	</div>
                 	<br />
+                	<div class="form-goup">
+                		<label for="foreign" th:text="#{form.select.foreign.language}">Select foreign Language</label>
+                		<select class="form-control" id="domestic" name="foreign">
+                			<option th:each="language : ${allLanguages}" th:text="${language.languageTitle}">Lang</option>
+						</select>
+                	</div>
+                	<br />
                 	<br />                	
 					<div class="form-group">
 						<button type="submit" class="btn btn-primary">
