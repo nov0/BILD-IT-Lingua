@@ -95,11 +95,12 @@ public class RegistrationController {
 	public String goToRegistrationFail(
 			@RequestParam("repeatpassword") String repeatPassword,
 			@RequestParam("domestic") String domesticLanguage,
+			@RequestParam("foreign") String foreignLanguage,
 			@Valid BaseUser baseUser,
 			BindingResult result,
 			Model model) {
 
-		return userService.userRegistration(repeatPassword, domesticLanguage, baseUser, result, model);
+		return userService.userRegistration(repeatPassword, domesticLanguage, foreignLanguage, baseUser, result, model);
 	}
 	
 	/**

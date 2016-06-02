@@ -10,7 +10,7 @@ public interface UserService extends BaseService<User, Long> {
 
 	boolean existByUsername(String username);
 	User findUserByUsername(String username);
-	String userRegistration(String repeatPassword, String domesticLanguage, BaseUser baseUser, BindingResult result, Model model);
+	String userRegistration(String repeatPassword, String domesticLanguage, String foreignLanguage, BaseUser baseUser, BindingResult result, Model model);
 	void setForeignLanguageForUser(String username, String languageTitle);
 	
 }
