@@ -211,11 +211,24 @@ body {
 .flag-image {
 	width: 50px;
 }
+.carousel-background {
+	background-color: #204D74; 
+	width: 1200; 
+	height: 300px;
+	text-align: center;
+}
+.carousel-caption {
+	padding-bottom: 80px;
+}
 /***header menu***/
 #menu {
 	padding-top: 20px; 
-	background-color: #ccc; 
+	background-color: #E4E4E4; 
 	padding-bottom: 15px; 
 	border-radius: 5px;
 }
+.nav-pills ul li a:hover {
+	background-color: red;
+}
+
 /********* end carousel **********/

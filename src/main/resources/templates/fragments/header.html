@@ -40,13 +40,14 @@
 							</div>
 						</div>
 	                    
+                    	<!-- LOGO -->
 	                    <div class="row">
-	                    	<!-- LOGO -->
-	                        <div class="col-xs-8 col-sm-6 logo-col-xs">
+	                        <div class="col-xs-4 col-sm-4 logo-col-xs">
 								<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
 	                        </div>
+	                        
 	                        <!-- Login Form -->
-	                        <div class="col-xs-4 col-sm-6 login-header-col">
+	                        <div class="col-xs-8 col-sm-8 login-header-col">
 								<div class="login-header">
 									<form th:action="@{/login}" class="form-inline" method="post">
 										<div class="form-group">
@@ -69,27 +70,28 @@
 								</a>
 		                    </div>
 	                    </div>
+	                  <!-- Responsive by Goran Arsenic -->
+							<div style="float:right; width: 160px;">
+								<div id="menuSign" style="float: right;">
+									<a id="plus" href="#"> <span class="glyphicon glyphicon-plus"></span></a>
+									<a id="minus" href="#" style="display: none"><span class="glyphicon glyphicon-minus"></span></a>
+								</div>
+								<div id="menu" style="display: none;">
+									<div class="container">
+										<ul class="nav nav-pills nav-stacked">
+											<li><a th:href="@{/login}"><span class="glyphicon glyphicon-log-in"></span> <span th:text="#{form.login.button.value}">Login</span></a></li>
+											<li><a th:href="@{/registration}"><span class="glyphicon glyphicon-user"></span> <span th:text="#{form.field.button.register}">Register</span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<!-- end -->
 	                    
 	                </div>
 	            </div>
 	            
 	            
-	            <!-- Responsive by Goran Arsenic -->
-				<div style="float:right; width: 160px;">
-					<div id="menuSign" style="float: right;">
-						<a id="plus" href="#"> <span class="glyphicon glyphicon-plus"></span></a>
-						<a id="minus" href="#" style="display: none"><span class="glyphicon glyphicon-minus"></span></a>
-					</div>
-					<div id="menu" style="display: none;">
-						<div class="container">
-							<ul class="nav nav-pills nav-stacked">
-								<li><a th:href="@{/login}">Login</a></li>
-								<li><a th:href="@{/registration}">Register</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<!-- end -->
+	           
 		
 			</div>
 		
