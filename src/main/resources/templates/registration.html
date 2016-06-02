@@ -28,26 +28,31 @@
   			<div style="float: left; position: relative;">
   				<a th:href="@{/}"><img th:src="@{/images/book_icon.png}" /></a>
   			</div>
-  			<div class="logged-user">
-  			    	<div class="dropdown">
-  		            	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-  		            		<span id="selected-language"></span>
-                        	<span class="caret"></span>
-  		            	</button>
-  		            	<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
-  		            		<li>
-  		            			<a th:href="@{/registration?lang=en}" th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'" id="eng-flag">
-  		            				English
-  		            			</a>
-  		            		</li>
-                        	<li>
-                        		<a th:href="@{/registration?lang=sr}" th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'" id="sr-flag">
-                        			Serbian
-                        		</a>
-                        	</li>
-                    	</ul>
-					</div>
-  		    	</div>
+  			<!-- Language Selection -->
+		                <div class="select-language-home" style="position: relative;">
+							<div class="dropdown">
+								<button class="btn btn-default dropdown-toggle language-selection-btn" type="button"
+									id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="true">
+									<span id="selected-language"></span> 
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
+									<li>
+										<a th:href="@{/registration?lang=en}"
+										th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+										class="eng-flag"> English 
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/registration?lang=sr}"
+											th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+											class="sr-flag"> Serbian 
+										</a>
+									</li>
+								</ul>
+							</div>
+						</div>
 		</div>
 		<!-- JavaScript for locale language -->
 		<script type="text/javascript" th:src="@{/js/locale-language-btn.js}"></script>
@@ -90,6 +95,13 @@
                 	<div class="form-goup">
                 		<label for="domestic" th:text="#{form.select.language}">Select your Language</label>
                 		<select class="form-control" id="domestic" name="domestic">
+                			<option th:each="language : ${allLanguages}" th:text="${language.languageTitle}">Lang</option>
+						</select>
+                	</div>
+                	<br />
+                	<div class="form-goup">
+                		<label for="foreign" th:text="#{form.select.foreign.language}">Select foreign Language</label>
+                		<select class="form-control" id="domestic" name="foreign">
                 			<option th:each="language : ${allLanguages}" th:text="${language.languageTitle}">Lang</option>
 						</select>
                 	</div>

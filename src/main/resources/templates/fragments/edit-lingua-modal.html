@@ -8,7 +8,7 @@
 	<!-- @author Bojan Aleksic -->
 
 	<!-- Bootstrap's Modal Layout -->
-	<div id="gridSystemModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="modal">
+	<div id="gridSystemModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="modal-edit">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -48,7 +48,7 @@
 					</div>
 					<h4 class="modal-title" id="gridModalLabel">
 						<img th:src="@{/images/add-new-lingua-icon.png}" />
-						<span th:text="#{modal.title}">Add new Lingua</span>
+						<span th:text="#{modal.edit.title}">Edit Lingua</span>
 					</h4>
 					<small style="float: right; color: red;" id="cat-error"></small>
 				</div>
@@ -58,7 +58,7 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="form-group domestic">
-									<textarea th:field="*{textDomestic}" th:placeholder="#{modal.placeholder.domestic}" class="form-control" id="domestic" rows="10"></textarea>
+									<textarea  th:field="*{textDomestic}" th:placeholder="#{modal.placeholder.domestic}" class="form-control" id="domestic" rows="10"></textarea>
 									<small style="color: red;" id="domestic-error"></small>
 								</div>
 							</div>
@@ -76,69 +76,56 @@
 							<span class="glyphicon glyphicon-remove-circle"></span> Cancel
 						</button>
 						<button type="submit" class="btn btn-success">
-							<span class="glyphicon glyphicon-floppy-disk"></span> Save Lingua
+							<span class="glyphicon glyphicon-floppy-disk"></span> Save changes
 						</button>
 					</div>
 				</form>
 			</div>
 		</div>
-		<script th:inline="javascript">
-			/*<![CDATA[*/
-			$(document).ready(function() {
+		<script>
+		$(document).ready(function() {
+			
+			var selectedCategory = "";
+			var selectedLanguage = "";
+			
+			$('.select-category').click(function() {
+				selectedCategory = $('.select-category li a').text();
+			});
+			
+			$('.btn-success').click(function(event) {
+				var domesticText = document.getElementById('domestic').value;
+				var foreignText = document.getElementById('foreign').value;
 				
-				var selectedCategory = "";
+				if(domesticText == "") {
+					$('.form-group.domestic').addClass('has-error');
+					$('#domestic-error').text("Please enter some text in domestic language");
+					$('#domestic-error').delay(3000).fadeOut();
+					event.preventDefault();
+				} 
 				
-			    	var selectedLanguage = [[${session.foreignLanguage}]];
-			    
+				if(foreignText == "") {
+					$('.form-group.foreign').addClass('has-error');
+					$('#foreign-error').text("Please enter some text in foreign language");
+					$('#foreign-error').delay(3000).fadeOut();
+					event.preventDefault();
+				} 
 				
-				$('.select-category').click(function() {
-					selectedCategory = $('.select-category li a').text();
-				});
-				
-				$('.btn-success').click(function(event) {
-					var domesticText = document.getElementById('domestic').value;
-					var foreignText = document.getElementById('foreign').value;
-					
-					console.log("Language: " + selectedLanguage);
-					
-					var message = "";
-					var color = "danger";
-					var icon = "glyphicon glyphicon-warning-sign";
-					
-					if(domesticText == "") {
-						$('.form-group.domestic').addClass('has-error');
-						message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
-						event.preventDefault();
-					} 
-					
-					if(foreignText == "") {
-						$('.form-group.foreign').addClass('has-error');
-						message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
-						event.preventDefault();
-					} 
-					
-					if(selectedCategory == "") {
-						message = /*[[#{modal.notifiction.message.category}]]*/ "Please select category for this ticket.";
-						event.preventDefault();
-					}
-					
-					if(selectedLanguage == null || selectedLanguage == "") {
-						message = /*[[#{modal.notifiction.message.practice.language}]]*/ "Please select language you want to practice.";
-						event.preventDefault();
-					}
-					
-					showNotification(message, color, icon);
-					
-				});
-				
-				/* Reset all text in the form when modal is closed */
-				$('.modal').on('hidden.bs.modal', function () {
-				    $(this).find('form').trigger('reset');
-				    $('.form-group').removeClass('has-error');
-				});
+				if(selectedCategory == "") {
+					$('.dropdown-menu .select-category').text("Select category");
+					$('#cat-error').delay(3000).fadeOut();
+					event.preventDefault();
+				}
 				
 			});
-			/*]]>*/
+			
+			/* Reset all text in the form when modal is closed */
+			$('.modal').on('hidden.bs.modal', function () {
+			    $(this).find('form').trigger('reset');
+			    $('.form-group').removeClass('has-error');
+			});
+			
+		});
+		
 		</script>
 	</div>
 
