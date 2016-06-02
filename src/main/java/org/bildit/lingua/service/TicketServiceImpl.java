@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TicketServiceImpl implements TicketService {
-
+	
 	@Autowired
 	private TicketRepository ticketRepository;
 	
@@ -49,7 +49,6 @@ public class TicketServiceImpl implements TicketService {
 	 * @author Mladen Todorovic
 	 * 
 	 * Method for getting list of all active user tickets by username
-	 * 
 	 * */
 	@Override
 	public List<Ticket> getAllActiveTicketsByUsername(String username) {
@@ -60,7 +59,6 @@ public class TicketServiceImpl implements TicketService {
 	 * @author Mladen Todorovic
 	 * 
 	 * Method for getting list of all deleted (deactivated) user tickets by username
-	 * 
 	 * */
 	@Override
 	public List<Ticket> getAllDeactivatedTicketsByUsername(String username) {
@@ -71,7 +69,6 @@ public class TicketServiceImpl implements TicketService {
 	 * @author Mladen Todorovic
 	 * 
 	 * Method for getting list of all moderated user tickets by username
-	 * 
 	 * */
 	@Override
 	public List<Ticket> getAllModeratedTicketsByUsername(String username) {
@@ -96,6 +93,15 @@ public class TicketServiceImpl implements TicketService {
 		ticket.getVotesUp().add(vote);
 		ticket.getVotesDown().add(vote);
 		return ticketRepository.save(ticket);
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * 
+	 * Method for updating inputed parameters using ticket id
+	 * */
+	@Override
+	public Ticket updateTicket(Long ticketId, String textDom, String textFor, String category) {
+		return ticketRepository.update(ticketId, textDom, textFor, category);
 	}
 	
 }
