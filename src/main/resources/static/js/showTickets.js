@@ -163,6 +163,11 @@ $(document).ready(function() {
 
 				$(".my-lingua-content").append(ticketClickable);
 
+				if(urlRequest === "ticket-deleted") {
+					/* Set deleted tickets to red color (Bootstrap's alert-danger style) */
+					$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
+				}
+
 				editTicket(ticket.id, ticket.textDomestic, ticket.textForeign, ticket.category);
 
 			});
