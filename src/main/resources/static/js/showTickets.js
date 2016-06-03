@@ -80,12 +80,14 @@ $(document).ready(function() {
 
 			var ticketClickable = document.createElement("a");
 			ticketClickable.setAttribute("href", "#");
-			ticketClickable.setAttribute("id", "ticket-edit");
+			ticketClickable.setAttribute("class", "ticket-edit");
+			ticketClickable.setAttribute("id", ticket.id);
 			ticketClickable.setAttribute("data-toggle", "modal");
 			ticketClickable.setAttribute("data-target", "#gridSystemModal2");
 
 				var ticketContainerDiv = document.createElement("div");
 				ticketContainerDiv.setAttribute("class", "ticket-container");
+				ticketClickable.appendChild(ticketContainerDiv);
 
 					var ticketHeaderDiv = document.createElement("div");
 					ticketHeaderDiv.setAttribute("class", "row ticket-header");
@@ -159,12 +161,24 @@ $(document).ready(function() {
 
 				ticketContainerDiv.appendChild(domesticForeignDiv);
 
-// 				$(".my-lingua-content").append(ticketContainerDiv);
-				ticketClickable.appendChild(ticketContainerDiv);
 				$(".my-lingua-content").append(ticketClickable);
+
+				editTicket(ticket.id, ticket.textDomestic, ticket.textForeign, ticket.category);
 
 			});
 
 		}
 
+		/* Get clicked ticket for edit by ID */
+		function editTicket(ticketId, textDomestic, textForeign, category) {
+			$(".ticket-edit").click(function() {
+				var id = $(this).attr("id");
+				if(ticketId == id) {
+					$(".domestic #domestic").text(textDomestic);
+					$(".foreign #foreign").text(textForeign);
+					$(".category").text(category);
+					document.getElementById("ticket-id-hidden").value = id;
+				}
+			});
+		}
 	});

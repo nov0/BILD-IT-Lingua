@@ -9,12 +9,10 @@ import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -98,17 +96,13 @@ public class TicketController {
 	
 	/**
 	 * @author Bojan Aleksic
-	 * @param id
+	 * @param ticket
 	 * @return
-	 * Not working at the moment. Still in process...
 	 */
-//	@RequestMapping("/ticket-edit")
-//	@ResponseBody
-//	public Map<String, Object> editTicket(@RequestParam("id") Long id) {
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("ticketEdit", ticketService.getOne(id));
-//		System.out.println("TEST: " + ticketService.getOne(id).getId());
-//		return map;
-//	}
+	@RequestMapping("/edit-ticket")
+	public String editTicket(@ModelAttribute("ticket") Ticket ticket) {
+		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getId());
+		return "home";
+	}
 	
 }

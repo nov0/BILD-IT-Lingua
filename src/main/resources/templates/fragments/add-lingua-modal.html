@@ -52,7 +52,7 @@
 					</h4>
 					<small style="float: right; color: red;" id="cat-error"></small>
 				</div>
-				<form role="form" data-toggle="validator" id="modal-ticket-form" action="#" th:action="@{/create-ticket?ticket-added}" th:object="${ticket}" method="POST">
+				<form role="form" id="modal-ticket-form" action="#" th:action="@{/create-ticket?ticket-added}" th:object="${ticket}" method="POST">
 					<div class="modal-body">
 						<!-- Bootstrap grid layout -->
 						<div class="row">
@@ -88,9 +88,8 @@
 				
 				var selectedCategory = "";
 				
-			    	var selectedLanguage = [[${session.foreignLanguage}]];
+			    var selectedLanguage = [[${session.foreignLanguage}]];
 			    
-				
 				$('.select-category').click(function() {
 					selectedCategory = $('.select-category li a').text();
 				});
@@ -98,8 +97,6 @@
 				$('.btn-success').click(function(event) {
 					var domesticText = document.getElementById('domestic').value;
 					var foreignText = document.getElementById('foreign').value;
-					
-					console.log("Language: " + selectedLanguage);
 					
 					var message = "";
 					var color = "danger";
