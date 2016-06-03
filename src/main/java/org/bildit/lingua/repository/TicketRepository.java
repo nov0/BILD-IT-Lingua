@@ -25,7 +25,7 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Ticket t SET t.textDomestic = ?1, t.textForeign = ?2, t.category = ?3 WHERE t.id = ?4")
+	@Query("UPDATE Ticket t SET t.textDomestic = ?1, t.textForeign = ?2, t.category = ?3, t.edited = 1 WHERE t.id = ?4")
 	void update(String textDomestic, String textForeign, String category, Long ticketId);
 	
 }

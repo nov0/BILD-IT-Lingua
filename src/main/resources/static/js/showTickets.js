@@ -86,7 +86,7 @@ $(document).ready(function() {
 			ticketClickable.setAttribute("data-target", "#gridSystemModal2");
 
 				var ticketContainerDiv = document.createElement("div");
-				ticketContainerDiv.setAttribute("class", "ticket-container");
+				ticketContainerDiv.setAttribute("class", "ticket-container alert alert-warning");
 				ticketClickable.appendChild(ticketContainerDiv);
 
 					var ticketHeaderDiv = document.createElement("div");
