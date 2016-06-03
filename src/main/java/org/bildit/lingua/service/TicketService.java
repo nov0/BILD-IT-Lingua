@@ -11,6 +11,6 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	List<Ticket> getAllDeactivatedTicketsByUsername(String username);
 	List<Ticket> getAllModeratedTicketsByUsername(String username);
 	Ticket saveTicket(Ticket ticket, String username);
-	Ticket updateTicket(Long ticketId, String dt, String ft, String category);
+	void updateTicket(String textDomestic, String textForeign, String category, Long ticketId);
 	
 }

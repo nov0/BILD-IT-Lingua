@@ -92,6 +92,7 @@ public class TicketServiceImpl implements TicketService {
 		vote.setVoteValue(0);
 		ticket.getVotesUp().add(vote);
 		ticket.getVotesDown().add(vote);
+		ticket.setLearningLanguage(user.getForeignLanguage());
 		return ticketRepository.save(ticket);
 	}
 	/**
@@ -100,8 +101,8 @@ public class TicketServiceImpl implements TicketService {
 	 * Method for updating inputed parameters using ticket id
 	 * */
 	@Override
-	public Ticket updateTicket(Long ticketId, String textDom, String textFor, String category) {
-		return ticketRepository.update(ticketId, textDom, textFor, category);
+	public void updateTicket(String textDomestic, String textForeign, String category, Long ticketId) {
+		ticketRepository.update(textDomestic, textForeign, category, ticketId);
 	}
 	
 }
