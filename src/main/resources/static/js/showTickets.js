@@ -36,13 +36,12 @@ $(document).ready(function() {
 
 	var selectedCategory = "";
 
+	/* Select category */
 	$(".select-category li > a").click(function() {
 		$(".category").text(this.innerHTML);
 		selectedCategory = this.innerHTML;
 		$(".selected-category").val(selectedCategory);
 	});
-
-	$('[data-toggle="tooltip"]').tooltip();
 
 	// get ID value of active class
 	var urlRequest = $('.btn.active').attr('id');
@@ -59,8 +58,8 @@ $(document).ready(function() {
 		$(".ticket-container").hide();
 
 		// set active class on clicked btn
-		urlRequest = $('.btn.active').attr('id');
 		$(this).addClass('active').siblings().removeClass('active');
+		urlRequest = $('.btn.active').attr('id');
 
 		$.getJSON(urlRequest, getTickets);
 
@@ -68,7 +67,7 @@ $(document).ready(function() {
 
 	/* Pass data-parsed object from the JSON server to the function */
 	function getTickets(data) {
-
+		console.log("URL third: " + urlRequest);
 		$("#preloader").hide();
 		$(".ticket-container").show();
 
@@ -168,6 +167,8 @@ $(document).ready(function() {
 					$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
 				}
 
+				$('[data-toggle="tooltip"]').tooltip();
+
 				editTicket(ticket.id, ticket.textDomestic, ticket.textForeign, ticket.category);
 
 			});
@@ -186,4 +187,5 @@ $(document).ready(function() {
 				}
 			});
 		}
+
 	});
