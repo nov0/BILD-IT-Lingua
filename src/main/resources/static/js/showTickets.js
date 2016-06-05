@@ -67,7 +67,6 @@ $(document).ready(function() {
 
 	/* Pass data-parsed object from the JSON server to the function */
 	function getTickets(data) {
-		console.log("URL third: " + urlRequest);
 		$("#preloader").hide();
 		$(".ticket-container").show();
 
