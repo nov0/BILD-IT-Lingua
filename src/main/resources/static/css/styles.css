@@ -220,6 +220,8 @@ body {
 .carousel-caption {
 	padding-bottom: 80px;
 }
+
+/********* end carousel **********/
 /***header menu***/
 #menu {
 	padding-top: 20px; 
@@ -230,5 +232,27 @@ body {
 .nav-pills ul li a:hover {
 	background-color: red;
 }
+/*** practice form ***/
+#practice-form {
+    margin:auto;
+    max-width: 400px;
+}
 
-/********* end carousel **********/
+.option-select-button {
+    width: 80px;
+}
+.option-select-group {
+    float:right;
+}
+.form-option {
+    height: 30px;
+    margin-bottom: 30px;
+}
+.form-option-text{
+    float:left;
+    margin-top: 7px;
+}
+#speed-slider {
+    margin-right: 10px;
+    float:right;
+}

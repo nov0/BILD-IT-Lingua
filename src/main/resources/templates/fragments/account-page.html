@@ -67,13 +67,97 @@
                     </div>
                 </div>
                 <div id="practice-lingua" class="tab-pane fade">
-                    <h3>Practice Lingua</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <!-- Practice Lingua by Goran Arsenic -->
+                    
+                    <div id="practice-form">
+                        <form th:action="@{/practice}" id="start-practice-form" method="post">
+                            <h3 style="text-align: center">Practice Lingua</h3>
+                            <div class="form-option">
+                                <div class="form-option-text">
+                                    Practice type:
+                                </div>
+                                <div class="btn-group option-select-group">
+                                    <button type="button" id="overview-button" class="btn btn-primary option-select-button active">Overview</button>
+                                    <button type="button" id="flipcard-button" class="btn btn-primary option-select-button">Flipcard</button>
+                                </div>
+                            </div>
+                            <div class="form-option">
+                                <div class="form-option-text">
+                                    From:
+                                </div>
+                                <div class="btn-group option-select-group">
+                                    <button type="button" id="me-button" class="btn btn-primary option-select-button active">Me</button>
+                                    <button type="button" id="everyone-button" class="btn btn-primary option-select-button">Everyone</button>
+                                </div>
+                            </div>
+                            <div class="form-option">
+                                <div class="form-option-text">
+                                    Type of Lingua:
+                                </div>
+                                 <div style="float: right" class="btn-group categories" role="group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" 
+                                                aria-haspopup="true" aria-expanded="false">
+                                            <span style="padding-right: 8px;" class="glyphicon glyphicon-tags" 
+                                                       aria-hidden="true"></span>
+                                            <span class="tab-btn-group category">Categories</span>
+                                            <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu select-category">
+                                            <li><a href="#">All</a></li>
+                                            <li><a href="#">Verbs</a></li>
+                                            <li><a href="#">Sentences</a></li>
+                                            <li><a href="#">Nouns</a></li>
+                                            <li><a href="#">Pronouns</a></li>
+                                            <li><a href="#">Adjectives</a></li>
+                                            <li><a href="#">Prepositions</a></li>
+                                            <li><a href="#">Adverbs</a></li>
+                                            <li><a href="#">Articles</a></li>
+                                            <li><a href="#">Interjections</a></li>                               
+                                        </ul>
+                                    </div>
+                            </div>
+                            <div id="speed" class="form-option">
+                                <div class="form-option-text">
+                                    Speed:
+                                </div>
+                                <div id="speed-slider">
+                                    <input id="slider" type="text"
+                                          name="speed"
+                                          data-provide="slider"
+                                          data-slider-ticks="[1, 2, 3]"
+                                          data-slider-ticks-labels='["5s", "10s", "15s"]'
+                                          data-slider-min="1"
+                                          data-slider-max="3"
+                                          data-slider-step="1"
+                                          data-slider-value="3"
+                                          data-slider-tooltip="hide" />
+                                </div>
+                            </div>
+                            <div id="order" class="form-option hide">
+                                <div class="form-option-text">
+                                    Lingua order:
+                                </div>
+                                <div class="btn-group option-select-group">
+                                    <button type="button" id="domestic-button" class="btn btn-primary option-select-button active">Domestic</button>
+                                    <button type="button" id="foreign-button" class="btn btn-primary option-select-button">Foreign</button>
+                                </div>
+                            </div>
+                       
+                            <input id="input-from" type="text" name="from" hidden="hidden"/>
+                            <input id="input-category" type="text" name="category" hidden="hidden"/>
+                            <input id="input-order" type="text" name="order" hidden="hidden"/>
+                            <button type="submit">Start practice</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Practice Lingua end -->
                 </div>
             </div>
         </div>
         <!-- Import JavaScript for loading tickets and some basic functions -->
         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
+        <!-- Script for practice lingua -->
+        <script type="text/javascript" th:src="@{/js/practiceLingua.js}"></script>
     </div>
     
     <!-- Administrator Account fragment -->
