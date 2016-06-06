@@ -67,6 +67,22 @@
                     </div>
                 </div>
                 <div id="practice-lingua" class="tab-pane fade">
+                    
+                    <div class="btn-group add-lingua" role="group">
+<!-- 						<div style="float: right;" id="preloader-language"><img th:src="@{/images/preloader.gif}" /></div> -->
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+			               	<span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
+			               	<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
+			               	<span class="caret"></span>
+			            </button>
+ 			            <ul class="dropdown-menu lingua-language select-language">
+ 	     					<li th:each="language : ${languages}">
+ 	     						<a id="selected-lang" href="#" th:text="${language}">Language</a>
+ 	     					</li>
+ 	    				</ul>
+	    			</div>
+                    
                     <!-- Practice Lingua by Goran Arsenic -->
                     
                     <div id="practice-form">
@@ -146,7 +162,7 @@
                             <input id="input-from" type="text" name="from" hidden="hidden"/>
                             <input id="input-category" type="text" name="category" hidden="hidden"/>
                             <input id="input-order" type="text" name="order" hidden="hidden"/>
-                            <button type="submit">Start practice</button>
+                            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-triangle-right"></span> Start practice</button>
                         </form>
                     </div>
                     
