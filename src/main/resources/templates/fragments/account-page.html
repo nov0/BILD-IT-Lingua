@@ -69,7 +69,6 @@
                 <div id="practice-lingua" class="tab-pane fade">
                     
                     <div class="btn-group add-lingua" role="group">
-<!-- 						<div style="float: right;" id="preloader-language"><img th:src="@{/images/preloader.gif}" /></div> -->
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
 			               	<span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
@@ -110,7 +109,7 @@
                                 <div class="form-option-text">
                                     Type of Lingua:
                                 </div>
-                                 <div style="float: right" class="btn-group categories" role="group">
+                                 <div style="float: right" class="btn-group option-select-group" role="group">
                                         <button type="button" class="btn btn-primary dropdown-toggle " data-toggle="dropdown" 
                                                 aria-haspopup="true" aria-expanded="false">
                                             <span style="padding-right: 8px;" class="glyphicon glyphicon-tags" 
