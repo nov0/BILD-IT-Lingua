@@ -21,29 +21,26 @@
 			<div class="carousel-inner" role="listbox">
 
 				<div class="item active">
-					<img style="width: 100%" src="images/carousel/book1.png"
-						alt="Lingua" />
+					<div class="carousel-background"></div>	
 					<div class="carousel-caption">
-						<h2>Naučite strani jezik</h2>
-						<p>Želite da naučite strani jezik? Na pravom ste mjestu.</p>
+						<h2 th:text="#{front.page.carousel1.title}">Naučite strani jezik</h2>
+						<p th:text="#{frong.page.carousel1.content}">Želite da naučite strani jezik? Na pravom ste mjestu.</p>
 					</div>
 				</div>
 
 				<div class="item">
-					<img style="width: 100%" src="images/carousel/book1.png"
-						alt="Lingua" />
+					<div class="carousel-background"></div>	
 					<div class="carousel-caption">
-						<h2>Besplatno je</h2>
-						<p>Lingua je besplatna aplikacija i uvijek će da bude.</p>
+						<h2 th:text="#{front.page.carousel2.title}">Besplatno je</h2>
+						<p th:text="#{frong.page.carousel2.content}">Lingua je besplatna aplikacija i uvijek će da bude.</p>
 					</div>
 				</div>
 
 				<div class="item">
-					<img style="width: 100%" src="images/carousel/book1.png"
-						alt="Lingua" />
+					<div class="carousel-background"></div>	
 					<div class="carousel-caption">
-						<h2>Podjelite svoje znanje</h2>
-						<p>Pomozite drugima da nauče strani jezik. Sami stvarajte sadržaj i omogućite i drugima
+						<h2 th:text="#{front.page.carousel3.title}">Podjelite svoje znanje</h2>
+						<p th:text="#{frong.page.carousel3.content}">Pomozite drugima da nauče strani jezik. Sami stvarajte sadržaj i omogućite i drugima
 						da nauče ono što Vi znate.
 						</p>
 					</div>
@@ -55,10 +52,10 @@
 			<div class="container">
 			<div class="row">
 				<div class="col-sm-6">
-					<h1>Learn a language for free</h1>
-					<p>You choose the language. You choose the words. You choose the text. 
+					<h1 th:text="#{front.page.main.text.title}">Learn a language for free</h1>
+					<p th:text="#{front.page.main.text.content}">You choose the language. You choose the words. You choose the text. 
 					Language learning to match your interests and your life.
-					In the real world, everyoneâ€™s language journey is unique. Join the Lingua.ly community of 
+					In the real world, everyones language journey is unique. Join the Lingua community of 
 					learners and plot your own course. Discover a clever new way to learn, practice and master 
 					a language.</p>
 				
@@ -72,7 +69,7 @@
 			<div id="national-flags">
 				<div class="container" style="width: 100%;">
 					<div class="row"  style="height: 349px; padding-top: 7%;">
-						<h1>Learn 11 different languages</h1><br/>
+						<h1 th:text="#{front.page.11languages}">Learn 11 different languages</h1><br/>
 						<img class="flag-image" th:src="@{/images/flags/BosniaHerzegowina.png}" />
 						<img class="flag-image" th:src="@{/images/flags/Croatia.png}" />
 						<img class="flag-image" th:src="@{/images/flags/France.png}" />
@@ -94,7 +91,7 @@
 						<div class="col-sm-2">
 						</div>
 						<div class="col-sm-4" style="padding-top: 5%;">
-							<h1>Learn languages on all devices</h1>
+							<h1 th:text="#{front.page.responsive}">Learn languages on all devices</h1>
 						</div>
 						<div class="col-sm-4" >
 							<img th:src="@{/images/responsive-design.jpg}" />
@@ -107,7 +104,7 @@
 			<div id="start-learning">
 				<div >
 					<h1>Lingua</h1>
-					<a class="btn btn-warning" th:href="@{/registration}">Start learning</a>
+					<a class="btn btn-warning" th:href="@{/registration}"><span th:text="#{front.page.button.start.learning}">Start learning</span></a>
 				</div>
 			</div>
 		</div>

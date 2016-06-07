@@ -211,11 +211,48 @@ body {
 .flag-image {
 	width: 50px;
 }
+.carousel-background {
+	background-color: #204D74; 
+	width: 1200; 
+	height: 300px;
+	text-align: center;
+}
+.carousel-caption {
+	padding-bottom: 80px;
+}
+
+/********* end carousel **********/
 /***header menu***/
 #menu {
 	padding-top: 20px; 
-	background-color: #ccc; 
+	background-color: #E4E4E4; 
 	padding-bottom: 15px; 
 	border-radius: 5px;
 }
-/********* end carousel **********/
+.nav-pills ul li a:hover {
+	background-color: red;
+}
+/*** practice form ***/
+#practice-form {
+    margin:auto;
+    max-width: 400px;
+}
+
+.option-select-button {
+    width: 80px;
+}
+.option-select-group {
+    float:right;
+}
+.form-option {
+    height: 30px;
+    margin-bottom: 30px;
+}
+.form-option-text{
+    float:left;
+    margin-top: 7px;
+}
+#speed-slider {
+    margin-right: 10px;
+    float:right;
+}

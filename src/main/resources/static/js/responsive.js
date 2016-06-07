@@ -17,10 +17,12 @@ $( document ).ready(function() {
     
    function hideButtons() {
         $(".login-header").hide();
+        $(".not-a-member-register").hide();
         $("#menuSign").show();
     }
     function showButtons() {
         $(".login-header").show();
+        $(".not-a-member-register").show();
         $("#menuSign").hide();
     }
     

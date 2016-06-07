@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	
+	<!-- @author Bojan Aleksic -->
+
+	<!-- Tickets fragment -->
+	<div class="my-lingua-content" th:fragment="tickets">
+		<div th:if="${tickets != null}">
+			<div class="ticket-container" th:each="ticket : ${tickets}">
+				<div class="row ticket-header">
+					<div class="col-md-2">
+						<span class="glyphicon glyphicon-time"></span> 
+						<span th:text="${ticket.dateCreated}"></span>
+					</div>
+					<div class="col-md-6">
+						<span class="glyphicon glyphicon-tag"></span> 
+						<span data-toggle="tooltip" title="Category">Verbs</span>
+					</div>
+					<div class="col-md-4 like-dislike-btn">
+						<a href="#"> 
+							<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+						</a> 31 &nbsp; 
+						<a href="#"> 
+							<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+						</a> 5
+					</div>
+				</div>
+				<div class="row domestic-foreign-row">
+					<div th:text="${ticket.textDomestic}"
+						class="col-md-6 domestic-foreign-text">Domestic Text</div>
+					<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

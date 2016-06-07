@@ -19,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
+			.antMatchers("/practice").permitAll()
 			.antMatchers("/logout").permitAll()
 			.antMatchers("/users").permitAll()
 			.antMatchers("/registration-page").permitAll()
@@ -35,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/edit-ticket").permitAll()
 			.antMatchers("/get-all-tickets").permitAll()
 			.antMatchers("/existusername").permitAll()
+			.antMatchers("/fragments/get-tickets.html").permitAll()
 			.antMatchers("/login-success").authenticated()
 			.anyRequest().denyAll()
 		.and()
