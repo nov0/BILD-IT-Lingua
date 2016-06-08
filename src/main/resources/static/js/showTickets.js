@@ -14,7 +14,13 @@ $(document).ready(function() {
  	    $("#preloader").hide();
  	});
 
- 	// get ID value of active class
+	/* Select category */
+	$(".select-category li > a").click(function() {
+		$(".category").text(this.innerHTML);
+		$(".selected-category").val($(this).attr("id"));
+	});
+
+	// get ID value of active class
 	var urlRequest = $('.btn.active').attr('id');
 
 	/* When user is logged in, populate page with all tickets by default */
