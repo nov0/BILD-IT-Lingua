@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	
+	<!-- @author Bojan Aleksic -->
+
+	<!-- Tickets fragment -->
+	<div class="my-lingua-content" th:fragment="tickets">
+		<div th:if="${tickets != null}">
+			<div class="ticket-container alert-warning" th:each="ticket : ${tickets}">
+				<div class="row ticket-header">
+					<div class="col-md-2">
+						<span class="glyphicon glyphicon-time"></span>
+						<span th:text="${ticket.dateCreated}"></span>
+					</div>
+					<div class="col-md-2">
+						<span class="glyphicon glyphicon-tag"></span>
+						<span th:text="${ticket.category}" data-toggle="tooltip" title="Category">Verbs</span>
+					</div>
+					<div class="col-md-2">
+						<a th:href="@{/(id=${ticket.id})}" data-remote="false" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
+							<span class="glyphicon glyphicon-pencil"></span>
+							<span data-toggle="tooltip" title="Edit">Edit</span>
+						</a>
+					</div>
+					<div class="col-md-2">
+						<a href="#" class="ticket-delete">
+							<span class="glyphicon glyphicon-trash"></span> 
+							<span data-toggle="tooltip" title="Delete">Delete</span>
+						</a>
+					</div>
+					<div class="col-md-4 like-dislike-btn">
+						<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+						<span th:text="${ticket.votesUp[0].voteValue}"></span>
+						&nbsp; &nbsp;
+						<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+						<span th:text="${ticket.votesDown[0].voteValue}"></span>
+					</div>
+				</div>
+				<div class="row domestic-foreign-row">
+					<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+					<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+				</div>
+				<script th:inline="javascript">
+				/*<![CDATA[*/
+				           
+					$(document).ready(function() {
+						
+						/* Set alert-danger style for deleted tickets */
+						var urlRequest = $('.btn.active').attr('id');
+						if(urlRequest === "ticket-deleted") {
+							/* Set deleted tickets to red color */
+							$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
+						}
+						
+						/* Obtain values from Thymeleaf's model, and assign them to the JS variables */
+						var ticketId = Number([[${ticket.id}]]);
+						var textDomestic = [[${ticket.textDomestic}]];
+						var textForeign = [[${ticket.textForeign}]];
+						var category = [[${ticket.category}]];
+						
+						/* Pass obtained values to the function */
+	 					tickets(ticketId, category, textDomestic, textForeign);
+						
+						/* Bootstrap's tooltip */
+						$('[data-toggle="tooltip"]').tooltip();
+						
+						/* Obtain actual ticket on the click by ticket's ID */
+						function tickets(ticketId, category, textDomestic, textForeign) {
+							$(".ticket-edit").click(function(event) {
+								event.preventDefault();
+								var id = $(this).attr("href").split("=");
+								if(ticketId == id[1]) {
+									$(".domestic #domestic").text(textDomestic);
+									$(".foreign #foreign").text(textForeign);
+									$(".category").text(category);
+									document.getElementById("ticket-id-hidden").value = id[1];
+								}
+							});
+						}
+						
+					});
+				           
+				/*]]>*/
+				</script>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

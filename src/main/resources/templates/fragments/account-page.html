@@ -58,15 +58,18 @@
 	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
 	    			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
 	    			
-                    <div class="my-lingua-content">
+                    <div class="tickets-content">
                     
                     	<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
                     	
-                    	<!-- Here goes content loaded with JSON -->
+                    	<!-- Here goes content loaded with AJAX -->
                     	
                     </div>
                 </div>
                 <div id="practice-lingua" class="tab-pane fade">
+
+                    <div th:replace="fragments/overview-practice :: overview"></div>
+                    
                     <!-- select language -->
                     <div class="btn-group add-lingua" role="group">
 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -82,102 +85,21 @@
  	    				</ul>
 	    			</div>
                     
-                    <!-- Practice Lingua by Goran Arsenic -->
-                    
-                    <div id="practice-form">
-                        <form th:action="@{/practice}" id="start-practice-form" method="post">
-                            <h3 style="text-align: center" th:text="#{practice.title}">Practice Lingua</h3>
-                            <div class="form-option">
-                                <div class="form-option-text">
-                                    <span th:text="#{practice.practice.type}">Practice type:</span>
-                                </div>
-                                <div class="btn-group option-select-group">
-                                    <button type="button" id="overview-button" class="btn btn-primary option-select-button active" th:text="#{practice.button.overview}">Overview</button>
-                                    <button type="button" id="flipcard-button" class="btn btn-primary option-select-button" th:text="#{practice.button.flipcard}">Flipcard</button>
-                                </div>
-                            </div>
-                            <div class="form-option">
-                                <div class="form-option-text">
-                                    <span th:text="#{practice.from}">From:</span>
-                                </div>
-                                <div class="btn-group option-select-group">
-                                    <button type="button" id="me-button" class="btn btn-primary option-select-button active" th:text="#{practice.button.me}">Me</button>
-                                    <button type="button" id="everyone-button" class="btn btn-primary option-select-button" th:text="#{practice.button.everyone}">Everyone</button>
-                                </div>
-                            </div>
-                            <div class="form-option">
-                                <div class="form-option-text">
-                                    <span th:text="#{practice.type.of.lingua}">Type of Lingua:</span>
-                                </div>
-                                 <div class="btn-group option-select-group" role="group">
-                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-<!--                                             <span style="padding-right: 8px;" class="glyphicon glyphicon-tags"  -->
-<!--                                                        aria-hidden="true"></span> -->
-                                            <span th:text="#{modal.categories}" class="tab-btn-group category">Categories</span>
-                                            <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu select-category">
-                                            <li><a id="all" th:text="#{tab.all}" href="#">All</a></li>
-                                            <li><a id="verbs" th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
-                                            <li><a id="sentences" th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
-                                            <li><a id="nouns" th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
-                                            <li><a id="pronouns" th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
-                                            <li><a id="adjectives" th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
-                                            <li><a id="prepositions" th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
-                                            <li><a id="adverbs" th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
-                                            <li><a id="articles" th:text="#{modal.categories.articles}" href="#">Articles</a></li>
-                                            <li><a id="interjections" th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>                               
-                                        </ul>
-                            	</div>
-                            </div>
-                            <div id="speed" class="form-option">
-                                <div class="form-option-text">
-                                    <span th:text="#{practice.speed}">Speed:</span>
-                                </div>
-			                    <div id="speed-slider">
-	                                 <input id="slider" type="text"
-				                            name="speed"
-				                            data-provide="slider"
-				                            data-slider-ticks="[1, 2, 3]"
-				                            data-slider-ticks-labels='["5s", "10s", "15s"]'
-				                            data-slider-min="1"
-				                            data-slider-max="3"
-				                            data-slider-step="1"
-				                            data-slider-value="3"
-				                            data-slider-tooltip="hide" />
-	                                
-			                    </div>
-			                    <div style="width: 230px; float: right;">
-			                    	<div style="width: 100px; display: inline-block">5s</div>
-			                    	<div style="width: 98px; display: inline-block">10s</div>
-			                    	<div style="display: inline-block">15s</div>
-			                    </div>
-                            </div>
-                            <div id="order" class="form-option hide">
-                                <div class="form-option-text">
-                                    <span th:text="#{practice.order}">Lingua order:</span>
-                                </div>
-                                <div class="btn-group option-select-group">
-                                    <button type="button" id="domestic-button" class="btn btn-primary option-select-button active" th:text="#{practice.button.domestic}">Domestic</button>
-                                    <button type="button" id="foreign-button" class="btn btn-primary option-select-button" th:text="#{practice.button.foreign}">Foreign</button>
-                                </div>
-                            </div>
-                       
-                            <input id="input-from" type="text" name="from" hidden="hidden"/>
-                            <input id="input-category" type="text" name="category" hidden="hidden"/>
-                            <input id="input-order" type="text" name="order" hidden="hidden"/>
-                            <div style="text-align: center">
-	                            <button type="submit" class="btn btn-primary"><span style="padding-right: 5px" class="glyphicon glyphicon-circle-arrow-right"></span><span th:text="#{practice.button.start}"> Start practice</span></button>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Practice Lingua end -->
+                    <!-- Practice Lingua fragment -->
+                    <div th:replace="fragments/practice-lingua :: practice-lingua"></div>
+
                 </div>
             </div>
         </div>
         <!-- Import JavaScript for loading tickets and some basic functions -->
         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
+        
+        <!-- Import JavaScript for changing learning language -->
+        <script type="text/javascript" th:src="@{/js/changeLanguage.js}"></script>
+        
+        <!-- Import JavaScript for selecting ticket-category -->
+        <script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
+        
         <!-- Script for practice lingua -->
         <script type="text/javascript" th:src="@{/js/practiceLingua.js}"></script>
     </div>
