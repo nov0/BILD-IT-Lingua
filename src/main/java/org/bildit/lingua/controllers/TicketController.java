@@ -9,7 +9,6 @@ import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -79,19 +78,6 @@ public class TicketController {
 		ticketService.saveTicket(ticket, principal.getName());
 		return "home";
 	}
-	
-	/**
-	 * @author Bojan Aleksic
-	 * @param ticket
-	 * @return
-	 */
-//	@RequestMapping("/edit-ticket")
-//	public String editTicket(@RequestParam("id") String ticketId, @RequestParam("textDomestic") String textDomestic, @RequestParam("textForeign") String textForeign, @RequestParam("category") String category) {
-//		long id = Long.parseLong(ticketId);
-//		ticketService.updateTicket(textDomestic, textForeign, category, id);
-////		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getId());
-//		return "home";
-//	}
 	
 	/**
 	 * @author Bojan Aleksic
