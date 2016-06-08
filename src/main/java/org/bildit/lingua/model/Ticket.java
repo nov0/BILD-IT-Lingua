@@ -143,5 +143,13 @@ public class Ticket extends BaseEntity {
 	public List<Vote> getVotesDown() {
 		return votesDown;
 	}
+
+	public void setVotesUp(List<Vote> votesUp) {
+		this.votesUp = votesUp;
+	}
+
+	public void setVotesDown(List<Vote> votesDown) {
+		this.votesDown = votesDown;
+	}
 	
 }

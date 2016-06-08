@@ -60,7 +60,7 @@
 	    			
                     <div class="tickets-content">
                     
-<!--                     	<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div> -->
+                    	<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
                     	
                     	<!-- Here goes content loaded with AJAX -->
                     	
@@ -175,6 +175,13 @@
         </div>
         <!-- Import JavaScript for loading tickets and some basic functions -->
         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
+        
+        <!-- Import JavaScript for changing learning language -->
+        <script type="text/javascript" th:src="@{/js/changeLanguage.js}"></script>
+        
+        <!-- Import JavaScript for selecting ticket-category -->
+        <script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
+        
         <!-- Script for practice lingua -->
         <script type="text/javascript" th:src="@{/js/practiceLingua.js}"></script>
     </div>

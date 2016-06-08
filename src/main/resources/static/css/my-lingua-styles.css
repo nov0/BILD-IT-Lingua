@@ -60,7 +60,7 @@
 }
 
 .ticket-header {
-	border-bottom: 1px dashed #d1d1d1;
+	border-bottom: 1px dashed #8a6d3b;
 	padding-bottom: 8px;
 }
 
@@ -84,6 +84,14 @@
 	text-align: center;
 	font-size: 18px;
 	font-family: 'Lobster', cursive;
+}
+
+.ticket-edit {
+	color: inherit;
+}
+
+.ticket-delete {
+	color: inherit;
 }
 
 .like-dislike-btn {
