@@ -28,12 +28,16 @@ public class PracticeServiceImpl implements PracticeService {
 		Language foreignLanguage = user.getForeignLanguage();
 		
 		// set how many tickets read from database
-		Pageable pageable = new PageRequest(0, 3);
+		Pageable pageable = new PageRequest(0, 10);
 		
-		if(from.equals("me")) {
+		if(from.equals("me") && !category.equals("all")) {
 			return ticketRepository.getMyTicketsForPractice(user, category, foreignLanguage, pageable);
-		} else {
+		} else if(from.equals("me") && category.equals("all")) {
+			return ticketRepository.getMyTicketsForPractice(user, foreignLanguage, pageable);
+		} else if(!from.equals("me") && !category.equals("all")) {
 			return ticketRepository.getTicketsForPractice(category, foreignLanguage, pageable);
+		} else {
+			return ticketRepository.getTicketsForPractice(foreignLanguage, pageable);
 		}
 	}
 

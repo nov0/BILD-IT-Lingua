@@ -35,14 +35,26 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 	/**
 	 * @author goran
 	 */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.user = ?1 AND ticket.category = ?2 AND ticket.learningLanguage = ?3 ORDER BY RAND()")
+	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.user = ?1 AND ticket.category = ?2 AND ticket.learningLanguage = ?3 AND ticket.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getMyTicketsForPractice(User user, String category, Language language, Pageable pageable);
 	
 	/**
 	 * @author goran
 	 */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.category = ?1 AND ticket.learningLanguage = ?2 ORDER BY RAND()")
+	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.user = ?1 AND ticket.learningLanguage = ?2 AND ticket.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getMyTicketsForPractice(User user, Language language, Pageable pageable);
+	
+	/**
+	 * @author goran
+	 */
+	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.category = ?1 AND ticket.learningLanguage = ?2 AND ticket.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(String category, Language language, Pageable pageable);
+	
+	/**
+	 * @author goran
+	 */
+	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.learningLanguage = ? AND ticket.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getTicketsForPractice(Language language, Pageable pageable);
 
 	
 }

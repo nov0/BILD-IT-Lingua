@@ -34,13 +34,10 @@ $(document).ready(function() {
 		});
 	});
 
-	var selectedCategory = "";
-
 	/* Select category */
 	$(".select-category li > a").click(function() {
 		$(".category").text(this.innerHTML);
-		selectedCategory = this.innerHTML;
-		$(".selected-category").val(selectedCategory);
+		$(".selected-category").val($(this).attr("id"));
 	});
 
 	// get ID value of active class

@@ -1,10 +1,14 @@
 /**
  * Practice Lingua script
+ * Work with practice form
+ * 
+ * @author Goran Arsenic
  */
 $(document).ready(function() {
     /*use this as default*/
 	$("#input-from").val("me");
 	$("#input-order").val(null);
+	$("#input-category").val("all");
 	
 	/*overview button*/
     $("#overview-button").click(function() {
@@ -52,11 +56,9 @@ $(document).ready(function() {
     });
     
     /***** Select category by Bojan Aleksic ******/ 
-    var selectedCategory = "";
 	$(".select-category li > a").click(function() {
 		$(".category").text(this.innerHTML);
-		selectedCategory = this.innerHTML;
-		$("#input-category").val(selectedCategory);
+		$("#input-category").val($(this).attr("id"));
 	});
     /*********** Select category end *************/
 });
