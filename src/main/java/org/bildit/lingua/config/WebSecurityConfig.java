@@ -49,7 +49,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/?logout=true").permitAll()
 		.and()
-			.csrf().disable();
+			.csrf()
+		.and()
+			.rememberMe()
+			.key("remember-me")
+			.rememberMeParameter("remember-me")
+			.rememberMeCookieName("remember-me-cookie");
 	}
 	
 	@Override

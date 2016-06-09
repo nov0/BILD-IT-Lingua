@@ -42,14 +42,23 @@
             <br />
             <br />
             <form role="form" action="#" th:action="@{/login}" method="post">
+            	<!-- username field -->
                 <div class="form-group">
                     <label class="control-label" th:text="#{form.field.username}">Username: </label>
 				    <input type="text" th:placeholder="#{form.field.username}" class="form-control" name="username" />
                 </div>
+                <!-- password field -->
 				<div class="form-group">
                     <label class="control-label" th:text="#{form.field.password}">Password: </label>
 				    <input type="password" th:placeholder="#{form.field.password}" class="form-control" name="password"/>
                 </div>
+                <!-- Remember me option -->
+                <div class="form-group">
+                <label>
+					<span th:text="#{form.login.rememberme}">Remember me: </span><input type="checkbox" name="remember-me" checked="checked" />
+				</label>
+				</div>
+                <!-- registration link -->
                 <div class="form-group">
 					<a th:href="@{/registration}">
 	  					<img th:src="@{/images/register-icon.png}" style="position: relative; bottom: 2px;" />
@@ -57,6 +66,9 @@
 	  				</a>
   		    	</div>
 				<div class="form-group">
+					<!-- CSRF token -->
+					<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+					
 					<button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
 		                <span th:text="#{form.login.button.value}" class="tab-btn-group">Login</span>
