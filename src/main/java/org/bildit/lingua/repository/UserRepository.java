@@ -10,13 +10,9 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 /**
- * 
  * @interface UserRepository
- * 
  * @author Mladen Todorovic
- * 
  * */
-
 public interface UserRepository extends BaseRepository <User, Long>, UserRepositoryCustom {
 	
 	List<User> findAll();

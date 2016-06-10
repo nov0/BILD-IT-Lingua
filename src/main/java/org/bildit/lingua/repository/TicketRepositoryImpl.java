@@ -4,13 +4,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- * 
  * @class TicketRepositoryImpl
- * 
  * @author Mladen Todorovic
- * 
  * */
-
 public class TicketRepositoryImpl implements TicketRepositoryCustom {
 	
 	@PersistenceContext

@@ -16,13 +16,9 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * 
  * User model
- * 
  * @author Mladen Todorovic
- * 
  * */
-
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class User extends BaseUser {
@@ -42,7 +38,7 @@ public class User extends BaseUser {
 	@JoinTable(name="user_tickets", 
 	   joinColumns=@JoinColumn(name="user_id"),
 	   inverseJoinColumns=@JoinColumn(name="ticket_id"))
-	List<Ticket> tickets = new ArrayList<>();
+	private List<Ticket> tickets = new ArrayList<>();
 	
 	@OneToOne
 	private Language domesticLanguage;
@@ -54,7 +50,7 @@ public class User extends BaseUser {
 		/** Empty default constructor */
 	}
 	
-	/** Constructor with params */
+	/** Constructor with parameters */
 	public User(BaseUser user) {
 		this.setId(user.getId());
 		this.setUsername(user.getUsername());
@@ -64,13 +60,14 @@ public class User extends BaseUser {
 		this.setEmail(user.getEmail());
 	}
 	
-	/** Constructor with params */
+	/** Constructor with parameters */
 	public User(boolean votingBan, boolean addingBan, boolean loginBan) {
 		this.votingBan = votingBan;
 		this.addingBan = addingBan;
 		this.loginBan = loginBan;
 	}
 	
+	/** Getters and Setters */
 	public Language getDomesticLanguage() {
 		return domesticLanguage;
 	}
