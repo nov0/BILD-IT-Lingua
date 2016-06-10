@@ -1,17 +1,12 @@
 package org.bildit.lingua.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -24,13 +19,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * 
  * Ticket model
- * 
  * @author Mladen Todorovic
- * 
  * */
-
 @Entity
 @Table(name = "tickets")
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
@@ -54,24 +45,38 @@ public class Ticket extends BaseEntity {
 	@JsonIgnore
 	private User user;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="ticket_votes_up", 
-	   		   joinColumns=@JoinColumn(name="ticket_id"),
-	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
-	List<Vote> votesUp = new ArrayList<>();
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Vote likes;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	@JoinTable(name="ticket_votes_down", 
-	   		   joinColumns=@JoinColumn(name="ticket_id"),
-	   		   inverseJoinColumns=@JoinColumn(name="vote_id"))
-	List<Vote> votesDown = new ArrayList<>();
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	private Vote dislikes;
 	
 	private String dateCreated;
 	
 	@OneToOne
 	private Language learningLanguage;
 	
+	public Ticket() {
+		/** Empty default constructor */
+	}
 	
+	/** Getters and Setters */
+	public Vote getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Vote likes) {
+		this.likes = likes;
+	}
+
+	public Vote getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(Vote dislikes) {
+		this.dislikes = dislikes;
+	}
+
 	public Language getLearningLanguage() {
 		return learningLanguage;
 	}
@@ -134,14 +139,6 @@ public class Ticket extends BaseEntity {
 
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-
-	public List<Vote> getVotesUp() {
-		return votesUp;
-	}
-
-	public List<Vote> getVotesDown() {
-		return votesDown;
 	}
 	
 }

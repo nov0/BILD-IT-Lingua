@@ -9,16 +9,19 @@ import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class TicketController {
 	
 	private static final String TICKETS = "ticketsList";
+	private static final String HOME = "home";
 	
 	@Autowired
 	private TicketService ticketService;
@@ -26,7 +29,7 @@ public class TicketController {
 	@Autowired
 	private UserService userService;
 	
-
+	
 	/**
 	 * @author Bojan Aleksic
 	 * @param principal
@@ -91,7 +94,7 @@ public class TicketController {
 	@RequestMapping("/create-ticket")
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal) {
 		ticketService.saveTicket(ticket, principal.getName());
-		return "home";
+		return HOME;
 	}
 	
 	/**
@@ -102,7 +105,33 @@ public class TicketController {
 	@RequestMapping("/edit-ticket")
 	public String editTicket(@ModelAttribute("ticket") Ticket ticket) {
 		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getId());
-		return "home";
+		return HOME;
+	}
+	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: add like to ticket by ticket id and user's username
+	 */
+	@RequestMapping("/add-like") // param ticketId is actually type long and username could be principal
+	public String addLike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
+		Long id = Long.parseLong(ticketId); // this is for testing purposes
+		return ticketService.addLikeToTicket(id, username, model);
+	}
+	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: add like to ticket by ticket id and user's username
+	 */
+	@RequestMapping("/add-dislike") // param ticketId is actually type long and username could be principal
+	public String addDislike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
+		Long id = Long.parseLong(ticketId); // this is for testing purposes
+		return ticketService.addDislikeToTicket(id, username, model);
+	}
+	
+	/** For testing purposes */
+	@RequestMapping("/test")
+	public String goToTest() {
+		return "test";
 	}
 	
 }

@@ -125,7 +125,7 @@ $(document).ready(function() {
 
 							var likeSpanVotes = document.createElement("span");
 							likeSpanVotes.setAttribute("class", "like-vote-value");
-							likeSpanVotes.appendChild(document.createTextNode(ticket.votesUp[0].voteValue));
+							likeSpanVotes.appendChild(document.createTextNode(ticket.likes.voteValue));
 							likeDislikeDiv.appendChild(likeSpanVotes);
 
 							var dislikeSpan = document.createElement("span");
@@ -135,7 +135,7 @@ $(document).ready(function() {
 							likeDislikeDiv.appendChild(dislikeSpan);
 
 							var dislikeSpanVotes = document.createElement("span");
-							dislikeSpanVotes.appendChild(document.createTextNode(ticket.votesDown[0].voteValue));
+							dislikeSpanVotes.appendChild(document.createTextNode(ticket.dislikes.voteValue));
 							likeDislikeDiv.appendChild(dislikeSpanVotes);
 
 						ticketHeaderDiv.appendChild(dateCreatedDiv);
@@ -179,6 +179,12 @@ $(document).ready(function() {
 		function editTicket(ticketId, textDomestic, textForeign, category) {
 			$(".ticket-edit").click(function() {
 				var id = $(this).attr("id");
+				
+				$("#delete-ticket-btn").click(function() {
+					$("#delete-ticket-btn").attr("href", "/delete-ticket?id=" + id);
+					console.log("test link: " + $("#delete-ticket-btn").attr("th:href"));
+				});
+				
 				if(ticketId == id) {
 					$(".domestic #domestic").text(textDomestic);
 					$(".foreign #foreign").text(textForeign);

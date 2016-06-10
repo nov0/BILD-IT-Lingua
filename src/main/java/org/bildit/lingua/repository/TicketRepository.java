@@ -2,26 +2,25 @@ package org.bildit.lingua.repository;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- * 
  * @interface TicketRepository
- * 
  * @author Mladen Todorovic
- * 
  * */
 public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRepositoryCustom {
-
+	
 	List<Ticket> findAll();
 	List<Ticket> findAllByUserId(Long id);
 	List<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id);
 	List<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id);
 	List<Ticket> findAllByUserIdAndEditedTrue(Long id);
+	
+	Ticket findOneByUserAndId(User user, Long id);
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)

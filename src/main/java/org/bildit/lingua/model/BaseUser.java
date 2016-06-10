@@ -16,11 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * 
  * BaseUser model
- * 
  * @author Mladen Todorovic
- * 
  * */
 
 @Entity
@@ -60,7 +57,7 @@ private static final long serialVersionUID = 1L;
 		/** Empty default constructor */
 	}
 	
-	/** Constructor with params */
+	/** Constructor with parameters */
 	public BaseUser(String username, String password, String firstName, String lastName, String email) {
 		this.username = username;
 		this.password = password;
@@ -68,7 +65,8 @@ private static final long serialVersionUID = 1L;
 		this.lastName = lastName;
 		this.email = email;
 	}
-
+	
+	/** Getters and Setters */
 	public String getUsername() {
 		return username;
 	}
