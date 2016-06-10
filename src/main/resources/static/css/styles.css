@@ -32,7 +32,7 @@ body {
 .login-header input {
 	position: relative;
 	height: 32px;
-	top: 5px;
+	top: 11px;
 	padding-left: 10px;
 }
 
@@ -108,10 +108,10 @@ body {
 }
 
 .not-a-member-register {
-	float: right;
 	position: relative;
+	float: right;
 	top: 10px;
-	right: 85px;
+/* 	right: 85px; */
 }
 
 .select-language-home img {
@@ -211,11 +211,54 @@ body {
 .flag-image {
 	width: 50px;
 }
+.carousel-background {
+	background-color: #204D74; 
+	width: 1200; 
+	height: 300px;
+	text-align: center;
+}
+.carousel-caption {
+	padding-bottom: 80px;
+}
+
+
+/********* end carousel **********/
 /***header menu***/
 #menu {
 	padding-top: 20px; 
-	background-color: #ccc; 
+	background-color: #E4E4E4; 
 	padding-bottom: 15px; 
 	border-radius: 5px;
 }
-/********* end carousel **********/
+.nav-pills ul li a:hover {
+	background-color: red;
+}
+/*** practice form ***/
+#practice-form {
+    margin:auto;
+    max-width: 400px;
+}
+
+.option-select-button {
+    width: 80px;
+}
+.option-select-group {
+    float:right;
+}
+.form-option {
+    height: 30px;
+    margin-bottom: 30px;
+}
+.form-option-text{
+    float:left;
+    margin-top: 7px;
+}
+#speed-slider {
+    margin-right: 10px;
+    float:right;
+}
+
+#speed {
+	border-bottom: 1px solid #d5d5d5;
+	padding-bottom: 50px;
+}

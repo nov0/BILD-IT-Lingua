@@ -19,6 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 			.antMatchers("/").permitAll()
+			.antMatchers("/practice").permitAll()
 			.antMatchers("/logout").permitAll()
 			.antMatchers("/users").permitAll()
 			.antMatchers("/registration-page").permitAll()
@@ -40,6 +41,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/test").permitAll()
 			.antMatchers("/add-like").permitAll()
 			.antMatchers("/add-dislike").permitAll()
+			.antMatchers("/fragments/get-tickets.html").permitAll()
 			.antMatchers("/login-success").authenticated()
 			.anyRequest().denyAll()
 		.and()
@@ -52,7 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/?logout=true").permitAll()
 		.and()
-			.csrf().disable();
+			.csrf()
+		.and()
+			.rememberMe()
+			.key("remember-me")
+			.rememberMeParameter("remember-me")
+			.rememberMeCookieName("remember-me-cookie");
 	}
 	
 	@Override

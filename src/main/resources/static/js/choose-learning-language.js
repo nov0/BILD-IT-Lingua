@@ -10,6 +10,6 @@ $(document).ready(function() {
     });
 
 	$(".select-category li > a").click(function() {
-	    $(".category").text(this.innerHTML);
+	    $(".category").text($(this).attr("id"));
 	});
 });

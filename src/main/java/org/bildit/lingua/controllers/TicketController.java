@@ -16,12 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class TicketController {
 	
-	private static final String TICKETS = "ticketsList";
 	private static final String HOME = "home";
+	private static final String TICKETS = "tickets";
 	
 	@Autowired
 	private TicketService ticketService;
@@ -29,44 +30,27 @@ public class TicketController {
 	@Autowired
 	private UserService userService;
 	
-	
 	/**
 	 * @author Bojan Aleksic
 	 * @param principal
+	 * @param mav
 	 * @return
-	 * Method receives all tickets by current user, and sends back data
-	 * in the JSON format to the server
+	 * Method receives all tickets by current user, determines which category by URL request,
+	 * and sends back data with the model
 	 */
-	@RequestMapping("/ticket-all")
+	@RequestMapping("/fragments/get-tickets.html")
 	@ResponseBody
-	public Map<String, Object> getAllTickets(Principal principal) {
-		Map<String, Object> map = new HashMap<>();
-		map.put(TICKETS, ticketService.getAllTicketsByUsername(principal.getName()));
-		return map;
-	}
-	
-	@RequestMapping("/ticket-active")
-	@ResponseBody
-	public Map<String, Object> getActiveTickets(Principal principal) {
-		Map<String, Object> map = new HashMap<>();
-		map.put(TICKETS, ticketService.getAllActiveTicketsByUsername(principal.getName()));
-		return map;
-	}
-	
-	@RequestMapping("/ticket-deleted")
-	@ResponseBody
-	public Map<String, Object> getDeletedTickets(Principal principal) {
-		Map<String, Object> map = new HashMap<>();
-		map.put(TICKETS, ticketService.getAllDeactivatedTicketsByUsername(principal.getName()));
-		return map;
-	}
-	
-	@RequestMapping("/ticket-moderated")
-	@ResponseBody
-	public Map<String, Object> getModeratedTickets(Principal principal) {
-		Map<String, Object> map = new HashMap<>();
-		map.put(TICKETS, ticketService.getAllModeratedTicketsByUsername(principal.getName()));
-		return map;
+	public ModelAndView getAllTickets(Principal principal, ModelAndView model, @RequestParam("urlData") String urlRequest) {
+		if("ticket-all".equals(urlRequest)) {
+			model.addObject(TICKETS, ticketService.getAllTicketsByUsername(principal.getName()));
+		} else if("ticket-active".equals(urlRequest)) {
+			model.addObject(TICKETS, ticketService.getAllActiveTicketsByUsername(principal.getName()));
+		} else if("ticket-deleted".equals(urlRequest)) {
+			model.addObject(TICKETS, ticketService.getAllDeactivatedTicketsByUsername(principal.getName()));
+		} else if("ticket-moderated".equals(urlRequest)) {
+			model.addObject(TICKETS, ticketService.getAllModeratedTicketsByUsername(principal.getName()));
+		}
+		return model;
 	}
 	
 	/**
@@ -114,7 +98,7 @@ public class TicketController {
 	 */
 	@RequestMapping("/add-like") // param ticketId is actually type long and username could be principal
 	public String addLike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes
+		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
 		return ticketService.addLikeToTicket(id, username, model);
 	}
 	
@@ -124,7 +108,7 @@ public class TicketController {
 	 */
 	@RequestMapping("/add-dislike") // param ticketId is actually type long and username could be principal
 	public String addDislike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes
+		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
 		return ticketService.addDislikeToTicket(id, username, model);
 	}
 	

@@ -8,7 +8,7 @@
 	<!-- @author Bojan Aleksic -->
 
 	<!-- Bootstrap's Modal Layout -->
-	<div id="gridSystemModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="modal-edit">
+	<div id="gridSystemModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="modal-edit">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -50,7 +50,6 @@
 						<img th:src="@{/images/add-new-lingua-icon.png}" />
 						<span th:text="#{modal.edit.title}">Edit Lingua</span>
 					</h4>
-					<small style="float: right; color: red;" id="cat-error"></small>
 				</div>
 				
 				<form role="form" id="modal-ticket-form" action="#" th:action="@{/edit-ticket}" th:object="${ticket}" method="POST">
@@ -59,19 +58,18 @@
 						<div class="row">
 							<div class="col-xs-6">
 								<div class="form-group domestic">
-									<textarea class="form-control" id="domestic" th:field="*{textDomestic}" rows="10"></textarea>
-									<small style="color: red;" id="domestic-error"></small>
+									<textarea class="form-control" id="domestic" th:field="*{textDomestic}" name="textDomestic" rows="10"></textarea>
 								</div>
 							</div>
 							<div class="col-xs-6">
 								<div class="form-group foreign">
-									<textarea class="form-control" id="foreign" th:field="*{textForeign}" rows="10"></textarea>
-									<small style="color: red;" id="foreign-error"></small>
+									<textarea class="form-control" id="foreign" th:field="*{textForeign}" name="textForeign" rows="10"></textarea>
 								</div>
 							</div>
 							<input type="hidden" id="ticket-id-hidden" name="id" />
-							<input type="hidden" th:field="*{category}" class="selected-category" value="" />
-						</div>End of Bootstrap's grid layout
+							<input type="hidden" th:field="*{category}" name="category" class="selected-category" value="" />
+						</div><!-- End of Bootstrap's grid layout -->
+
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">

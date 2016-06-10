@@ -1,11 +1,20 @@
 /* @author Bojan Aleksic */
 
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+	background-color: #f9f9f9;
+}
+
 .lingua-container-body {
 	border-bottom: 1px solid #e5e5e5;
 	border-left: 1px solid #e5e5e5;
 	border-right: 1px solid #e5e5e5;
 	position: relative; 
 	bottom: 0px;
+}
+
+.tab-content {
+	padding: 50px;
+	background-color: #f9f9f9;
 }
 
 .btn-group {
@@ -60,7 +69,7 @@
 }
 
 .ticket-header {
-	border-bottom: 1px dashed #d1d1d1;
+	border-bottom: 1px dashed #8a6d3b;
 	padding-bottom: 8px;
 }
 
@@ -84,6 +93,14 @@
 	text-align: center;
 	font-size: 18px;
 	font-family: 'Lobster', cursive;
+}
+
+.ticket-edit {
+	color: inherit;
+}
+
+.ticket-delete {
+	color: inherit;
 }
 
 .like-dislike-btn {

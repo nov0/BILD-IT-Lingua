@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	
+	<!-- @author Bojan Aleksic -->
+
+	<!-- Overview practice fragment -->
+	<div id="practice-lingua-fragment" th:fragment="overview">
+		<div class="row" style="position: relative; bottom: 20px;">
+			<div class="col-md-6" style="position: relative; bottom: 15px;">
+				<h3 style="color: #1898b0;">
+					<span class="glyphicon glyphicon-list-alt"></span>
+					<span th:text="#{overview.fragment.title}"></span>
+				</h3>
+			</div>
+			<div class="col-md-6" style="text-align: right;">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
+				</button>
+			</div>
+		</div>
+		<div class="row domestic-foreign-row-overview">
+			<div class="col-md-5 domestic-foreign-grid" style="float: left;">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+				eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+				ad minim veniam, quis nostrud exercitation sed do eiusmod tempor
+				incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+				veniam, quis nostrud exercitation
+			</div>
+			<div id="gradient"></div>
+			<div class="col-md-5 domestic-foreign-grid">Lorem ipsum dolor
+				sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+				incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+				veniam, quis nostrud exercitation sed do eiusmod tempor incididunt
+				ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+				nostrud exercitation
+			</div>
+		</div>
+		<div class="row row-footer">
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-user"></span>&nbsp;beyon&nbsp;&nbsp; 
+				<span class="glyphicon glyphicon-time"></span> Jun 5., 2016 11:25h
+			</div>
+			<div class="col-md-4" style="text-align: center;">
+				<input id="ex19" class="slider" type="text" data-provide="slider"
+					data-slider-ticks="[1, 2, 3]"
+					data-slider-ticks-labels='["5s", "10s", "15s"]'
+					data-slider-min="1" data-slider-max="3" data-slider-step="1"
+					data-slider-value="2" data-slider-tooltip="hide"
+					data-slider-handle="round" />
+			</div>
+			<div style="text-align: right;" class="col-md-4">
+				<span class="glyphicon glyphicon-thumbs-up"></span> 34 &nbsp; 
+				<span class="glyphicon glyphicon-thumbs-down"> 4</span>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

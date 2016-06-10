@@ -14,7 +14,7 @@
             <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" href="#practice-lingua">Practice Lingua</a></li>
         </ul>
         <div class="lingua-container-body">
-            <div class="tab-content" style="padding: 50px;">
+            <div class="tab-content">
             	<div id="my-lingua" class="tab-pane fade in active">
 	            	<div class="btn-group">
 	  					<button type="button" class="btn btn-primary btn-tickets active" id="ticket-all">
@@ -55,25 +55,40 @@
 	    			</div>
 	    			
 	    			<!-- Include Modal from fragments -->
-	    			<div th:replace="fragments/add-lingua-modal :: modal"></div>
+	    			<div th:replace="fragments/add-lingua-modal :: modal-create"></div>
 	    			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
 	    			
-                    <div class="my-lingua-content">
+                    <div class="tickets-content">
                     
                     	<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
                     	
-                    	<!-- Here goes content loaded with JSON -->
+                    	<!-- Here goes Tickets content loaded with AJAX -->
                     	
                     </div>
                 </div>
+                <!--**** Practice Lingua Section ****-->
                 <div id="practice-lingua" class="tab-pane fade">
-                    <h3>Practice Lingua</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
+                    <!-- Practice Lingua fragment -->
+                    <div th:replace="fragments/practice-lingua :: practice-lingua"></div>
+
+					<!-- Overview Lingua fragment -->
+<!--                     <div th:replace="fragments/overview-practice :: overview"></div> -->
+                    
                 </div>
             </div>
         </div>
         <!-- Import JavaScript for loading tickets and some basic functions -->
         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
+        
+        <!-- Import JavaScript for changing learning language -->
+        <script type="text/javascript" th:src="@{/js/changeLanguage.js}"></script>
+        
+        <!-- Import JavaScript for selecting ticket-category -->
+        <script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
+        
+        <!-- Script for practice lingua -->
+        <script type="text/javascript" th:src="@{/js/practiceLingua.js}"></script>
     </div>
     
     <!-- Administrator Account fragment -->
@@ -84,7 +99,7 @@
             <li><a data-toggle="tab" href="#reports">Reports</a></li>
         </ul>
         <div class="lingua-container-body">
-            <div class="tab-content" style="padding: 50px;">
+            <div class="tab-content">
             	<div id="moderate-users" class="tab-pane fade in active">
             		<h3>Moderate Users</h3>
                     <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
