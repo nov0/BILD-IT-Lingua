@@ -25,11 +25,23 @@ UNLOCK TABLES;
 LOCK TABLES `base_users` WRITE;
 /*!40000 ALTER TABLE `base_users` DISABLE KEYS */;
 INSERT INTO `base_users` VALUES (2,'USER','yonbe83@gmail.com','','Bojan','Aleksic','yonbe','yonbe');
+INSERT INTO `base_users` VALUES (3,'USER','novo@gmail.com','','Novislav','Sekulic','novos','novos');
+INSERT INTO `base_users` VALUES (4,'USER','gogi@gmail.com','','Goran','Arsenic','goran','goran');
+INSERT INTO `base_users` VALUES (5,'USER','djomla79@gmail.com','','Mladen','Todorovic','djomla','djomla');
 /*!40000 ALTER TABLE `base_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+LOCK TABLES `languages` WRITE;
+/*!40000 ALTER TABLE `languages` DISABLE KEYS */;
+INSERT INTO `languages` VALUES (4,'Serbian'),(5,'English'),(6,'German');
+/*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('\0','\0','\0',2,NULL);
+INSERT INTO `user` VALUES ('\0','\0','\0',2,4,5);
+INSERT INTO `user` VALUES ('\0','\0','\0',3,4,5);
+INSERT INTO `user` VALUES ('\0','\0','\0',4,4,6);
+INSERT INTO `user` VALUES ('\0','\0','\0',5,4,5);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
