@@ -13,7 +13,6 @@
     position: relative;
     right: 0px;
 /*    border: 1px solid #faebcc;*/
-    background-image: url('images/img-noise.png');
 }
 
 .domestic-foreign-row-overview {
@@ -37,4 +36,12 @@
 
 .row-footer {
     margin-top: 30px;
+}
+
+#ticket-vote-up a:focus, a:hover {
+	text-decoration: none;
+}
+
+#ticket-vote-down a:focus, a:hover {
+	text-decoration: none;
 }

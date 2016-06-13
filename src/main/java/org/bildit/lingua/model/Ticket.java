@@ -45,10 +45,10 @@ public class Ticket extends BaseEntity {
 	@JsonIgnore
 	private User user;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Vote likes;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private Vote dislikes;
 	
 	private String dateCreated;
