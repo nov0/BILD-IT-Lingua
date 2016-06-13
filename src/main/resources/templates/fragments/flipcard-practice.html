@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+
+	<!-- @author Goran Arsenic -->
+
+	<!-- Flip card practice fragment -->
+	<div id="flipcard-practice" th:fragment="flipcard">
+		<h3>Flipcard</h3>
+		<div id="card">
+			<section class="card-container">
+				<div class="card" onclick="flip()">
+			    	<div class="front">1</div>
+			    	<div class="back">2</div>
+			  	</div>
+			</section>
+			<div class="col-md-4 like-dislike-btn">
+				<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+				<span>21</span>
+				&nbsp; &nbsp;
+				<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+				<span>10</span>
+			</div>
+		</div>
+		<div class="buttons">
+			<button id="button-flip" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span>FLIP CARD</button>
+			<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-expand"></span>NEXT</button>
+		</div>
+		<!-- Script for flip card practice-->
+	    <script type="text/javascript" th:src="@{/js/flipcard.js}"></script>	
+	</div>
+</body>
+</html>
