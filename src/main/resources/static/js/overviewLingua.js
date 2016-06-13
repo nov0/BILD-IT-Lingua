@@ -6,9 +6,9 @@
 $(document).ready(function() {
 
     $("#start-practice-submit").click(function() {
-    	
+
     	$("#practice-form").hide();
-    	
+
         var from = $("#input-from").val();
         var category = $("#input-category").val();
         var speed = $("#slider").val();
@@ -21,7 +21,7 @@ $(document).ready(function() {
                 speed : speed
             }, function(response, status, xhr) {
             	if(status == "error") {
-            		console.log("Error occurred");
+            		console.log("Overview error occurred");
             	} else {
             		console.log("success overview");
             	}
@@ -33,14 +33,12 @@ $(document).ready(function() {
                 order : order
             }, function(response, status, xhr) {
             	if(status == "error") {
-            		console.log("Error occurred");
+            		console.log("Flipcard error occurred");
             	} else {
             		console.log("success flipcard");
             	}
             });
         }
-        
-        
 
     });
 
