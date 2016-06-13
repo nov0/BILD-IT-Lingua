@@ -25,17 +25,17 @@
 						</a>
 					</div>
 					<div class="col-md-2">
-						<a href="#" class="ticket-delete">
+						<a th:href="@{/delete-ticket(id=${ticket.id})}" class="ticket-delete">
 							<span class="glyphicon glyphicon-trash"></span> 
 							<span data-toggle="tooltip" title="Delete">Delete</span>
 						</a>
 					</div>
 					<div class="col-md-4 like-dislike-btn">
 						<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-						<span th:text="${ticket.votesUp[0].voteValue}"></span>
+						<span th:text="${ticket.likes.voteValue}"></span>
 						&nbsp; &nbsp;
 						<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-						<span th:text="${ticket.votesDown[0].voteValue}"></span>
+						<span th:text="${ticket.dislikes.voteValue}"></span>
 					</div>
 				</div>
 				<div class="row domestic-foreign-row">
