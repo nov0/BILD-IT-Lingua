@@ -70,14 +70,12 @@
                 <div id="practice-lingua" class="tab-pane fade">
                     
                     <!-- Practice Lingua fragment -->
-                    <div th:replace="fragments/practice-lingua :: practice-lingua"></div>
-
-					<!-- Overview Lingua fragment -->
-<!--                     <div th:replace="fragments/overview-practice :: overview"></div> -->
+                    <div th:replace="fragments/practice-lingua :: practice-lingua" id="practice-lingua-frag"></div>
                     
                 </div>
             </div>
         </div>
+        
         <!-- Import JavaScript for loading tickets and some basic functions -->
         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
         
@@ -89,6 +87,10 @@
         
         <!-- Script for practice lingua -->
         <script type="text/javascript" th:src="@{/js/practiceLingua.js}"></script>
+        
+        <!-- Import JavaScript for overview page -->
+        <script type="text/javascript" th:src="@{/js/overviewLingua.js}"></script>
+        
     </div>
     
     <!-- Administrator Account fragment -->

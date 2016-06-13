@@ -37,6 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/get-all-tickets").permitAll()
 			.antMatchers("/existusername").permitAll()
 			.antMatchers("/fragments/get-tickets.html").permitAll()
+			.antMatchers("/fragments/overview-practice.html").permitAll()
 			.antMatchers("/login-success").authenticated()
 			.anyRequest().denyAll()
 		.and()

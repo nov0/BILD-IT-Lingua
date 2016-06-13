@@ -7,7 +7,7 @@
 
 	<!-- Practice Lingua fragment -->
 	<div id="practice-form" th:fragment="practice-lingua">
-		<form th:action="@{/practice}" id="start-practice-form" method="post">
+<!-- 		<form th:action="@{/practice}" id="start-practice-form" method="get"> -->
 			<h3 style="text-align: center;" th:text="#{practice.title}">Practice Lingua</h3>
 			<br />
 			<div class="form-option">
@@ -132,17 +132,17 @@
 				</div>
 			</div>
 
-			<input id="input-from" type="text" name="from" hidden="hidden" /> <input
-				id="input-category" type="text" name="category" hidden="hidden" /> <input
-				id="input-order" type="text" name="order" hidden="hidden" />
+			<input id="input-from" type="text" name="from" hidden="hidden" /> 
+			<input id="input-category" type="text" name="category" hidden="hidden" />
+			<input id="input-order" type="text" name="order" hidden="hidden" />
 			<div style="text-align: center">
-				<button type="submit" class="btn btn-primary btn-block">
+				<button type="submit" class="btn btn-primary" id="start-practice-submit">
 					<span style="padding-right: 5px"
 						class="glyphicon glyphicon-circle-arrow-right"></span><span
 						th:text="#{practice.button.start}"> Start practice</span>
 				</button>
 			</div>
-		</form>
+<!-- 		</form> -->
 	</div>
 
 </body>
