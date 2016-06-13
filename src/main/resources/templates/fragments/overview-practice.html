@@ -19,6 +19,9 @@
 					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
 					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
 				</button>
+				<button type="button" id="test-next" class="btn btn-primary">
+					Next
+				</button>
 			</div>
 		</div>
 		<!-- Tickets -->
@@ -61,20 +64,36 @@
 				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
-				<span th:text="${ticket.votesUp[0].voteValue}"></span>
+				<span th:text="${ticket.likes.voteValue}"></span>
 				&nbsp;&nbsp;
 				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
-				<span th:text="${ticket.votesDown[0].voteValue}"></span>
+				<span th:text="${ticket.dislikes.voteValue}"></span>
 			</div>
 		</div>
+		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<!-- Import for Slider, for some reason slider doesn't work even though it is already imported in the main page -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
 		<script>
+
+		 	$("#test-next").click(function() {
+		 		var stackSize = $("#stack-size").val();
+	    		if(stackSize > 0) {
+	    			$("#practice-lingua").load("fragments/overview-practice.html", function(response, status, xhr) {
+		            	if(status == "error") {
+		            		console.log("Error occurred");
+		            	} else {
+		            		console.log("success");
+		            	}
+		            });
+	    		}
+			});
+		 
 			$(function() {
 		        $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 		    });
+			
 		</script>
 	</div>
 

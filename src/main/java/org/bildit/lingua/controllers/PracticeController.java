@@ -28,7 +28,11 @@ public class PracticeController {
 	PracticeService practiceService;
 	
 	@RequestMapping("/fragments/overview-practice.html")
-	public ModelAndView startPractice(@RequestParam() String from, @RequestParam String category, @RequestParam String speed, Principal principal) {
+	public ModelAndView startOverview(
+			@RequestParam(value="from", required=false) String from, 
+			@RequestParam(value="category", required=false) String category, 
+			@RequestParam(value="speed", required=false) String speed, 
+			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		if(stack.isEmpty()) {
 			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
@@ -36,42 +40,25 @@ public class PracticeController {
 			}
 		}
 		modelAndView.addObject("tickets", stack.pop());
+		modelAndView.addObject("stackSize", stack.size());
 		return modelAndView;
 	}
 	
-	
-	
-//	@RequestMapping("/fragments/overview-practice.html")
-//	@ResponseBody
-//	public String startPractice(@RequestParam String from, @RequestParam String category, @RequestParam String speed, Principal principal) {
-//		java.util.Map<String, Object> map = new java.util.HashMap<>();
-//		map.put("tickets", practiceService.getTicketsForPractice(from, category, principal.getName()));
-//		ObjectMapper mapper = new ObjectMapper();
-//		String json = "";
-//		try {
-//			json = mapper.writeValueAsString(map);
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//		}
-//		return json;
-//	}
-	
-//	@RequestMapping("/fragments/overview-practice.html")
-//	@ResponseBody
-//	public ModelAndView startPractice(@RequestParam String from, @RequestParam String category, @RequestParam String order, @RequestParam String speed, Principal principal) {
-//		ModelAndView mav = new ModelAndView();
-//		List<Ticket> ticketsForPractice = practiceService.getTicketsForPractice(from, category, principal.getName());
-//		mav.addObject("tickets", ticketsForPractice);
-//		return mav;
-//	}
-	
-//	@RequestMapping("/practice")
-//	@ResponseBody
-//	public java.util.Map<String, Object> startPractice(@RequestParam String from, @RequestParam String category, @RequestParam String order, @RequestParam String speed, Principal principal) {
-//		java.util.Map<String, Object> map = new java.util.HashMap<>();
-//		List<Ticket> ticketsForPractice = practiceService.getTicketsForPractice(from, category, principal.getName());
-//		map.put("tickets", ticketsForPractice);
-//		return map;
-//	}
+	@RequestMapping("/fragments/flipcard-practice.html")
+	public ModelAndView startFlipcard(
+			@RequestParam(value="from", required=false) String from, 
+			@RequestParam(value="category", required=false) String category, 
+			@RequestParam(value="order", required=false) String order, 
+			Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		if(stack.isEmpty()) {
+			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
+				stack.push(ticket);
+			}
+		}
+		modelAndView.addObject("tickets", stack.pop());
+		modelAndView.addObject("stackSize", stack.size());
+		return modelAndView;
+	}
 	
 }

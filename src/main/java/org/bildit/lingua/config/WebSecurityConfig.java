@@ -33,11 +33,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/ticket-moderated").permitAll()
 			.antMatchers("/set-foreign-language").permitAll()
 			.antMatchers("/create-ticket").permitAll()
+			.antMatchers("/delete-ticket").permitAll()
+			.antMatchers("/delete-ticket/**").permitAll()
 			.antMatchers("/edit-ticket").permitAll()
 			.antMatchers("/get-all-tickets").permitAll()
 			.antMatchers("/existusername").permitAll()
+			.antMatchers("/test").permitAll()
+			.antMatchers("/add-like").permitAll()
+			.antMatchers("/add-dislike").permitAll()
 			.antMatchers("/fragments/get-tickets.html").permitAll()
 			.antMatchers("/fragments/overview-practice.html").permitAll()
+			.antMatchers("/fragments/flipcard-practice.html").permitAll()
 			.antMatchers("/login-success").authenticated()
 			.anyRequest().denyAll()
 		.and()
@@ -50,7 +56,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 			.logoutSuccessUrl("/?logout=true").permitAll()
 		.and()
-			.csrf().disable();
+			.csrf()
+			.ignoringAntMatchers("/fragments/**")
+		.and()
+			.rememberMe()
+			.key("remember-me")
+			.rememberMeParameter("remember-me")
+			.rememberMeCookieName("remember-me-cookie");
 	}
 	
 	@Override
