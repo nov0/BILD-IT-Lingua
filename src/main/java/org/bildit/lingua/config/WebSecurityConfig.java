@@ -55,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.logoutSuccessUrl("/?logout=true").permitAll()
 		.and()
 			.csrf()
+			.ignoringAntMatchers("/fragments/get-tickets.html")
 		.and()
 			.rememberMe()
 			.key("remember-me")
