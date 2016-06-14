@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PracticeController {
 	
 	private static Stack<Ticket> stack = new Stack<>();
+	private static String sideOrder = "";
 	
 	@Autowired
 	PracticeService practiceService;
@@ -64,8 +65,12 @@ public class PracticeController {
 				stack.push(ticket);
 			}
 		}
+		if(order != null){
+			sideOrder = order;
+		}
 		modelAndView.addObject("tickets", stack.pop());
 		modelAndView.addObject("stackSize", stack.size());
+		modelAndView.addObject("order", sideOrder);
 		return modelAndView;
 	}
 	

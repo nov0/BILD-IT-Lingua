@@ -259,7 +259,7 @@ body {
 }
 /*** flip card ***/
 .card-container {
-    width: 200px;
+    width: 600px;
     height: 260px;
     position: relative;
     border: 1px solid #ccc;
@@ -289,8 +289,6 @@ body {
     line-height: 260px;
     color: white;
     text-align: center;
-    font-weight: bold;
-    font-size: 140px;
     position: absolute;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;

@@ -6,29 +6,63 @@
 	<!-- @author Goran Arsenic -->
 
 	<!-- Flip card practice fragment -->
-	<div id="flipcard-practice" th:fragment="flipcard">
+	<div id="flipcard-practice" th:fragment="flipcard" th:each="ticket : ${tickets}">
 		<h3>Flipcard</h3>
 		<div id="card">
-			<section class="card-container">
-				<div class="card" onclick="flip()">
-			    	<div class="front">1</div>
-			    	<div class="back">2</div>
-			  	</div>
-			</section>
-			<div class="col-md-4 like-dislike-btn">
-				<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-				<span>21</span>
-				&nbsp; &nbsp;
-				<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-				<span>10</span>
+			<div th:switch="${order}">
+				<div th:case="'domestic'">
+					<section class="card-container">
+						<div class="card" onclick="flip()">
+							<div class="front" th:text="${ticket.textDomestic}"></div>
+							<div class="back" th:text="${ticket.textForeign}"></div>
+				  		</div>
+					</section>
+				</div>
+				<div th:case="'foreign'">
+					<section class="card-container">
+						<div class="card" onclick="flip()">
+							<div class="front" th:text="${ticket.textForeign}"></div>
+							<div class="back" th:text="${ticket.textDomestic}"></div>
+				  		</div>
+					</section>
+				</div>
+			</div>
+			<div style="text-align: right;" class="col-md-4">
+				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
+					<span class="glyphicon glyphicon-thumbs-up"></span>
+				</a>
+				<span th:text="${ticket.likes.voteValue}" id="likes-value"></span>
+				&nbsp;&nbsp;
+				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
+					<span class="glyphicon glyphicon-thumbs-down"></span>
+				</a>
+				<span th:text="${ticket.dislikes.voteValue}" id="dislikes-value"></span>
 			</div>
 		</div>
 		<div class="buttons">
 			<button id="button-flip" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span>FLIP CARD</button>
-			<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-expand"></span>NEXT</button>
+			<button id="button-next" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-expand"></span>NEXT</button>
 		</div>
+		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<!-- Script for flip card practice-->
-	    <script type="text/javascript" th:src="@{/js/flipcard.js}"></script>	
+	    <script type="text/javascript" th:src="@{/js/flipcard.js}"></script>
+	    <script>
+	    $("#button-next").click(nextTicket);
+	    	function nextTicket() {
+			var stackSize = $("#stack-size").val();
+			console.log("next");
+			if(stackSize > 0) {
+				$("#practice-lingua").load("fragments/flipcard-practice.html", function(response, status, xhr) {
+		        	if(status == "error") {
+		        		console.log("Error occurred");
+		        	} else {
+		        		console.log("success");
+		        	}
+		        });
+			}
+ 			$(this).blur();
+			};
+	    </script>	
 	</div>
 </body>
 </html>
