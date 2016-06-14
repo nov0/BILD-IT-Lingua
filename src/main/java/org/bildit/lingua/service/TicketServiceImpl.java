@@ -13,7 +13,6 @@ import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -24,6 +23,7 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@SuppressWarnings("unused")
 	@Autowired
 	private VoteRepository voteRepository;
 	
@@ -100,19 +100,19 @@ public class TicketServiceImpl implements TicketService {
 		ticket.setLearningLanguage(user.getForeignLanguage());
 		return ticketRepository.save(ticket);
 	}
+	
 	/**
 	 * @author Mladen Todorovic
 	 * Method add vote-like to ticket by ticket-id and user's username
 	 */
 	@Override
-	public String addLikeToTicket(Long ticketId, String username, Model model) {
+	public String addLikeToTicket(Long ticketId, String username) {
 		
 		User user = userRepository.findUserByUsername(username);
 		Ticket ticket = ticketRepository.getOne(ticketId);
 		Ticket userTicket = ticketRepository.findOneByUserAndId(user, ticket.getId());
 		if (userTicket == ticket) {
-			model.addAttribute("messageErrorUserVote", "message.error.user.vote");
-			return "test";
+			return "your-own-ticket";
 		}
 		Vote vote = new Vote();
 		vote = ticket.getLikes();
@@ -121,25 +121,24 @@ public class TicketServiceImpl implements TicketService {
 		if (!listOfVotedUsers.contains(user)) {
 			listOfVotedUsers.add(user);
 			vote.incrementVoteValue();
-			voteRepository.save(vote);
-			return "home";
+//			voteRepository.save(vote);
+			return String.valueOf(ticket.getLikes().getVoteValue()); // <-- edited
 		} else {
-			model.addAttribute("messageErrorUserVote2", "message.error.user.vote2");
-			return "test";
+			return "already-voted";
 		}
 	}
+	
 	/**
 	 * @author Mladen Todorovic
 	 * Method: add vote-dislike to ticket by ticket-id and user's username
 	 */
 	@Override
-	public String addDislikeToTicket(Long ticketId, String username, Model model) {
+	public String addDislikeToTicket(Long ticketId, String username) {
 		
 		User user = userRepository.findUserByUsername(username);
 		Ticket ticket = ticketRepository.getOne(ticketId);
 		Ticket userTicket = ticketRepository.findOneByUserAndId(user, ticket.getId());
 		if (userTicket == ticket) {
-			model.addAttribute("messageErrorUserVote", "message.error.user.vote");
 			return "test";
 		}
 		Vote vote = new Vote();
@@ -149,13 +148,13 @@ public class TicketServiceImpl implements TicketService {
 		if (!listOfVotedUsers.contains(user)) {
 			listOfVotedUsers.add(user);
 			vote.incrementVoteValue();
-			voteRepository.save(vote);
-			return "home";
+//			voteRepository.save(vote);
+			return String.valueOf(ticket.getDislikes().getVoteValue()); // <-- edited
 		} else {
-			model.addAttribute("messageErrorUserVote2", "message.error.user.vote2");
 			return "test";
 		}
 	}
+	
 	/**
 	 * @author Mladen Todorovic
 	 * Method for updating inputed parameters using ticket-id
