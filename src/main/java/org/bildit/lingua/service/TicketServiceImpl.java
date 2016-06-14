@@ -23,7 +23,6 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	@SuppressWarnings("unused")
 	@Autowired
 	private VoteRepository voteRepository;
 	
@@ -121,7 +120,7 @@ public class TicketServiceImpl implements TicketService {
 		if (!listOfVotedUsers.contains(user)) {
 			listOfVotedUsers.add(user);
 			vote.incrementVoteValue();
-//			voteRepository.save(vote);
+			voteRepository.save(vote);
 			return String.valueOf(ticket.getLikes().getVoteValue()); // <-- edited
 		} else {
 			return "already-voted";
@@ -148,7 +147,7 @@ public class TicketServiceImpl implements TicketService {
 		if (!listOfVotedUsers.contains(user)) {
 			listOfVotedUsers.add(user);
 			vote.incrementVoteValue();
-//			voteRepository.save(vote);
+			voteRepository.save(vote);
 			return String.valueOf(ticket.getDislikes().getVoteValue()); // <-- edited
 		} else {
 			return "test";
