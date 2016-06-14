@@ -9,7 +9,6 @@ import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -96,26 +95,21 @@ public class TicketController {
 	 * @author Mladen Todorovic
 	 * Method: add like to ticket by ticket id and user's username
 	 */
-	@RequestMapping("/add-like") // param ticketId is actually type long and username could be principal
-	public String addLike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
-		return ticketService.addLikeToTicket(id, username, model);
+	@RequestMapping("/add-like")
+	@ResponseBody
+	public String addLike(@RequestParam("id") String ticketId, Principal principal) {
+		Long id = Long.parseLong(ticketId);
+		return ticketService.addLikeToTicket(id, principal.getName());
 	}
 	
 	/**
 	 * @author Mladen Todorovic
 	 * Method: add like to ticket by ticket id and user's username
 	 */
-	@RequestMapping("/add-dislike") // param ticketId is actually type long and username could be principal
-	public String addDislike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
-		return ticketService.addDislikeToTicket(id, username, model);
-	}
-	
-	/** For testing purposes */
-	@RequestMapping("/test")
-	public String goToTest() {
-		return "test";
+	@RequestMapping("/add-dislike")
+	public String addDislike(@RequestParam("id") String ticketId, Principal principal) {
+		Long id = Long.parseLong(ticketId);
+		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
 }

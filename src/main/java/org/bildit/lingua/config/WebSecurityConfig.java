@@ -58,6 +58,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.csrf()
 			.ignoringAntMatchers("/fragments/**")
+			.ignoringAntMatchers("/add-like")
+			.ignoringAntMatchers("/add-dislike")
 		.and()
 			.rememberMe()
 			.key("remember-me")
