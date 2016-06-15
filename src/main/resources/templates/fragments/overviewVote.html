@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<body>
+	<div th:fragment="overviewVote">
+		<script type="text/javascript" th:inline="javascript">
+			/*<![CDATA[*/
+
+			/**
+ 			* @author Bojan Aleksic
+ 			* @edit Novislav Sekulic
+ 			* Vote rating system
+ 			*/
+
+			$(document).ready(function() {
+
+				var message = "";
+				var colorError = "danger";
+				var iconError = "glyphicon glyphicon-warning-sign";
+				var colorSuccess = 'success';
+				var iconSuccess = 'glyphicon glyphicon-ok';
+
+				/* Likes */
+				$("#ticket-vote-up").click(function() {
+					var id = $("#ticket-id").val();
+					$.post("add-like", {
+						id : id
+					})
+					.done(function(response) {
+						if(response === "already-voted") {
+							message = /*[[#{message.error.user.vote.voted}]]*/ "You have already submitted your vote for this ticket.";
+							showNotification(message, colorError, iconError);
+						} else if(response === "your-own-ticket") {
+							message = /*[[#{message.error.user.vote.own}]]*/ "You can't vote on your own ticket.";
+							showNotification(message, colorError, iconError);
+						} else {
+							$("#likes-value").text(response);
+							message = /*[[#{message.success.user.vote}]]*/ "You successfully voted.";
+							showNotification(message, colorSuccess, iconSuccess);
+						}
+					});
+				});
+
+				/* Dislikes */
+				$("#ticket-vote-down").click(function() {
+					var id = $("#ticket-id").val();
+					$.post("add-dislike", {
+						id : id
+					})
+					.done(function(response) {
+						if(response === "already-voted") {
+							message = /*[[#{message.error.user.vote.voted}]]*/ "You have already submitted your vote for this ticket.";
+							showNotification(message, colorError, iconError);
+						} else if(response === "your-own-ticket") {
+							message = /*[[#{message.error.user.vote.own}]]*/ "You can't vote on your own ticket.";
+							showNotification(message, colorError, iconError);
+						} else {
+							$("#dislikes-value").text(response);
+							message = /*[[#{message.success.user.vote}]]*/ "You successfully voted.";
+							showNotification(message, colorSuccess, iconSuccess);
+						}
+					});
+				});
+			});
+			/*]]>*/
+		</script>
+	</div>
+</body>
+</html>
