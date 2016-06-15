@@ -7,25 +7,52 @@
 
 	<!-- Flip card practice fragment -->
 	<div id="flipcard-practice" th:fragment="flipcard" th:each="ticket : ${tickets}">
-		<h3>Flipcard</h3>
-		<div id="card">
+		<div class="row" style="position: relative; bottom: 20px;">
+			<div class="col-md-6" style="position: relative; bottom: 15px;">
+				<h3 style="color: #1898b0;">
+					<span class="glyphicon glyphicon-retweet"></span>
+					<span>Flipcard</span>
+				</h3>
+			</div>
+			<div class="col-md-6" style="text-align: right;">
+				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
+				</button>
+			</div>
+		</div>
+		<div class="row domestic-foreign-row-overview">
 			<div th:switch="${order}">
 				<div th:case="'domestic'">
 					<section class="card-container">
-						<div class="card" onclick="flip()">
+						<div class="card">
 							<div class="front" th:text="${ticket.textDomestic}"></div>
 							<div class="back" th:text="${ticket.textForeign}"></div>
-				  		</div>
+					  	</div>
 					</section>
 				</div>
 				<div th:case="'foreign'">
 					<section class="card-container">
-						<div class="card" onclick="flip()">
+						<div class="card">
 							<div class="front" th:text="${ticket.textForeign}"></div>
 							<div class="back" th:text="${ticket.textDomestic}"></div>
 				  		</div>
 					</section>
 				</div>
+			</div>
+		</div>
+		
+		<div class="row row-footer">
+			<div class="col-md-4">
+				<span class="glyphicon glyphicon-user"></span>
+				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName} + ' (' + ${ticket.user.username} + ')' ">User</span>
+				&nbsp; &bull; &nbsp;
+				<span class="glyphicon glyphicon-time"></span>
+				<span th:text="${ticket.dateCreated}">Date</span>
+			</div>
+			<div class="col-md-4" style="text-align: center;">
+				<button id="button-flip" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span>FLIP CARD</span></button>
+				<button id="button-next" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-expand"></span><span>NEXT</span></button>
 			</div>
 			<div style="text-align: right;" class="col-md-4">
 				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
@@ -38,10 +65,7 @@
 				</a>
 				<span th:text="${ticket.dislikes.voteValue}" id="dislikes-value"></span>
 			</div>
-		</div>
-		<div class="buttons">
-			<button id="button-flip" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-retweet"></span>FLIP CARD</button>
-			<button id="button-next" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-expand"></span>NEXT</button>
+			
 		</div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<!-- Script for flip card practice-->
