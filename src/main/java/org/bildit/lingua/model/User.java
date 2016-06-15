@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * User model
  * @author Mladen Todorovic
+ * @class User
  * */
 @Entity
 @JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
@@ -34,7 +34,7 @@ public class User extends BaseUser {
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	@JoinTable(name="user_tickets", 
 	   joinColumns=@JoinColumn(name="user_id"),
 	   inverseJoinColumns=@JoinColumn(name="ticket_id"))

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,8 +20,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * Ticket model
  * @author Mladen Todorovic
+ * @class Ticket
  * */
 @Entity
 @Table(name = "tickets")
@@ -45,11 +46,8 @@ public class Ticket extends BaseEntity {
 	@JsonIgnore
 	private User user;
 	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private Vote likes;
-	
-	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
-	private Vote dislikes;
+	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	private Vote ticketVotes;
 	
 	private String dateCreated;
 	
@@ -60,25 +58,27 @@ public class Ticket extends BaseEntity {
 		/** Empty default constructor */
 	}
 	
+	/** 
+	 * Method:
+	 *  remove ticket from list of user's tickets
+	 *  when this ticket is deleted
+	 *  */
+	@PreRemove
+	private void removeTicketFromUser() {
+		user.getTickets().remove(this);
+	}
+	
 	/** Getters and Setters */
-	public Vote getLikes() {
-		return likes;
-	}
-
-	public void setLikes(Vote likes) {
-		this.likes = likes;
-	}
-
-	public Vote getDislikes() {
-		return dislikes;
-	}
-
-	public void setDislikes(Vote dislikes) {
-		this.dislikes = dislikes;
-	}
-
 	public Language getLearningLanguage() {
 		return learningLanguage;
+	}
+	
+	public Vote getTicketVotes() {
+		return ticketVotes;
+	}
+
+	public void setTicketVotes(Vote ticketVotes) {
+		this.ticketVotes = ticketVotes;
 	}
 
 	public void setLearningLanguage(Language learningLanguage) {

@@ -3,7 +3,6 @@ package org.bildit.lingua.service;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
-import org.springframework.ui.Model;
 
 public interface TicketService extends BaseService<Ticket, Long> {
 
@@ -16,7 +15,9 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	
 	void updateTicket(String textDomestic, String textForeign, String category, Long ticketId);
 	
-	String addLikeToTicket(Long id, String username, Model model);
-	String addDislikeToTicket(Long id, String username, Model model);
+	String addLikeToTicket(Long id, String username);
+	String addDislikeToTicket(Long id, String username);
+	
+	void deleteTicket(Long id, String username);
 	
 }

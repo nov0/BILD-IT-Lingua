@@ -9,7 +9,6 @@ import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,28 +93,30 @@ public class TicketController {
 	
 	/**
 	 * @author Mladen Todorovic
-	 * Method: add like to ticket by ticket id and user's username
+	 * Method: add like to ticket by ticket-id and user's username
 	 */
-	@RequestMapping("/add-like") // param ticketId is actually type long and username could be principal
-	public String addLike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
-		return ticketService.addLikeToTicket(id, username, model);
+	@RequestMapping("/add-like")
+	public String addLike(@RequestParam Long id, Principal principal) {
+		return ticketService.addLikeToTicket(id, principal.getName());
 	}
 	
 	/**
 	 * @author Mladen Todorovic
-	 * Method: add like to ticket by ticket id and user's username
+	 * Method: add like to ticket by ticket-id and user's username
 	 */
-	@RequestMapping("/add-dislike") // param ticketId is actually type long and username could be principal
-	public String addDislike(@RequestParam("ticketId") String ticketId, @RequestParam("username") String username, Model model) {
-		Long id = Long.parseLong(ticketId); // this is for testing purposes (wait to be deleted :)
-		return ticketService.addDislikeToTicket(id, username, model);
+	@RequestMapping("/add-dislike")
+	public String addDislike(@RequestParam Long id, Principal principal) {
+		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
-	/** For testing purposes */
-	@RequestMapping("/test")
-	public String goToTest() {
-		return "test";
+	/**
+	 * @author Mladen Todorovic
+	 * Method: delete ticket by ticket-id and user's username
+	 */
+	@RequestMapping("/delete-ticket")
+	public String deleteTicket(@RequestParam Long id, Principal principal) {
+		ticketService.deleteTicket(id, principal.getName());
+		return HOME;
 	}
 	
 }
