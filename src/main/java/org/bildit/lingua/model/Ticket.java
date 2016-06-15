@@ -46,7 +46,7 @@ public class Ticket extends BaseEntity {
 	@JsonIgnore
 	private User user;
 	
-	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
+	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
 	private Vote ticketVotes;
 	
 	private String dateCreated;

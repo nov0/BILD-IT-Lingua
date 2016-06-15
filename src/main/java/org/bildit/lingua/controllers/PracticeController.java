@@ -1,42 +1,72 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
-import java.util.List;
+import java.util.Stack;
 
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.service.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class PracticeController {
 	
+	private static Stack<Ticket> stack = new Stack<>();
+	
 	@Autowired
 	PracticeService practiceService;
 	
-	//TODO: Now is just for test form submit, must be changed
-	@RequestMapping(value="/practice", method=RequestMethod.POST)
-	public String startPractice(
-			@RequestParam("from") String from,
-			@RequestParam("category") String category,
-			@RequestParam("speed") String speed,
-			@RequestParam("order") String order,
+	/**
+	 * @param from
+	 * @param category
+	 * @param speed
+	 * @param principal
+	 * @return
+	 * @author Bojan Aleksic
+	 */
+	@RequestMapping("/fragments/overview-practice.html")
+	public ModelAndView startOverview(
+			@RequestParam(value="from", required=false) String from, 
+			@RequestParam(value="category", required=false) String category, 
+			@RequestParam(value="speedOrOrder", required=false) String speed, 
 			Principal principal) {
-		// get list of tickets for practice from database
-		List<Ticket> ticketsForPractice = practiceService.getTicketsForPractice(from, category, principal.getName());
-		
-		
-		/** this is crap for testing */
-		for(Ticket t : ticketsForPractice) {
-			System.out.println("user:" + t.getUser().getId() + "ticket id: " + t.getId() + ", language: " + t.getLearningLanguage().getLanguageTitle());
+		ModelAndView modelAndView = new ModelAndView();
+		if(stack.isEmpty()) {
+			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
+				stack.push(ticket);
+			}
 		}
-		if(ticketsForPractice.isEmpty()) {
-			System.out.println("*********** NEMA NIŠTA ***********");
-		}
-		/******************************/
-		return "error";
+		modelAndView.addObject("tickets", stack.pop());
+		modelAndView.addObject("stackSize", stack.size());
+		return modelAndView;
 	}
+	
+	/**
+	 * @param from
+	 * @param category
+	 * @param order
+	 * @param principal
+	 * @return
+	 * @author Bojan Aleksic
+	 */
+	@RequestMapping("/fragments/flipcard-practice.html")
+	public ModelAndView startFlipcard(
+			@RequestParam(value="from", required=false) String from, 
+			@RequestParam(value="category", required=false) String category, 
+			@RequestParam(value="speedOrOrder", required=false) String order, 
+			Principal principal) {
+		ModelAndView modelAndView = new ModelAndView();
+		if(stack.isEmpty()) {
+			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
+				stack.push(ticket);
+			}
+		}
+		modelAndView.addObject("tickets", stack.pop());
+		modelAndView.addObject("stackSize", stack.size());
+		return modelAndView;
+	}
+	
 }

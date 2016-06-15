@@ -115,7 +115,7 @@ public class TicketServiceImpl implements TicketService {
 		Ticket userTicket = ticketRepository.findOneByUserAndId(user, ticket.getId());
 		
 		if (userTicket == ticket) {
-			return "test";
+			return "your-own-ticket";
 		}
 		Vote vote = new Vote();
 		vote = ticket.getTicketVotes();
@@ -127,7 +127,7 @@ public class TicketServiceImpl implements TicketService {
 			voteRepository.save(vote);
 			return String.valueOf(vote.getLikes());
 		} else {
-			return "test";
+			return "already-voted";
 		}
 	}
 	
@@ -143,7 +143,7 @@ public class TicketServiceImpl implements TicketService {
 		Ticket userTicket = ticketRepository.findOneByUserAndId(user, ticket.getId());
 		
 		if (userTicket == ticket) {
-			return "test";
+			return "your-own-ticket";
 		}
 		Vote vote = new Vote();
 		vote = ticket.getTicketVotes();
@@ -155,7 +155,7 @@ public class TicketServiceImpl implements TicketService {
 			voteRepository.save(vote);
 			return String.valueOf(vote.getDislikes());
 		} else {
-			return "test";
+			return "already-voted";
 		}
 	}
 	

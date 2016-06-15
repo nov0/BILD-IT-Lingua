@@ -96,7 +96,9 @@ public class TicketController {
 	 * Method: add like to ticket by ticket-id and user's username
 	 */
 	@RequestMapping("/add-like")
-	public String addLike(@RequestParam Long id, Principal principal) {
+	@ResponseBody
+	public String addLike(@RequestParam("id") String ticketId, Principal principal) {
+		Long id = Long.parseLong(ticketId);
 		return ticketService.addLikeToTicket(id, principal.getName());
 	}
 	
@@ -105,7 +107,8 @@ public class TicketController {
 	 * Method: add like to ticket by ticket-id and user's username
 	 */
 	@RequestMapping("/add-dislike")
-	public String addDislike(@RequestParam Long id, Principal principal) {
+	public String addDislike(@RequestParam("id") String ticketId, Principal principal) {
+		Long id = Long.parseLong(ticketId);
 		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
@@ -114,9 +117,10 @@ public class TicketController {
 	 * Method: delete ticket by ticket-id and user's username
 	 */
 	@RequestMapping("/delete-ticket")
+	//public String deleteTicket(@RequestParam("id") String ticketId, Principal principal) {
 	public String deleteTicket(@RequestParam Long id, Principal principal) {
+		//Long id = Long.parseLong(ticketId);
 		ticketService.deleteTicket(id, principal.getName());
 		return HOME;
 	}
-	
 }
