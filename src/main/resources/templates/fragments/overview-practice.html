@@ -19,9 +19,6 @@
 					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
 					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
 				</button>
-				<button type="button" id="test-next" class="btn btn-primary">
-					Next
-				</button>
 			</div>
 		</div>
 		<!-- Tickets -->
@@ -33,20 +30,22 @@
 		<div class="row row-footer">
 			<div class="col-md-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName} + ' (' + ${ticket.user.username} + ')' ">User</span>
+				<span data-toggle="tooltip" title="Author" th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span th:text="${ticket.dateCreated}">Date</span>
+				<span data-toggle="tooltip" title="Date created" th:text="${ticket.dateCreated}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
-				<div id="speed-slider">
+				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets">
 					<input id="slider" type="text" name="speed" data-provide="slider"
 						data-slider-ticks="[1, 2, 3]"
 						data-slider-ticks-labels='["5s", "10s", "15s"]'
-						data-slider-min="1" data-slider-max="3" data-slider-step="1"
-						data-slider-value="3" data-slider-tooltip="hide" />
-
+						data-slider-min="1" 
+						data-slider-max="3" 
+						data-slider-step="1"
+						data-slider-value="1" 
+						data-slider-tooltip="hide" />
 				</div>
 				<div style="width: 230px; float: right; text-align: left;">
 					<div style="width: 100px; display: inline-block">
@@ -81,20 +80,12 @@
 		<!-- Import JavaScript for handling votes (likes/dislikes) -->
 		<script type="text/javascript" th:src="@{/js/overviewVote.js}"></script>
 		<script>
-
-		 	$("#test-next").click(function() {
-		 		var stackSize = $("#stack-size").val();
-	    		if(stackSize > 0) {
-	    			$("#practice-lingua").load("fragments/overview-practice.html", function(response, status, xhr) {
-		            	if(status == "error") {
-		            		console.log("Error occurred");
-		            	} else {
-		            		console.log("success");
-		            	}
-		            });
-	    		}
-			});
-		 
+		
+			$(".slider-handle").click(function() {
+	            var getValue = $(".slider-handle").attr("aria-valuenow");
+	            console.log("Slider value: " + getValue);
+	        });
+		
 			$(function() {
 		        $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 		    });

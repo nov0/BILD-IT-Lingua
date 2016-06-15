@@ -107,6 +107,7 @@ public class TicketController {
 	 * Method: add like to ticket by ticket id and user's username
 	 */
 	@RequestMapping("/add-dislike")
+	@ResponseBody
 	public String addDislike(@RequestParam("id") String ticketId, Principal principal) {
 		Long id = Long.parseLong(ticketId);
 		return ticketService.addDislikeToTicket(id, principal.getName());

@@ -138,7 +138,7 @@ public class TicketServiceImpl implements TicketService {
 		Ticket ticket = ticketRepository.getOne(ticketId);
 		Ticket userTicket = ticketRepository.findOneByUserAndId(user, ticket.getId());
 		if (userTicket == ticket) {
-			return "test";
+			return "your-own-ticket";
 		}
 		Vote vote = new Vote();
 		vote = ticket.getDislikes();
@@ -150,7 +150,7 @@ public class TicketServiceImpl implements TicketService {
 			voteRepository.save(vote);
 			return String.valueOf(ticket.getDislikes().getVoteValue()); // <-- edited
 		} else {
-			return "test";
+			return "already-voted";
 		}
 	}
 	
