@@ -51,21 +51,5 @@ public class BildItLinguaApplication extends WebMvcConfigurerAdapter {
 		// messageSource.setCacheSeconds(10);
 		return messageSource;
 	}
-	/**
-	 * Edit: Mladen Todorovic
-	 *   HttpMessageConverter for overriding all default converters, (json in this case)
-	 *   set to ignore all properties that is not present in serializing feature of an Entity,
-	 *   it can be used this annotation @JsonIgnoreProperties(ignoreUnknown=true) on class instead
-	 *   and to avoid error if jackson was trying to serialize an empty object.
-	 * */
-//	@Bean
-//	public MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter() {
-//		MappinglJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-//		objectMapper.configure(SeriaizationFeature.FAIL_ON_EMPTY_BEANS, false);
-//		jsonConverter.setObjectMapper(objectMapper);
-//		return jsonConverter;
-//	}
 
 }

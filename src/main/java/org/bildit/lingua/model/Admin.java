@@ -3,8 +3,8 @@ package org.bildit.lingua.model;
 import javax.persistence.Entity;
 
 /**
- * Admin model
  * @author Mladen Todorovic
+ * @class Admin
  * */
 @Entity
 public class Admin extends BaseUser {
