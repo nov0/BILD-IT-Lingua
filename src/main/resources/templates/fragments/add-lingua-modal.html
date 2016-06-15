@@ -134,6 +134,12 @@
 				    $('.form-group').removeClass('has-error');
 				});
 				
+				/* Restet text fields in modal when click on add button */
+				$("#addnewlingua").click(function() {
+					$("#domestic").val("");
+					$("#foreign").val("");
+				}); // end click
+				
 			});
 			/*]]>*/
 		</script>
