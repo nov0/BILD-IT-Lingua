@@ -18,4 +18,6 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	String addLikeToTicket(Long id, String username);
 	String addDislikeToTicket(Long id, String username);
 	
+	void deleteTicket(Long id, String username);
+	
 }

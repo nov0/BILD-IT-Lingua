@@ -31,11 +31,15 @@
 						</a>
 					</div>
 					<div class="col-md-4 like-dislike-btn">
+						<a th:href="@{/add-like(id=${ticket.id})}">
 						<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-						<span th:text="${ticket.likes.voteValue}"></span>
+						<span th:text="${ticket.ticketVotes.likes}"></span>
+						</a>
 						&nbsp; &nbsp;
+						<a th:href="@{/add-dislike(id=${ticket.id})}">
 						<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-						<span th:text="${ticket.dislikes.voteValue}"></span>
+						<span th:text="${ticket.ticketVotes.dislikes}"></span>
+						</a>
 					</div>
 				</div>
 				<div class="row domestic-foreign-row">
