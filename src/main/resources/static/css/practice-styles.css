@@ -17,13 +17,11 @@
 
 .domestic-foreign-row-overview {
     overflow-x: hidden;
-    height: 300px;
+    height: 200px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: white;
-    border-top: 1px solid #eeeeee;
-    border-bottom: 1px solid #eeeeee;
-    border-left: 1px solid #eeeeee;
+    border: 1px solid #eeeeee;
 }
 
 .domestic-foreign-row-overview {
@@ -45,3 +43,28 @@
 #ticket-vote-down a:focus, a:hover {
 	text-decoration: none;
 }
+
+/* CSS3 Transitions */
+.domestic-foreign-grid {
+    -webkit-animation: mymove 2s; /* Chrome, Safari, Opera */
+    animation: mymove 2s;
+}
+
+/* Chrome, Safari, Opera */
+.domestic-foreign-grid {-webkit-animation-timing-function: ease;}
+
+/* Standard syntax */
+.domestic-foreign-grid {animation-timing-function: ease;}
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes mymove {
+    from {left: -1000px;}
+    to {left: 0px;}
+}
+
+/* Standard syntax */
+@keyframes mymove {
+    from {left: -1000px;}
+    to {left: 0px;}
+}
+/* <-- CSS3 Transitions END */
