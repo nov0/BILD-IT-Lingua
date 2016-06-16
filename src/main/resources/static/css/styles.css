@@ -261,7 +261,7 @@ body {
 .card-container {
 	margin: auto;
     width: 600px;
-    min-height: 240px;
+    min-height: 150px;
     position: relative;
     -webkit-perspective: 800px;
     -moz-perspective: 800px;
@@ -288,7 +288,7 @@ body {
     display: block;
     height: 100%;
     width: 100%;
- 	padding-top: 100px;
+ 	padding-top: 50px;
     color: white;
     position: absolute;
     -webkit-backface-visibility: hidden;
