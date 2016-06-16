@@ -21,7 +21,7 @@ $(document).ready(function() {
 			millisec = 10000;
 		}
 
-        if(speed !== "0") {
+        if(speed != 0) {
         	/* Load overview practice fragment with time interval on user's choice */
         	var timer = window.setInterval(function() {
         		$("#practice-lingua").load("fragments/overview-practice.html", {
