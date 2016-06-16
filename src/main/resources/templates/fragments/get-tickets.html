@@ -36,7 +36,7 @@
 						<div id="confirm" class="modal fade" style="width: 30%; margin: 0 auto; margin-top: 20px;">
 							<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
 							<div class="modal-footer">
-								<a th:href="@{/delete-ticket(id=${ticket.id})}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
+								<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
 									<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
 								</a>
 								<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
@@ -99,15 +99,6 @@
 								}
 							});
 						}
-						
-						/* Delete ticket */
-						$("#delete-confirm").click(function(event) {
-// 							event.preventDefault();
-							var message = /*[[#{confirm.delete.message}]]*/ 'Ticket deleted!';
-				        	var color = 'success';
-				        	var icon = 'glyphicon glyphicon-ok';
-				        	showNotification(message, color, icon);
-						});
 						
 					});
 				           
