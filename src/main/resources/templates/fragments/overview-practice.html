@@ -38,14 +38,16 @@
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
 				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets">
-					<input id="slider" type="text" name="speed" data-provide="slider"
-						data-slider-ticks="[1, 2, 3]"
-						data-slider-ticks-labels='["5s", "10s", "15s"]'
-						data-slider-min="1" 
-						data-slider-max="3" 
-						data-slider-step="1"
-						data-slider-value="1" 
-						data-slider-tooltip="hide" />
+					<a href="#" id="slider-ticker">
+						<input id="slider" type="text" name="speed" data-provide="slider"
+							data-slider-ticks="[1, 2, 3]"
+							data-slider-ticks-labels='["5s", "10s", "15s"]'
+							data-slider-min="1" 
+							data-slider-max="3" 
+							data-slider-step="1"
+							data-slider-value="1" 
+							data-slider-tooltip="hide" />
+					</a>
 				</div>
 				<div style="width: 230px; float: right; text-align: left;">
 					<div style="width: 100px; display: inline-block">
@@ -80,15 +82,8 @@
 		<!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
 		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
 		
-		
-		
 		<script>
-		
-			$(".slider-handle").click(function() {
-	            var getValue = $(".slider-handle").attr("aria-valuenow");
-	            console.log("Slider value: " + getValue);
-	        });
-		
+			
 			$(function() {
 		        $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 		    });
