@@ -63,12 +63,12 @@
 				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
-				<span th:text="${ticket.likes.voteValue}" id="likes-value"></span>
+				<span th:text="${ticket.ticketVotes.likes}" id="likes-value"></span>
 				&nbsp;&nbsp;
 				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
-				<span th:text="${ticket.dislikes.voteValue}" id="dislikes-value"></span>
+				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>
 			</div>
 		</div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
@@ -77,8 +77,11 @@
 		<!-- Import for Slider, for some reason slider doesn't work even though it is already imported in the main page -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
 		
-		<!-- Import JavaScript for handling votes (likes/dislikes) -->
-		<script type="text/javascript" th:src="@{/js/overviewVote.js}"></script>
+		<!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
+		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
+		
+		
+		
 		<script>
 		
 			$(".slider-handle").click(function() {
