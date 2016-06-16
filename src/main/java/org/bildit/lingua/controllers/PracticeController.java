@@ -32,7 +32,6 @@ public class PracticeController {
 	public ModelAndView startOverview(
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
-			@RequestParam(value="speedOrOrder", required=false) String speed, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		if(stack.isEmpty()) {
@@ -57,7 +56,7 @@ public class PracticeController {
 	public ModelAndView startFlipcard(
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
-			@RequestParam(value="speedOrOrder", required=false) String order, 
+			@RequestParam(value="order", required=false) String order, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		if(stack.isEmpty()) {

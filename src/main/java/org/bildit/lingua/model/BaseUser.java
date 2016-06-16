@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 /**
- * BaseUser model
  * @author Mladen Todorovic
+ * @class BaseUser
  * */
 
 @Entity
@@ -34,7 +34,6 @@ private static final long serialVersionUID = 1L;
 	private String firstName;
 	@NotBlank
 	@Size(min = 2, max = 25)
-	//@Pattern(regexp = "^[A-Za-z]$")
 	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String lastName;
 	@NotBlank

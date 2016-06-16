@@ -46,6 +46,11 @@
 			        	var color = 'success';
 			        	var icon = 'glyphicon glyphicon-ok';
 			        	showNotification(message, color, icon); 
+			        } else if(isParamPresent("ticket-deleted")) {
+			        	var message = /*[[#{confirm.delete.message}]]*/ 'Ticket deleted!';
+			        	var color = 'success';
+			        	var icon = 'glyphicon glyphicon-ok';
+			        	showNotification(message, color, icon);
 			        }
 			    	
 				}); // end ready

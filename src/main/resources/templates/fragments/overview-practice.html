@@ -19,9 +19,6 @@
 					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
 					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
 				</button>
-				<button type="button" id="test-next" class="btn btn-primary">
-					Next
-				</button>
 			</div>
 		</div>
 		<!-- Tickets -->
@@ -33,20 +30,22 @@
 		<div class="row row-footer">
 			<div class="col-md-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName} + ' (' + ${ticket.user.username} + ')' ">User</span>
+				<span data-toggle="tooltip" title="Author" th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span th:text="${ticket.dateCreated}">Date</span>
+				<span data-toggle="tooltip" title="Date created" th:text="${ticket.dateCreated}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
-				<div id="speed-slider">
+				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets">
 					<input id="slider" type="text" name="speed" data-provide="slider"
 						data-slider-ticks="[1, 2, 3]"
 						data-slider-ticks-labels='["5s", "10s", "15s"]'
-						data-slider-min="1" data-slider-max="3" data-slider-step="1"
-						data-slider-value="3" data-slider-tooltip="hide" />
-
+						data-slider-min="1" 
+						data-slider-max="3" 
+						data-slider-step="1"
+						data-slider-value="1" 
+						data-slider-tooltip="hide" />
 				</div>
 				<div style="width: 230px; float: right; text-align: left;">
 					<div style="width: 100px; display: inline-block">
@@ -64,12 +63,12 @@
 				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
-				<span th:text="${ticket.likes.voteValue}" id="likes-value"></span>
+				<span th:text="${ticket.ticketVotes.likes}" id="likes-value"></span>
 				&nbsp;&nbsp;
 				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
-				<span th:text="${ticket.dislikes.voteValue}" id="dislikes-value"></span>
+				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>
 			</div>
 		</div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
@@ -78,23 +77,18 @@
 		<!-- Import for Slider, for some reason slider doesn't work even though it is already imported in the main page -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
 		
-		<!-- Import JavaScript for handling votes (likes/dislikes) -->
-		<script type="text/javascript" th:src="@{/js/overviewVote.js}"></script>
+		<!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
+		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
+		
+		
+		
 		<script>
-
-		 	$("#test-next").click(function() {
-		 		var stackSize = $("#stack-size").val();
-	    		if(stackSize > 0) {
-	    			$("#practice-lingua").load("fragments/overview-practice.html", function(response, status, xhr) {
-		            	if(status == "error") {
-		            		console.log("Error occurred");
-		            	} else {
-		            		console.log("success");
-		            	}
-		            });
-	    		}
-			});
-		 
+		
+			$(".slider-handle").click(function() {
+	            var getValue = $(".slider-handle").attr("aria-valuenow");
+	            console.log("Slider value: " + getValue);
+	        });
+		
 			$(function() {
 		        $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 		    });

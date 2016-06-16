@@ -40,9 +40,7 @@ public class RegistrationController {
 	private LanguageServiceImpl languageServices;
 	
 	/**
-	 * 
 	 * @author Mladen Todorovic
-	 * 
 	 * */
 	@RequestMapping(value="/register", method=RequestMethod.GET)
 	public String registerUser(BaseUser baseUser, Model model) {
@@ -50,11 +48,8 @@ public class RegistrationController {
 		return "registration-page";
 	}
 	/**
-	 * 
 	 * @author Mladen Todorovic
-	 * 
 	 * Method for registering administrator 
-	 * 
 	 * */
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
 	public String registerAdmin(

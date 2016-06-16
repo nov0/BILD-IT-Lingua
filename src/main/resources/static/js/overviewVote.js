@@ -1,6 +1,6 @@
 /**
  * @author Bojan Aleksic
- * Vote rating system
+ * Vote rating handler
  */
 
 $(document).ready(function() {

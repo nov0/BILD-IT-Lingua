@@ -13,7 +13,9 @@ import org.springframework.validation.BindingResult;
 
 @Service
 public class UserServiceImpl implements UserService {
-
+	
+	private static final String REGISTRATION = "registration";
+	
 	@Autowired
 	private UserRepository userRepository;
 	
@@ -64,26 +66,26 @@ public class UserServiceImpl implements UserService {
 		if (!baseUser.getPassword().equals(repeatPassword)) {
 			model.addAttribute("repassword", true);
 			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
+			return REGISTRATION;
 		}
 		
 		if(userRepository.existByUsername(baseUser.getUsername())) {
 			model.addAttribute("usernameExist", true);
 			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
+			return REGISTRATION;
 		}
 
 		if (result.hasErrors()) {
 			model.addAttribute("allLanguages", languageServices.getAll());
-			return "registration";
+			return REGISTRATION;
 		} else {
 			User user = new User(baseUser);
 				
 			/* setting first letter to upper case in first name and last name */
 			String firstName = user.getFirstName();
-			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1);
+			firstName = firstName.substring(0, 1).toUpperCase() + firstName.substring(1).toLowerCase();
 			String lastName = user.getLastName();
-			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1);
+			lastName = lastName.substring(0, 1).toUpperCase() + lastName.substring(1).toLowerCase();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			// setting username to lower case
