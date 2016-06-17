@@ -51,8 +51,8 @@
 				<span th:text="${ticket.dateCreated}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
-				<button id="button-flip" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span>FLIP CARD</span></button>
-				<button id="button-next" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-expand"></span><span>NEXT</span></button>
+				<button id="button-flip" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span th:text="#{flipcard.button.flip}">FLIP CARD</span></button>
+				<button id="button-next" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-expand"></span><span th:text="#{flipcard.button.next}">NEXT</span></button>
 			</div>
 			<div style="text-align: right;" class="col-md-4">
 				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
