@@ -15,6 +15,8 @@ import org.bildit.lingua.repository.TicketRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,41 +49,41 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(id);
 	}
 
-	/** 
+	/* 
 	 * @author Bojan Aleksic
-	 * This method returns all tickets of current user by username
+	 * This method returns all tickets of current user by username, 5 records per page.
 	 */
 	@Override
-	public List<Ticket> getAllTicketsByUsername(String username) {
-		return userRepository.findUserByUsername(username).getTickets();
+	public Page<Ticket> getAllTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserId(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all active user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllActiveTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(user.getId());
+	public Page<Ticket> getAllActiveTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all deleted (deactivated) user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllDeactivatedTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(user.getId());
+	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all moderated user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllModeratedTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndEditedTrue(user.getId());
+	public Page<Ticket> getAllModeratedTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndEditedTrue(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 
 	/**
