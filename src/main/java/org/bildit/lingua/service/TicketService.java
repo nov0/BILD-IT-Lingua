@@ -3,10 +3,13 @@ package org.bildit.lingua.service;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface TicketService extends BaseService<Ticket, Long> {
 
-	List<Ticket> getAllTicketsByUsername(String username);
+//	List<Ticket> getAllTicketsByUsername(String username, int pageNumber);
+	Page<Ticket> getAllTicketsByUsername(String username, Pageable pageable);
 	List<Ticket> getAllActiveTicketsByUsername(String username);
 	List<Ticket> getAllDeactivatedTicketsByUsername(String username);
 	List<Ticket> getAllModeratedTicketsByUsername(String username);

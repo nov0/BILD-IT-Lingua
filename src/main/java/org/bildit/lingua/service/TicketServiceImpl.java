@@ -15,6 +15,8 @@ import org.bildit.lingua.repository.TicketRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.repository.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -47,13 +49,13 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(id);
 	}
 
-	/** 
+	/* 
 	 * @author Bojan Aleksic
-	 * This method returns all tickets of current user by username
+	 * This method returns all tickets of current user by username, 5 records per page.
 	 */
 	@Override
-	public List<Ticket> getAllTicketsByUsername(String username) {
-		return userRepository.findUserByUsername(username).getTickets();
+	public Page<Ticket> getAllTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserId(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 
 	/**
