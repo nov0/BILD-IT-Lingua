@@ -18,11 +18,11 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRepositoryCustom {
 	
 	List<Ticket> findAll();
-//	List<Ticket> findAllByUserId(Long id, Pageable pageable);
-	List<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id);
-	List<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id);
-	List<Ticket> findAllByUserIdAndEditedTrue(Long id);
+	Page<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndEditedTrue(Long id, Pageable pageable);
 	
+	/* @author: Bojan Aleksic */
 	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
 	Ticket findOneByUserAndId(User user, Long id);

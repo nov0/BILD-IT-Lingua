@@ -49,20 +49,22 @@ public class TicketController {
 			Principal principal, 
 			ModelAndView model, 
 			@RequestParam("urlData") String urlRequest, 
-			@RequestParam(value="page", required=false) int page, 
+			@RequestParam(value="page", required=false) Integer page, 
 			@PageableDefault(value=2) Pageable pageable) {
 		
+		Page<Ticket> tickets = null;
+		
 		if("ticket-all".equals(urlRequest)) {
-			Page<Ticket> allTickets = ticketService.getAllTicketsByUsername(principal.getName(), pageable);
-			model.addObject(TICKETS, allTickets);
-			model.addObject("totalPages", allTickets.getTotalPages());
+			tickets = ticketService.getAllTicketsByUsername(principal.getName(), pageable);
 		} else if("ticket-active".equals(urlRequest)) {
-			model.addObject(TICKETS, ticketService.getAllActiveTicketsByUsername(principal.getName()));
+			tickets = ticketService.getAllActiveTicketsByUsername(principal.getName(), pageable);
 		} else if("ticket-deleted".equals(urlRequest)) {
-			model.addObject(TICKETS, ticketService.getAllDeactivatedTicketsByUsername(principal.getName()));
+			tickets = ticketService.getAllDeactivatedTicketsByUsername(principal.getName(), pageable);
 		} else if("ticket-moderated".equals(urlRequest)) {
-			model.addObject(TICKETS, ticketService.getAllModeratedTicketsByUsername(principal.getName()));
+			tickets = ticketService.getAllModeratedTicketsByUsername(principal.getName(), pageable);
 		}
+		model.addObject(TICKETS, tickets);
+		model.addObject("totalPages", tickets.getTotalPages());
 		return model;
 	}
 	

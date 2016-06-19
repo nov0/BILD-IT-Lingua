@@ -43,16 +43,30 @@ $(document).ready(function() {
 		});
 	}
 
-	/* Load tickets to the tickets-content selector, using AJAX's load() method */
+	/* Load tickets to the tickets-content selector, triggered by click on the button */
 	$(".btn-tickets").click(function() {
-		$("#preloader").show();
 		$(this).addClass('active').siblings().removeClass('active');
 		urlRequest = $('.btn.active').attr('id');
-		$(".tickets-content").load("fragments/get-tickets.html", { 
-			"urlData" : urlRequest 
+		var page = 0;
+		loadTicketsInitially(page);
+		page++;
+		/* Invoke this function every time user scrolls */
+		$(window).scroll(function() {
+			var scrollTop = $(window).scrollTop();
+			var docHeight = $(document).height();
+			var winHeight = $(window).height();
+			/* If end of the document is reached... */
+			if(scrollTop >= (docHeight - winHeight)) {
+				$("#preloader").show();
+				if(page < window.totalPages) {
+					loadTicketsWithScroll(page);
+					page++;
+				}
+				$("#preloader").hide();
+			}
 		});
 	});
-	
+
 	/* Function for loading tickets initially without scrolling */
 	function loadTicketsInitially(page) {
 		$(".tickets-content").load("fragments/get-tickets.html", { 

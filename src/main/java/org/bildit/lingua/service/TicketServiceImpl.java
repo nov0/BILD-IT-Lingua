@@ -60,30 +60,30 @@ public class TicketServiceImpl implements TicketService {
 
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all active user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllActiveTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(user.getId());
+	public Page<Ticket> getAllActiveTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all deleted (deactivated) user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllDeactivatedTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(user.getId());
+	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Bojan Aleksic
 	 * Method: get list of all moderated user tickets by username
 	 * */
 	@Override
-	public List<Ticket> getAllModeratedTicketsByUsername(String username) {
-		User user = userRepository.findUserByUsername(username);
-		return ticketRepository.findAllByUserIdAndEditedTrue(user.getId());
+	public Page<Ticket> getAllModeratedTicketsByUsername(String username, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndEditedTrue(userRepository.findUserByUsername(username).getId(), pageable);
 	}
 
 	/**
