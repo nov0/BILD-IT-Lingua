@@ -59,6 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.ignoringAntMatchers("/fragments/**")
 			.ignoringAntMatchers("/add-like")
 			.ignoringAntMatchers("/add-dislike")
+			.ignoringAntMatchers("/set-foreign-language")
 		.and()
 			.rememberMe()
 			.key("remember-me")

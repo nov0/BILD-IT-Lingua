@@ -81,6 +81,7 @@ public class TicketController {
 		Map<String, String> map = new HashMap<>();
 		userService.setForeignLanguageForUser(principal.getName(), languageTitle);
 		map.put("languageTitle", languageTitle);
+		System.out.println("language invoked");
 		return map;
 	}
 	
