@@ -12,8 +12,10 @@ $(document).ready(function() {
 	});
 	
 	$(document).keypress(function(e) {
+		console.log("spaceee");
 		if ((e.keyCode || e.which) == 32) {
 			flipCard();
+			
 		} 
 	});
 });
