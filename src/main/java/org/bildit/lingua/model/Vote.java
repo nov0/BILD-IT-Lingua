@@ -15,7 +15,8 @@ import javax.persistence.Table;
 import org.bildit.lingua.common.BaseEntity;
 
 /**
- * @author Novislav Sekulic, edit: Mladen Todorovic
+ * @author Mladen Todorovic
+ * @class Vote
  */
 @Entity
 @Table(name = "votes")
@@ -23,7 +24,8 @@ public class Vote extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int voteValue;
+	private int likes;
+	private int dislikes;
 	
 	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinTable(name="votes_users", 
@@ -38,26 +40,31 @@ public class Vote extends BaseEntity {
 		/** Empty default constructor */
 	}
 	
-	/** Constructor with parameter */
-	public Vote(int voteValue) {
-		this.voteValue = voteValue;
+	/** Constructor with parameters */
+	public Vote(int likes, int dislikes) {
+		this.likes = likes;
+		this.dislikes = dislikes;
 	}
 	
 	/** Getters and Setters */
-	public void setVotedUsers(Set<User> votedUsers) {
-		this.votedUsers = votedUsers;
-	}
-
 	public Set<User> getVotedUsers() {
 		return votedUsers;
 	}
-
-	public int getVoteValue() {
-		return voteValue;
+	
+	public int getLikes() {
+		return likes;
 	}
 
-	public void setVoteValue(int voteValue) {
-		this.voteValue = voteValue;
+	public void setLikes(int likes) {
+		this.likes = likes;
+	}
+
+	public int getDislikes() {
+		return dislikes;
+	}
+
+	public void setDislikes(int dislikes) {
+		this.dislikes = dislikes;
 	}
 
 	public Ticket getTicket() {
@@ -67,9 +74,15 @@ public class Vote extends BaseEntity {
 	public void setTicket(Ticket ticket) {
 		this.ticket = ticket;
 	}
-	/** Method for incrementing voteValue */
-	public void incrementVoteValue() {
-		voteValue++;
+	
+	/** Method for incrementing likes */
+	public void incrementLikes() {
+		likes++;
+	}
+	
+	/** Method for incrementing dislikes */
+	public void incrementDislikes() {
+		dislikes++;
 	}
 	
 }

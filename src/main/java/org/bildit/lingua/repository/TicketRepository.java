@@ -5,6 +5,7 @@ import java.util.List;
 import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -17,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRepositoryCustom {
 	
 	List<Ticket> findAll();
-	List<Ticket> findAllByUserId(Long id);
-	List<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id);
-	List<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id);
-	List<Ticket> findAllByUserIdAndEditedTrue(Long id);
+	Page<Ticket> findAllByUserIdAndDeactivatedIsNull(Long id, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndDeactivatedIsNotNull(Long id, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndEditedTrue(Long id, Pageable pageable);
+	
+	/* @author: Bojan Aleksic */
+	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
 	Ticket findOneByUserAndId(User user, Long id);
 	

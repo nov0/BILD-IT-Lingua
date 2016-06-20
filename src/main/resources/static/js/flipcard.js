@@ -3,13 +3,20 @@
  * 
  */
 $(document).ready(function() {
-	$("#button-flip").click(function(){
-		 $('.card').toggleClass('flipped');
-		 $(this).blur();
+	function flipCard() {
+		$('.card').toggleClass('flipped');
+	}
+	$("#button-flip").click(function() {
+		flipCard();
+		$(this).blur();
+	});
+	
+	$(document).keypress(function(e) {
+		if ((e.keyCode || e.which) == 32) {
+			flipCard();
+		} 
 	});
 });
-$(document).keypress(function(e) {
-    if(e.which == 32) {
-    	$('.card').toggleClass('flipped');
-    }
-});
+
+
+

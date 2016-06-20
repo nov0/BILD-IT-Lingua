@@ -71,7 +71,8 @@ DROP TABLE IF EXISTS `votes`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `votes` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `vote_value` int(11) NOT NULL,
+  `dislikes` int(11) NOT NULL,
+  `likes` int(11) NOT NULL,
   `ticket` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_f78dg7c8e7y7ne8cfnevgd869` (`ticket`),
