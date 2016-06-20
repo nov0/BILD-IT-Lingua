@@ -48,8 +48,10 @@ $(document).ready(function() {
 		$(this).addClass('active').siblings().removeClass('active');
 		urlRequest = $('.btn.active').attr('id');
 		var page = 0;
+		var pageSync = 0;
 		loadTicketsInitially(page);
 		page++;
+		pageSync++;
 		/* Invoke this function every time user scrolls */
 		$(window).scroll(function() {
 			var scrollTop = $(window).scrollTop();
@@ -58,10 +60,11 @@ $(document).ready(function() {
 			/* If end of the document is reached... */
 			if(scrollTop >= (docHeight - winHeight)) {
 				$("#preloader").show();
-				if(page < window.totalPages) {
+				if(page < window.totalPages && page == pageSync) {
 					loadTicketsWithScroll(page);
 					page++;
 				}
+				pageSync++;
 				$("#preloader").hide();
 			}
 		});

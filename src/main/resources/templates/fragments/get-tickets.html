@@ -26,17 +26,17 @@
 					</div>
 					
 					<div class="col-md-2">
-						<a href="#" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#confirm">
+						<a href="@{/(id=${ticket.id})}" data-remote="false" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#confirm">
 							<span class="glyphicon glyphicon-trash"></span> 
 							<span data-toggle="tooltip" title="Delete">Delete</span>
 						</a>
 					</div>
 					<!-- Confirmation Delete Dialog Modal -->
-					<form role="form" th:action="@{/delete-ticket}" th:object="${ticket}">
+					<form role="form" action="#" th:object="${ticket}">
 						<div id="confirm" class="modal fade" style="width: 30%; margin: 0 auto; margin-top: 20px;">
 							<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
 							<div class="modal-footer">
-								<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
+								<a th:href="@{/}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
 									<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
 								</a>
 								<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
@@ -47,15 +47,11 @@
 					</form> <!-- Confirmation Delete Dialog Modal END -->
 					
 					<div class="col-md-3 like-dislike-btn">
-						<a th:href="@{/add-like(id=${ticket.id})}">
-							<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-							<span th:text="${ticket.ticketVotes.likes}"></span>
-						</a>
+						<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+						<span th:text="${ticket.ticketVotes.likes}"></span>
 						&nbsp; &nbsp;
-						<a th:href="@{/add-dislike(id=${ticket.id})}">
-							<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-							<span th:text="${ticket.ticketVotes.dislikes}"></span>
-						</a>
+						<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+						<span th:text="${ticket.ticketVotes.dislikes}"></span>
 					</div>
 				</div>
 				<div class="row domestic-foreign-row">
@@ -84,6 +80,8 @@
 						/* Pass obtained values to the function */
 	 					tickets(ticketId, category, textDomestic, textForeign);
 						
+	 					deleteTicket(ticketId);
+						
 						/* Bootstrap's tooltip */
 						$('[data-toggle="tooltip"]').tooltip();
 						
@@ -97,6 +95,20 @@
 									$(".foreign #foreign").text(textForeign);
 									$(".category").text(category);
 									document.getElementById("ticket-id-hidden").value = id[1];
+								}
+							});
+						}
+						
+						function deleteTicket(ticketId) {
+							$(".ticket-delete").click(function(event) {
+								event.preventDefault();
+								var id = $(this).attr("href").split("=");
+								console.log("ID: " + id);
+								console.log("ID2: " + ticketId);
+								if(ticketId == id[1]) {
+									console.log("if block ");
+//	 								document.getElementById("ticket-id-hidden").value = id[1];
+									$("#delete-confirm").attr("th:href", "@{/delete-ticket(ticket-deleted, id=${ " + id[1] + "})}");
 								}
 							});
 						}
