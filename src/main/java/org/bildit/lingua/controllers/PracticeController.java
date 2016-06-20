@@ -34,12 +34,17 @@ public class PracticeController {
 			@RequestParam(value="category", required=false) String category, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
+		if(from != null){
+			stack.clear();
+		}
 		if(stack.isEmpty()) {
 			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
 				stack.push(ticket);
 			}
 		}
-		modelAndView.addObject("tickets", stack.pop());
+		if(!stack.isEmpty()){
+			modelAndView.addObject("tickets", stack.pop());
+		}
 		modelAndView.addObject("stackSize", stack.size());
 		return modelAndView;
 	}
@@ -59,15 +64,19 @@ public class PracticeController {
 			@RequestParam(value="order", required=false) String order, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
+		if(order != null){
+			sideOrder = order;
+			stack.clear();
+		}
 		if(stack.isEmpty()) {
 			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
 				stack.push(ticket);
 			}
 		}
-		if(order != null){
-			sideOrder = order;
+		
+		if(!stack.isEmpty()){
+			modelAndView.addObject("tickets", stack.pop());
 		}
-		modelAndView.addObject("tickets", stack.pop());
 		modelAndView.addObject("stackSize", stack.size());
 		modelAndView.addObject("order", sideOrder);
 		return modelAndView;
