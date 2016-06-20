@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class PracticeController {
 	
 	private static Stack<Ticket> stack = new Stack<>();
+	private static String sideOrder = "";
 	
 	@Autowired
 	PracticeService practiceService;
@@ -31,7 +32,6 @@ public class PracticeController {
 	public ModelAndView startOverview(
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
-			@RequestParam(value="speedOrOrder", required=false) String speed, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		if(stack.isEmpty()) {
@@ -56,7 +56,7 @@ public class PracticeController {
 	public ModelAndView startFlipcard(
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
-			@RequestParam(value="speedOrOrder", required=false) String order, 
+			@RequestParam(value="order", required=false) String order, 
 			Principal principal) {
 		ModelAndView modelAndView = new ModelAndView();
 		if(stack.isEmpty()) {
@@ -64,8 +64,12 @@ public class PracticeController {
 				stack.push(ticket);
 			}
 		}
+		if(order != null){
+			sideOrder = order;
+		}
 		modelAndView.addObject("tickets", stack.pop());
 		modelAndView.addObject("stackSize", stack.size());
+		modelAndView.addObject("order", sideOrder);
 		return modelAndView;
 	}
 	

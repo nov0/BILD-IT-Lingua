@@ -7,10 +7,10 @@
 
 	<!-- Tickets fragment -->
 	<div class="my-lingua-content" th:fragment="tickets">
-		<div th:if="${tickets != null}">
+		<div th:if="${tickets != null}" class="tickets-wrapper">
 			<div class="ticket-container alert-warning" th:each="ticket : ${tickets}">
 				<div class="row ticket-header">
-					<div class="col-md-2">
+					<div class="col-md-3">
 						<span class="glyphicon glyphicon-time"></span>
 						<span th:text="${ticket.dateCreated}"></span>
 					</div>
@@ -24,21 +24,37 @@
 							<span data-toggle="tooltip" title="Edit">Edit</span>
 						</a>
 					</div>
+					
 					<div class="col-md-2">
-						<a th:href="@{/delete-ticket(id=${ticket.id})}" class="ticket-delete">
+						<a href="#" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#confirm">
 							<span class="glyphicon glyphicon-trash"></span> 
 							<span data-toggle="tooltip" title="Delete">Delete</span>
 						</a>
 					</div>
-					<div class="col-md-4 like-dislike-btn">
+					<!-- Confirmation Delete Dialog Modal -->
+					<form role="form" th:action="@{/delete-ticket}" th:object="${ticket}">
+						<div id="confirm" class="modal fade" style="width: 30%; margin: 0 auto; margin-top: 20px;">
+							<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
+							<div class="modal-footer">
+								<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
+									<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+								</a>
+								<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
+									<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Cancel
+								</button>
+							</div>
+						</div>
+					</form> <!-- Confirmation Delete Dialog Modal END -->
+					
+					<div class="col-md-3 like-dislike-btn">
 						<a th:href="@{/add-like(id=${ticket.id})}">
-						<span data-toggle="tooltip" title="Like" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-						<span th:text="${ticket.ticketVotes.likes}"></span>
+							<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+							<span th:text="${ticket.ticketVotes.likes}"></span>
 						</a>
 						&nbsp; &nbsp;
 						<a th:href="@{/add-dislike(id=${ticket.id})}">
-						<span data-toggle="tooltip" title="Dislike" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-						<span th:text="${ticket.ticketVotes.dislikes}"></span>
+							<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+							<span th:text="${ticket.ticketVotes.dislikes}"></span>
 						</a>
 					</div>
 				</div>
@@ -46,6 +62,7 @@
 					<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
 					<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
 				</div>
+				<input type="hidden" th:value="${totalPages}" id="total-pages" />
 				<script th:inline="javascript">
 				/*<![CDATA[*/
 				           
