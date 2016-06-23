@@ -11,77 +11,7 @@
 	<div id="gridSystemModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="modal-edit">
 		<div class="modal-dialog" role="document" style="width: 80%;">
 			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-					</button>
-					<div class="btn-group categories" role="group">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span style="padding-right: 8px;" class="glyphicon glyphicon-tags" aria-hidden="true"></span>
-							<span th:text="#{modal.categories}" class="tab-btn-group category">Categories</span>
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu select-category">
-							<li><a th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
-							<li><a th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
-							<li><a th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
-							<li><a th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
-							<li><a th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
-							<li><a th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
-							<li><a th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
-							<li><a th:text="#{modal.categories.articles}" href="#">Articles</a></li>
-							<li><a th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
-						</ul>
-					</div>
-					<div class="btn-group languages" role="group">
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<span style="padding-right: 5px;" class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-							<span th:if="${session.foreignLanguage eq null}" th:text="#{modal.select.language}" class="tab-btn-group select-practice-lang">Select Language</span>
-			               	<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
-							<span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu select-language">
-							<li th:each="language : ${languages}">
-								<a id="selected-lang" href="#" th:text="${language}">Language</a>
-							</li>
-						</ul>
-					</div>
-					<h4 class="modal-title" id="gridModalLabel">
-						<img th:src="@{/images/add-new-lingua-icon.png}" />
-						<span th:text="#{modal.edit.title}">Edit Lingua</span>
-					</h4>
-				</div>
-				
-				<form role="form" id="modal-ticket-form" action="#" th:action="@{/edit-ticket}" th:object="${ticket}" method="POST">
-					<div class="modal-body">
-						<!-- Bootstrap grid layout -->
-						<div class="row">
-							<div class="col-xs-6">
-								<div class="form-group domestic">
-									<textarea class="form-control" id="domestic" th:field="*{textDomestic}" name="textDomestic" rows="10"></textarea>
-								</div>
-							</div>
-							<div class="col-xs-6">
-								<div class="form-group foreign">
-									<textarea class="form-control" id="foreign" th:field="*{textForeign}" name="textForeign" rows="10"></textarea>
-								</div>
-							</div>
-							<input type="hidden" id="ticket-id-hidden" name="id" />
-							<input type="hidden" th:field="*{category}" name="category" class="selected-category" value="" />
-						</div><!-- End of Bootstrap's grid layout -->
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove-circle"></span> Cancel
-						</button>
-						<button type="submit" class="btn btn-success">
-							<span class="glyphicon glyphicon-floppy-disk"></span> Save changes
-						</button>
-		
-					</div>		
-				</form>
-				
+				<!-- Here will be loaded content from "edit-ticket-modal-content.html" page, by TicketController -->
 			</div>
 		</div>
 	</div>

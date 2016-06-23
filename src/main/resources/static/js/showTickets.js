@@ -32,9 +32,9 @@ $(document).ready(function() {
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
 			/* If end of the document is reached... */
-			if(scrollTop >= (docHeight - winHeight)) {
-				$("#preloader").show();
+			if(scrollTop == docHeight - winHeight) {
 				if(page < window.totalPages) {
+					$("#preloader").show();
 					loadTicketsWithScroll(page);
 					page++;
 				}
@@ -48,20 +48,23 @@ $(document).ready(function() {
 		$(this).addClass('active').siblings().removeClass('active');
 		urlRequest = $('.btn.active').attr('id');
 		var page = 0;
+		var pageSync = 0;
 		loadTicketsInitially(page);
 		page++;
+		pageSync++;
 		/* Invoke this function every time user scrolls */
 		$(window).scroll(function() {
 			var scrollTop = $(window).scrollTop();
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
 			/* If end of the document is reached... */
-			if(scrollTop >= (docHeight - winHeight)) {
+			if(scrollTop == docHeight - winHeight) {
 				$("#preloader").show();
-				if(page < window.totalPages) {
+				if(page < window.totalPages && page === pageSync) {
 					loadTicketsWithScroll(page);
 					page++;
 				}
+				pageSync++;
 				$("#preloader").hide();
 			}
 		});

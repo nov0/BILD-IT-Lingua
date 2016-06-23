@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal"
+			aria-label="Close">
+			<span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+		</button>
+		<div class="btn-group categories" role="group">
+			<button type="button" class="btn btn-primary dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span style="padding-right: 8px;" class="glyphicon glyphicon-tags"
+					aria-hidden="true">
+				</span> 
+				<span th:text="${ticket.category}"
+					class="tab-btn-group category">Categories
+				</span> 
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu select-category">
+				<li><a th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
+				<li><a th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
+				<li><a th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
+				<li><a th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
+				<li><a th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
+				<li><a th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
+				<li><a th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
+				<li><a th:text="#{modal.categories.articles}" href="#">Articles</a></li>
+				<li><a th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
+			</ul>
+		</div>
+		<div class="btn-group languages" role="group">
+			<button type="button" class="btn btn-primary dropdown-toggle"
+				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<span style="padding-right: 5px;"
+					class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+				<span th:if="${session.foreignLanguage eq null}"
+					th:text="#{modal.select.language}"
+					class="tab-btn-group select-practice-lang">Select Language
+				</span>
+				<span
+					th:if="${session.foreignLanguage ne null}"
+					th:text="${session.foreignLanguage}"
+					class="tab-btn-group select-practice-lang">
+				</span>
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu select-language">
+				<li th:each="language : ${languages}">
+					<a id="selected-lang" href="#" th:text="${language}">Language</a>
+				</li>
+			</ul>
+		</div>
+		<h4 class="modal-title" id="gridModalLabel">
+			<img th:src="@{/images/add-new-lingua-icon.png}" /> <span
+				th:text="#{modal.edit.title}">Edit Lingua</span>
+		</h4>
+	</div>
+
+	<form role="form" id="modal-ticket-form" action="#"
+		th:action="@{/edit(ticket-edited, id=${ticket.id})}" th:object="${ticket}" method="POST">
+		<div class="modal-body">
+			<!-- Bootstrap grid layout -->
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group domestic">
+						<textarea class="form-control" id="domestic"
+							th:field="*{textDomestic}" name="textDomestic" rows="10">
+						</textarea>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group foreign">
+						<textarea class="form-control" id="foreign"
+							th:field="*{textForeign}" name="textForeign" rows="10">
+						</textarea>
+					</div>
+				</div>
+				<input type="hidden" th:field="*{category}" name="category" class="selected-category" value="" />
+			</div> <!-- End of Bootstrap's grid layout -->
+
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-dismiss="modal">
+				<span class="glyphicon glyphicon-remove-circle"></span> Cancel
+			</button>
+			<button type="submit" class="btn btn-success">
+				<span class="glyphicon glyphicon-floppy-disk"></span> Save changes
+			</button>
+		</div>
+	</form>
+	
+	<!-- Import function for changing categories -->
+	<script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
+	
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+		$(document).ready(function() {
+			
+			/*
+			 * Edit Ticket Validation
+			 * @author: Bojan Aleksic
+			 */
+				
+			$('.btn-success').click(function(event) {
+				/* Note: for some reason "document.getElementById(id).value" doesn't return any value without: "this.form.id.value" */
+				var domesticText = document.getElementById('domestic').value = this.form.domestic.value;
+				var foreignText = document.getElementById('foreign').value = this.form.foreign.value;
+				
+				var message = "";
+				var color = "danger";
+				var icon = "glyphicon glyphicon-warning-sign";
+					
+				if(domesticText == "") {
+					$('.form-group.domestic').addClass('has-error');
+					message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
+					event.preventDefault();
+					showNotification(message, color, icon);
+				} 
+					
+				if(foreignText == "") {
+					$('.form-group.foreign').addClass('has-error');
+					message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
+					event.preventDefault();
+					showNotification(message, color, icon);
+				} 
+					
+			});
+				
+			/* Reset all text in the form when modal is closed */
+			$('.modal').on('hidden.bs.modal', function () {
+				$(this).find('form').trigger('reset');
+				$('.form-group').removeClass('has-error');
+			});
+			
+			$('.modal').on('hidden.bs.modal', function() { 
+				$(this).removeData(); 
+			}); 
+				
+		});
+		/*]]>*/
+	</script>
+	
+</body>
+</html>

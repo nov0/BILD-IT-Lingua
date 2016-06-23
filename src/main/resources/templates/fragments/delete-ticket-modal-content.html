@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+	
+	<!-- Content for Delete Modal returned by TicketController -->
+	<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
+	<div class="modal-footer">
+		<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}"
+			type="button" class="btn btn-sm btn-primary" id="delete-confirm">
+			<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+		</a>
+		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
+			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Cancel
+		</button>
+	</div>
+
+</body>
+</html>
