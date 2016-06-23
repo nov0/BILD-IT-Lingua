@@ -32,9 +32,9 @@ $(document).ready(function() {
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
 			/* If end of the document is reached... */
-			if(scrollTop >= (docHeight - winHeight)) {
-				$("#preloader").show();
+			if(scrollTop == docHeight - winHeight) {
 				if(page < window.totalPages) {
+					$("#preloader").show();
 					loadTicketsWithScroll(page);
 					page++;
 				}
@@ -58,9 +58,9 @@ $(document).ready(function() {
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
 			/* If end of the document is reached... */
-			if(scrollTop >= (docHeight - winHeight)) {
+			if(scrollTop == docHeight - winHeight) {
 				$("#preloader").show();
-				if(page < window.totalPages && page == pageSync) {
+				if(page < window.totalPages && page === pageSync) {
 					loadTicketsWithScroll(page);
 					page++;
 				}

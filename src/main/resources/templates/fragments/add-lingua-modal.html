@@ -86,6 +86,11 @@
 			/*<![CDATA[*/
 			$(document).ready(function() {
 				
+				/*
+				 * Create Ticket Validation
+				 * @author: Bojan Aleksic
+				 */
+				
 				var selectedCategory = "";
 				
 			    var selectedLanguage = [[${session.foreignLanguage}]];
@@ -106,25 +111,27 @@
 						$('.form-group.domestic').addClass('has-error');
 						message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
+						showNotification(message, color, icon);
 					} 
 					
 					if(foreignText == "") {
 						$('.form-group.foreign').addClass('has-error');
 						message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
+						showNotification(message, color, icon);
 					} 
 					
 					if(selectedCategory == "") {
 						message = /*[[#{modal.notifiction.message.category}]]*/ "Please select category for this ticket.";
 						event.preventDefault();
+						showNotification(message, color, icon);
 					}
 					
 					if(selectedLanguage == null || selectedLanguage == "") {
 						message = /*[[#{modal.notifiction.message.practice.language}]]*/ "Please select language you want to practice.";
 						event.preventDefault();
+						showNotification(message, color, icon);
 					}
-					
-					showNotification(message, color, icon);
 					
 				});
 				

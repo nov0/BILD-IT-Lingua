@@ -51,6 +51,11 @@
 			        	var color = 'success';
 			        	var icon = 'glyphicon glyphicon-ok';
 			        	showNotification(message, color, icon);
+			        } else if(isParamPresent("ticket-edited")) {
+			        	var message = /*[[#{modal.ticket.edited}]]*/ 'Ticket edited!';
+			        	var color = 'success';
+			        	var icon = 'glyphicon glyphicon-ok';
+			        	showNotification(message, color, icon);
 			        }
 			    	
 				}); // end ready

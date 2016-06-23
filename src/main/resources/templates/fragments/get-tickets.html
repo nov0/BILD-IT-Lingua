@@ -19,32 +19,18 @@
 						<span th:text="${ticket.category}" data-toggle="tooltip" title="Category">Verbs</span>
 					</div>
 					<div class="col-md-2">
-						<a th:href="@{/(id=${ticket.id})}" data-remote="false" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
+						<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
 							<span class="glyphicon glyphicon-pencil"></span>
 							<span data-toggle="tooltip" title="Edit">Edit</span>
 						</a>
 					</div>
 					
 					<div class="col-md-2">
-						<a href="@{/(id=${ticket.id})}" data-remote="false" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#confirm">
+						<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
 							<span class="glyphicon glyphicon-trash"></span> 
 							<span data-toggle="tooltip" title="Delete">Delete</span>
 						</a>
 					</div>
-					<!-- Confirmation Delete Dialog Modal -->
-					<form role="form" action="#" th:object="${ticket}">
-						<div id="confirm" class="modal fade" style="width: 30%; margin: 0 auto; margin-top: 20px;">
-							<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
-							<div class="modal-footer">
-								<a th:href="@{/}" type="button" class="btn btn-sm btn-primary" id="delete-confirm">
-									<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
-								</a>
-								<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
-									<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Cancel
-								</button>
-							</div>
-						</div>
-					</form> <!-- Confirmation Delete Dialog Modal END -->
 					
 					<div class="col-md-3 like-dislike-btn">
 						<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
@@ -59,8 +45,9 @@
 					<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
 				</div>
 				<input type="hidden" th:value="${totalPages}" id="total-pages" />
-				<script th:inline="javascript">
-				/*<![CDATA[*/
+				<input type="hidden" th:value="${ticket.id}" id="ticket-id" />
+				<input type="hidden" th:value="${ticket.textDomestic}" id="text-domestic-test" />
+				<script>
 				           
 					$(document).ready(function() {
 						
@@ -71,51 +58,15 @@
 							$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
 						}
 						
-						/* Obtain values from Thymeleaf's model, and assign them to the JS variables */
-						var ticketId = Number([[${ticket.id}]]);
-						var textDomestic = [[${ticket.textDomestic}]];
-						var textForeign = [[${ticket.textForeign}]];
-						var category = [[${ticket.category}]];
-						
-						/* Pass obtained values to the function */
-	 					tickets(ticketId, category, textDomestic, textForeign);
-						
-	 					deleteTicket(ticketId);
-						
 						/* Bootstrap's tooltip */
 						$('[data-toggle="tooltip"]').tooltip();
 						
-						/* Obtain actual ticket on the click by ticket's ID */
-						function tickets(ticketId, category, textDomestic, textForeign) {
-							$(".ticket-edit").click(function(event) {
-								event.preventDefault();
-								var id = $(this).attr("href").split("=");
-								if(ticketId == id[1]) {
-									$(".domestic #domestic").text(textDomestic);
-									$(".foreign #foreign").text(textForeign);
-									$(".category").text(category);
-									document.getElementById("ticket-id-hidden").value = id[1];
-								}
-							});
-						}
-						
-						function deleteTicket(ticketId) {
-							$(".ticket-delete").click(function(event) {
-								event.preventDefault();
-								var id = $(this).attr("href").split("=");
-								console.log("ID: " + id);
-								console.log("ID2: " + ticketId);
-								if(ticketId == id[1]) {
-									console.log("if block ");
-//	 								document.getElementById("ticket-id-hidden").value = id[1];
-									$("#delete-confirm").attr("th:href", "@{/delete-ticket(ticket-deleted, id=${ " + id[1] + "})}");
-								}
-							});
-						}
+						$(".modal").on("hidden.bs.modal", function() {
+							$(this).removeData();
+						});
 						
 					});
 				           
-				/*]]>*/
 				</script>
 			</div>
 		</div>
