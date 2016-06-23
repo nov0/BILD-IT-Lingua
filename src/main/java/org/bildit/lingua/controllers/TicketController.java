@@ -172,7 +172,6 @@ public class TicketController {
 	@ResponseBody
 	public String addLike(@RequestParam("id") String ticketId, Principal principal) {
 		Long id = Long.parseLong(ticketId);
-		System.out.println("ticket ID: " + id);
 		return ticketService.addLikeToTicket(id, principal.getName());
 	}
 	

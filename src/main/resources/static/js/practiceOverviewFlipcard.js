@@ -19,11 +19,11 @@ $(document).ready(function() {
     	var icon = 'glyphicon glyphicon-ok';
 
         if(speed === "1") {
-	        millisec = 3000;
+	        millisec = 5000;
 		} else if(speed === "2") {
-			millisec = 5000;
-		} else if(speed === "3") {
 			millisec = 10000;
+		} else if(speed === "3") {
+			millisec = 15000;
 		}
 
         if(speed != 0) {
@@ -53,16 +53,16 @@ $(document).ready(function() {
     			$("#slider-ticker").click(function() {
     				currentSliderValue = $(".slider-handle").attr("aria-valuenow");
     				if(currentSliderValue === "1") {
-    			        millisec = 3000;
-    			        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 3 seconds.";
+    			        millisec = 5000;
+    			        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
     			        showNotification(message, color, icon);
     				} else if(currentSliderValue === "2") {
-    					millisec = 5000;
-    					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 5 seconds.";
+    					millisec = 10000;
+    					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
     			        showNotification(message, color, icon);
     				} else if(currentSliderValue === "3") {
-    					millisec = 10000;
-    					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 10 seconds.";
+    					millisec = 15000;
+    					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
     			        showNotification(message, color, icon);
     				}
     		    });
