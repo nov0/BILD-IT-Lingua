@@ -73,6 +73,7 @@
 				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>
 			</div>
 		</div>
+		<input type="hidden" data-toggle="modal" data-target="#practice-over-modal" />
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<input type="hidden" th:value="${ticket.id}" id="ticket-id-overview" />
 		

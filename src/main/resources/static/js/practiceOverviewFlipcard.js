@@ -85,6 +85,7 @@ $(document).ready(function() {
 	            /* Check if Stack List is empty, if true, terminate Interval */
 	            if(stackSize === "0") {
 	            	clearTimeout(timeout);
+	            	practiceOver();
 		        }
     		});
         }
@@ -101,6 +102,13 @@ $(document).ready(function() {
             		console.log("Error occurred");
             	}
             });
+        }
+
+        /* Function for letting the user know that practice is over */
+        function practiceOver() {
+        	setTimeout(function() {
+        		$("#practice-over-modal").modal();
+        	}, millisec);
         }
 
     });

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<!-- Bootstrap's Modal Layout -->
+	<div id="practice-over-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridModalLabel" aria-hidden="true" th:fragment="practice-over-modal">
+		<div class="modal-dialog" role="document" style="width: 30%; margin: 0 auto; margin-top: 20px;">
+			<div class="modal-content">
+				<!-- Here will be loaded content from "delete-ticket-modal-content.html" page -->
+				<div th:text="#{practice.over.dialog}" class="modal-body">Practice over. Continue?</div>
+				<div class="modal-footer">
+					<a href="practice-lingua" type="button" class="btn btn-sm btn-primary" id="repeat-practice-yes">
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;
+						<span th:text="#{practice.over.yes}">Yes</span>
+					</a>
+					<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
+						<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;
+						<span th:text="#{practice.over.no}">No</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			/*
+			* If user choose to repeat the practice again, 
+			* redirect him to "Practice Lingua" page.
+			* Note: Further implementation of this 
+			* is to be found in "showTickets.js" file.
+			*/
+			$(document).ready(function() {
+				$("#repeat-practice-yes").click(function(event) {
+					event.preventDefault();
+					var url = $(this).attr("href");
+					localStorage.setItem("practicePage", url);
+					window.location.reload();
+				});
+			});
+		</script>
+	</div>
+
+</body>
+</html>

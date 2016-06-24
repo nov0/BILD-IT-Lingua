@@ -11,7 +11,7 @@
 	<div class="container" th:fragment="user-account">
         <ul class="nav nav-tabs">
             <li class="active"><a th:text="#{tab.my.lingua}" data-toggle="tab" href="#my-lingua">My Lingua</a></li>
-            <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" href="#practice-lingua">Practice Lingua</a></li>
+            <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" id="practice-reload" href="#practice-lingua">Practice Lingua</a></li>
         </ul>
         <div class="lingua-container-body">
             <div class="tab-content">
@@ -75,6 +75,8 @@
                     
                 </div>
             </div>
+            <!-- Include modal from fragments for "practice over" - message, during the practice lingua -->
+            <div th:replace="fragments/practice-over-modal :: practice-over-modal"></div>
         </div>
         
         <!-- Import JavaScript for loading tickets and some basic functions -->

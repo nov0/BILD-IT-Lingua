@@ -4,6 +4,12 @@
  */
 
 $(document).ready(function() {
+	
+	/* Check on load page if localStorage is set, if true, redirect to "Practice Lingua" page */
+	if(localStorage.getItem("practicePage")) {
+		document.getElementById("practice-reload").click();
+		localStorage.clear();
+	}
 
     $("#preloader-language").hide();
 
