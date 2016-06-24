@@ -247,11 +247,16 @@ body {
 }
 .form-option {
     height: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 60px;
 }
-.form-option-text{
+
+.form-option-text {
     float:left;
     margin-top: 7px;
+    font-weight: bold;
+    color: #555555;
 }
 #speed-slider {
     margin-right: 10px;
