@@ -70,6 +70,28 @@
 				</script>
 			</div>
 		</div>
+		<div th:if="${tickets eq null}">
+			<div class="no-tickets-wrapper">
+				<span th:text="#{no.tickets.message}">No tickets available...</span>
+				<span>
+					<a th:text="#{no.tickets.message.create.one}" data-toggle="modal" data-target="#gridSystemModal">
+						Create ticket here
+					</a>.
+				</span>
+			</div>
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+			           
+				if(window.totalPages == 0) {
+					var message = /*[[#{no.tickets.message.notification}]]*/ 'message';
+					var color = 'warning';
+					var icon = 'glyphicon glyphicon-warning-sign';
+					showNotification(message, color, icon);
+				}
+			
+				/*]]>*/
+			</script>
+		</div>
 	</div>
 
 </body>

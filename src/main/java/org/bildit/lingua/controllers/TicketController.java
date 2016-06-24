@@ -64,22 +64,23 @@ public class TicketController {
 		
 		if("ticket-all".equals(urlRequest)) {
 			tickets = ticketService.getAllTicketsByUsername(principal.getName(), pageable);
-			model.addObject(TICKETS, tickets);
-		} 
-		if("ticket-active".equals(urlRequest)) {
+//			model.addObject(TICKETS, tickets);
+		} else if("ticket-active".equals(urlRequest)) {
 			tickets = ticketService.getAllActiveTicketsByUsername(principal.getName(), pageable);
-			model.addObject(TICKETS, tickets);
-		} 
-		if("ticket-deleted".equals(urlRequest)) {
+//			model.addObject(TICKETS, tickets);
+		} else if("ticket-deleted".equals(urlRequest)) {
 			tickets = ticketService.getAllDeactivatedTicketsByUsername(principal.getName(), pageable);
-			model.addObject(TICKETS, tickets);
-		} 
-		if("ticket-moderated".equals(urlRequest)) {
+//			model.addObject(TICKETS, tickets);
+		} else if("ticket-moderated".equals(urlRequest)) {
 			tickets = ticketService.getAllModeratedTicketsByUsername(principal.getName(), pageable);
-			model.addObject(TICKETS, tickets);
+//			model.addObject(TICKETS, tickets);
 		}
-//		model.addObject(TICKETS, tickets);
-		model.addObject("totalPages", tickets.getTotalPages());
+		
+		if(tickets.getContent().size() > 0) {
+			model.addObject(TICKETS, tickets);
+			model.addObject("totalPages", tickets.getTotalPages());
+		}
+		
 		return model;
 	}
 	
