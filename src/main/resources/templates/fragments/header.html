@@ -110,12 +110,13 @@
 				<div class="logged-user">
 					<div class="dropdown">
 						<button class="btn btn-default dropdown-toggle user-language-buttons" type="button"
-							id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false">
-							<img th:src="@{/images/logged-user.png}" /> <span
-								style="color: #1898b0; font-size: 14px;"
-								sec:authentication="name">Current Logged User</span> <span
-								class="caret"></span>
+							id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<!-- 							<img th:src="@{/images/logged-user.png}" />  -->
+							<span style="color: #1898b0; font-size: 12px;" class="glyphicon glyphicon-user"></span>
+							<span style="color: #1898b0; font-size: 14px;" sec:authentication="name">
+								Current Logged User
+							</span>
+							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 							<li><a th:href="@{/logout}">Logout</a></li>

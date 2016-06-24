@@ -103,7 +103,8 @@ body {
 }
 
 .btn-default.user-language-buttons {
-	background-color: white;
+	background-color: transparent;
+	border-style: none;
     border-radius: 0px;
 }
 
