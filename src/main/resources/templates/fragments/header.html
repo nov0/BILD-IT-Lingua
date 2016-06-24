@@ -63,7 +63,12 @@
 											th:style="'background-image: url(' + @{images/login-icon.png} + ');'" />
 										<!-- Remember me option -->
 										<div style="position: relative;">
-											<span th:text="#{form.login.rememberme}">Remember me:</span> <input type="checkbox" name="remember-me" checked="checked" />
+											<small>
+												<span style="color: #1898b0; position: relative; bottom: 2px;" th:text="#{form.login.rememberme}">
+													Remember me:
+												</span>
+											</small> 
+											<input type="checkbox" name="remember-me" checked="checked" />
 		                    				<!-- Not a member? Register -->
 		                    				<div class="not-a-member-register" >
 		                       					<a th:href="@{/registration}"> 

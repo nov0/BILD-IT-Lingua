@@ -56,6 +56,11 @@
 	background-color: #f1f1f1;
 }
 
+.no-tickets-wrapper {
+	padding: 50px;
+	background-color: #f1f1f1;
+}
+
 #preloader {
 	text-align: center;
 }
