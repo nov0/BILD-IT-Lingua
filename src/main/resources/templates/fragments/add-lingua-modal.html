@@ -112,14 +112,28 @@
 						message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
 						showNotification(message, color, icon);
-					} 
+					} else if(domesticText.length > 100) {
+						$('.form-group.domestic').addClass('has-error');
+						message = /*[[#{modal.notifiction.message.text.oversize}]]*/ "Maximum number of characters is 100.";
+						event.preventDefault();
+						showNotification(message, color, icon);
+					} else {
+						$('.form-group.domestic').removeClass('has-error');
+					}
 					
 					if(foreignText == "") {
 						$('.form-group.foreign').addClass('has-error');
 						message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
 						event.preventDefault();
 						showNotification(message, color, icon);
-					} 
+					} else if(foreignText.length > 100) {
+						$('.form-group.foreign').addClass('has-error');
+						message = /*[[#{modal.notifiction.message.text.oversize}]]*/ "Maximum number of characters is 100.";
+						event.preventDefault();
+						showNotification(message, color, icon);
+					} else {
+						$('.form-group.foreign').removeClass('has-error');
+					}
 					
 					if(selectedCategory == "") {
 						message = /*[[#{modal.notifiction.message.category}]]*/ "Please select category for this ticket.";
@@ -132,7 +146,6 @@
 						event.preventDefault();
 						showNotification(message, color, icon);
 					}
-					
 				});
 				
 				/* Reset all text in the form when modal is closed */
