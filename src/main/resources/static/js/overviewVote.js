@@ -13,7 +13,7 @@ $(document).ready(function() {
 
 	/* Likes */
 	$("#ticket-vote-up").click(function() {
-		var id = $("#ticket-id").val();
+		var id = $("#ticket-id-overview").val();
 		$.post("add-like", {
 			id : id
 		})
@@ -34,7 +34,7 @@ $(document).ready(function() {
 
 	/* Dislikes */
 	$("#ticket-vote-down").click(function() {
-		var id = $("#ticket-id").val();
+		var id = $("#ticket-id-overview").val();
 		$.post("add-dislike", {
 			id : id
 		})

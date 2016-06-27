@@ -46,6 +46,8 @@ $(document).ready(function() {
     				console.log("Error occurred");
 		        }
 
+    			practiceFrom(from);
+
     			/* Initially read and set speed value based on practice-lingua properties */
     		    var slider = $("#slider").attr("data-slider-value", speed);
 
@@ -101,6 +103,7 @@ $(document).ready(function() {
             	if(status == "error") {
             		console.log("Error occurred");
             	}
+            	practiceFrom(from);
             });
         }
 
@@ -109,6 +112,18 @@ $(document).ready(function() {
         	setTimeout(function() {
         		$("#practice-over-modal").modal();
         	}, millisec);
+        }
+
+        /* Check if logged user has tickets if he select "from = me" */
+        function practiceFrom(from) {
+        	/* If "from" is set to "me"... */
+			if(from === "me") {
+				/* ...check if logged user don't have tickets created and redirect if so */
+    	    	if($("#is-tickets-empty").val() == undefined) {
+    	    		localStorage.setItem("noTickets", undefined);
+    	    		window.location.reload();
+    	    	}
+			}
         }
 
     });
