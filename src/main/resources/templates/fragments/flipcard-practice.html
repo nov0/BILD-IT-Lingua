@@ -45,7 +45,7 @@
 		<div class="row row-footer">
 			<div class="col-md-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName} + ' (' + ${ticket.user.username} + ')' ">User</span>
+				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
 				<span th:text="${ticket.dateCreated}">Date</span>
@@ -67,6 +67,7 @@
 			</div>
 			
 		</div>
+		<div id="test-flipcard"></div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<input type="hidden" th:value="${ticket.id}" id="ticket-id" />
 		<!-- Script for flip card practice-->
@@ -74,7 +75,7 @@
 	    <!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
 		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
 	    <script>
-	    $("#button-next").click(newTicket());
+	    	$("#button-next").click(nextTicket);
 	    	function nextTicket() {
 				var stackSize = $("#stack-size").val();
 				console.log("next");
