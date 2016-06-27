@@ -9,6 +9,9 @@ $(document).ready(function() {
 	if(localStorage.getItem("practicePage")) {
 		document.getElementById("practice-reload").click();
 		localStorage.clear();
+	} else if(localStorage.getItem("noTickets")) {
+		document.getElementById("practice-reload").click();
+		localStorage.clear();
 	}
 
     $("#preloader-language").hide();

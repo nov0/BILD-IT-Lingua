@@ -58,7 +58,7 @@ public class TicketController {
 			ModelAndView model, 
 			@RequestParam("urlData") String urlRequest, 
 			@RequestParam(value="page", required=false) Integer page, 
-			@PageableDefault(value=2) Pageable pageable) {
+			@PageableDefault(value=3) Pageable pageable) {
 		
 		Page<Ticket> tickets = null;
 		
@@ -136,7 +136,7 @@ public class TicketController {
 	public String editTicketSubmit(@ModelAttribute("ticket") Ticket ticket, BindingResult result, @RequestParam("id") Long id) {
 		if(result.hasErrors()) {
 			for(Object error : result.getAllErrors()) {
-				logger.info(error);
+				logger.error(error);
 			}
 		}
 		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);

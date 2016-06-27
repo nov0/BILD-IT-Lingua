@@ -1,6 +1,7 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Stack;
 
 import org.bildit.lingua.model.Ticket;
@@ -32,14 +33,19 @@ public class PracticeController {
 	public ModelAndView startOverview(
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
+			ModelAndView modelAndView,
 			Principal principal) {
-		ModelAndView modelAndView = new ModelAndView();
-		if(stack.isEmpty()) {
-			for(Ticket ticket : practiceService.getTicketsForPractice(from, category, principal.getName())) {
+		
+		List<Ticket> tickets = practiceService.getTicketsForPractice(from, category, principal.getName());
+		
+		if(stack.isEmpty() && !tickets.isEmpty()) {
+			for(Ticket ticket : tickets) {
 				stack.push(ticket);
 			}
 		}
-		modelAndView.addObject("tickets", stack.pop());
+		if(!stack.isEmpty()) {
+			modelAndView.addObject("tickets", stack.pop());
+		}
 		modelAndView.addObject("stackSize", stack.size());
 		return modelAndView;
 	}
@@ -57,8 +63,8 @@ public class PracticeController {
 			@RequestParam(value="from", required=false) String from, 
 			@RequestParam(value="category", required=false) String category, 
 			@RequestParam(value="order", required=false) String order, 
+			ModelAndView modelAndView,
 			Principal principal) {
-		ModelAndView modelAndView = new ModelAndView();
 		if(order != null){
 			sideOrder = order;
 			stack.clear();

@@ -74,22 +74,22 @@
 	    <!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
 		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
 	    <script>
-	    $("#button-next").click(nextTicket);
+	    $("#button-next").click(newTicket());
 	    	function nextTicket() {
-			var stackSize = $("#stack-size").val();
-			console.log("next");
-			if(stackSize > 0) {
-				$("#practice-lingua").load("fragments/flipcard-practice.html", function(response, status, xhr) {
-		        	if(status == "error") {
-		        		console.log("Error occurred");
-		        	} else {
-		        		console.log("success");
-		        	}
-		        });
-			} else {
-				showNotification('Practice is over','success','glyphicon glyphicon-ok');
-			}
- 			$(this).blur();
+				var stackSize = $("#stack-size").val();
+				console.log("next");
+				if(stackSize > 0) {
+					$("#practice-lingua").load("fragments/flipcard-practice.html", function(response, status, xhr) {
+			        	if(status == "error") {
+			        		console.log("Error occurred");
+			        	} else {
+			        		console.log("success");
+			        	}
+			        });
+				} else {
+					showNotification('Practice is over','success','glyphicon glyphicon-ok');
+				}
+	 			$(this).blur();
 			};
 	    </script>	
 	</div>
