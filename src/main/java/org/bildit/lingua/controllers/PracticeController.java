@@ -6,10 +6,12 @@ import java.util.Stack;
 
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.service.PracticeService;
+import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -20,6 +22,9 @@ public class PracticeController {
 	
 	@Autowired
 	PracticeService practiceService;
+	
+	@Autowired
+	UserService userService;
 	
 	/**
 	 * @param from
@@ -81,6 +86,23 @@ public class PracticeController {
 		modelAndView.addObject("stackSize", stack.size());
 		modelAndView.addObject("order", sideOrder);
 		return modelAndView;
+	}
+	
+	
+	/**
+	 * @author Bojan Aleksic
+	 * @param principal
+	 * @return
+	 * Method checks whether user has tickets created and if so returns true,
+	 * otherwise returns false
+	 */
+	@RequestMapping("/user-has-tickets")
+	@ResponseBody
+	public boolean userHasTickets(Principal principal) {
+		if(userService.findUserByUsername(principal.getName()).getTickets().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 	
 }

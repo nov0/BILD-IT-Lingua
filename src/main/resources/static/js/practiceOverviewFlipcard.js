@@ -13,10 +13,14 @@ $(document).ready(function() {
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
+        window.userHasTickets = true;
 
         var message = "";
         var color = 'success';
     	var icon = 'glyphicon glyphicon-ok';
+    	
+        var colorError = 'danger';
+    	var iconError = 'glyphicon glyphicon-warning-sign';
 
         if(speed === "1") {
 	        millisec = 5000;
@@ -26,10 +30,27 @@ $(document).ready(function() {
 			millisec = 15000;
 		}
 
-        if(speed != 0) {
-        	loadOverview();
+        /* Check if logged user has tickets if he select "from = me" */
+        if(from === "me") {
+        	$.ajax({
+        		url : "user-has-tickets",
+        		type : "GET",
+        		async : false,
+        		success : function(response) {
+        			window.userHasTickets = response;
+        		}
+        	});
+        }
+
+        if(window.userHasTickets == true) {
+        	if(speed != 0) {
+        		loadOverview();
+        	} else {
+        		loadFlipcard();
+        	}
         } else {
-        	loadFlipcard();
+        	message = /*[[#{slider.speed.message.one}]]*/ "You don't have any tickets created.";
+    		showNotification(message, colorError, iconError);
         }
 
         /* Overview function */
@@ -45,8 +66,6 @@ $(document).ready(function() {
     			if(status == "error") {
     				console.log("Error occurred");
 		        }
-
-    			practiceFrom(from);
 
     			/* Initially read and set speed value based on practice-lingua properties */
     		    var slider = $("#slider").attr("data-slider-value", speed);
@@ -103,7 +122,6 @@ $(document).ready(function() {
             	if(status == "error") {
             		console.log("Error occurred");
             	}
-            	practiceFrom(from);
             });
         }
 
@@ -112,18 +130,6 @@ $(document).ready(function() {
         	setTimeout(function() {
         		$("#practice-over-modal").modal();
         	}, millisec);
-        }
-
-        /* Check if logged user has tickets if he select "from = me" */
-        function practiceFrom(from) {
-        	/* If "from" is set to "me"... */
-			if(from === "me") {
-				/* ...check if logged user don't have tickets created and redirect if so */
-    	    	if($("#is-tickets-empty").val() == undefined) {
-    	    		localStorage.setItem("noTickets", undefined);
-    	    		window.location.reload();
-    	    	}
-			}
         }
 
     });
