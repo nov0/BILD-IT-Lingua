@@ -25,6 +25,15 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 	/* @author: Bojan Aleksic */
 	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
+	/**
+	 * @author Bojan Aleksic
+	 * Obtain all tickets by this user, with specific category selected.
+	 */
+	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2")
+	List<Ticket> findAllByUserAndCategory(User user, String category);
+	
+	List<Ticket> findAllByCategory(String category);
+	
 	Ticket findOneByUserAndId(User user, Long id);
 	
 	@Transactional
