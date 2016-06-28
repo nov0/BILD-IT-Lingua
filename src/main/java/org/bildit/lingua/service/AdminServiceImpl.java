@@ -7,6 +7,7 @@ import org.bildit.lingua.model.BaseUser;
 import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,9 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	public List<Admin> getAll() {
@@ -71,6 +75,10 @@ public class AdminServiceImpl implements AdminService {
 			admin.setLastName(lastName);
 			
 			admin.setUsername(admin.getUsername().toLowerCase());
+			
+			if(admin.getPassword().length() < 40) {
+				admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+			}
 			
 			admin.setEnabled(true);
 			admin.setAuthority("ADMIN");
