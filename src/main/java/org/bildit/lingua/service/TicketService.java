@@ -1,6 +1,9 @@
 package org.bildit.lingua.service;
 
+import java.util.List;
+
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,5 +22,9 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	String addDislikeToTicket(Long id, String username);
 	
 	void deleteTicket(Long id, String username);
+	
+	List<Ticket> getTicketsByUserAndCategory(User user, String category);
+	
+	List<Ticket> getTicketsByCategory(String category);
 	
 }
