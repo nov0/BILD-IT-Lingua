@@ -20,7 +20,7 @@ $(document).ready(function() {
 	});
 
 	// get ID value of active class
-	var urlRequest = $('.btn.active').attr('id');
+	var urlRequest = $('.li.active').attr('id');
 	
 	window.totalPages = "";
 
@@ -50,9 +50,9 @@ $(document).ready(function() {
 	}
 
 	/* Load tickets to the tickets-content selector, triggered by click on the button */
-	$(".btn-tickets").click(function() {
+	$(".li-tickets").click(function() {
 		$(this).addClass('active').siblings().removeClass('active');
-		urlRequest = $('.btn.active').attr('id');
+		urlRequest = $('.li.active').attr('id');
 		var page = 0;
 		var pageSync = 0;
 		loadTicketsInitially(page);
