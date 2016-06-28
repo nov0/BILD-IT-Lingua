@@ -41,7 +41,7 @@ private static final long serialVersionUID = 1L;
 	@Pattern(regexp = "^[\\p{L}0-9]*$")
 	private String username;
 	@NotBlank
-	@Size(min = 5, max = 40)
+	@Size(min = 5, max = 80)
 	private String password;
 	@NotBlank
 	@Size(min = 8, max = 80)

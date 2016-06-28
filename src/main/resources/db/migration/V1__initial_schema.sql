@@ -10,7 +10,7 @@ CREATE TABLE `base_users` (
   `enabled` bit(1) DEFAULT NULL,
   `first_name` varchar(25) NOT NULL,
   `last_name` varchar(25) NOT NULL,
-  `password` varchar(40) NOT NULL,
+  `password` varchar(80) NOT NULL,
   `username` varchar(25) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;

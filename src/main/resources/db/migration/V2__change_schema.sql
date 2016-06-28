@@ -12,7 +12,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `base_users` WRITE;
 /*!40000 ALTER TABLE `base_users` DISABLE KEYS */;
-INSERT INTO `base_users` VALUES (1,'ADMIN','admin@admin.com','','Admin','Adminic','admin','admin');
+INSERT INTO `base_users` VALUES (1,'ADMIN','admin@admin.com','','Admin','Adminic','$2a$10$7apjkSZSaBsJGgio/zWVOOmombHmupiywX4NuX2/I.mL0sG7ruLXC','admin');
 /*!40000 ALTER TABLE `base_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -24,10 +24,10 @@ UNLOCK TABLES;
 
 LOCK TABLES `base_users` WRITE;
 /*!40000 ALTER TABLE `base_users` DISABLE KEYS */;
-INSERT INTO `base_users` VALUES (2,'USER','yonbe83@gmail.com','','Bojan','Aleksic','yonbe','yonbe');
-INSERT INTO `base_users` VALUES (3,'USER','novo@gmail.com','','Novislav','Sekulic','novos','novos');
-INSERT INTO `base_users` VALUES (4,'USER','gogi@gmail.com','','Goran','Arsenic','goran','goran');
-INSERT INTO `base_users` VALUES (5,'USER','djomla79@gmail.com','','Mladen','Todorovic','djomla','djomla');
+INSERT INTO `base_users` VALUES (2,'USER','yonbe83@gmail.com','','Bojan','Aleksic','$2a$10$YGj4GEVqkh8V0pXK9Y5D/uFcCNwGrKCz1pJU3x1PV916p9hQN1ep.','yonbe');
+INSERT INTO `base_users` VALUES (3,'USER','novo@gmail.com','','Novislav','Sekulic','$2a$10$kA5IBQU/Gi2/yyZOrreEA.Sj1zDgGC0ctqyWMNIX.I2JZYhyKLINS','novos');
+INSERT INTO `base_users` VALUES (4,'USER','gogi@gmail.com','','Goran','Arsenic','$2a$10$uzEwWbLm8v.KZVruhU11Ae6nDBqtGvFWh3NVLxmXwTvy3PjBfpgBy','goran');
+INSERT INTO `base_users` VALUES (5,'USER','djomla79@gmail.com','','Mladen','Todorovic','$2a$10$0J9EJ/95st7qoBZpNw3t..tllIEMP5Fkr1MKGVp7MKhk.1EtP/WUi','djomla');
 /*!40000 ALTER TABLE `base_users` ENABLE KEYS */;
 UNLOCK TABLES;
 

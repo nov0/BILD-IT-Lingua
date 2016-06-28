@@ -7,6 +7,7 @@ import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +22,9 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private LanguageService languageServices;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	
 	@Override
@@ -90,6 +94,10 @@ public class UserServiceImpl implements UserService {
 			user.setLastName(lastName);
 			// setting username to lower case
 			user.setUsername(user.getUsername().toLowerCase());
+			
+			if(user.getPassword().length() < 40) {
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
+			}
 
 			user.setDomesticLanguage(languageServices.getOneByLanguageTitle(domesticLanguage));
 			user.setForeignLanguage(languageServices.getOneByLanguageTitle(foreignLanguage));
