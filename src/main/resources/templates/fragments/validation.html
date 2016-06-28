@@ -115,11 +115,11 @@
 			                        stringLength: {
 			                            min: 5,
 			                            max: 25,
-			                            message: /*[[#{Size.baseUser.username}]]*/'Please input minimal'
+			                            message: /*[[#{Size.baseUser.username}]]*/ 'Please input minimal'
 			                        },
 			                        regexp: {
-			                            regexp: /^[a-zA-z0-9]+$/,
-			                            message: /*[[#{Pattern.baseUser.username}]]*/ 'Only letters'
+			                            regexp: /^[a-z0-9]+$/,
+			                            message: /*[[#{Pattern.baseUser.username}]]*/ 'Only lowercase letters'
 			                        },
 			                        callback: {
 			                        	callback: function(value, validator, $field){

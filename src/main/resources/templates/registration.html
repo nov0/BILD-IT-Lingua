@@ -11,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 	<script src="js/formValidation.min.js"></script>
 	<script src="js/valid-bootstrap.min.js"></script>
+	<script src="js/disableSelectOption.js"></script>
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" href="css/styles.css" />  
 </head>
 <body>
@@ -101,7 +102,7 @@
                 	<br />
                 	<div class="form-goup">
                 		<label for="foreign" th:text="#{form.select.foreign.language}">Select foreign Language</label>
-                		<select class="form-control" id="domestic" name="foreign">
+                		<select class="form-control" id="foreign" name="foreign">
                 			<option th:each="language : ${allLanguages}" th:text="${language.languageTitle}">Lang</option>
 						</select>
                 	</div>
