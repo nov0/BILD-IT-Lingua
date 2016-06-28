@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
  * @class VoteRepositoryImpl
  * @author Mladen Todorovic
  * */
-public class VoteRepositoryImpl implements VoteRepositoryCustom {
+public class VoteRepositoryImpl {
 	
     @PersistenceContext
     private EntityManager entityManager;

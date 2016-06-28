@@ -7,7 +7,7 @@ import javax.persistence.PersistenceContext;
  * @class AdminRepositoryImpl
  * @author Mladen Todorovic
  * */
-public class AdminRepositoryImpl implements AdminRepositoryCustom {
+public class AdminRepositoryImpl {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -17,10 +17,4 @@ public class AdminRepositoryImpl implements AdminRepositoryCustom {
 		this.entityManager = entityManager;
 	}
 	 
-	/** Temporary unused method */
-    @Override
-    public String customAdminMethod() {
-    	return "";
-    }
-	
 }

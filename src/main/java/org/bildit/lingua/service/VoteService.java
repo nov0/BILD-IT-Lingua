@@ -8,6 +8,4 @@ import org.bildit.lingua.model.Vote;
  * */
 public interface VoteService extends BaseService <Vote, Long> {
 	
-	Vote findVoteByTicketId(Long id);
-	
 }

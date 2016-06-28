@@ -18,7 +18,14 @@ $(document).ready(function() {
 		$(".category").text(this.innerHTML);
 		$(".selected-category").val($(this).attr("id"));
 	});
+	
+	var selectedLanguage = "";
 
+	$(".select-language li > a").click(function() {
+		$(".select-practice-lang").text(this.innerHTML);
+		selectedLanguage = this.innerHTML;
+	});
+	
 	// get ID value of active class
 	var urlRequest = $('.btn.active').attr('id');
 	
@@ -80,7 +87,8 @@ $(document).ready(function() {
 	function loadTicketsInitially(page) {
 		$(".tickets-content").load("fragments/get-tickets.html", { 
 			"urlData" : urlRequest,
-			"page" : page
+			"page" : page,
+			"learningLanguage" : selectedLanguage
 		},
 		function(response, status, xhr) {
 			if(status == "error") {
@@ -96,7 +104,8 @@ $(document).ready(function() {
 		/* Avoid replacing the same content all over again */
 		$(".tickets-wrapper").append($("<div>").load("fragments/get-tickets.html .ticket-container", { 
 			"urlData" : urlRequest,
-			"page" : page
+			"page" : page,
+			"learningLanguage" : selectedLanguage
 		},
 		function(response, status, xhr) {
 			if(status == "error") {
