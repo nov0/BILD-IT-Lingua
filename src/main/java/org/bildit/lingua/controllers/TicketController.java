@@ -1,11 +1,11 @@
 package org.bildit.lingua.controllers;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
+import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.LanguageService;
 import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
@@ -17,9 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,8 +38,12 @@ public class TicketController {
 	@Autowired
 	private LanguageService languageService;
 	
+	@Autowired
+	private UserRepository userRepository;
+	
 	/**
 	 * @author Bojan Aleksic
+	 * @edit Mladen Todorovic
 	 * @param principal
 	 * @param model
 	 * @param urlRequest
@@ -57,22 +59,32 @@ public class TicketController {
 			Principal principal, 
 			ModelAndView model, 
 			@RequestParam("urlData") String urlRequest, 
-			@RequestParam(value="page", required=false) Integer page, 
+			@RequestParam(value="page", required=false) Integer page,
+			@RequestParam(value="learningLanguage", required=false) String learningLanguage,
 			@PageableDefault(value=3) Pageable pageable) {
-		
+
 		Page<Ticket> tickets = null;
+		String language = "";
+		
+		if (learningLanguage == null || learningLanguage.isEmpty()) {
+			User user = userRepository.findUserByUsername(principal.getName());
+			language = user.getForeignLanguage().getLanguageTitle();
+		} else {
+			userService.setForeignLanguageForUser(principal.getName(), learningLanguage);
+			language = learningLanguage;
+		}
 		
 		if("ticket-all".equals(urlRequest)) {
-			tickets = ticketService.getAllTicketsByUsername(principal.getName(), pageable);
+			tickets = ticketService.getAllTicketsByUsername(principal.getName(), language, pageable);
 //			model.addObject(TICKETS, tickets);
 		} else if("ticket-active".equals(urlRequest)) {
-			tickets = ticketService.getAllActiveTicketsByUsername(principal.getName(), pageable);
+			tickets = ticketService.getAllActiveTicketsByUsername(principal.getName(), language, pageable);
 //			model.addObject(TICKETS, tickets);
 		} else if("ticket-deleted".equals(urlRequest)) {
-			tickets = ticketService.getAllDeactivatedTicketsByUsername(principal.getName(), pageable);
+			tickets = ticketService.getAllDeactivatedTicketsByUsername(principal.getName(), language, pageable);
 //			model.addObject(TICKETS, tickets);
 		} else if("ticket-moderated".equals(urlRequest)) {
-			tickets = ticketService.getAllModeratedTicketsByUsername(principal.getName(), pageable);
+			tickets = ticketService.getAllModeratedTicketsByUsername(principal.getName(), language, pageable);
 //			model.addObject(TICKETS, tickets);
 		}
 		
@@ -82,22 +94,6 @@ public class TicketController {
 		}
 		
 		return model;
-	}
-	
-	/**
-	 * @author Bojan Aleksic
-	 * @param languageTitle
-	 * @param principal
-	 * @return
-	 * Updating user's foreign (learning) language
-	 */
-	@RequestMapping(value="/set-foreign-language", method=RequestMethod.POST, produces="application/json")
-	@ResponseBody
-	public Map<String, String> setForeignLanguage(@RequestBody String languageTitle, Principal principal) {
-		Map<String, String> map = new HashMap<>();
-		userService.setForeignLanguageForUser(principal.getName(), languageTitle);
-		map.put("languageTitle", languageTitle);
-		return map;
 	}
 	
 	/**
@@ -178,7 +174,7 @@ public class TicketController {
 	
 	/**
 	 * @author Mladen Todorovic
-	 * Method: add like to ticket by ticket-id and user's username
+	 * Method: add dislike to ticket by ticket-id and user's username
 	 */
 	@RequestMapping("/add-dislike")
 	@ResponseBody

@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 
 public interface TicketService extends BaseService<Ticket, Long> {
 
-	Page<Ticket> getAllTicketsByUsername(String username, Pageable pageable);
-	Page<Ticket> getAllActiveTicketsByUsername(String username, Pageable pageable);
-	Page<Ticket> getAllDeactivatedTicketsByUsername(String username, Pageable pageable);
-	Page<Ticket> getAllModeratedTicketsByUsername(String username, Pageable pageable);
+	Page<Ticket> getAllTicketsByUsername(String username, String learningLanguage, Pageable pageable);
+	Page<Ticket> getAllActiveTicketsByUsername(String username, String learningLanguage, Pageable pageable);
+	Page<Ticket> getAllDeactivatedTicketsByUsername(String username, String learningLanguage, Pageable pageable);
+	Page<Ticket> getAllModeratedTicketsByUsername(String username, String learningLanguage, Pageable pageable);
 	
 	Ticket saveTicket(Ticket ticket, String username);
 	

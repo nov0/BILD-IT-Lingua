@@ -6,6 +6,6 @@ import org.bildit.lingua.model.Admin;
  * @author Mladen Todorovic
  * @interface AdminRepository
  * */
-public interface AdminRepository extends BaseRepository<Admin, Long>, AdminRepositoryCustom {
+public interface AdminRepository extends BaseRepository<Admin, Long> {
 	
 }

@@ -6,15 +6,9 @@ import javax.persistence.PersistenceContext;
  * @class LanguageRepositoryImpl
  * @author Mladen Todorovic
  * */
-public class LanguageRepositoryImpl implements LanguageRepositoryCustom {
+public class LanguageRepositoryImpl {
 	
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-	/** Temporary unused method */
-    @Override
-	public String customLanguageMethod() {
-		return "";
-	}
 	
 }
