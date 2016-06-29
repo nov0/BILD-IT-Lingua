@@ -17,8 +17,9 @@ $(document).ready(function() {
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
+        window.userHasTickets = "";
+
         var scrollSpeed = Number(speed);
-        window.userHasTickets = true;
         // Control variable for enabling and disabling keyboard shortcuts slider control.
         // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
         var overviewPractice = false;
@@ -26,7 +27,7 @@ $(document).ready(function() {
         var message = "";
         var color = 'success';
     	var icon = 'glyphicon glyphicon-ok';
-    	
+
         var colorError = 'danger';
     	var iconError = 'glyphicon glyphicon-warning-sign';
 
@@ -39,7 +40,8 @@ $(document).ready(function() {
 		}
 
         /* Check if logged user has tickets if he select "from = me",
-         * and if he has tickets in specific category if he select "everyone" */
+         * and if there is tickets available in specific category by specific language 
+         * if he select "everyone" */
         if(from === "me" || from == "everyone") {
         	$.ajax({
         		url : "user-has-tickets",
@@ -54,26 +56,29 @@ $(document).ready(function() {
         		}
         	});
         }
-
-        if(window.userHasTickets == true) {
+        
+        if(window.userHasTickets === "me-category-all-language=false"
+        	|| window.userHasTickets === "everyone-category-all-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified language available.";
+    		showNotification(message, colorError, iconError);
+        } else if(window.userHasTickets === "me-specified-category-language=false"
+        	|| window.userHasTickets === "everyone-specified-category-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified category in this language available";
+    		showNotification(message, colorError, iconError);
+        } else {
         	if(speed != 0) {
         		loadOverview();
         	} else {
         		loadFlipcard();
         	}
-        } else {
-        	message = /*[[#{slider.speed.message.one}]]*/ "You've selected option that has no tickets.";
-    		showNotification(message, colorError, iconError);
         }
+        
         /*
          * @author Novislav Sekulic
-         * 
          * Method for changing speed of practice via keyboard shortcuts.
          * LEFT arrow key is to slow down by 5s,
          * RIGHT arrof key is for speed up by 5s.
-         * 
          */
-        
         $(window).keydown(function(e) {
         	if(overviewPractice) {
         		// if LEFT arrow is pressed, slow down by 5s
@@ -83,8 +88,8 @@ $(document).ready(function() {
         				currentSliderValue = scrollSpeed.toString();
         				changeSpeed(currentSliderValue);
         			}
-				
-        			// if RIGHT arrow is pressed, speed up for 5s
+
+        		// if RIGHT arrow is pressed, speed up for 5s
         		} else if((e.keyCode || e.which) == 39) {
         			if(scrollSpeed <= 2) {
         				scrollSpeed++;

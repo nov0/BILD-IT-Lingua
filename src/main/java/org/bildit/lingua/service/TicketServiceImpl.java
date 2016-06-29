@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.model.Vote;
@@ -53,7 +54,7 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(id);
 	}
 
-	/* 
+	/**
 	 * @author Bojan Aleksic
 	 * This method returns all tickets of current user by username, 5 records per page.
 	 */
@@ -189,15 +190,6 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(ticket);
 	}
 	
-	/** 
-	 * @author Bojan Aleksic
-	 * Method returns tickets by User and selected category
-	 */
-	@Override
-	public List<Ticket> getTicketsByUserAndCategory(User user, String category) {
-		return ticketRepository.findAllByUserAndCategory(user, category);
-	}
-	
 	/**
 	 * @author Bojan Aleksic
 	 * Method returns all tickets by provided category
@@ -205,6 +197,44 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public List<Ticket> getTicketsByCategory(String category) {
 		return ticketRepository.findAllByCategory(category);
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns tickets by User and his learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByUserAndLanguage(User user, Language language) {
+		return ticketRepository.findAllByUserAndLearningLanguage(user, language);
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns ticket by user, selected category, and
+	 * by user's learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByUserCategoryAndLanguage(User user, String category, Language language) {
+		return ticketRepository.findAllByUserAndCategoryAndLearningLanguage(user, category, language);
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns everyone's tickets by specified learning language
+	 * by the user.
+	 */
+	@Override
+	public List<Ticket> getEveryonesTicketsByLanguage(Language language) {
+		return ticketRepository.findAllByLearningLanguage(language);
+	}
+
+	/**
+	 * @author Bojan Aleksic 
+	 * Method returns tickets by specified category and user's learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByCategoryAndLanguage(String category, Language language) {
+		return ticketRepository.findAllByCategoryAndLearningLanguage(category, language);
 	}
 	
 }

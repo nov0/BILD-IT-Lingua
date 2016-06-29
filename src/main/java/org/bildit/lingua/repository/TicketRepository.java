@@ -27,7 +27,7 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	Page<Ticket> findAllByUserIdAndLearningLanguageAndEditedTrue(Long id, Language learningLanguage, Pageable pageable);
 	
-	/* @author: Bojan Aleksic */
+	/** @author: Bojan Aleksic */
 	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
 	/** @author Mladen Todorovic */
@@ -40,10 +40,13 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2")
 	List<Ticket> findAllByUserAndCategory(User user, String category);
 	
+	/** @author Bojan Aleksic */
 	List<Ticket> findAllByCategory(String category);
-	
-	/** @author Mladen Todorovic */
 	Ticket findOneByUserAndId(User user, Long id);
+	List<Ticket> findAllByUserAndLearningLanguage(User user, Language language);
+	List<Ticket> findAllByUserAndCategoryAndLearningLanguage(User user, String category, Language language);
+	List<Ticket> findAllByLearningLanguage(Language language);
+	List<Ticket> findAllByCategoryAndLearningLanguage(String category, Language language);
 	
 	/** @author Mladen Todorovic */
 	@Transactional
@@ -66,6 +69,5 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Goran Arsenic */
 	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.learningLanguage = ?1 AND ticket.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language language, Pageable pageable);
-
 	
 }

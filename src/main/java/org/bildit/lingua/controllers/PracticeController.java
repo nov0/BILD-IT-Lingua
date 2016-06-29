@@ -95,9 +95,10 @@ public class PracticeController {
 		return modelAndView;
 	}
 	
-	
 	/**
 	 * @author Bojan Aleksic
+	 * @param from
+	 * @param category
 	 * @param principal
 	 * @return
 	 * Method checks whether user has tickets created and if so returns true,
@@ -106,22 +107,22 @@ public class PracticeController {
 	 */
 	@RequestMapping("/user-has-tickets")
 	@ResponseBody
-	public boolean userHasTickets(@RequestParam String from, @RequestParam String category, Principal principal) {
+	public String userHasTickets(@RequestParam String from, @RequestParam String category, Principal principal) {
 		User user = userService.findUserByUsername(principal.getName());
 		if("me".equals(from)) {
 			if("all".equals(category)) {
-				return !user.getTickets().isEmpty();
+				return "me-category-all-language=" + !ticketService.getTicketsByUserAndLanguage(user, user.getForeignLanguage()).isEmpty();
 			} else {
-				return !ticketService.getTicketsByUserAndCategory(user, category).isEmpty();
+				return "me-specified-category-language=" + !ticketService.getTicketsByUserCategoryAndLanguage(user, category, user.getForeignLanguage()).isEmpty();
 			}
 		} else if("everyone".equals(from)) {
 			if("all".equals(category)) {
-				return !ticketService.getAll().isEmpty();
+				return "everyone-category-all-language=" + !ticketService.getEveryonesTicketsByLanguage(user.getForeignLanguage()).isEmpty();
 			} else {
-				return !ticketService.getTicketsByCategory(category).isEmpty();
+				return "everyone-specified-category-language=" + !ticketService.getTicketsByCategoryAndLanguage(category, user.getForeignLanguage()).isEmpty();
 			}
 		}
-		return true;
+		return Boolean.toString(true);
 	}
 	
 	/**
