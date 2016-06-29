@@ -32,9 +32,13 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2")
 	List<Ticket> findAllByUserAndCategory(User user, String category);
 	
+	/** @author Bojan Aleksic */
 	List<Ticket> findAllByCategory(String category);
-	
 	Ticket findOneByUserAndId(User user, Long id);
+	List<Ticket> findAllByUserAndLearningLanguage(User user, Language language);
+	List<Ticket> findAllByUserAndCategoryAndLearningLanguage(User user, String category, Language language);
+	List<Ticket> findAllByLearningLanguage(Language language);
+	List<Ticket> findAllByCategoryAndLearningLanguage(String category, Language language);
 	
 	@Transactional
 	@Modifying(clearAutomatically = true)
@@ -65,6 +69,5 @@ public interface TicketRepository extends BaseRepository<Ticket, Long>, TicketRe
 	 */
 	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.learningLanguage = ? AND ticket.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language language, Pageable pageable);
-
 	
 }

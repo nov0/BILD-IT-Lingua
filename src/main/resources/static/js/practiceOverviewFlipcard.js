@@ -17,7 +17,7 @@ $(document).ready(function() {
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
-        window.userHasTickets = true;
+        window.userHasTickets = "";
 
         var message = "";
         var color = 'success';
@@ -35,7 +35,8 @@ $(document).ready(function() {
 		}
 
         /* Check if logged user has tickets if he select "from = me",
-         * and if he has tickets in specific category if he select "everyone" */
+         * and if there is tickets available in specific category by specific language 
+         * if he select "everyone" */
         if(from === "me" || from == "everyone") {
         	$.ajax({
         		url : "user-has-tickets",
@@ -50,16 +51,21 @@ $(document).ready(function() {
         		}
         	});
         }
-
-        if(window.userHasTickets == true) {
+        
+        if(window.userHasTickets === "me-category-all-language=false"
+        	|| window.userHasTickets === "everyone-category-all-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified language available.";
+    		showNotification(message, colorError, iconError);
+        } else if(window.userHasTickets === "me-specified-category-language=false"
+        	|| window.userHasTickets === "everyone-specified-category-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified category in this language available";
+    		showNotification(message, colorError, iconError);
+        } else {
         	if(speed != 0) {
         		loadOverview();
         	} else {
         		loadFlipcard();
         	}
-        } else {
-        	message = /*[[#{slider.speed.message.one}]]*/ "You've selected option that has no tickets.";
-    		showNotification(message, colorError, iconError);
         }
 
         /* Overview function */
