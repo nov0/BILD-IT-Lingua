@@ -19,6 +19,9 @@ $(document).ready(function() {
         var currentSliderValue;
         var scrollSpeed = Number(speed);
         window.userHasTickets = true;
+        // Control variable for enabling and disabling keyboard shortcuts slider control.
+        // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
+        var overviewPractice = false;
 
         var message = "";
         var color = 'success';
@@ -71,23 +74,25 @@ $(document).ready(function() {
          * 
          */
         
-        $(window).keydown(function(e) {			
-			// if LEFT arrow is pressed, slow down by 5s
-			if((e.keyCode || e.which) == 37) {
-				if(scrollSpeed >= 2) {
-					scrollSpeed--;
-					currentSliderValue = scrollSpeed.toString();
-					changeSpeed(currentSliderValue);
-				}
+        $(window).keydown(function(e) {
+        	if(overviewPractice) {
+        		// if LEFT arrow is pressed, slow down by 5s
+        		if((e.keyCode || e.which) == 37) {
+        			if(scrollSpeed >= 2) {
+        				scrollSpeed--;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
 				
-			// if RIGHT arrow is pressed, speed up for 5s
-			} else if((e.keyCode || e.which) == 39) {
-				if(scrollSpeed <= 2) {
-					scrollSpeed++;
-					currentSliderValue = scrollSpeed.toString();
-					changeSpeed(currentSliderValue);
-				}
-			}
+        			// if RIGHT arrow is pressed, speed up for 5s
+        		} else if((e.keyCode || e.which) == 39) {
+        			if(scrollSpeed <= 2) {
+        				scrollSpeed++;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
+        		}
+        	}
 		}); // end keydown
 		
         /* Method for changing speed of practice. */
@@ -109,6 +114,8 @@ $(document).ready(function() {
 
         /* Overview function */
         function loadOverview() {
+        	// Enabling keyboard shortcuts slider control.
+        	overviewPractice = true;
         	/* Load overview practice fragment with time interval on user's choice */
         	$("#practice-lingua").load("fragments/overview-practice.html", {
         		from : from,
@@ -156,6 +163,8 @@ $(document).ready(function() {
 
         /* Flipcard function */
         function loadFlipcard() {
+        	// Disableing keyboard shortcuts slider control.
+        	overviewPractice = false;
         	$("#practice-lingua").load("fragments/flipcard-practice.html", {
                 from : from,
                 category : category,
