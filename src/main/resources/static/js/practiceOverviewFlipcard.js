@@ -7,6 +7,10 @@ $(document).ready(function() {
 
     $("#start-practice-submit").click(function() {
 
+    	/* Set item for practice to check later if practice is aborted
+    	 * or left before it ends */
+    	localStorage.setItem("practiceStarted", true);
+
         var from = $("#input-from").val();
         var category = $("#input-category").val();
         var speed = $("#slider").val();
@@ -30,11 +34,16 @@ $(document).ready(function() {
 			millisec = 15000;
 		}
 
-        /* Check if logged user has tickets if he select "from = me" */
-        if(from === "me") {
+        /* Check if logged user has tickets if he select "from = me",
+         * and if he has tickets in specific category if he select "everyone" */
+        if(from === "me" || from == "everyone") {
         	$.ajax({
         		url : "user-has-tickets",
         		type : "GET",
+        		data : { 
+        			from : from,
+        			category : category
+        		},
         		async : false,
         		success : function(response) {
         			window.userHasTickets = response;
@@ -49,7 +58,7 @@ $(document).ready(function() {
         		loadFlipcard();
         	}
         } else {
-        	message = /*[[#{slider.speed.message.one}]]*/ "You don't have any tickets created.";
+        	message = /*[[#{slider.speed.message.one}]]*/ "You've selected option that has no tickets.";
     		showNotification(message, colorError, iconError);
         }
 
