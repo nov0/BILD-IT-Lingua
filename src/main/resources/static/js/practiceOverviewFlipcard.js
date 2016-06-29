@@ -19,10 +19,15 @@ $(document).ready(function() {
         var currentSliderValue;
         window.userHasTickets = "";
 
+        var scrollSpeed = Number(speed);
+        // Control variable for enabling and disabling keyboard shortcuts slider control.
+        // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
+        var overviewPractice = false;
+
         var message = "";
         var color = 'success';
     	var icon = 'glyphicon glyphicon-ok';
-    	
+
         var colorError = 'danger';
     	var iconError = 'glyphicon glyphicon-warning-sign';
 
@@ -67,9 +72,55 @@ $(document).ready(function() {
         		loadFlipcard();
         	}
         }
+        
+        /*
+         * @author Novislav Sekulic
+         * Method for changing speed of practice via keyboard shortcuts.
+         * LEFT arrow key is to slow down by 5s,
+         * RIGHT arrof key is for speed up by 5s.
+         */
+        $(window).keydown(function(e) {
+        	if(overviewPractice) {
+        		// if LEFT arrow is pressed, slow down by 5s
+        		if((e.keyCode || e.which) == 37) {
+        			if(scrollSpeed >= 2) {
+        				scrollSpeed--;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
+
+        		// if RIGHT arrow is pressed, speed up for 5s
+        		} else if((e.keyCode || e.which) == 39) {
+        			if(scrollSpeed <= 2) {
+        				scrollSpeed++;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
+        		}
+        	}
+		}); // end keydown
+		
+        /* Method for changing speed of practice. */
+		function changeSpeed(sliderValue) {
+			if(sliderValue === "1") {
+		        millisec = 5000;
+		        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "2") {
+				millisec = 10000;
+				message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "3") {
+				millisec = 15000;
+				message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
+		        showNotification(message, color, icon);
+			}
+	    }
 
         /* Overview function */
         function loadOverview() {
+        	// Enabling keyboard shortcuts slider control.
+        	overviewPractice = true;
         	/* Load overview practice fragment with time interval on user's choice */
         	$("#practice-lingua").load("fragments/overview-practice.html", {
         		from : from,
@@ -88,21 +139,10 @@ $(document).ready(function() {
     			/* Change slider speed */
     			$("#slider-ticker").click(function() {
     				currentSliderValue = $(".slider-handle").attr("aria-valuenow");
-    				if(currentSliderValue === "1") {
-    			        millisec = 5000;
-    			        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "2") {
-    					millisec = 10000;
-    					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "3") {
-    					millisec = 15000;
-    					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
-    			        showNotification(message, color, icon);
-    				}
-    		    });
-
+    				scrollSpeed = Number(currentSliderValue);
+    				changeSpeed(currentSliderValue);
+    			});
+    			
 	            if(currentSliderValue != undefined) {
 	            	/* Change slider ticker value based on user's click */
 	    		    $("#slider").attr("data-slider-value", currentSliderValue);
@@ -128,6 +168,8 @@ $(document).ready(function() {
 
         /* Flipcard function */
         function loadFlipcard() {
+        	// Disableing keyboard shortcuts slider control.
+        	overviewPractice = false;
         	$("#practice-lingua").load("fragments/flipcard-practice.html", {
                 from : from,
                 category : category,

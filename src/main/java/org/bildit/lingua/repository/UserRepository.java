@@ -13,11 +13,14 @@ import org.springframework.data.jpa.repository.Query;
  * @interface UserRepository
  * @author Mladen Todorovic
  * */
-public interface UserRepository extends BaseRepository <User, Long>, UserRepositoryCustom {
+public interface UserRepository extends BaseRepository <User, Long> {
 	
 	List<User> findAll();
+	
+	/** @author Mladen Todorovic */
 	User findUserByUsername(String username);
 	
+	/** @author Novislav Sekulic */
 	@Query("SELECT CASE WHEN COUNT(baseUser) > 0 THEN 'true' ELSE 'false' END FROM BaseUser baseUser WHERE baseUser.username = ?1")
 	boolean existByUsername(String username);
 	

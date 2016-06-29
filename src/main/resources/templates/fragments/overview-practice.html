@@ -37,7 +37,7 @@
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
-				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets">
+				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets." th:attr="title=#{tooltip.title.slider}">
 					<a href="#" id="slider-ticker">
 						<input id="slider" type="text" name="speed" data-provide="slider"
 							data-slider-ticks="[1, 2, 3]"
@@ -62,12 +62,12 @@
 				</div>
 			</div>
 			<div style="text-align: right;" class="col-md-4">
-				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
+				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up" th:attr="title=#{tooltip.title.voteup}">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.likes}" id="likes-value"></span>
 				&nbsp;&nbsp;
-				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
+				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down" th:attr="title=#{tooltip.title.votedown}">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>

@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
  * @interface LanguageRepository
  * @author Mladen Todorovic
  * */
-public interface LanguageRepository extends BaseRepository<Language, Long>, LanguageRepositoryCustom {
+public interface LanguageRepository extends BaseRepository<Language, Long> {
 
 	@Query("SELECT lang FROM Language lang WHERE lang.languageTitle = ?1")
 	Language getOneByLanguageTitle(String languageTitle);

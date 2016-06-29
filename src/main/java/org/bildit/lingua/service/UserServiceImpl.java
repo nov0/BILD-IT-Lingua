@@ -123,6 +123,7 @@ public class UserServiceImpl implements UserService {
 		Language foreignLanguage = languageServices.getOneByLanguageTitle(languageTitle);
 		user.setForeignLanguage(foreignLanguage);
 		userRepository.updateForeignLanguageForUser(foreignLanguage, user.getId());
+		userRepository.flush();
 	}
 
 	
