@@ -51,16 +51,16 @@
 				<span th:text="${ticket.dateCreated}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
-				<button id="button-flip" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span th:text="#{flipcard.button.flip}">FLIP CARD</span></button>
-				<button id="button-next" type="button" class="btn btn-primary"><span style="padding-right: 8px;" class="glyphicon glyphicon-expand"></span><span th:text="#{flipcard.button.next}">NEXT</span></button>
+				<button id="button-flip" type="button" class="btn btn-primary" data-toggle="tooltip" title="Flip Card" th:attr="title=#{tooltip.title.flip}"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span th:text="#{flipcard.button.flip}">FLIP CARD</span></button>
+				<button id="button-next" type="button" class="btn btn-primary" data-toggle="tooltip" title="Next Card" th:attr="title=#{tooltip.title.next}"><span style="padding-right: 8px;" class="glyphicon glyphicon-expand"></span><span th:text="#{flipcard.button.next}">NEXT</span></button>
 			</div>
 			<div style="text-align: right;" class="col-md-4">
-				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up">
+				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up" th:attr="title=#{tooltip.title.voteup}">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.likes}" id="likes-value"></span>
 				&nbsp;&nbsp;
-				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down">
+				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down" th:attr="title=#{tooltip.title.votedown}">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>
@@ -70,8 +70,6 @@
 		<div id="test-flipcard"></div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<input type="hidden" th:value="${ticket.id}" id="ticket-id-overview" />
-		<!-- Script for flip card practice-->
-	    <script type="text/javascript" th:src="@{/js/flipcard.js}"></script>
 	    <!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
 		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
 	    <script>
