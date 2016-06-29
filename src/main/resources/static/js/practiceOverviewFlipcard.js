@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     	/* Set item for practice to check later if practice is aborted
     	 * or left before it ends */
-    	localStorage.setItem("practiceStarted", undefined);
+    	localStorage.setItem("practiceStarted", true);
 
         var from = $("#input-from").val();
         var category = $("#input-category").val();
