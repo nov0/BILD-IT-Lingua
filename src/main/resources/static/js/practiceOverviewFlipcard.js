@@ -17,7 +17,7 @@ $(document).ready(function() {
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
-        var keyPressed = 0;
+        var scrollSpeed = Number(speed);
         window.userHasTickets = true;
 
         var message = "";
@@ -71,28 +71,22 @@ $(document).ready(function() {
          * 
          */
         
-        $(window).keydown(function(e) {
-        	// registering how many key for changing speed is pressed
-        	keyPressed++;
-			currentSliderValue = $(".slider-handle").attr("aria-valuenow");
-			
+        $(window).keydown(function(e) {			
 			// if LEFT arrow is pressed, slow down by 5s
 			if((e.keyCode || e.which) == 37) {
-				if(currentSliderValue === "3" && keyPressed > 1 || currentSliderValue === "2") {
-					currentSliderValue = "1";
-				} else if (currentSliderValue === "3"){
-					currentSliderValue = "2";
+				if(scrollSpeed >= 2) {
+					scrollSpeed--;
+					currentSliderValue = scrollSpeed.toString();
+					changeSpeed(currentSliderValue);
 				}
-				changeSpeed(currentSliderValue);
 				
-				// if RIGHT arrow is pressed, speed up for 5s
+			// if RIGHT arrow is pressed, speed up for 5s
 			} else if((e.keyCode || e.which) == 39) {
-				if(currentSliderValue === "1" && keyPressed > 1 || currentSliderValue === "2") {
-					currentSliderValue = "3";
-				} else if(currentSliderValue === "1") {
-					currentSliderValue = "2";
-				} 
-				changeSpeed(currentSliderValue);
+				if(scrollSpeed <= 2) {
+					scrollSpeed++;
+					currentSliderValue = scrollSpeed.toString();
+					changeSpeed(currentSliderValue);
+				}
 			}
 		}); // end keydown
 		
@@ -123,8 +117,13 @@ $(document).ready(function() {
     		},
     		function(response, status, xhr) {
     			
-    			// reseting counter how many key is pressed
-    			keyPressed = 0;
+//    			// reseting counter how many key is pressed
+//    			keyPressed = 0;
+//    			currentSliderValue = $(".slider-handle").attr("aria-valuenow");
+//    			scrollSpeed = parseInt(currentSliderValue);
+//    			console.log(scrollSpeed.typeof);
+//    			console.log("Value of ScrollSpeed" + scrollSpeed);
+//    			console.log("value of currentSliderValue: " + currentSliderValue);
 
     			if(status == "error") {
     				console.log("Error occurred");
@@ -136,6 +135,7 @@ $(document).ready(function() {
     			/* Change slider speed */
     			$("#slider-ticker").click(function() {
     				currentSliderValue = $(".slider-handle").attr("aria-valuenow");
+    				scrollSpeed = Number(currentSliderValue);
     				changeSpeed(currentSliderValue);
     			});
     			
