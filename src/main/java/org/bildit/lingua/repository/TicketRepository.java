@@ -33,6 +33,15 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	Page<Ticket> findAllByUserIdAndLearningLanguage(Long id, Language learningLanguage, Pageable pageable);
 	
+	/**
+	 * @author Bojan Aleksic
+	 * Obtain all tickets by this user, with specific category selected.
+	 */
+	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2")
+	List<Ticket> findAllByUserAndCategory(User user, String category);
+	
+	List<Ticket> findAllByCategory(String category);
+	
 	/** @author Mladen Todorovic */
 	Ticket findOneByUserAndId(User user, Long id);
 	

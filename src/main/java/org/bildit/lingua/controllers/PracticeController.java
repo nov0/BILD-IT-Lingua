@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Stack;
 
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
 import org.bildit.lingua.service.PracticeService;
+import org.bildit.lingua.service.TicketService;
 import org.bildit.lingua.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -25,6 +29,9 @@ public class PracticeController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	TicketService ticketService;
 	
 	/**
 	 * @param from
@@ -94,15 +101,40 @@ public class PracticeController {
 	 * @param principal
 	 * @return
 	 * Method checks whether user has tickets created and if so returns true,
-	 * otherwise returns false
+	 * otherwise returns false. It also checks if user has ticket in specific
+	 * category.
 	 */
 	@RequestMapping("/user-has-tickets")
 	@ResponseBody
-	public boolean userHasTickets(Principal principal) {
-		if(userService.findUserByUsername(principal.getName()).getTickets().isEmpty()) {
-			return false;
+	public boolean userHasTickets(@RequestParam String from, @RequestParam String category, Principal principal) {
+		User user = userService.findUserByUsername(principal.getName());
+		if("me".equals(from)) {
+			if("all".equals(category)) {
+				return !user.getTickets().isEmpty();
+			} else {
+				return !ticketService.getTicketsByUserAndCategory(user, category).isEmpty();
+			}
+		} else if("everyone".equals(from)) {
+			if("all".equals(category)) {
+				return !ticketService.getAll().isEmpty();
+			} else {
+				return !ticketService.getTicketsByCategory(category).isEmpty();
+			}
 		}
 		return true;
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * Method clears out the Stack, if user leave practice 
+	 * before it ends
+	 */
+	@RequestMapping("/reset-practice")
+	@ResponseStatus(value = HttpStatus.OK)
+	public void clearStackOnPracticeAbort() {
+		if(!stack.isEmpty()) {
+			stack.clear();
+		}
 	}
 	
 }

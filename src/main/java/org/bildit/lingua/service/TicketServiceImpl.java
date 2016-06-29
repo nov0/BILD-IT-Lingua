@@ -189,4 +189,22 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(ticket);
 	}
 	
+	/** 
+	 * @author Bojan Aleksic
+	 * Method returns tickets by User and selected category
+	 */
+	@Override
+	public List<Ticket> getTicketsByUserAndCategory(User user, String category) {
+		return ticketRepository.findAllByUserAndCategory(user, category);
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns all tickets by provided category
+	 */
+	@Override
+	public List<Ticket> getTicketsByCategory(String category) {
+		return ticketRepository.findAllByCategory(category);
+	}
+	
 }

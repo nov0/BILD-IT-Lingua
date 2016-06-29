@@ -7,12 +7,17 @@ $(document).ready(function() {
 
     $("#start-practice-submit").click(function() {
 
+    	/* Set item for practice to check later if practice is aborted
+    	 * or left before it ends */
+    	localStorage.setItem("practiceStarted", true);
+
         var from = $("#input-from").val();
         var category = $("#input-category").val();
         var speed = $("#slider").val();
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
+        var keyPressed = 0;
         window.userHasTickets = true;
 
         var message = "";
@@ -30,11 +35,16 @@ $(document).ready(function() {
 			millisec = 15000;
 		}
 
-        /* Check if logged user has tickets if he select "from = me" */
-        if(from === "me") {
+        /* Check if logged user has tickets if he select "from = me",
+         * and if he has tickets in specific category if he select "everyone" */
+        if(from === "me" || from == "everyone") {
         	$.ajax({
         		url : "user-has-tickets",
         		type : "GET",
+        		data : { 
+        			from : from,
+        			category : category
+        		},
         		async : false,
         		success : function(response) {
         			window.userHasTickets = response;
@@ -49,9 +59,59 @@ $(document).ready(function() {
         		loadFlipcard();
         	}
         } else {
-        	message = /*[[#{slider.speed.message.one}]]*/ "You don't have any tickets created.";
+        	message = /*[[#{slider.speed.message.one}]]*/ "You've selected option that has no tickets.";
     		showNotification(message, colorError, iconError);
         }
+        /*
+         * @author Novislav Sekulic
+         * 
+         * Method for changing speed of practice via keyboard shortcuts.
+         * LEFT arrow key is to slow down by 5s,
+         * RIGHT arrof key is for speed up by 5s.
+         * 
+         */
+        
+        $(window).keydown(function(e) {
+        	// registering how many key for changing speed is pressed
+        	keyPressed++;
+			currentSliderValue = $(".slider-handle").attr("aria-valuenow");
+			
+			// if LEFT arrow is pressed, slow down by 5s
+			if((e.keyCode || e.which) == 37) {
+				if(currentSliderValue === "3" && keyPressed > 1 || currentSliderValue === "2") {
+					currentSliderValue = "1";
+				} else if (currentSliderValue === "3"){
+					currentSliderValue = "2";
+				}
+				changeSpeed(currentSliderValue);
+				
+				// if RIGHT arrow is pressed, speed up for 5s
+			} else if((e.keyCode || e.which) == 39) {
+				if(currentSliderValue === "1" && keyPressed > 1 || currentSliderValue === "2") {
+					currentSliderValue = "3";
+				} else if(currentSliderValue === "1") {
+					currentSliderValue = "2";
+				} 
+				changeSpeed(currentSliderValue);
+			}
+		}); // end keydown
+		
+        /* Method for changing speed of practice. */
+		function changeSpeed(sliderValue) {
+			if(sliderValue === "1") {
+		        millisec = 5000;
+		        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "2") {
+				millisec = 10000;
+				message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "3") {
+				millisec = 15000;
+				message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
+		        showNotification(message, color, icon);
+			}
+	    }
 
         /* Overview function */
         function loadOverview() {
@@ -62,6 +122,9 @@ $(document).ready(function() {
     		    speed : speed
     		},
     		function(response, status, xhr) {
+    			
+    			// reseting counter how many key is pressed
+    			keyPressed = 0;
 
     			if(status == "error") {
     				console.log("Error occurred");
@@ -73,21 +136,9 @@ $(document).ready(function() {
     			/* Change slider speed */
     			$("#slider-ticker").click(function() {
     				currentSliderValue = $(".slider-handle").attr("aria-valuenow");
-    				if(currentSliderValue === "1") {
-    			        millisec = 5000;
-    			        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "2") {
-    					millisec = 10000;
-    					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "3") {
-    					millisec = 15000;
-    					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
-    			        showNotification(message, color, icon);
-    				}
-    		    });
-
+    				changeSpeed(currentSliderValue);
+    			});
+    			
 	            if(currentSliderValue != undefined) {
 	            	/* Change slider ticker value based on user's click */
 	    		    $("#slider").attr("data-slider-value", currentSliderValue);
