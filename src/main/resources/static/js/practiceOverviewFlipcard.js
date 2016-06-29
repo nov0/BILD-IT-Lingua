@@ -116,14 +116,6 @@ $(document).ready(function() {
     		    speed : speed
     		},
     		function(response, status, xhr) {
-    			
-//    			// reseting counter how many key is pressed
-//    			keyPressed = 0;
-//    			currentSliderValue = $(".slider-handle").attr("aria-valuenow");
-//    			scrollSpeed = parseInt(currentSliderValue);
-//    			console.log(scrollSpeed.typeof);
-//    			console.log("Value of ScrollSpeed" + scrollSpeed);
-//    			console.log("value of currentSliderValue: " + currentSliderValue);
 
     			if(status == "error") {
     				console.log("Error occurred");
