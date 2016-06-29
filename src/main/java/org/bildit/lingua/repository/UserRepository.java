@@ -16,6 +16,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends BaseRepository <User, Long> {
 	
 	List<User> findAll();
+	
 	/** @author Mladen Todorovic */
 	User findUserByUsername(String username);
 	

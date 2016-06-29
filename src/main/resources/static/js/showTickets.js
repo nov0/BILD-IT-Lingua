@@ -19,17 +19,18 @@ $(document).ready(function() {
 		$(".selected-category").val($(this).attr("id"));
 	});
 	
-	var selectedLanguage = "";
-
-	$(".select-language li > a").click(function() {
-		$(".select-practice-lang").text(this.innerHTML);
-		selectedLanguage = this.innerHTML;
-	});
-	
 	// get ID value of active class
 	var urlRequest = $('.btn.active').attr('id');
 	
 	window.totalPages = "";
+	
+	var selectedLanguage = "";
+	
+	$(".select-language li > a").click(function() {
+		$(".select-practice-lang").text(this.innerHTML);
+		selectedLanguage = this.innerHTML;
+		loadTicketsInitially(page);
+	});
 
 	/* 
 	 * When user is logged in, populate page with all tickets by default 
@@ -55,7 +56,7 @@ $(document).ready(function() {
 			}
 		});
 	}
-
+	
 	/* Load tickets to the tickets-content selector, triggered by click on the button */
 	$(".btn-tickets").click(function() {
 		$(this).addClass('active').siblings().removeClass('active');
@@ -82,7 +83,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-
+	
 	/* Function for loading tickets initially without scrolling */
 	function loadTicketsInitially(page) {
 		$(".tickets-content").load("fragments/get-tickets.html", { 
@@ -104,8 +105,7 @@ $(document).ready(function() {
 		/* Avoid replacing the same content all over again */
 		$(".tickets-wrapper").append($("<div>").load("fragments/get-tickets.html .ticket-container", { 
 			"urlData" : urlRequest,
-			"page" : page,
-			"learningLanguage" : selectedLanguage
+			"page" : page
 		},
 		function(response, status, xhr) {
 			if(status == "error") {
