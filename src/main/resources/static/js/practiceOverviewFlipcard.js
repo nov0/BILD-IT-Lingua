@@ -19,6 +19,8 @@ $(document).ready(function() {
         var currentSliderValue;
         window.userHasTickets = "";
 
+	    var stackSize;
+
         var scrollSpeed = Number(speed);
         // Control variable for enabling and disabling keyboard shortcuts slider control.
         // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
@@ -72,7 +74,7 @@ $(document).ready(function() {
         		loadFlipcard();
         	}
         }
-        
+
         /*
          * @author Novislav Sekulic
          * Method for changing speed of practice via keyboard shortcuts.
@@ -148,8 +150,8 @@ $(document).ready(function() {
 	    		    $("#slider").attr("data-slider-value", currentSliderValue);
 	            }
 
-    		    /* Get size of the Stack List */
-    		    var stackSize = $("#stack-size").val();
+	            /* Get size of the Stack List */
+    		    stackSize = $("#stack-size").val();
 
 	            console.log("speed: " + speed);
 	            console.log("m/s: " + millisec);
@@ -161,7 +163,7 @@ $(document).ready(function() {
 	            /* Check if Stack List is empty, if true, terminate Interval */
 	            if(stackSize === "0") {
 	            	clearTimeout(timeout);
-	            	practiceOver();
+	            	practiceIsOver();
 		        }
     		});
         }
@@ -179,11 +181,16 @@ $(document).ready(function() {
             	if(status == "error") {
             		console.log("Error occurred");
             	}
+            	stackSize = $("#stack-size").val();
+            	console.log("stack size in flipcard: " + stackSize);
+            	if(stackSize === "0") {
+            		practiceIsOver();
+            	}
             });
         }
 
         /* Function for letting the user know that practice is over */
-        function practiceOver() {
+        function practiceIsOver() {
         	setTimeout(function() {
         		$("#practice-over-modal").modal();
         	}, millisec);
