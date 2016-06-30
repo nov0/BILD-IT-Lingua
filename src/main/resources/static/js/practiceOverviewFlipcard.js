@@ -17,12 +17,17 @@ $(document).ready(function() {
         var order = $("#input-order").val();
         var millisec;
         var currentSliderValue;
-        window.userHasTickets = true;
+        window.userHasTickets = "";
+
+        var scrollSpeed = Number(speed);
+        // Control variable for enabling and disabling keyboard shortcuts slider control.
+        // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
+        var overviewPractice = false;
 
         var message = "";
         var color = 'success';
     	var icon = 'glyphicon glyphicon-ok';
-    	
+
         var colorError = 'danger';
     	var iconError = 'glyphicon glyphicon-warning-sign';
 
@@ -35,7 +40,8 @@ $(document).ready(function() {
 		}
 
         /* Check if logged user has tickets if he select "from = me",
-         * and if he has tickets in specific category if he select "everyone" */
+         * and if there is tickets available in specific category by specific language 
+         * if he select "everyone" */
         if(from === "me" || from == "everyone") {
         	$.ajax({
         		url : "user-has-tickets",
@@ -50,20 +56,71 @@ $(document).ready(function() {
         		}
         	});
         }
-
-        if(window.userHasTickets == true) {
+        
+        if(window.userHasTickets === "me-category-all-language=false"
+        	|| window.userHasTickets === "everyone-category-all-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified language available.";
+    		showNotification(message, colorError, iconError);
+        } else if(window.userHasTickets === "me-specified-category-language=false"
+        	|| window.userHasTickets === "everyone-specified-category-language=false") {
+        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified category in this language available";
+    		showNotification(message, colorError, iconError);
+        } else {
         	if(speed != 0) {
         		loadOverview();
         	} else {
         		loadFlipcard();
         	}
-        } else {
-        	message = /*[[#{slider.speed.message.one}]]*/ "You've selected option that has no tickets.";
-    		showNotification(message, colorError, iconError);
         }
+        
+        /*
+         * @author Novislav Sekulic
+         * Method for changing speed of practice via keyboard shortcuts.
+         * LEFT arrow key is to slow down by 5s,
+         * RIGHT arrof key is for speed up by 5s.
+         */
+        $(window).keydown(function(e) {
+        	if(overviewPractice) {
+        		// if LEFT arrow is pressed, slow down by 5s
+        		if((e.keyCode || e.which) == 37) {
+        			if(scrollSpeed >= 2) {
+        				scrollSpeed--;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
+
+        		// if RIGHT arrow is pressed, speed up for 5s
+        		} else if((e.keyCode || e.which) == 39) {
+        			if(scrollSpeed <= 2) {
+        				scrollSpeed++;
+        				currentSliderValue = scrollSpeed.toString();
+        				changeSpeed(currentSliderValue);
+        			}
+        		}
+        	}
+		}); // end keydown
+		
+        /* Method for changing speed of practice. */
+		function changeSpeed(sliderValue) {
+			if(sliderValue === "1") {
+		        millisec = 5000;
+		        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "2") {
+				millisec = 10000;
+				message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
+		        showNotification(message, color, icon);
+			} else if(sliderValue === "3") {
+				millisec = 15000;
+				message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
+		        showNotification(message, color, icon);
+			}
+	    }
 
         /* Overview function */
         function loadOverview() {
+        	// Enabling keyboard shortcuts slider control.
+        	overviewPractice = true;
         	/* Load overview practice fragment with time interval on user's choice */
         	$("#practice-lingua").load("fragments/overview-practice.html", {
         		from : from,
@@ -82,21 +139,10 @@ $(document).ready(function() {
     			/* Change slider speed */
     			$("#slider-ticker").click(function() {
     				currentSliderValue = $(".slider-handle").attr("aria-valuenow");
-    				if(currentSliderValue === "1") {
-    			        millisec = 5000;
-    			        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "2") {
-    					millisec = 10000;
-    					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
-    			        showNotification(message, color, icon);
-    				} else if(currentSliderValue === "3") {
-    					millisec = 15000;
-    					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
-    			        showNotification(message, color, icon);
-    				}
-    		    });
-
+    				scrollSpeed = Number(currentSliderValue);
+    				changeSpeed(currentSliderValue);
+    			});
+    			
 	            if(currentSliderValue != undefined) {
 	            	/* Change slider ticker value based on user's click */
 	    		    $("#slider").attr("data-slider-value", currentSliderValue);
@@ -122,6 +168,8 @@ $(document).ready(function() {
 
         /* Flipcard function */
         function loadFlipcard() {
+        	// Disableing keyboard shortcuts slider control.
+        	overviewPractice = false;
         	$("#practice-lingua").load("fragments/flipcard-practice.html", {
                 from : from,
                 category : category,

@@ -8,9 +8,11 @@ import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.model.Vote;
+import org.bildit.lingua.repository.LanguageRepository;
 import org.bildit.lingua.repository.TicketRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.repository.VoteRepository;
@@ -34,6 +36,9 @@ public class TicketServiceImpl implements TicketService {
 	@Autowired
 	private VoteRepository voteRepository;
 	
+	@Autowired
+	private LanguageRepository languageRepository;
+	
 	@Override
 	public List<Ticket> getAll() {
 		return ticketRepository.findAll();
@@ -49,13 +54,13 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(id);
 	}
 
-	/* 
+	/**
 	 * @author Bojan Aleksic
 	 * This method returns all tickets of current user by username, 5 records per page.
 	 */
 	@Override
-	public Page<Ticket> getAllTicketsByUsername(String username, Pageable pageable) {
-		return ticketRepository.findAllByUserId(userRepository.findUserByUsername(username).getId(), pageable);
+	public Page<Ticket> getAllTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndLearningLanguage(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
@@ -64,8 +69,8 @@ public class TicketServiceImpl implements TicketService {
 	 * Method: get list of all active user tickets by username
 	 * */
 	@Override
-	public Page<Ticket> getAllActiveTicketsByUsername(String username, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNull(userRepository.findUserByUsername(username).getId(), pageable);
+	public Page<Ticket> getAllActiveTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNull(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -73,8 +78,8 @@ public class TicketServiceImpl implements TicketService {
 	 * Method: get list of all deleted (deactivated) user tickets by username
 	 * */
 	@Override
-	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndDeactivatedIsNotNull(userRepository.findUserByUsername(username).getId(), pageable);
+	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNull(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -82,12 +87,13 @@ public class TicketServiceImpl implements TicketService {
 	 * Method: get list of all moderated user tickets by username
 	 * */
 	@Override
-	public Page<Ticket> getAllModeratedTicketsByUsername(String username, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndEditedTrue(userRepository.findUserByUsername(username).getId(), pageable);
+	public Page<Ticket> getAllModeratedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndEditedTrue(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
 	 * @author Bojan Aleksic
+	 * @edit Mladen Todorovic
 	 * Save ticket into database
 	 */
 	@Override
@@ -102,7 +108,7 @@ public class TicketServiceImpl implements TicketService {
 		vote.setTicket(ticket);
 		ticket.setTicketVotes(vote);
 		ticket.setLearningLanguage(user.getForeignLanguage());
-		return ticketRepository.save(ticket);
+		return ticketRepository.saveAndFlush(ticket);
 	}
 	
 	/**
@@ -184,15 +190,6 @@ public class TicketServiceImpl implements TicketService {
 		ticketRepository.delete(ticket);
 	}
 	
-	/** 
-	 * @author Bojan Aleksic
-	 * Method returns tickets by User and selected category
-	 */
-	@Override
-	public List<Ticket> getTicketsByUserAndCategory(User user, String category) {
-		return ticketRepository.findAllByUserAndCategory(user, category);
-	}
-	
 	/**
 	 * @author Bojan Aleksic
 	 * Method returns all tickets by provided category
@@ -200,6 +197,44 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public List<Ticket> getTicketsByCategory(String category) {
 		return ticketRepository.findAllByCategory(category);
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns tickets by User and his learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByUserAndLanguage(User user, Language language) {
+		return ticketRepository.findAllByUserAndLearningLanguage(user, language);
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns ticket by user, selected category, and
+	 * by user's learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByUserCategoryAndLanguage(User user, String category, Language language) {
+		return ticketRepository.findAllByUserAndCategoryAndLearningLanguage(user, category, language);
+	}
+
+	/**
+	 * @author Bojan Aleksic
+	 * Method returns everyone's tickets by specified learning language
+	 * by the user.
+	 */
+	@Override
+	public List<Ticket> getEveryonesTicketsByLanguage(Language language) {
+		return ticketRepository.findAllByLearningLanguage(language);
+	}
+
+	/**
+	 * @author Bojan Aleksic 
+	 * Method returns tickets by specified category and user's learning language.
+	 */
+	@Override
+	public List<Ticket> getTicketsByCategoryAndLanguage(String category, Language language) {
+		return ticketRepository.findAllByCategoryAndLearningLanguage(category, language);
 	}
 	
 }

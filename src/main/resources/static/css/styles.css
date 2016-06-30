@@ -80,6 +80,18 @@ body {
     background-repeat: no-repeat;
 }
 
+.bs-flag {
+    background-image: url('images/bosnia-flag.png');
+    background-position: 5px 7px;
+    background-repeat: no-repeat;
+}
+
+.hr-flag {
+    background-image: url('images/croatia-flag.png');
+    background-position: 5px 7px;
+    background-repeat: no-repeat;
+}
+
 #select-lang a {
     padding-left: 30px;
 }

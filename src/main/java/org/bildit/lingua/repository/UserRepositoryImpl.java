@@ -7,15 +7,9 @@ import javax.persistence.PersistenceContext;
  * @class UserRepositoryImpl
  * @author Mladen Todorovic
  * */
-public class UserRepositoryImpl implements UserRepositoryCustom {
+public class UserRepositoryImpl {
     
 	@PersistenceContext
 	private EntityManager entityManager;
-	
-    /** Temporary unused method */
-    @Override
-    public String customUserMethod() {
-    	return "";
-    }
     
 }

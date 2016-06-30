@@ -3,7 +3,7 @@ package org.bildit.lingua.controllers;
 
 
 /**
- * @author Novislav Sekulic, Mladen Todorovic
+ * @author Novislav Sekulic
  * 
  *         Controller for registering and editing users information.
  *
@@ -49,6 +49,7 @@ public class RegistrationController {
 	}
 	/**
 	 * @author Mladen Todorovic
+	 * @edit Novislav Sekulic
 	 * Method for registering administrator 
 	 * */
 	@RequestMapping(value="/register-admin", method=RequestMethod.POST)
