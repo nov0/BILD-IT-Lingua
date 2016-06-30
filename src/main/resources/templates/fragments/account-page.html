@@ -16,43 +16,102 @@
         <div class="lingua-container-body">
             <div class="tab-content">
             	<div id="my-lingua" class="tab-pane fade in active">
-	            	<div class="btn-group">
-	  					<button type="button" class="btn btn-primary btn-tickets active" id="ticket-all">
-	                    	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>
-	                    	<span th:text="#{tab.all}" class="tab-btn-group">All</span>
-	                	</button>
-		  				<button type="button" class="btn btn-primary btn-tickets" id="ticket-active">
-		                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>
-		                    <span th:text="#{tab.active}" class="tab-btn-group">Active</span>
-		                </button>
-		                <button type="button" class="btn btn-primary btn-tickets" id="ticket-deleted">
-		                    <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span>
-		                    <span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
-		                </button>
-		  				<button type="button" class="btn btn-primary btn-tickets" id="ticket-moderated">
-		                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>
-		                    <span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
-		                </button>
-		                <!-- ************ Bootstrap's Modal Button *************** -->
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#gridSystemModal" id="addnewlingua">
-			                <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>
-                            <span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
-			            </button>
-					</div>
-					<div class="btn-group add-lingua" role="group">
-<!-- 						<div style="float: right;" id="preloader-language"><img th:src="@{/images/preloader.gif}" /></div> -->
-						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-			               	<span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
-			               	<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
-			               	<span class="caret"></span>
-			            </button>
- 			            <ul class="dropdown-menu lingua-language select-language">
- 	     					<li th:each="language : ${languages}">
- 	     						<a id="selected-lang" href="#" th:text="${language}">Language</a>
- 	     					</li>
- 	    				</ul>
-	    			</div>
+	            	
+	            	<nav class="navbar navbar-default">
+					  <div class="container-fluid">
+					    <div class="navbar-header">
+					      <button style="float:left; margin-left: 10px;" type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					      </button>
+					    </div>
+					    <div class="collapse navbar-collapse" id="myNavbar">
+					      <ul  class="nav navbar-nav">
+					         <li class="li li-tickets active" id="ticket-all"><a href="#">
+					         	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span>
+	                    		<span th:text="#{tab.all}" class="tab-btn-group">All</span>
+	                    		</a>
+	                    	 </li>
+					         <li class="li li-tickets" id="ticket-active"><a id="ticket-active" href="#">
+					            <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span>
+		                   		<span th:text="#{tab.active}" class="tab-btn-group">Active</span>
+					            </a>
+					         </li>
+					         <li class="li li-tickets" id="ticket-deleted"><a href="#">
+					            <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span>
+		                    	<span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
+					            </a>
+					         </li>
+					         <li class="li li-tickets" id="ticket-moderated"><a href="#">
+					            <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span>
+		                    	<span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
+					            </a>
+					         </li>
+					         <li><a href="#" data-toggle="modal" data-target="#gridSystemModal" id="addnewlingua">
+					            <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span>
+                            	<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
+					            </a>
+					         </li>
+					      </ul>
+					      <ul class="nav navbar-nav navbar-right">
+					         <li class="dropdown">
+						        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						            <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+				               		<span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
+				               		<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
+				               		<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu lingua-language select-language">
+		 	     					<li th:each="language : ${languages}">
+		 	     						<a id="selected-lang" href="#" th:text="${language}">Language</a>
+		 	     					</li>
+		 	    				</ul>
+					         </li>
+					      </ul>
+					    </div>
+					  </div>
+					</nav>
+	            	
+	            	<!-- old version of menu -->
+	            	
+<!-- 	            	<div class="btn-group"> -->
+<!-- 	  					<button type="button" class="btn btn-primary btn-tickets active" id="ticket-all"> -->
+<!-- 	                    	<span class="glyphicon glyphicon-list btn-glyphicons" aria-hidden="true"></span> -->
+<!-- 	                    	<span th:text="#{tab.all}" class="tab-btn-group">All</span> -->
+<!-- 	                	</button> -->
+<!-- 		  				<button type="button" class="btn btn-primary btn-tickets" id="ticket-active"> -->
+<!-- 		                    <span class="glyphicon glyphicon-ok-sign btn-glyphicons" aria-hidden="true"></span> -->
+<!-- 		                    <span th:text="#{tab.active}" class="tab-btn-group">Active</span> -->
+<!-- 		                </button> -->
+<!-- 		                <button type="button" class="btn btn-primary btn-tickets" id="ticket-deleted"> -->
+<!-- 		                    <span class="glyphicon glyphicon-trash btn-glyphicons" aria-hidden="true"></span> -->
+<!-- 		                    <span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span> -->
+<!-- 		                </button> -->
+<!-- 		  				<button type="button" class="btn btn-primary btn-tickets" id="ticket-moderated"> -->
+<!-- 		                    <span class="glyphicon glyphicon-pencil btn-glyphicons" aria-hidden="true"></span> -->
+<!-- 		                    <span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span> -->
+<!-- 		                </button> -->
+<!-- 						************ Bootstrap's Modal Button *************** -->
+<!--                    		<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="modal" data-target="#gridSystemModal" id="addnewlingua"> -->
+<!-- 			                <span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> -->
+<!--                             <span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span> -->
+<!-- 			            </button> -->
+<!-- 					</div> -->
+					
+<!-- 					<div class="btn-group add-lingua" role="group"> -->
+<!-- 						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!-- 			                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> -->
+<!-- 			               	<span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span> -->
+<!-- 			               	<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> -->
+<!-- 			               	<span class="caret"></span> -->
+<!-- 			            </button> -->
+<!--  			            <ul class="dropdown-menu lingua-language select-language"> -->
+<!--  	     					<li th:each="language : ${languages}"> -->
+<!--  	     						<a id="selected-lang" href="#" th:text="${language}">Language</a> -->
+<!--  	     					</li> -->
+<!--  	    				</ul> -->
+<!-- 	    			</div> -->
 	    			
 	    			<!-- Include Modal from fragments -->
 	    			<div th:replace="fragments/add-lingua-modal :: modal-create"></div>
