@@ -4,7 +4,6 @@ import java.security.Principal;
 
 import org.apache.log4j.Logger;
 import org.bildit.lingua.model.Ticket;
-import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.LanguageService;
 import org.bildit.lingua.service.TicketService;
@@ -64,11 +63,10 @@ public class TicketController {
 			@PageableDefault(value=3) Pageable pageable) {
 
 		Page<Ticket> tickets = null;
-		String language = "";
+		String language;
 		
 		if (learningLanguage == null || learningLanguage.isEmpty()) {
-			User user = userRepository.findUserByUsername(principal.getName());
-			language = user.getForeignLanguage().getLanguageTitle();
+			language = userRepository.findUserByUsername(principal.getName()).getForeignLanguage().getLanguageTitle();
 		} else {
 			userService.setForeignLanguageForUser(principal.getName(), learningLanguage);
 			language = learningLanguage;
@@ -76,19 +74,15 @@ public class TicketController {
 		
 		if("ticket-all".equals(urlRequest)) {
 			tickets = ticketService.getAllTicketsByUsername(principal.getName(), language, pageable);
-//			model.addObject(TICKETS, tickets);
 		} else if("ticket-active".equals(urlRequest)) {
 			tickets = ticketService.getAllActiveTicketsByUsername(principal.getName(), language, pageable);
-//			model.addObject(TICKETS, tickets);
 		} else if("ticket-deleted".equals(urlRequest)) {
 			tickets = ticketService.getAllDeactivatedTicketsByUsername(principal.getName(), language, pageable);
-//			model.addObject(TICKETS, tickets);
 		} else if("ticket-moderated".equals(urlRequest)) {
 			tickets = ticketService.getAllModeratedTicketsByUsername(principal.getName(), language, pageable);
-//			model.addObject(TICKETS, tickets);
 		}
 		
-		if(tickets.getContent().size() > 0) {
+		if(tickets != null ? tickets.getContent().size() > 0 : false) {
 			model.addObject(TICKETS, tickets);
 			model.addObject("totalPages", tickets.getTotalPages());
 		}

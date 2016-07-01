@@ -62,7 +62,10 @@
 }
 
 #preloader {
-	text-align: center;
+	left: 50%;
+	top: 50%;
+	position: fixed;
+	z-index: 9999;
 }
 
 .lingua-language {

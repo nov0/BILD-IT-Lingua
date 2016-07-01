@@ -7,6 +7,10 @@
 
 	<!-- Tickets fragment -->
 	<div class="my-lingua-content" th:fragment="tickets">
+	
+		<!-- Preloader -->
+		<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
+		
 		<div th:if="${tickets != null}" class="tickets-wrapper">
 			<div class="ticket-container alert-warning" th:each="ticket : ${tickets}">
 				<div class="row ticket-header">
@@ -52,7 +56,7 @@
 					$(document).ready(function() {
 						
 						/* Set alert-danger style for deleted tickets */
-						var urlRequest = $('.btn.active').attr('id');
+						var urlRequest = $('.li-tickets.active').attr('id');
 						if(urlRequest === "ticket-deleted") {
 							/* Set deleted tickets to red color */
 							$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
