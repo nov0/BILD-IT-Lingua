@@ -130,7 +130,7 @@ $(document).ready(function() {
     		    speed : speed
     		},
     		function(response, status, xhr) {
-
+    			$("#select-language-button").hide();
     			if(status == "error") {
     				console.log("Error occurred");
 		        }
@@ -170,6 +170,7 @@ $(document).ready(function() {
 
         /* Flipcard function */
         function loadFlipcard() {
+        	$("#select-language-button").hide();
         	// Disableing keyboard shortcuts slider control.
         	overviewPractice = false;
         	$("#practice-lingua").load("fragments/flipcard-practice.html", {

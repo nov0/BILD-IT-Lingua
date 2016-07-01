@@ -90,6 +90,11 @@
 				}
 	 			$(this).blur();
 			};
+			$("#button-flip").click(flipCard);
+			function flipCard(){
+				$('.card').toggleClass('flipped');
+				$(this).blur();
+			};
 	    </script>	
 	</div>
 </body>
