@@ -4,86 +4,70 @@
  */
 
 $(document).ready(function() {
-	
+
 	/* Check on load page if localStorage is set, if true, redirect to "Practice Lingua" page */
 	if(localStorage.getItem("practicePage")) {
 		document.getElementById("practice-reload").click();
 		localStorage.clear();
 	}
 
-    $("#preloader-language").hide();
-
 	/* Select category */
 	$(".select-category li > a").click(function() {
 		$(".category").text(this.innerHTML);
 		$(".selected-category").val($(this).attr("id"));
 	});
-	
+
 	// get ID value of active class
 	var urlRequest = $('.li.active').attr('id');
-	
+
+	window.page = 0;
 	window.totalPages = "";
-	
+
 	var selectedLanguage = "";
-	
 	$(".select-language li > a").click(function() {
+		$("#preloader").show();
 		$(".select-practice-lang").text(this.innerHTML);
 		selectedLanguage = this.innerHTML;
-		loadTicketsInitially(page);
+		window.page = 0;
+		loadTicketsInitially(window.page);
+		window.page++;
 	});
 
 	/* 
 	 * When user is logged in, populate page with all tickets by default 
-	 * Edit: Infinite Scroll - implemented
 	 */
 	if(urlRequest === "ticket-all") {
-		var page = 0;
-		loadTicketsInitially(page);
-		page++;
-		/* Invoke this function every time user scrolls */
-		$(window).scroll(function() {
-			var scrollTop = $(window).scrollTop();
-			var docHeight = $(document).height();
-			var winHeight = $(window).height();
-			/* If end of the document is reached... */
-			if(scrollTop == docHeight - winHeight) {
-				if(page < window.totalPages) {
-					$("#preloader").show();
-					loadTicketsWithScroll(page);
-					page++;
-				}
-				$("#preloader").hide();
-			}
-		});
+		$("#preloader").show();
+		window.page = 0;
+		loadTicketsInitially(window.page);
+		window.page++;
 	}
-	
-	/* Load tickets to the tickets-content selector, triggered by click on the button */
+
+	/* Load tickets to the tickets-content selector, triggered by click on the nav bar menu */
 	$(".li-tickets").click(function() {
+		$("#preloader").show();
 		$(this).addClass('active').siblings().removeClass('active');
 		urlRequest = $('.li.active').attr('id');
-		var page = 0;
-		var pageSync = 0;
-		loadTicketsInitially(page);
-		page++;
-		pageSync++;
-		/* Invoke this function every time user scrolls */
-		$(window).scroll(function() {
-			var scrollTop = $(window).scrollTop();
-			var docHeight = $(document).height();
-			var winHeight = $(window).height();
-			/* If end of the document is reached... */
-			if(scrollTop == docHeight - winHeight) {
-				$("#preloader").show();
-				if(page < window.totalPages && page === pageSync) {
-					loadTicketsWithScroll(page);
-					page++;
-				}
-				pageSync++;
-				$("#preloader").hide();
-			}
-		});
+		window.page = 0;
+		loadTicketsInitially(window.page);
+		window.page++;
 	});
-	
+
+	/* Invoke this function every time user scrolls (Infinite Scroll) */
+	$(window).scroll(function() {
+		var scrollTop = $(window).scrollTop();
+		var docHeight = $(document).height();
+		var winHeight = $(window).height();
+		/* If end of the document is reached... */
+		if(scrollTop == docHeight - winHeight) {
+			if(window.page < window.totalPages) {
+				$("#preloader").show();
+				loadTicketsWithScroll(window.page);
+				window.page++;
+			}
+		}
+	});
+
 	/* Function for loading tickets initially without scrolling */
 	function loadTicketsInitially(page) {
 		$(".tickets-content").load("fragments/get-tickets.html", { 
@@ -97,6 +81,7 @@ $(document).ready(function() {
 			}
 			/* Retrieve number of pages from the model */
 			window.totalPages = $("#total-pages").val();
+			$("#preloader").hide();
 		});
 	}
 
@@ -111,6 +96,7 @@ $(document).ready(function() {
 			if(status == "error") {
 				console.log("Error occurred.");
 			}
+			$("#preloader").hide();
 		}));
 	}
 
