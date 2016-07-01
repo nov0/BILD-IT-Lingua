@@ -335,16 +335,16 @@ body {
     backface-visibility: hidden;
 }
 .card .front {
-  font-family: 'Lobster', cursive;
+  font-family: 'Patrick Hand', cursive;
   background-color: #ffffcc;
   color: #1898b0;
-  font-size: 22px;
+  font-size: 28px;
 }
 .card .back {
-	font-family: 'Lobster', cursive;
+	font-family: 'Patrick Hand', cursive;
 	background-color: #ffffcc;
  	color: #1898b0;
-  	font-size: 22px;
+  	font-size: 28px;
     -webkit-transform: rotateX( 180deg );
     -moz-transform: rotateX( 180deg );
     -o-transform: rotateX( 180deg );
