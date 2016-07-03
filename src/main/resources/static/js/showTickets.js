@@ -54,17 +54,16 @@ $(document).ready(function() {
 	});
 
 	/* Invoke this function every time user scrolls (Infinite Scroll) */
-	$(window).scroll(function() {
-		var scrollTop = $(window).scrollTop();
-		var docHeight = $(document).height();
-		var winHeight = $(window).height();
+	$(".tickets-content").scroll(function() {
+		var scrollTop = $(this).scrollTop();
+		var innerHeight = $(this).innerHeight();
+		var scrollHeight = $(this)[0].scrollHeight;
+
 		/* If end of the document is reached... */
-		if(scrollTop == docHeight - winHeight) {
-			if(window.page < window.totalPages) {
-				$("#preloader").show();
-				loadTicketsWithScroll(window.page);
-				window.page++;
-			}
+		if(scrollTop === scrollHeight - innerHeight && window.page < window.totalPages) {
+			$("#preloader").show();
+			loadTicketsWithScroll(window.page);
+			window.page++;
 		}
 	});
 
