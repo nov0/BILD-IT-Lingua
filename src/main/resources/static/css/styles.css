@@ -111,7 +111,7 @@ body {
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, 
 .navbar-default .navbar-nav > .active > a:hover {
     color: white;
-    background-color: #204d74;
+    background-color: #13879b;
 }
 .navbar-default .navbar-nav > li > a:focus {
 	outline: none;
