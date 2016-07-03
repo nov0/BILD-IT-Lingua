@@ -21,9 +21,6 @@
  	     		<li th:each="language : ${languages}">
  	     			<a id="selected-lang" href="#" th:text="${language}">Language</a>
  	     		</li>
- 				<li th:each="language : ${languages}">
- 	    			<a id="selected-lang" href="#" th:text="${language}">Language</a>
- 	    		</li>
  	    	</ul>
 	    </div>
 		
@@ -81,7 +78,6 @@
 							</div>
 						</div>
 					</nav>
-
 	    			
 	    			<!-- Include Modal from fragments -->
 	    			<div th:replace="fragments/add-lingua-modal :: modal-create"></div>
