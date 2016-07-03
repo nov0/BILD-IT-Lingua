@@ -76,11 +76,18 @@
 }
 
 .lingua-language {
-    background-color: #204d74;
+	background-color: #1898b0;
 }
 
 .lingua-language > li > a {
     color: white;
+}
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:focus, 
+.navbar-default .navbar-nav > .open > a:hover {
+	background-color: #13879b;
+	color: white;
 }
 
 .ticket-container {

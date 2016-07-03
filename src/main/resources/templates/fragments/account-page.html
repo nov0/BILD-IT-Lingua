@@ -10,20 +10,6 @@
 	<!-- User Account fragment -->
 	<div class="container" th:fragment="user-account">
 		
-		<div id="select-language-button" class="btn-group add-lingua" role="group">
-			<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-			    <span th:if="${session.foreignLanguage eq null}" th:text="#{tab.choose.language}" class="tab-btn-group select-practice-lang">Select Language</span>
-			    <span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span>
-			    <span class="caret"></span>
-			</button>
- 			<ul class="dropdown-menu lingua-language select-language">
- 	     		<li th:each="language : ${languages}">
- 	     			<a id="selected-lang" href="#" th:text="${language}">Language</a>
- 	     		</li>
- 	    	</ul>
-	    </div>
-		
         <ul class="nav nav-tabs">
             <li class="active"><a th:text="#{tab.my.lingua}" data-toggle="tab" href="#my-lingua">My Lingua</a></li>
             <li><a th:text="#{tab.practice.lingua}" data-toggle="tab" id="practice-reload" href="#practice-lingua">Practice Lingua</a></li>
@@ -73,6 +59,27 @@
 											<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> 
 											<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
 										</a>
+									</li>
+								</ul>
+								<ul class="nav navbar-nav navbar-right">
+									<li class="dropdown">
+										<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
+											<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+											<span th:if="${session.foreignLanguage eq null}"
+												th:text="#{tab.choose.language}"
+												class="tab-btn-group select-practice-lang">Select Language
+											</span> 
+											<span th:if="${session.foreignLanguage ne null}"
+												th:text="${session.foreignLanguage}"
+												class="tab-btn-group select-practice-lang">
+											</span> 
+											<span class="caret"></span>
+										</a>
+										<ul class="dropdown-menu lingua-language select-language">
+											<li th:each="language : ${languages}">
+												<a id="selected-lang" href="#" th:text="${language}">Language</a>
+											</li>
+										</ul>
 									</li>
 								</ul>
 							</div>
