@@ -85,6 +85,7 @@ public class TicketController {
 		if(tickets != null ? tickets.getContent().size() > 0 : false) {
 			model.addObject(TICKETS, tickets);
 			model.addObject("totalPages", tickets.getTotalPages());
+			model.addObject("foreignLanguage", language);
 		}
 		
 		return model;
