@@ -105,6 +105,13 @@
 .ticket-header {
 	border-bottom: 1px dashed #8a6d3b;
 	padding-bottom: 8px;
+	font-size: 14px;
+}
+
+@media (min-width: 992px) {
+	.col-md-2 {
+    	width: 15%;
+	}
 }
 
 #date-created {

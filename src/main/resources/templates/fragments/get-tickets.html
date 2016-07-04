@@ -23,6 +23,10 @@
 						<span th:text="${ticket.category}" data-toggle="tooltip" title="Category">Verbs</span>
 					</div>
 					<div class="col-md-2">
+						<span class="glyphicon glyphicon-flag"></span>
+						<span th:text="${foreignLanguage}" data-toggle="tooltip" title="Foreign Language">Foreign</span>
+					</div>
+					<div class="col-md-2">
 						<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
 							<span class="glyphicon glyphicon-pencil"></span>
 							<span data-toggle="tooltip" title="Edit">Edit</span>
@@ -34,12 +38,12 @@
 							<span class="glyphicon glyphicon-trash"></span> 
 							<span data-toggle="tooltip" title="Delete">Delete</span>
 						</a>
-					</div>
+					</div>	
 					
-					<div class="col-md-3 like-dislike-btn">
+					<div class="col-md-2 like-dislike-btn">
 						<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
 						<span th:text="${ticket.ticketVotes.likes}"></span>
-						&nbsp; &nbsp;
+						&nbsp;
 						<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
 						<span th:text="${ticket.ticketVotes.dislikes}"></span>
 					</div>
