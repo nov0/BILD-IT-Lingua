@@ -60,7 +60,7 @@ public class TicketController {
 			@RequestParam("urlData") String urlRequest, 
 			@RequestParam(value="page", required=false) Integer page,
 			@RequestParam(value="learningLanguage", required=false) String learningLanguage,
-			@PageableDefault(value=3) Pageable pageable) {
+			@PageableDefault(value=4) Pageable pageable) {
 
 		Page<Ticket> tickets = null;
 		String language;
