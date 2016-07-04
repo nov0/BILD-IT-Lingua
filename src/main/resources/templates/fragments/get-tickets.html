@@ -67,7 +67,7 @@
 						}
 						
 						/* Bootstrap's tooltip */
-						$('[data-toggle="tooltip"]').tooltip();
+						$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 						
 						$(".modal").on("hidden.bs.modal", function() {
 							$(this).removeData();
@@ -82,7 +82,7 @@
 			<div class="no-tickets-wrapper">
 				<span th:text="#{no.tickets.message}">No tickets available...</span>
 				<span>
-					<a th:text="#{no.tickets.message.create.one}" data-toggle="modal" data-target="#gridSystemModal">
+					<a href="#" th:text="#{no.tickets.message.create.one}" data-toggle="modal" data-target="#gridSystemModal">
 						Create ticket here
 					</a>.
 				</span>
