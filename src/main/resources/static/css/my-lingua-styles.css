@@ -22,10 +22,13 @@
 	border-right: 1px solid #e5e5e5;
 	position: relative; 
 	bottom: 0px;
+	background-color: #f9f9f9;
+	margin-bottom: 50px;
+	padding-bottom: 50px;
 }
 
 .tab-content {
-	padding: 30px 50px 50px 50px;
+	padding: 30px 50px 0px 50px;
 	background-color: #f9f9f9;
 }
 
@@ -53,7 +56,7 @@
 
 .my-lingua-content {
 	padding-top: 30px;
-	padding-bottom: 50px;
+	padding-bottom: 0px;
 }
 
 .tickets-wrapper {
