@@ -25,8 +25,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class TicketController {
 	
 	private static final Logger logger = Logger.getLogger(TicketController.class.getName());
-	private static final String HOME = "home";
 	private static final String TICKETS = "tickets";
+	private static final String REDIRECT = "redirect:/";
 	
 	@Autowired
 	private TicketService ticketService;
@@ -100,7 +100,7 @@ public class TicketController {
 	@RequestMapping("/create-ticket")
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal) {
 		ticketService.saveTicket(ticket, principal.getName());
-		return HOME;
+		return REDIRECT;
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class TicketController {
 			}
 		}
 		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
-		return HOME;
+		return REDIRECT;
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class TicketController {
 	@RequestMapping("/delete-ticket")
 	public String deleteTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id, Principal principal) {
 		ticketService.deleteTicket(id, principal.getName());
-		return HOME;
+		return REDIRECT;
 	}
 	
 	/**
