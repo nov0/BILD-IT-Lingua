@@ -7,18 +7,30 @@
 
 	<!-- Overview practice fragment -->
 	<div id="practice-lingua-fragment" th:fragment="overview" th:each="ticket : ${tickets}">
-		<div class="row" style="position: relative; bottom: 20px;">
+		<div class="row" style="position: relative; top: 0px;">
 			<div class="col-md-6" style="position: relative; bottom: 15px;">
 				<h3 style="color: #1898b0;">
 					<span class="glyphicon glyphicon-list-alt"></span>
 					<span th:text="#{overview.fragment.title}"></span>
 				</h3>
 			</div>
-			<div class="col-md-6" style="text-align: right;">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
-				</button>
+		</div>
+		<div class="row" style="padding-bottom: 15px;">
+			<div class="col-md-3">
+				<a href="#" style="color: #1898b0;" data-toggle="modal" data-target="#leave-practice-modal">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<span th:text="#{back.to.practice.menu}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.back.to.menu}">
+						Back to practice menu
+					</span>
+				</a>
+			</div>
+			<div class="col-md-6" style="text-align: right; float: right; color: #1898b0;">
+				<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+				<span th:if="${session.foreignLanguage ne null}" 
+					  th:text="${session.foreignLanguage}" 
+					  class="tab-btn-group select-practice-lang"
+					  data-toggle="tooltip" th:attr="title=#{tooltip.practice.language}">
+				</span> 
 			</div>
 		</div>
 		<!-- Tickets -->
@@ -30,14 +42,14 @@
 		<div class="row row-footer">
 			<div class="col-md-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span data-toggle="tooltip" title="Author" th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
+				<span data-toggle="tooltip" th:attr="title=#{tooltip.practice.author}" th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span data-toggle="tooltip" title="Date created" th:text="${ticket.dateCreated}">Date</span>
+				<span data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}" th:text="${ticket.dateCreated}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
-				<div id="speed-slider" data-toggle="tooltip" title="Set time interval for switching tickets." th:attr="title=#{tooltip.title.slider}">
+				<div id="speed-slider" data-toggle="tooltip" th:attr="title=#{tooltip.title.slider}">
 					<a href="#" id="slider-ticker">
 						<input id="slider" type="text" name="speed" data-provide="slider"
 							data-slider-ticks="[1, 2, 3]"
@@ -62,12 +74,12 @@
 				</div>
 			</div>
 			<div style="text-align: right;" class="col-md-4">
-				<a href="#" id="ticket-vote-up" data-toggle="tooltip" title="Vote up" th:attr="title=#{tooltip.title.voteup}">
+				<a href="#" id="ticket-vote-up" data-toggle="tooltip" th:attr="title=#{tooltip.title.voteup}">
 					<span class="glyphicon glyphicon-thumbs-up"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.likes}" id="likes-value"></span>
 				&nbsp;&nbsp;
-				<a href="#" id="ticket-vote-down" data-toggle="tooltip" title="Vote down" th:attr="title=#{tooltip.title.votedown}">
+				<a href="#" id="ticket-vote-down" data-toggle="tooltip" th:attr="title=#{tooltip.title.votedown}">
 					<span class="glyphicon glyphicon-thumbs-down"></span>
 				</a>
 				<span th:text="${ticket.ticketVotes.dislikes}" id="dislikes-value"></span>

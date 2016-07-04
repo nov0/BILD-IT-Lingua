@@ -7,18 +7,30 @@
 
 	<!-- Flip card practice fragment -->
 	<div id="flipcard-practice" th:fragment="flipcard" th:each="ticket : ${tickets}">
-		<div class="row" style="position: relative; bottom: 20px;">
+		<div class="row" style="position: relative; top: 0px;">
 			<div class="col-md-6" style="position: relative; bottom: 15px;">
 				<h3 style="color: #1898b0;">
 					<span class="glyphicon glyphicon-retweet"></span>
 					<span>Flipcard</span>
 				</h3>
 			</div>
-			<div class="col-md-6" style="text-align: right;">
-				<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-					<span th:if="${session.foreignLanguage ne null}" th:text="${session.foreignLanguage}" class="tab-btn-group select-practice-lang"></span> 
-				</button>
+		</div>
+		<div class="row" style="padding-bottom: 15px;">
+			<div class="col-md-3">
+				<a href="#" style="color: #1898b0;" data-toggle="modal" data-target="#leave-practice-modal">
+					<span class="glyphicon glyphicon-chevron-left"></span>
+					<span th:text="#{back.to.practice.menu}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.back.to.menu}">
+						Back to practice menu
+					</span>
+				</a>
+			</div>
+			<div class="col-md-6" style="text-align: right; float: right; color: #1898b0;">
+				<span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
+				<span th:if="${session.foreignLanguage ne null}" 
+					  th:text="${session.foreignLanguage}" 
+					  class="tab-btn-group select-practice-lang"
+					  data-toggle="tooltip" th:attr="title=#{tooltip.practice.language}">
+				</span> 
 			</div>
 		</div>
 		<div class="row domestic-foreign-row-overview">
@@ -45,10 +57,12 @@
 		<div class="row row-footer">
 			<div class="col-md-4">
 				<span class="glyphicon glyphicon-user"></span>
-				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
+				<span th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.author}">
+					User
+				</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span th:text="${ticket.dateCreated}">Date</span>
+				<span th:text="${ticket.dateCreated}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}">Date</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<button id="button-flip" type="button" class="btn btn-primary" data-toggle="tooltip" title="Flip Card" th:attr="title=#{tooltip.title.flip}"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span th:text="#{flipcard.button.flip}">FLIP CARD</span></button>
@@ -95,6 +109,9 @@
 				$('.card').toggleClass('flipped');
 				$(this).blur();
 			};
+			
+			$('[data-toggle="tooltip"]').tooltip();
+			
 	    </script>	
 	</div>
 </body>

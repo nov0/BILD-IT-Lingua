@@ -67,7 +67,7 @@
 						}
 						
 						/* Bootstrap's tooltip */
-						$('[data-toggle="tooltip"]').tooltip();
+						$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 						
 						$(".modal").on("hidden.bs.modal", function() {
 							$(this).removeData();
