@@ -95,6 +95,12 @@
 	color: white;
 }
 
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    	color: white;
+	}
+}
+
 .ticket-container {
 	border: 1px solid #d1d1d1;
 	padding-left: 20px;
