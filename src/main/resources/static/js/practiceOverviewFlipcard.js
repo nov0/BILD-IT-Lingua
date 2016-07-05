@@ -11,6 +11,17 @@ $(document).ready(function() {
     	 * or left before it ends */
     	localStorage.setItem("practiceStarted", true);
 
+    	/* If user clicks on logo during the practice */
+    	$("#lingua-logo").click(function(event) {
+    		event.preventDefault();
+    		localStorage.setItem("leavePracticeToHome", true);
+    		$(".practice-menu-modal").click();
+    	});
+
+    	$(".modal").on("hidden.bs.modal", function() {
+			localStorage.clear();
+		});
+
         var from = $("#input-from").val();
         var category = $("#input-category").val();
         var speed = $("#slider").val();

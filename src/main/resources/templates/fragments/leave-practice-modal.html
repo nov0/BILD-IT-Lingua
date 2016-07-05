@@ -12,7 +12,7 @@
 		<div class="modal-dialog" role="document" style="width: 30%; margin: 0 auto; margin-top: 20px;">
 			<div class="modal-content">
 				<!-- Here will be loaded content from "delete-ticket-modal-content.html" page -->
-				<div th:text="#{leave.practice.dialog}" class="modal-body">Are you sure you want to cancel practice?</div>
+				<div th:text="#{leave.practice.dialog}" class="modal-body">Are you sure you want to leave practice?</div>
 				<div class="modal-footer">
 					<a href="practice-lingua" type="button" class="btn btn-sm btn-primary" id="leave-practice-yes">
 						<span class="glyphicon glyphicon-ok"></span>&nbsp;
@@ -27,18 +27,30 @@
 		</div>
 		<script>
 			/*
-			* If user choose to leave practice, 
-			* redirect him to "Practice Lingua" page.
+			* If user choose to leave practice (depending on where does he click, logo or back button)
+			* redirect him to "Practice Lingua" page or home page accordingly.
 			* Note: Further implementation of this 
 			* is to be found in "showTickets.js" file.
 			*/
 			$(document).ready(function() {
+				
 				$("#leave-practice-yes").click(function(event) {
+					
 					event.preventDefault();
-					var url = $(this).attr("href");
-					localStorage.setItem("practicePage", url);
-					window.location.reload();
+					
+					/* If user clicked on logo during the practice, redirect to home page */
+					if(localStorage.getItem("leavePracticeToHome")) {
+						localStorage.clear();
+						window.location.reload();
+					/* If user clicked on "Back to practice" during the practice, redirect to Practice Lingua page */
+					} else {
+						var url = $(this).attr("href");
+						localStorage.setItem("practicePage", url);
+						window.location.reload();
+					}
+					
 				});
+				
 			});
 		</script>
 	</div>
