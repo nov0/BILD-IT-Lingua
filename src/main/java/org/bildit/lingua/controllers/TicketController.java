@@ -100,7 +100,7 @@ public class TicketController {
 	@RequestMapping("/create-ticket")
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal) {
 		ticketService.saveTicket(ticket, principal.getName());
-		return REDIRECT;
+		return REDIRECT + "?ticket-added";
 	}
 	
 	/**
@@ -131,7 +131,7 @@ public class TicketController {
 			}
 		}
 		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
-		return REDIRECT;
+		return REDIRECT + "?ticket-edited";
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class TicketController {
 	@RequestMapping("/delete-ticket")
 	public String deleteTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id, Principal principal) {
 		ticketService.deleteTicket(id, principal.getName());
-		return REDIRECT;
+		return REDIRECT + "?ticket-deleted";
 	}
 	
 	/**
