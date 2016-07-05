@@ -41,12 +41,14 @@
 					/* If user clicked on logo during the practice, redirect to home page */
 					if(localStorage.getItem("leavePracticeToHome")) {
 						localStorage.clear();
-						window.location.reload();
+						// clear any eventual URL parameters to avoid notification messages after reload
+						window.location = window.location.href.split("?")[0];
 					/* If user clicked on "Back to practice" during the practice, redirect to Practice Lingua page */
 					} else {
 						var url = $(this).attr("href");
 						localStorage.setItem("practicePage", url);
-						window.location.reload();
+						// clear any eventual URL parameters to avoid notification messages after reload
+						window.location = window.location.href.split("?")[0];
 					}
 					
 				});
