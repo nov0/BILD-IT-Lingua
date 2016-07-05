@@ -55,19 +55,19 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	void update(String textDomestic, String textForeign, String category, Long ticketId);	
 	
 	/** @author Goran Arsenic */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.user = ?1 AND ticket.category = ?2 AND ticket.learningLanguage = ?3 AND ticket.deactivated IS NULL ORDER BY RAND()")
-	List<Ticket> getMyTicketsForPractice(User user, String category, Language language, Pageable pageable);
+	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2 AND t.learningLanguage = ?3 AND t.domesticLanguage = ?4 AND t.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getMyTicketsForPractice(User user, String category, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
 	/** @author Goran Arsenic */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.user = ?1 AND ticket.learningLanguage = ?2 AND ticket.deactivated IS NULL ORDER BY RAND()")
-	List<Ticket> getMyTicketsForPractice(User user, Language language, Pageable pageable);
+	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2 AND t.domesticLanguage = ?3 AND t.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getMyTicketsForPractice(User user, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
 	/** @author Goran Arsenic */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.category = ?1 AND ticket.learningLanguage = ?2 AND ticket.deactivated IS NULL ORDER BY RAND()")
-	List<Ticket> getTicketsForPractice(String category, Language language, Pageable pageable);
+	@Query("SELECT t FROM Ticket t WHERE t.category = ?1 AND t.learningLanguage = ?2 AND t.domesticLanguage = ?3 AND t.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getTicketsForPractice(String category, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
 	/** @author Goran Arsenic */
-	@Query("SELECT ticket FROM Ticket ticket WHERE ticket.learningLanguage = ?1 AND ticket.deactivated IS NULL ORDER BY RAND()")
-	List<Ticket> getTicketsForPractice(Language language, Pageable pageable);
+	@Query("SELECT t FROM Ticket t WHERE t.learningLanguage = ?1 AND t.domesticLanguage = ?2 AND t.deactivated IS NULL ORDER BY RAND()")
+	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
 }

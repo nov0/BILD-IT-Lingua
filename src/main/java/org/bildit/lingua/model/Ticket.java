@@ -46,13 +46,16 @@ public class Ticket extends BaseEntity {
 	@JsonIgnore
 	private User user;
 	
-	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.EAGER, orphanRemoval=true)
+	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	private Vote ticketVotes;
 	
 	private String dateCreated;
 	
 	@OneToOne
 	private Language learningLanguage;
+	
+	@OneToOne
+	private Language domesticLanguage;
 	
 	public Ticket() {
 		/** Empty default constructor */
@@ -69,10 +72,14 @@ public class Ticket extends BaseEntity {
 	}
 	
 	/** Getters and Setters */
-	public Language getLearningLanguage() {
-		return learningLanguage;
+	public Language getDomesticLanguage() {
+		return domesticLanguage;
 	}
-	
+
+	public void setDomesticLanguage(Language domesticLanguage) {
+		this.domesticLanguage = domesticLanguage;
+	}
+
 	public Vote getTicketVotes() {
 		return ticketVotes;
 	}
@@ -80,7 +87,11 @@ public class Ticket extends BaseEntity {
 	public void setTicketVotes(Vote ticketVotes) {
 		this.ticketVotes = ticketVotes;
 	}
-
+	
+	public Language getLearningLanguage() {
+		return learningLanguage;
+	}
+	
 	public void setLearningLanguage(Language learningLanguage) {
 		this.learningLanguage = learningLanguage;
 	}

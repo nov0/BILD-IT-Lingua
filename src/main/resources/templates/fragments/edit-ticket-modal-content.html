@@ -35,28 +35,6 @@
 				<li><a th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
 			</ul>
 		</div>
-		<div class="btn-group languages" role="group">
-			<button type="button" class="btn btn-primary dropdown-toggle"
-				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				<span style="padding-right: 5px;"
-					class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span>
-				<span th:if="${session.foreignLanguage eq null}"
-					th:text="#{modal.select.language}"
-					class="tab-btn-group select-practice-lang">Select Language
-				</span>
-				<span
-					th:if="${session.foreignLanguage ne null}"
-					th:text="${session.foreignLanguage}"
-					class="tab-btn-group select-practice-lang">
-				</span>
-				<span class="caret"></span>
-			</button>
-			<ul class="dropdown-menu select-language">
-				<li th:each="language : ${languages}">
-					<a id="selected-lang" href="#" th:text="${language}">Language</a>
-				</li>
-			</ul>
-		</div>
 		<h4 class="modal-title" id="gridModalLabel">
 			<img th:src="@{/images/add-new-lingua-icon.png}" /> <span
 				th:text="#{modal.edit.title}">Edit Lingua</span>

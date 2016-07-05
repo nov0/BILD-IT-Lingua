@@ -57,12 +57,15 @@ CREATE TABLE `tickets` (
   `text_domestic` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `text_foreign` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `learning_language` bigint(20) DEFAULT NULL,
+  `domestic_language` bigint(20) DEFAULT NULL,
   `user` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_7l33mxamukg6om3h7yhtn5ptn` (`learning_language`),
+  KEY `FK_3233mlamukg1om3h7yhtn5pta` (`domestic_language`),
   KEY `FK_1o1qks9jxgqgnoqnyduycqlb8` (`user`),
   CONSTRAINT `FK_1o1qks9jxgqgnoqnyduycqlb8` FOREIGN KEY (`user`) REFERENCES `user` (`id`),
-  CONSTRAINT `FK_7l33mxamukg6om3h7yhtn5ptn` FOREIGN KEY (`learning_language`) REFERENCES `languages` (`id`)
+  CONSTRAINT `FK_7l33mxamukg6om3h7yhtn5ptn` FOREIGN KEY (`learning_language`) REFERENCES `languages` (`id`),
+  CONSTRAINT `FK_3233mlamukg1om3h7yhtn5pta` FOREIGN KEY (`domestic_language`) REFERENCES `languages` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
