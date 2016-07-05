@@ -31,6 +31,8 @@ $(document).ready(function() {
 		window.page = 0;
 		loadTicketsInitially(window.page);
 		window.page++;
+
+		showNotificationTicketsLanguageChange();
 	});
 
 	/* 
