@@ -21,17 +21,17 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	Page<Ticket> findAllByLearningLanguage(Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNull(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNull(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndEditedTrue(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndEditedTrueOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
 	
 	/** @author: Bojan Aleksic */
 	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguage(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
 	
 	/**
 	 * @author Bojan Aleksic
