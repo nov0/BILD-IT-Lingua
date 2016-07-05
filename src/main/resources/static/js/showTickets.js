@@ -32,7 +32,7 @@ $(document).ready(function() {
 		loadTicketsInitially(window.page);
 		window.page++;
 
-		showNotificationTicketsLanguageChange(this.innerHTML);
+		showNotificationTicketsLanguageChange();
 	});
 
 	/* 
