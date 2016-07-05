@@ -108,6 +108,7 @@ public class TicketServiceImpl implements TicketService {
 		vote.setTicket(ticket);
 		ticket.setTicketVotes(vote);
 		ticket.setLearningLanguage(user.getForeignLanguage());
+		ticket.setDomesticLanguage(user.getDomesticLanguage());
 		return ticketRepository.saveAndFlush(ticket);
 	}
 	
