@@ -60,7 +60,7 @@ public class TicketServiceImpl implements TicketService {
 	 */
 	@Override
 	public Page<Ticket> getAllTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguage(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllActiveTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNull(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -79,7 +79,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNull(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -88,7 +88,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllModeratedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndEditedTrue(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndEditedTrueOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
