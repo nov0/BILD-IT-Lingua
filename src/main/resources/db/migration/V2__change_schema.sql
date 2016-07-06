@@ -33,15 +33,15 @@ UNLOCK TABLES;
 
 LOCK TABLES `languages` WRITE;
 /*!40000 ALTER TABLE `languages` DISABLE KEYS */;
-INSERT INTO `languages` VALUES (4,'Serbian'),(5,'English'),(6,'German');
+INSERT INTO `languages` VALUES (1,'Serbian'),(2,'Bosnian'),(3,'Croatian'),(4,'English'),(5,'German');
 /*!40000 ALTER TABLE `languages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('\0','\0','\0',2,4,5);
-INSERT INTO `user` VALUES ('\0','\0','\0',3,4,5);
-INSERT INTO `user` VALUES ('\0','\0','\0',4,4,6);
-INSERT INTO `user` VALUES ('\0','\0','\0',5,4,5);
+INSERT INTO `user` VALUES ('\0','\0','\0',2,1,4);
+INSERT INTO `user` VALUES ('\0','\0','\0',3,1,4);
+INSERT INTO `user` VALUES ('\0','\0','\0',4,1,5);
+INSERT INTO `user` VALUES ('\0','\0','\0',5,1,4);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
