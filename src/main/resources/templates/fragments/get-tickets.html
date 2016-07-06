@@ -55,7 +55,8 @@
 				<input type="hidden" th:value="${totalPages}" id="total-pages" />
 				<input type="hidden" th:value="${ticket.id}" id="ticket-id" />
 				<input type="hidden" th:value="${ticket.textDomestic}" id="text-domestic-test" />
-				<script>
+				<script th:inline="javascript">
+				/*<![CDATA[*/
 				           
 					$(document).ready(function() {
 						
@@ -66,6 +67,18 @@
 							$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
 						}
 						
+						var ticketAdded;
+						
+						if(window.location.search.indexOf("?") >= 0) {
+							ticketAdded = window.location.href.split("?")[1]
+						}
+						
+						/* When ticket is created or edited, highlight the ticket */
+						if(ticketAdded === "ticket-added" || ticketAdded === "ticket-edited") {
+							$(".my-lingua-content .ticket-container").first().addClass("fade-out-on-create");
+							$(".ticket-container").removeClass("fade-out-on-create", 3000);
+						}
+						
 						/* Bootstrap's tooltip */
 						$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
 						
@@ -74,7 +87,8 @@
 						});
 						
 					});
-				           
+				          
+					/*]]>*/
 				</script>
 			</div>
 		</div>
