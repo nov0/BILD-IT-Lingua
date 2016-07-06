@@ -20,23 +20,23 @@
 					</div>
 					<div class="col-md-2">
 						<span class="glyphicon glyphicon-tag"></span>
-						<span th:text="${ticket.category}" data-toggle="tooltip" title="Category">Verbs</span>
+						<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
 					</div>
 					<div class="col-md-2">
 						<span class="glyphicon glyphicon-flag"></span>
-						<span th:text="${foreignLanguage}" data-toggle="tooltip" title="Foreign Language">Foreign</span>
+						<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span>
 					</div>
 					<div class="col-md-2">
 						<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
 							<span class="glyphicon glyphicon-pencil"></span>
-							<span data-toggle="tooltip" title="Edit">Edit</span>
+							<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
 						</a>
 					</div>
 					
 					<div class="col-md-2">
 						<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
 							<span class="glyphicon glyphicon-trash"></span> 
-							<span data-toggle="tooltip" title="Delete">Delete</span>
+							<span data-toggle="tooltip" th:attr="title=#{ticket.delete}" th:text="#{ticket.delete}">Delete</span>
 						</a>
 					</div>	
 					
