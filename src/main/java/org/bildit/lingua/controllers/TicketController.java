@@ -102,8 +102,7 @@ public class TicketController {
 	@RequestMapping("/create-ticket")
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal, HttpSession session) {
 		ticketService.saveTicket(ticket, principal.getName());
-//		session.setAttribute("ticketAdded", true);
-		return REDIRECT + "?ticket-added";
+		return REDIRECT;
 	}
 	
 	/**
@@ -127,14 +126,14 @@ public class TicketController {
 	 * @return
 	 */
 	@RequestMapping("/edit")
-	public String editTicketSubmit(@ModelAttribute("ticket") Ticket ticket, BindingResult result, @RequestParam("id") Long id) {
+	public String editTicketSubmit(@ModelAttribute("ticket") Ticket ticket, BindingResult result, @RequestParam("id") Long id, Model model) {
 		if(result.hasErrors()) {
 			for(Object error : result.getAllErrors()) {
 				logger.error(error);
 			}
 		}
 		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
-		return REDIRECT + "?ticket-edited";
+		return REDIRECT;
 	}
 	
 	/**
@@ -156,7 +155,7 @@ public class TicketController {
 	@RequestMapping("/delete-ticket")
 	public String deleteTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id, Principal principal) {
 		ticketService.deleteTicket(id, principal.getName());
-		return REDIRECT + "?ticket-deleted";
+		return REDIRECT;
 	}
 	
 	/**
