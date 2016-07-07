@@ -5,5 +5,5 @@
 
 $(".select-category li > a").click(function() {
     $(".category").text(this.innerHTML);
-    $(".selected-category").val(this.innerHTML);
+    $(".selected-category").val($(this).attr("id"));
 });
