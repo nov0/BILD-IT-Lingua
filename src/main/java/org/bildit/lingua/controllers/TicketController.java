@@ -103,7 +103,6 @@ public class TicketController {
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal, HttpSession session) {
 		ticketService.saveTicket(ticket, principal.getName());
 		return REDIRECT;
-
 	}
 	
 	/**

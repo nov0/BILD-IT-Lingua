@@ -124,24 +124,22 @@
 				}
 			
 				if(domesticText.length > 0 && domesticText.length <= 100
-						&& foreignText.length > 0 && foreignText.length <= 100
-						&& selectedCategory != "") {
+						&& foreignText.length > 0 && foreignText.length <= 100) {
 					localStorage.setItem("ticket-edited", true);
 				}
 				
-			/* Reset all text in the form when modal is closed */
-			$('.modal').on('hidden.bs.modal', function () {
-				$(this).find('form').trigger('reset');
-				$('.form-group').removeClass('has-error');
-			});
+				/* Reset all text in the form when modal is closed */
+				$('.modal').on('hidden.bs.modal', function () {
+					$(this).find('form').trigger('reset');
+					$('.form-group').removeClass('has-error');
+				});
 			
-			$('.modal').on('hidden.bs.modal', function() { 
-				$(this).removeData(); 
-			});
+				$('.modal').on('hidden.bs.modal', function() { 
+					$(this).removeData(); 
+				});
 			
-			console.log("JE li radi ovdje");
-			
-		});
+			}); // end click
+		}); // end ready
 		/*]]>*/
 	</script>
 	
