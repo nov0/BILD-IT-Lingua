@@ -119,6 +119,10 @@
 	font-size: 14px;
 }
 
+.fade-out-on-create {
+	background-color: #99e895;
+}
+
 @media (min-width: 992px) {
 	.col-md-2 {
     	width: 15%;

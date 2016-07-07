@@ -18,21 +18,21 @@
 				<span style="padding-right: 8px;" class="glyphicon glyphicon-tags"
 					aria-hidden="true">
 				</span> 
-				<span th:text="${ticket.category}"
+				<span th:text="#{modal.categories. + ${ticket.category}}"
 					class="tab-btn-group category">Categories
 				</span> 
 				<span class="caret"></span>
 			</button>
 			<ul class="dropdown-menu select-category">
-				<li><a th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
-				<li><a th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
-				<li><a th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
-				<li><a th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
-				<li><a th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
-				<li><a th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
-				<li><a th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
-				<li><a th:text="#{modal.categories.articles}" href="#">Articles</a></li>
-				<li><a th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
+				<li><a id="verbs" th:text="#{modal.categories.verbs}" href="#">Verbs</a></li>
+				<li><a id="sentences" th:text="#{modal.categories.sentences}" href="#">Sentences</a></li>
+				<li><a id="nouns" th:text="#{modal.categories.nouns}" href="#">Nouns</a></li>
+				<li><a id="pronouns" th:text="#{modal.categories.pronouns}" href="#">Pronouns</a></li>
+				<li><a id="adjectives" th:text="#{modal.categories.adjectives}" href="#">Adjectives</a></li>
+				<li><a id="prepositions" th:text="#{modal.categories.prepositions}" href="#">Prepositions</a></li>
+				<li><a id="adverbs" th:text="#{modal.categories.adverbs}" href="#">Adverbs</a></li>
+				<li><a id="articles" th:text="#{modal.categories.articles}" href="#">Articles</a></li>
+				<li><a id="interjections" th:text="#{modal.categories.interjections}" href="#">Interjections</a></li>
 			</ul>
 		</div>
 		<h4 class="modal-title" id="gridModalLabel">
@@ -66,10 +66,10 @@
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="btn btn-danger" data-dismiss="modal">
-				<span class="glyphicon glyphicon-remove-circle"></span> Cancel
+				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span th:text="#{form.field.button.cancel}">Cancel</span>
 			</button>
 			<button type="submit" class="btn btn-success" id="ticket-edited">
-				<span class="glyphicon glyphicon-floppy-disk"></span> Save changes
+				<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;<span th:text="#{save.changes}">Save changes</span>
 			</button>
 		</div>
 	</form>
@@ -100,20 +100,34 @@
 					message = /*[[#{modal.notifiction.message.domestic}]]*/ "Please enter some text in foreign language.";
 					event.preventDefault();
 					showNotification(message, color, icon);
-				} 
-					
+				} else if(domesticText.length > 100) {
+					$('.form-group.domestic').addClass('has-error');
+					message = /*[[#{modal.notifiction.message.text.oversize}]]*/ "Maximum number of characters is 100.";
+					event.preventDefault();
+					showNotification(message, color, icon);
+				} else {
+					$('.form-group.domestic').removeClass('has-error');
+				}
+				
 				if(foreignText == "") {
 					$('.form-group.foreign').addClass('has-error');
 					message = /*[[#{modal.notifiction.message.foreign}]]*/ "Please enter some text in foreign language.";
 					event.preventDefault();
 					showNotification(message, color, icon);
-				} 
-				
-				if(domesticText != "" && foreignText != "") {
+				} else if(foreignText.length > 100) {
+					$('.form-group.foreign').addClass('has-error');
+					message = /*[[#{modal.notifiction.message.text.oversize}]]*/ "Maximum number of characters is 100.";
+					event.preventDefault();
+					showNotification(message, color, icon);
+				} else {
+					$('.form-group.foreign').removeClass('has-error');
+				}
+			
+				if(domesticText.length > 0 && domesticText.length <= 100
+						&& foreignText.length > 0 && foreignText.length <= 100
+						&& selectedCategory != "") {
 					localStorage.setItem("ticket-edited", true);
 				}
-					
-			});
 				
 			/* Reset all text in the form when modal is closed */
 			$('.modal').on('hidden.bs.modal', function () {
@@ -123,7 +137,9 @@
 			
 			$('.modal').on('hidden.bs.modal', function() { 
 				$(this).removeData(); 
-			}); 
+			});
+			
+			console.log("JE li radi ovdje");
 			
 		});
 		/*]]>*/

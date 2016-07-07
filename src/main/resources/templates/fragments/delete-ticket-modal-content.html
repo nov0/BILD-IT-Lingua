@@ -13,10 +13,10 @@
 		<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}"
 			onclick="localStorage.setItem('ticket-deleted', true)"
 			type="button" class="btn btn-sm btn-primary" id="delete-confirm">
-			<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+			<span class="glyphicon glyphicon-trash"></span>&nbsp;<span th:text="#{ticket.delete}">Delete</span>
 		</a>
 		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
-			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;Cancel
+			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span th:text="#{form.field.button.cancel}">Cancel</span>
 		</button>
 	</div>
 	

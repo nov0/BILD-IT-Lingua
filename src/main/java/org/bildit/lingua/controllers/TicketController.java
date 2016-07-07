@@ -2,6 +2,8 @@ package org.bildit.lingua.controllers;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.repository.UserRepository;
@@ -98,9 +100,10 @@ public class TicketController {
 	 * @return
 	 */
 	@RequestMapping("/create-ticket")
-	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal) {
+	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal, HttpSession session) {
 		ticketService.saveTicket(ticket, principal.getName());
 		return REDIRECT;
+
 	}
 	
 	/**
