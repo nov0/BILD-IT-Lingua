@@ -146,6 +146,14 @@
 // 						event.preventDefault();
 // 						showNotification(message, color, icon);
 // 					}
+
+					/* adding argument to lacal session for displaying ticket added notification */
+					if(domesticText.length > 0 && domesticText.length <= 100
+							&& foreignText.length > 0 && foreignText.length <= 100
+							&& selectedCategory != "") {
+						localStorage.setItem("ticket-added", true);
+					}
+
 				});
 				
 				/* Reset all text in the form when modal is closed */

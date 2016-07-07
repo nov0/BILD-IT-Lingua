@@ -25,12 +25,12 @@
 <body>
 
 	<!-- @author Bojan Aleksic -->
+	
+	<!-- Include notification fragment -->
+	<div th:replace="fragments/notifications :: notifications">Notification fragment</div>
 
 	<!-- Include header from fragments -->
 	<div th:replace="fragments/header :: header">...</div>
-
-	<!-- Include notification fragment -->
-	<div th:replace="fragments/notifications :: notifications">Notification fragment</div>
 
 	<div sec:authorize="isAuthenticated()">
 		<!-- Include Account fragment by authority (User account or Admin account) -->

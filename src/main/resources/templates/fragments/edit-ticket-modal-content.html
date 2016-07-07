@@ -68,7 +68,7 @@
 			<button type="button" class="btn btn-danger" data-dismiss="modal">
 				<span class="glyphicon glyphicon-remove-circle"></span> Cancel
 			</button>
-			<button type="submit" class="btn btn-success">
+			<button type="submit" class="btn btn-success" id="ticket-edited">
 				<span class="glyphicon glyphicon-floppy-disk"></span> Save changes
 			</button>
 		</div>
@@ -108,6 +108,10 @@
 					event.preventDefault();
 					showNotification(message, color, icon);
 				} 
+				
+				if(domesticText != "" && foreignText != "") {
+					localStorage.setItem("ticket-edited", true);
+				}
 					
 			});
 				
@@ -120,7 +124,7 @@
 			$('.modal').on('hidden.bs.modal', function() { 
 				$(this).removeData(); 
 			}); 
-				
+			
 		});
 		/*]]>*/
 	</script>
