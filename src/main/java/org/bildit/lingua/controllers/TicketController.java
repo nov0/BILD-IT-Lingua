@@ -102,7 +102,6 @@ public class TicketController {
 	@RequestMapping("/create-ticket")
 	public String createNewTicket(@ModelAttribute("ticket") Ticket ticket, Principal principal, HttpSession session) {
 		ticketService.saveTicket(ticket, principal.getName());
-//		session.setAttribute("ticketAdded", true);
 		return REDIRECT + "?ticket-added";
 	}
 	
@@ -156,7 +155,7 @@ public class TicketController {
 	@RequestMapping("/delete-ticket")
 	public String deleteTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id, Principal principal) {
 		ticketService.deleteTicket(id, principal.getName());
-		return REDIRECT + "?ticket-deleted";
+		return REDIRECT;
 	}
 	
 	/**

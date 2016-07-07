@@ -68,7 +68,7 @@
 			<button type="button" class="btn btn-danger" data-dismiss="modal">
 				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span th:text="#{form.field.button.cancel}">Cancel</span>
 			</button>
-			<button type="submit" class="btn btn-success">
+			<button type="submit" class="btn btn-success" id="ticket-edited">
 				<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;<span th:text="#{save.changes}">Save changes</span>
 			</button>
 		</div>
@@ -122,8 +122,12 @@
 				} else {
 					$('.form-group.foreign').removeClass('has-error');
 				}
-					
-			});
+			
+				if(domesticText.length > 0 && domesticText.length <= 100
+						&& foreignText.length > 0 && foreignText.length <= 100) {
+					localStorage.setItem("ticket-edited", true);
+				}
+			}); // end click
 				
 			/* Reset all text in the form when modal is closed */
 			$('.modal').on('hidden.bs.modal', function () {
@@ -133,9 +137,9 @@
 			
 			$('.modal').on('hidden.bs.modal', function() { 
 				$(this).removeData(); 
-			}); 
-				
-		});
+			});
+			
+		}); // end ready
 		/*]]>*/
 	</script>
 	
