@@ -24,14 +24,31 @@ $(document).ready(function() {
 	window.totalPages = "";
 
 	var selectedLanguage = "";
+	var selectedLanguageTemp = "";
 	$(".select-language li > a").click(function() {
 		$("#preloader").show();
 		$(".select-practice-lang").text(this.innerHTML);
-		selectedLanguage = this.innerHTML;
+		selectedLanguageTemp = this.innerHTML;
+		/**
+		 * This is not good solution, but it's easiest for now. 
+		 * Language title must be converted in English.
+		 */
+		/***** If you add new localization language, you must update this.*****/
+		if(selectedLanguageTemp === "English" || selectedLanguageTemp === "Engleski") {
+			selectedLanguage = "English";
+		} else if(selectedLanguageTemp === "Bosnian" || selectedLanguageTemp === "Bosanski") {
+			selectedLanguage = "Bosnian";
+		} else if(selectedLanguageTemp ==="Serbian" || selectedLanguageTemp === "Srpski") {
+			selectedLanguage = "Serbian";
+		} else if(selectedLanguageTemp === "Croatian" || selectedLanguageTemp === "Hrvatski") {
+			selectedLanguage = "Croatian";
+		} else {
+			selectedLanguage = "German";
+		}
 		window.page = 0;
 		loadTicketsInitially(window.page);
 		window.page++;
-
+		
 		showNotificationTicketsLanguageChange();
 	});
 

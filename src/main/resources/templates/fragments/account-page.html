@@ -70,14 +70,14 @@
 												class="tab-btn-group select-practice-lang">Select Language
 											</span> 
 											<span th:if="${session.foreignLanguage ne null}"
-												th:text="${session.foreignLanguage}"
+												th:text="#{language. + ${session.foreignLanguage}}"
 												class="tab-btn-group select-practice-lang">
 											</span> 
 											<span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu lingua-language select-language">
 											<li th:each="language : ${languages}">
-												<a id="selected-lang" href="#" th:text="${language}">Language</a>
+												<a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
 											</li>
 										</ul>
 									</li>
