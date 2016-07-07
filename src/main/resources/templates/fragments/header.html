@@ -23,7 +23,7 @@
 									<span id="selected-language"></span> 
 									<span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang" onclick="localStorage.setItem('local-language-change', true)">
 									<li>
 										<a th:href="@{/?lang=en}"
 										th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
@@ -148,7 +148,7 @@
 							<span id="selected-language"></span> 
 							<span class="caret"></span>
 						</button>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang" onclick="localStorage.setItem('local-language-change', true)">
 							<li>
 								<a th:href="@{/?lang=en}"
 								th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"

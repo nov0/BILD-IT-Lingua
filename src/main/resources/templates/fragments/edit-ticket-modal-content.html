@@ -127,18 +127,18 @@
 						&& foreignText.length > 0 && foreignText.length <= 100) {
 					localStorage.setItem("ticket-edited", true);
 				}
-				
-				/* Reset all text in the form when modal is closed */
-				$('.modal').on('hidden.bs.modal', function () {
-					$(this).find('form').trigger('reset');
-					$('.form-group').removeClass('has-error');
-				});
-			
-				$('.modal').on('hidden.bs.modal', function() { 
-					$(this).removeData(); 
-				});
-			
 			}); // end click
+				
+			/* Reset all text in the form when modal is closed */
+			$('.modal').on('hidden.bs.modal', function () {
+				$(this).find('form').trigger('reset');
+				$('.form-group').removeClass('has-error');
+			});
+			
+			$('.modal').on('hidden.bs.modal', function() { 
+				$(this).removeData(); 
+			});
+			
 		}); // end ready
 		/*]]>*/
 	</script>
