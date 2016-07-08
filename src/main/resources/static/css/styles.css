@@ -92,6 +92,12 @@ body {
     background-repeat: no-repeat;
 }
 
+.gr-flag {
+    background-image: url('images/german-flag.png');
+    background-position: 5px 7px;
+    background-repeat: no-repeat;
+}
+
 #select-lang a {
     padding-left: 30px;
 }
