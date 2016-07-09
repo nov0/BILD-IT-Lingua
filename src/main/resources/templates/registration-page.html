@@ -7,6 +7,8 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 	<script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.1/animate.min.css" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/mouse0270-bootstrap-notify/3.1.5/bootstrap-notify.min.js"></script>
 	<script src="js/formValidation.min.js"></script>
 	<script src="js/valid-bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}" />
@@ -15,8 +17,11 @@
 
 	<!-- @author Novislav Sekulic -->
 			 
-		<!-- including script for validating user form -->
-		<div th:replace="fragments/validation :: validation">...</div>
+	<!-- including script for validating user form -->
+	<div th:replace="fragments/validation :: validation">...</div>
+		
+	<!-- Include notification fragment -->
+	<div th:replace="fragments/notifications :: notifications">Notification fragment</div>
 
 	<div class="jumbotron" style="heigth: 150px;" th:fragment="header">
 		<div class="container" style="height: 60px;">
@@ -32,7 +37,7 @@
 									<span id="selected-language"></span> 
 									<span class="caret"></span>
 								</button>
-								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang">
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang" onclick="localStorage.setItem('local-language-change', true)">
 									<li>
 										<a th:href="@{/register?lang=sr}"
 											th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
