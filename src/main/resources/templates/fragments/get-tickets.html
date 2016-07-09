@@ -16,7 +16,7 @@
 				<div class="row ticket-header">
 					<div class="col-md-3">
 						<span class="glyphicon glyphicon-time"></span>
-						<span th:text="${ticket.dateCreated}"></span>
+						<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}"></span>
 					</div>
 					<div class="col-md-2">
 						<span class="glyphicon glyphicon-tag"></span>

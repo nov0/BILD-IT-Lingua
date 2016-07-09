@@ -1,5 +1,6 @@
 package org.bildit.lingua.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
@@ -49,7 +50,7 @@ public class Ticket extends BaseEntity {
 	@OneToOne(mappedBy="ticket", cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	private Vote ticketVotes;
 	
-	private String dateCreated;
+	private LocalDateTime localDateTime;
 	
 	@OneToOne
 	private Language learningLanguage;
@@ -144,12 +145,12 @@ public class Ticket extends BaseEntity {
 		this.user = user;
 	}
 
-	public String getDateCreated() {
-		return dateCreated;
+	public LocalDateTime getLocalDateTime() {
+		return localDateTime;
 	}
 
-	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated;
+	public void setLocalDateTime(LocalDateTime localDateTime) {
+		this.localDateTime = localDateTime;
 	}
 	
 }
