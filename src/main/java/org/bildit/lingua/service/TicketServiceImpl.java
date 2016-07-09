@@ -1,7 +1,6 @@
 package org.bildit.lingua.service;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
@@ -60,7 +59,7 @@ public class TicketServiceImpl implements TicketService {
 	 */
 	@Override
 	public Page<Ticket> getAllTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageOrderByLocalDateTimeDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
@@ -70,7 +69,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllActiveTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByLocalDateTimeDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -79,7 +78,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllDeactivatedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByLocalDateTimeDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 	/**
 	 * @author Mladen Todorovic
@@ -88,7 +87,7 @@ public class TicketServiceImpl implements TicketService {
 	 * */
 	@Override
 	public Page<Ticket> getAllModeratedTicketsByUsername(String username, String learningLanguage, Pageable pageable) {
-		return ticketRepository.findAllByUserIdAndLearningLanguageAndEditedTrueOrderByDateCreatedDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
+		return ticketRepository.findAllByUserIdAndLearningLanguageAndEditedTrueOrderByLocalDateTimeDesc(userRepository.findUserByUsername(username).getId(), languageRepository.getOneByLanguageTitle(learningLanguage), pageable);
 	}
 
 	/**
@@ -99,10 +98,8 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Ticket saveTicket(Ticket ticket, String username) {
 		User user = userRepository.findUserByUsername(username);
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMM dd HH:mm");
-		String date = sdf.format(new Date());
 		ticket.setUser(user);
-		ticket.setDateCreated(date);
+		ticket.setLocalDateTime(LocalDateTime.now());
 		user.getTickets().add(ticket);
 		Vote vote = new Vote(0,0);
 		vote.setTicket(ticket);

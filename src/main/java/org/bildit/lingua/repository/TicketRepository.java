@@ -21,17 +21,17 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	Page<Ticket> findAllByLearningLanguage(Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNullOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndDeactivatedIsNotNullOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageAndEditedTrueOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageAndEditedTrueOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	
 	/** @author: Bojan Aleksic */
 	Page<Ticket> findAllByUserId(Long id, Pageable pageable);
 	
 	/** @author Mladen Todorovic */
-	Page<Ticket> findAllByUserIdAndLearningLanguageOrderByDateCreatedDesc(Long id, Language learningLanguage, Pageable pageable);
+	Page<Ticket> findAllByUserIdAndLearningLanguageOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	
 	/**
 	 * @author Bojan Aleksic

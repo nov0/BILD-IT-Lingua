@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 /**
  * @author Novislav Sekulic
@@ -51,5 +52,10 @@ public class BildItLinguaApplication extends WebMvcConfigurerAdapter {
 		// messageSource.setCacheSeconds(10);
 		return messageSource;
 	}
+	
+	@Bean
+    public Java8TimeDialect java8TimeDialect() {
+        return new Java8TimeDialect();
+    }
 
 }
