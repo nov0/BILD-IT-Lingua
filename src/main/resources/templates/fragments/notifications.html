@@ -16,10 +16,9 @@
 			    		var color = 'danger';
 			    		var icon = 'glyphicon glyphicon-warning-sign';
 			    		showNotification(message, color, icon);
-			    		
 			        } 
 					
-					/* Watching if local storage conteins specified value for notifications */
+					/* Watching if local storage contains specified value to trigger notifications */
 					
 					if(localStorage.getItem("ticket-edited")) {
 						showNotificationTicketEdited();
@@ -36,26 +35,15 @@
 					} else if(localStorage.getItem('local-language-change')) {
 						showNotificationLocalLanguageChange();
 						localStorage.removeItem('local-language-change')
-					} 
-					
-					
-					
+					} else if(localStorage.getItem('user-register')) {
+						showNotificationUserRegister();
+						localStorage.removeItem('user-register');
+					} else if(localStorage.getItem('admin-register')) {
+						showNotificationAdminRegister();
+						localStorage.removeItem('user-register');
+					}
 					
 				}); // end ready
-				
-			        
-// 			        if(isParamPresent("register")) {
-// 			        	var message = /*[[#{register.success.message}]]*/ 'Register message';
-// 			        	var color = 'success';
-// 			        	var icon = 'glyphicon glyphicon-ok';
-// 			        	showNotification(message, color, icon); 
-// 			        }  else if(isParamPresent("adminreg")) {
-// 			        	var message = /*[[#{register.success.message.admin}]]*/ 'Admin Created';
-// 			        	var color = 'success';
-// 			        	var icon = 'glyphicon glyphicon-ok';
-// 			        	showNotification(message, color, icon); 
-// 			        } 
-
 
 				var iconOk = 'glyphicon glyphicon-ok';
 			    var iconWarning = 'glyphicon glyphicon-warning-sign';
@@ -97,6 +85,16 @@
 				
 				function showNotificationLoggedOut(){
 					message = /*[[#{logout.success.message}]]*/ 'Logout message';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationUserRegister() {
+					message = /*[[#{register.success.message}]]*/ 'Register message';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationAdminRegister() {
+					message = /*[[#{register.success.message.admin}]]*/ 'Admin Created';
 					showNotification(message, colorGreen, iconOk);
 				}
 				
