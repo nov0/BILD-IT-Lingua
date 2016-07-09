@@ -51,7 +51,7 @@ DROP TABLE IF EXISTS `tickets`;
 CREATE TABLE `tickets` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `category` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `date_created` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `local_date_time` DATETIME COLLATE utf8_unicode_ci DEFAULT NULL,
   `deactivated` date DEFAULT NULL,
   `edited` bit(1) DEFAULT NULL,
   `text_domestic` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
