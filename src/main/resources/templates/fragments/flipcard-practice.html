@@ -62,7 +62,9 @@
 				</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span th:text="${ticket.dateCreated}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}">Date</span>
+				<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}">
+					Date
+				</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<button id="button-flip" type="button" class="btn btn-primary" data-toggle="tooltip" title="Flip Card" th:attr="title=#{tooltip.title.flip}"><span style="padding-right: 8px;" class="glyphicon glyphicon-retweet"></span><span th:text="#{flipcard.button.flip}">FLIP CARD</span></button>
