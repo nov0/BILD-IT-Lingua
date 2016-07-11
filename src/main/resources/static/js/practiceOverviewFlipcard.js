@@ -5,20 +5,20 @@
 
 $(document).ready(function() {
 
+	/* If user clicks on logo during the practice */
+	$("#lingua-logo").click(function(event) {
+		if($("#stack-size").val() > 0) {
+			event.preventDefault();
+			localStorage.setItem("leavePracticeToHome", true);
+    		$(".practice-menu-modal").click();
+		} 
+	});
+
     $("#start-practice-submit").click(function() {
 
     	/* Set item for practice to check later if practice is aborted
     	 * or left before it ends */
     	localStorage.setItem("practiceStarted", true);
-
-    	/* If user clicks on logo during the practice */
-    	$("#lingua-logo").click(function(event) {
-    		if($("#stack-size").val() > 0) {
-    			event.preventDefault();
-    		}
-    		localStorage.setItem("leavePracticeToHome", true);
-    		$(".practice-menu-modal").click();
-    	});
 
     	$(".modal").on("hidden.bs.modal", function() {
 			localStorage.clear();
