@@ -37,7 +37,11 @@
 					event.preventDefault();
 					var url = $(this).attr("href");
 					localStorage.setItem("practicePage", url);
-					window.location.reload();
+					if(window.location.href.indexOf("#") >= 0) {
+						window.location = window.location.href.split("#")[0];
+					} else {
+						window.location = window.location.href.split("?")[0];
+					}
 				});
 			});
 		</script>

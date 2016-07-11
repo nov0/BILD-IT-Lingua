@@ -45,7 +45,9 @@
 				<span data-toggle="tooltip" th:attr="title=#{tooltip.practice.author}" th:text="${ticket.user.firstName} + ' ' + ${ticket.user.lastName}">User</span>
 				&nbsp; &bull; &nbsp;
 				<span class="glyphicon glyphicon-time"></span>
-				<span data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}" th:text="${ticket.dateCreated}">Date</span>
+				<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}" data-toggle="tooltip" th:attr="title=#{tooltip.practice.date}">
+					Date
+				</span>
 			</div>
 			<div class="col-md-4" style="text-align: center;">
 				<!-- Bootstrap's Slider -->
