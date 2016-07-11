@@ -34,13 +34,13 @@ $(document).ready(function() {
 		 * Language title must be converted in English.
 		 */
 		/***** If you add new localization language, you must update this.*****/
-		if(selectedLanguageTemp === "English" || selectedLanguageTemp === "Engleski") {
+		if(selectedLanguageTemp === "English" || selectedLanguageTemp === "Engleski" || selectedLanguageTemp === "Englisch") {
 			selectedLanguage = "English";
-		} else if(selectedLanguageTemp === "Bosnian" || selectedLanguageTemp === "Bosanski") {
+		} else if(selectedLanguageTemp === "Bosnian" || selectedLanguageTemp === "Bosanski" || selectedLanguageTemp === "Bosnisch") {
 			selectedLanguage = "Bosnian";
-		} else if(selectedLanguageTemp ==="Serbian" || selectedLanguageTemp === "Srpski") {
+		} else if(selectedLanguageTemp ==="Serbian" || selectedLanguageTemp === "Srpski" || selectedLanguageTemp === "Serbisch") {
 			selectedLanguage = "Serbian";
-		} else if(selectedLanguageTemp === "Croatian" || selectedLanguageTemp === "Hrvatski") {
+		} else if(selectedLanguageTemp === "Croatian" || selectedLanguageTemp === "Hrvatski" || selectedLanguageTemp === "Kroatisch") {
 			selectedLanguage = "Croatian";
 		} else {
 			selectedLanguage = "German";
@@ -48,9 +48,6 @@ $(document).ready(function() {
 		window.page = 0;
 		loadTicketsInitially(window.page);
 		window.page++;
-
-		
-		showNotificationTicketsLanguageChange();
 
 	});
 
