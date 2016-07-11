@@ -162,6 +162,7 @@
 }
 
 .like-dislike-btn {
+	float:right; 
 	text-align: right;
 }
 
