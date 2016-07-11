@@ -12,45 +12,78 @@
 		<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
 		
 		<div th:if="${tickets != null}" class="tickets-wrapper">
-			<div class="ticket-container alert-warning" th:each="ticket : ${tickets}">
-				<div class="row ticket-header">
-					<div class="col-md-3">
-						<span class="glyphicon glyphicon-time"></span>
-						<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}"></span>
-					</div>
-					<div class="col-md-2">
-						<span class="glyphicon glyphicon-tag"></span>
-						<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
-					</div>
-					<div class="col-md-2">
-						<span class="glyphicon glyphicon-flag"></span>
-						<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span>
-					</div>
-					<div class="col-md-2">
-						<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
-							<span class="glyphicon glyphicon-pencil"></span>
-							<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
-						</a>
-					</div>
-					
-					<div class="col-md-2">
-						<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
-							<span class="glyphicon glyphicon-trash"></span> 
-							<span data-toggle="tooltip" th:attr="title=#{ticket.delete}" th:text="#{ticket.delete}">Delete</span>
-						</a>
-					</div>	
-					
-					<div class="col-md-2 like-dislike-btn">
-						<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
-						<span th:text="${ticket.ticketVotes.likes}"></span>
-						&nbsp;
-						<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
-						<span th:text="${ticket.ticketVotes.dislikes}"></span>
+			<div th:each="ticket : ${tickets}">
+				<div th:if="${ticket.deactivated == null}">
+					<div class="ticket-container alert-warning" >
+						<div class="row ticket-header">
+							<div class="col-md-3">
+								<span class="glyphicon glyphicon-time"></span>
+								<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}"></span>
+							</div>
+							<div class="col-md-2">
+								<span class="glyphicon glyphicon-tag"></span>
+								<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
+							</div>
+							<div class="col-md-2">
+								<span class="glyphicon glyphicon-flag"></span>
+								<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span>
+							</div>
+							<div class="col-md-2">
+								<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
+									<span class="glyphicon glyphicon-pencil"></span>
+									<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
+								</a>
+							</div>
+							
+							<div class="col-md-2">
+								<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
+									<span class="glyphicon glyphicon-trash"></span> 
+									<span data-toggle="tooltip" th:attr="title=#{ticket.delete}" th:text="#{ticket.delete}">Delete</span>
+								</a>
+							</div>	
+							
+							<div class="col-md-2 like-dislike-btn">
+								<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+								<span th:text="${ticket.ticketVotes.likes}"></span>
+								&nbsp;
+								<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+								<span th:text="${ticket.ticketVotes.dislikes}"></span>
+							</div>
+						</div>
+						<div class="row domestic-foreign-row">
+							<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+							<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+						</div>
 					</div>
 				</div>
-				<div class="row domestic-foreign-row">
-					<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
-					<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+				<div th:unless="${ticket.deactivated == null}">
+					<div class="ticket-container alert-danger" >
+						<div class="row ticket-header">
+							<div class="col-md-3">
+								<span class="glyphicon glyphicon-time"></span>
+								<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}"></span>
+							</div>
+							<div class="col-md-2">
+								<span class="glyphicon glyphicon-tag"></span>
+								<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
+							</div>
+							<div class="col-md-2">
+								<span class="glyphicon glyphicon-flag"></span>
+								<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span>
+							</div>
+							<div class="col-md-2 like-dislike-btn">
+								<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+								<span th:text="${ticket.ticketVotes.likes}"></span>
+								&nbsp;
+								<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+								<span th:text="${ticket.ticketVotes.dislikes}"></span>
+							</div>
+						</div>
+						<div class="row domestic-foreign-row">
+							<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+							<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+						</div>
+					</div>
 				</div>
 				<input type="hidden" th:value="${totalPages}" id="total-pages" />
 				<input type="hidden" th:value="${ticket.id}" id="ticket-id" />
@@ -85,9 +118,7 @@
 						$(".modal").on("hidden.bs.modal", function() {
 							$(this).removeData();
 						});
-						
 					});
-				          
 					/*]]>*/
 				</script>
 			</div>
