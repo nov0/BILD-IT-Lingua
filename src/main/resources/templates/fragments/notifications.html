@@ -98,6 +98,35 @@
 					showNotification(message, colorGreen, iconOk);
 				}
 				
+				/* notifications for selection practice if tickets not available */
+				
+				function showNotificationNoTicketAvailable() {
+					message = /*[[#{no.tickets.for.practice}]]*/ "No tickets for specified language available.";
+					showNotification(message, colorRed, iconWarning);
+				}
+				
+				function showNotificationNoTicketAvailableForThisLanguage() {
+					message = /*[[#{no.tickets.for.practice.this}]]*/ "No tickets for specified category in this language available";
+					showNotification(message, colorRed, iconWarning);
+				}
+				
+				/* notifications for slider speed*/
+				
+				function showNotificationSliderSpeedOne() {
+					message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationSliderSpeedTwo() {
+					message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationSliderSpeedThree() {
+					message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
+					showNotification(message, colorGreen, iconOk);
+				}
+				
 				
 				/**
 				 * Function for showing notification. This function is called form others functions.
