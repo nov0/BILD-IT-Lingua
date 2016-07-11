@@ -13,7 +13,9 @@ $(document).ready(function() {
 
     	/* If user clicks on logo during the practice */
     	$("#lingua-logo").click(function(event) {
-    		event.preventDefault();
+    		if($("#stack-size").val() > 0) {
+    			event.preventDefault();
+    		}
     		localStorage.setItem("leavePracticeToHome", true);
     		$(".practice-menu-modal").click();
     	});
