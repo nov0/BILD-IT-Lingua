@@ -12,59 +12,101 @@
 			    $( document ).ready(function() {
 			    	
 					if(isParamPresent("error")){
-						
-			    		var message = /*[[#{login.error.message}]]*/ 'message';
+			    		var message = /*[[#{login.error.message}]]*/ 'message'; 
 			    		var color = 'danger';
 			    		var icon = 'glyphicon glyphicon-warning-sign';
 			    		showNotification(message, color, icon);
-			    		
-			        } else if(isParamPresent("logout")){
-			        	
-			        	var message = /*[[#{logout.success.message}]]*/ 'Logout message';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon);
-			        	
-			        } else if(isParamPresent("lang")){
-			        	
-			        	var message = /*[[#{language.local.change}]]*/ 'Language cahange';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon);
-			        } else if(isParamPresent("register")) {
-			        	var message = /*[[#{register.success.message}]]*/ 'Register message';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon); 
-			        } else if(isParamPresent("ticket-added")) {
-			        	var message = /*[[#{modal.ticket.created}]]*/ 'Ticket Created';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon); 
-			        } else if(isParamPresent("adminreg")) {
-			        	var message = /*[[#{register.success.message.admin}]]*/ 'Ticket Created';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon); 
-			        } else if(isParamPresent("ticket-deleted")) {
-			        	var message = /*[[#{confirm.delete.message}]]*/ 'Ticket deleted!';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon);
-			        } else if(isParamPresent("ticket-edited")) {
-			        	var message = /*[[#{modal.ticket.edited}]]*/ 'Ticket edited!';
-			        	var color = 'success';
-			        	var icon = 'glyphicon glyphicon-ok';
-			        	showNotification(message, color, icon);
-			        }
-			    	
+			        } 
+					
+					/* Watching if local storage contains specified value to trigger notifications */
+					
+					if(localStorage.getItem("ticket-edited")) {
+						showNotificationTicketEdited();
+						localStorage.removeItem("ticket-edited");
+					} else if(localStorage.getItem("ticket-deleted")) {
+						showNotificationTicketDeleted();
+						localStorage.removeItem("ticket-deleted");
+					} else if(localStorage.getItem("ticket-added")) {
+						showNotificationTicketAdded();
+						localStorage.removeItem("ticket-added");
+					} else if(localStorage.getItem("logged-out")) {
+						showNotificationLoggedOut();					
+						localStorage.removeItem("logged-out");
+					} else if(localStorage.getItem('local-language-change')) {
+						showNotificationLocalLanguageChange();
+						localStorage.removeItem('local-language-change')
+					} else if(localStorage.getItem('user-register')) {
+						showNotificationUserRegister();
+						localStorage.removeItem('user-register');
+					} else if(localStorage.getItem('admin-register')) {
+						showNotificationAdminRegister();
+						localStorage.removeItem('admin-register');
+					}
+					
 				}); // end ready
+
+				var iconOk = 'glyphicon glyphicon-ok';
+			    var iconWarning = 'glyphicon glyphicon-warning-sign';
+			    var colorGreen = 'success';
+			    var colorRed = 'danger';
+			    var colorYellow = 'warning';
+			    var message = "Message of notification";
+			    	
 			    
-			    function isParamPresent(urlParam) {
-				    var urlVariables = window.location.search;
-			        return urlVariables.indexOf("?" + urlParam) >= 0;
-			    }
+				function showNotificationTicketsLanguageChange() {
+					message = /*[[#{language.ticket.change}]]*/ 'Language Changed';
+					showNotification(message, colorGreen, iconOk);
+				}
 				
+				function showNotificationLoginError() {
+					message = /*[[#{login.error.message}]]*/ 'message';
+					showNotification(message, colorRed, iconWarning);
+				}
+				
+				function showNotificationLocalLanguageChange() {
+					message = /*[[#{language.local.change}]]*/ 'Language cahange';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationTicketEdited() {
+					message = /*[[#{modal.ticket.edited}]]*/ 'Ticket edited!';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationTicketDeleted() {
+					message = /*[[#{confirm.delete.message}]]*/ 'Ticket deleted!';
+					showNotification(message, colorRed, iconOk);
+				}
+				
+				function showNotificationTicketAdded() {
+					message = /*[[#{modal.ticket.created}]]*/ 'Ticket Created';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationLoggedOut(){
+					message = /*[[#{logout.success.message}]]*/ 'Logout message';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationUserRegister() {
+					message = /*[[#{register.success.message}]]*/ 'Register message';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationAdminRegister() {
+					message = /*[[#{register.success.message.admin}]]*/ 'Admin Created';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				
+				/**
+				 * Function for showing notification. This function is called form others functions.
+				 *
+				 * @param messageText - is messages text body for notification
+				 * @param typeColor - color of notification background
+				 * @param icon - icon of notification
+				 **/
+			    	
 				function showNotification(messageText, typeColor, icon) {
 					$.notify({
 		    			// options
@@ -91,7 +133,19 @@
 		    				exit: 'animated fadeOutUp'
 		    			}
 		    		}); // end notify
-				}
+				} // end showNotification
+
+				/**
+				 * Function for detecting specified URL parameter is
+				 * present, not his value.
+				 * 
+				 * @param urlPara - parameter name
+				 * @return - true or false if parameter is on URL path
+				 **/
+			    function isParamPresent(urlParam) {
+				    var urlVariables = window.location.search;
+			        return urlVariables.indexOf("?" + urlParam) >= 0;
+			    }
 			/*]]>*/
 		</script>
 
