@@ -25,12 +25,6 @@
 								</button>
 								<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang" onclick="localStorage.setItem('local-language-change', true)">
 									<li>
-										<a th:href="@{/?lang=en}"
-										th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
-										class="eng-flag"> English
-										</a>
-									</li>
-									<li>
 										<a th:href="@{/?lang=sr}"
 											th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
 											class="sr-flag"> Serbian 
@@ -46,6 +40,18 @@
 										<a th:href="@{/?lang=hr}"
 											th:style="'background:url(' + @{/images/croatia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
 											class="hr-flag"> Croatian
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/?lang=en}"
+											th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+											class="eng-flag"> English
+										</a>
+									</li>
+									<li>
+										<a th:href="@{/?lang=gr}"
+											th:style="'background:url(' + @{/images/german-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+											class="gr-flag"> German
 										</a>
 									</li>
 								</ul>
@@ -150,12 +156,6 @@
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="select-lang" onclick="localStorage.setItem('local-language-change', true)">
 							<li>
-								<a th:href="@{/?lang=en}"
-								th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
-								class="eng-flag"> English 
-								</a>
-							</li>
-							<li>
 								<a th:href="@{/?lang=sr}"
 									th:style="'background:url(' + @{/images/serbia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
 									class="sr-flag"> Serbian 
@@ -171,6 +171,18 @@
 								<a th:href="@{/?lang=hr}"
 									th:style="'background:url(' + @{/images/croatia-flag.png} + ') no-repeat; background-position: 5px 7px;'"
 									class="hr-flag"> Croatian
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/?lang=en}"
+									th:style="'background:url(' + @{/images/eng-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+									class="eng-flag"> English 
+								</a>
+							</li>
+							<li>
+								<a th:href="@{/?lang=gr}"
+									th:style="'background:url(' + @{/images/german-flag.png} + ') no-repeat; background-position: 5px 7px;'"
+									class="gr-flag"> German
 								</a>
 							</li>
 						</ul>

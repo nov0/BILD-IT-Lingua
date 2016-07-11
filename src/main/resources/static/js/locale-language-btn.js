@@ -20,6 +20,9 @@ if(document.cookie.indexOf("LOCALE=sr") > -1) {
 } else if(document.cookie.indexOf("LOCALE=hr") > -1) {
 	lang = "Croatian";
 	flag = "images/croatia-flag.png";
+} else if(document.cookie.indexOf("LOCALE=gr") > -1) {
+	lang = "German";
+	flag = "images/german-flag.png";
 } else {
 	lang = "English";
 	flag = "images/eng-flag.png";
