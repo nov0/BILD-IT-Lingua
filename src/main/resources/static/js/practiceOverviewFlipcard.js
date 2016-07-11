@@ -37,13 +37,6 @@ $(document).ready(function() {
         // This variable excludes RIGHT and LEFT arrow key shortcut on flipcard practice.
         var overviewPractice = false;
 
-        var message = "";
-        var color = 'success';
-    	var icon = 'glyphicon glyphicon-ok';
-
-        var colorError = 'danger';
-    	var iconError = 'glyphicon glyphicon-warning-sign';
-
         if(speed === "1") {
 	        millisec = 5000;
 		} else if(speed === "2") {
@@ -72,12 +65,10 @@ $(document).ready(function() {
         
         if(window.userHasTickets === "me-category-all-language=false"
         	|| window.userHasTickets === "everyone-category-all-language=false") {
-        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified language available.";
-    		showNotification(message, colorError, iconError);
+        	showNotificationNoTicketAvailable();
         } else if(window.userHasTickets === "me-specified-category-language=false"
         	|| window.userHasTickets === "everyone-specified-category-language=false") {
-        	message = /*[[#{slider.speed.message.one}]]*/ "No tickets for specified category in this language available";
-    		showNotification(message, colorError, iconError);
+        	showNotificationNoTicketAvailableForThisLanguage();
         } else {
         	if(speed != 0) {
         		loadOverview();
@@ -117,16 +108,13 @@ $(document).ready(function() {
 		function changeSpeed(sliderValue) {
 			if(sliderValue === "1") {
 		        millisec = 5000;
-		        message = /*[[#{slider.speed.message.one}]]*/ "Slider speed changed to 5 seconds.";
-		        showNotification(message, color, icon);
+		        showNotificationSliderSpeedOne();
 			} else if(sliderValue === "2") {
 				millisec = 10000;
-				message = /*[[#{slider.speed.message.two}]]*/ "Slider speed changed to 10 seconds.";
-		        showNotification(message, color, icon);
+				showNotificationSliderSpeedTwo();
 			} else if(sliderValue === "3") {
 				millisec = 15000;
-				message = /*[[#{slider.speed.message.three}]]*/ "Slider speed changed to 15 seconds.";
-		        showNotification(message, color, icon);
+				showNotificationSliderSpeedThree();
 			}
 	    }
 
@@ -210,3 +198,4 @@ $(document).ready(function() {
 
     });
 });
+
