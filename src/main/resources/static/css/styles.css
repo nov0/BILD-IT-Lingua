@@ -264,6 +264,15 @@ a, a:active, a:focus {
 }
 .carousel-caption {
 	padding-bottom: 80px;
+	float: right; 
+	text-align: right;
+	right: 5%;
+}
+
+.carousel-img {
+	float: left;
+	position: relative;
+	left: 5%;
 }
 
 
