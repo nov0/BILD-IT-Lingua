@@ -45,6 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/add-dislike").authenticated()
 			.antMatchers("/user-has-tickets").authenticated()
 			.antMatchers("/reset-practice").authenticated()
+			.antMatchers("/user-search").authenticated()
 			.antMatchers("/fragments/get-tickets.html").authenticated()
 			.antMatchers("/fragments/overview-practice.html").authenticated()
 			.antMatchers("/fragments/flipcard-practice.html").authenticated()
