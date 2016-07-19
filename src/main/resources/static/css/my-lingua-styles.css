@@ -180,3 +180,30 @@
 	padding-right: 3px;
 }
 
+.search-user-wrapper {
+    margin-left: 30px;
+    padding: 30px;
+    background-color: #f1f1f1;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+}
+
+.user-container {
+	border: 1px solid #dddddd;
+	background-color: white;
+	padding: 15px;
+}
+
+.votes-group {
+	text-align: right;
+}
+
+.ban-icons-group {
+	text-align: right;
+}
+
+.ban-icons {
+	color: #1898b0;
+	font-size: 120%;
+}
+
