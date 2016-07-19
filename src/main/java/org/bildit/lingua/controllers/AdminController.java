@@ -25,10 +25,14 @@ public class AdminController {
 	 */
 	@RequestMapping("/user-search")
 	public String searchForUser(@RequestParam("searchQuery") String searchQuery, 
-			@RequestParam("userCheckbox") String userCheckbox, 
+			@RequestParam(value="username", required=false) String username,
+			@RequestParam(value="firstName", required=false) String firstName,
+			@RequestParam(value="lastName", required=false) String lastName,
 			@RequestParam(value="selectedBan", required=false) String selectedBan) {
 		System.out.println("Search query: " + searchQuery);
-		System.out.println("Search by: " + userCheckbox);
+		System.out.println("Search by: " + username);
+		System.out.println("Search by: " + firstName);
+		System.out.println("Search by: " + lastName);
 		System.out.println("Banned by: " + selectedBan);
 		return "redirect:/";
 	}
