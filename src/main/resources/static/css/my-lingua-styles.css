@@ -204,6 +204,13 @@
 
 .ban-icons {
 	color: #1898b0;
-	font-size: 120%;
+	font-size: 20px;
 }
-
+.ban-red {
+    color: red;
+    z-index: 10;
+    position: absolute;
+    margin-left: -32px;
+    margin-top: -8px;
+    font-size: 36px;
+}
