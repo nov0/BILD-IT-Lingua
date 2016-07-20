@@ -19,7 +19,6 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	
 	/** @author Mladen Todorovic */
 	User findUserByUsername(String username);
-	
 	/** @author Novislav Sekulic */
 	@Query("SELECT CASE WHEN COUNT(baseUser) > 0 THEN 'true' ELSE 'false' END FROM BaseUser baseUser WHERE baseUser.username = ?1")
 	boolean existByUsername(String username);
