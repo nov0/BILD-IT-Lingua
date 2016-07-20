@@ -54,7 +54,13 @@
 											<span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
 										</a>
 									</li>
-									<li>
+									<li th:if="${session.loggedUser.isAddingBan()}">
+										<a href="#" onclick="showNotificationAddNewBan()"> 
+											<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> 
+											<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
+										</a>
+									</li>
+									<li th:unless="${session.loggedUser.isAddingBan()}">
 										<a href="#" data-toggle="modal" data-target="#gridSystemModal" id="addnewlingua"> 
 											<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> 
 											<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>

@@ -105,9 +105,9 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public boolean loginBan(Long userId) {
 		User user = userRepository.findOne(userId);
-		user.setLoginBan(!user.isLoginBan());
+		user.setEnabled(!user.isEnabled());
 		userRepository.saveAndFlush(user);
-		return user.isLoginBan();
+		return user.isEnabled();
 	}
 	/**
 	 * @author Goran Arsenic

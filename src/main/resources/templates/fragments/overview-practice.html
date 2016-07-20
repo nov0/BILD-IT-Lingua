@@ -90,6 +90,7 @@
 		<input type="hidden" data-toggle="modal" data-target="#practice-over-modal" />
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<input type="hidden" th:value="${ticket.id}" id="ticket-id-overview" />
+		<input type="hidden" th:value="${session.loggedUser.isVotingBan()}" id="user-voting-ban" />
 		
 		<!-- Import for Slider, for some reason slider doesn't work even though it is already imported in the main page -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>

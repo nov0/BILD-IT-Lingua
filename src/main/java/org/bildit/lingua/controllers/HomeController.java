@@ -35,6 +35,7 @@ public class HomeController {
 			model.addAttribute("authority", auth.getAuthorities().toString());
 			if("[USER]".equals(auth.getAuthorities().toString())) {
 				User user = userService.findUserByUsername(auth.getName());
+				session.setAttribute("loggedUser", user);
 				if(user.getForeignLanguage() != null) {
 					session.setAttribute("foreignLanguage", user.getForeignLanguage().getLanguageTitle());
 				}
