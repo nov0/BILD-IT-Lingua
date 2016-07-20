@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleag.org"
+	xmlns:sec="http://www.thymeleaf.org/tymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!--  @author Novislav Sekulic -->
+
+	<div th:fragment="moderate-tickets">
+		<div class="row">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button style="float: left; background-color: #efefef"
+							type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#myNavbar">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav">
+							<li class="li li-tickets active" id="tickets-disliked"><a href="#">
+									<span class="glyphicon glyphicon-thumbs-down" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.dislike}" class="tab-btn-group" >Disliked</span>
+							</a></li>
+							<li class="li li-tickets" id="ticket-moderated"><a href="#">
+									<span class="glyphicon glyphicon-pencil btn-glyphicons"
+									aria-hidden="true"></span> <span th:text="#{tab.moderated}"
+									class="tab-btn-group">Moderated</span>
+							</a></li>
+							<li class="li li-tickets" id="ticket-deleted"><a href="#">
+									<span class="glyphicon glyphicon-trash btn-glyphicons"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
+							</a></li>
+						</ul>
+						
+						<!-- Language selection -->
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown"><a class="dropdown-toggle"
+								data-toggle="dropdown" href="#"> <span
+									class="glyphicon glyphicon-flag btn-glyphicons"
+									aria-hidden="true"></span> <span
+									th:if="${session.foreignLanguage eq null}"
+									th:text="#{tab.all}"
+									class="tab-btn-group select-practice-lang">All </span>
+									<span th:if="${session.foreignLanguage ne null}"
+									th:text="#{language. + ${session.foreignLanguage}}"
+									class="tab-btn-group select-practice-lang"> </span>
+									<span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu lingua-language select-language"
+									onclick="showNotificationTicketsLanguageChange()">
+									<li th:each="language : ${languages}"><a
+										id="selected-lang" href="#"
+										th:text="#{language. + ${language}}">Language</a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Include Modal from fragments -->
+			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
+			<div th:replace="fragments/delete-ticket-modal :: modal-delete"></div>
+
+			<div class="tickets-content">
+
+				<!-- Here goes Tickets content loaded with AJAX -->
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Import JavaScript for loading tickets and some basic functions -->
+	<script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
+
+	<!-- Import JavaScript for selecting ticket-category -->
+	<script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
+
+</body>
+</html>
