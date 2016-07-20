@@ -64,17 +64,21 @@
 							<p>johnny</p>
 						</div>
 						<div class="col-md-10 ban-icons-group">
-							<span class="glyphicon glyphicon-plus-sign ban-icons"></span>
+							<span id="ban-add-new" data-toggle="tooltip" title="Ban add new entry" class="glyphicon glyphicon-plus-sign ban-icons"></span>
+							<span id="ban-add-new-yes" data-toggle="tooltip" title="Unban add new entry" class="ban-red glyphicon glyphicon-ban-circle"></span>
 							&nbsp; &nbsp; 
-							<span class="glyphicon glyphicon-log-in ban-icons"></span>
+							<span id="ban-login" data-toggle="tooltip" title="Ban login" class="glyphicon glyphicon-log-in ban-icons"></span>
+							<span id="ban-login-yes" data-toggle="tooltip" title="Unban login" class="ban-red glyphicon glyphicon-ban-circle"></span>
 							&nbsp; &nbsp; 
-							<span class="glyphicon glyphicon-thumbs-up ban-icons"></span>
+							<span id="ban-vote" data-toggle="tooltip" title="Ban vote" class="glyphicon glyphicon-thumbs-up ban-icons"></span>
+							<span id="ban-vote-yes" data-toggle="tooltip" title="Unban vote" class="ban-red glyphicon glyphicon-ban-circle"></span>
 						</div>
 					</div>
 				</div>
+				<input id="user-id" type="hidden" th:value="3" />
 			</div>
 		</div>
 	</div>
-
+	
 </body>
 </html>
