@@ -1,6 +1,10 @@
 package org.bildit.lingua.controllers;
 
+import org.bildit.lingua.model.User;
+import org.bildit.lingua.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class AdminController {
+	
+	@Autowired
+	private UserService userService;
 
 	/**
 	 * @author Bojan Aleksic
@@ -35,6 +42,13 @@ public class AdminController {
 		System.out.println("Search by: " + lastName);
 		System.out.println("Banned by: " + selectedBan);
 		return "redirect:/";
+	}
+	
+	@RequestMapping("/ban-user-request")
+	public String banUserRequest(@RequestParam("id") Long id, Model model) {
+		User user = userService.getOne(id);
+		model.addAttribute("user", user);
+		return "fragments/ban-confirmation-modal-content";
 	}
 	
 }
