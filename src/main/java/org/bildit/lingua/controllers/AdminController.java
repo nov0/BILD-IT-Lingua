@@ -2,11 +2,13 @@ package org.bildit.lingua.controllers;
 
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.service.UserService;
+import org.bildit.lingua.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Administrator controllers
@@ -20,6 +22,8 @@ public class AdminController {
 	
 	@Autowired
 	private UserService userService;
+
+	AdminService adminService;
 
 	/**
 	 * @author Bojan Aleksic
@@ -49,6 +53,37 @@ public class AdminController {
 		User user = userService.getOne(id);
 		model.addAttribute("user", user);
 		return "fragments/ban-confirmation-modal-content";
+	}
+	
+	/**
+	 * Add new entry ban
+	 * 
+	 * @author Goran Arsenic
+	 */
+	@RequestMapping("/new-entry-ban")
+	@ResponseBody
+	public boolean addNewEntryBan(@RequestParam("userId") Long userId) {
+		return adminService.newEntryBan(userId);
+	}
+	/**
+	 * Login ban
+	 * 
+	 * @author Goran Arsenic
+	 */
+	@RequestMapping("/login-ban")
+	@ResponseBody
+	public boolean loginBan(@RequestParam("userId") Long userId) {
+		return adminService.loginBan(userId);
+	}
+	/**
+	 * Vote ban
+	 * 
+	 * @author Goran Arsenic
+	 */
+	@RequestMapping("/vote-ban")
+	@ResponseBody
+	public boolean voteBan(@RequestParam("userId") Long userId) {
+		return adminService.voteBan(userId);
 	}
 	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bildit.lingua.model.Admin;
 import org.bildit.lingua.model.BaseUser;
+import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.AdminRepository;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,4 +88,36 @@ public class AdminServiceImpl implements AdminService {
 		
 		return "redirect:/?adminreg";
 	}
+	
+	/**
+	 * @author Goran Arsenic
+	 */
+	@Override
+	public boolean newEntryBan(long userId) {
+		User user = userRepository.findOne(userId);
+		user.setAddingBan(!user.isAddingBan());
+		userRepository.saveAndFlush(user);
+		return user.isAddingBan();
+	}
+	/**
+	 * @author Goran Arsenic
+	 */
+	@Override
+	public boolean loginBan(Long userId) {
+		User user = userRepository.findOne(userId);
+		user.setEnabled(!user.isEnabled());
+		userRepository.saveAndFlush(user);
+		return user.isEnabled();
+	}
+	/**
+	 * @author Goran Arsenic
+	 */
+	@Override
+	public boolean voteBan(Long userId) {
+		User user = userRepository.findOne(userId);
+		user.setVotingBan(!user.isVotingBan());
+		userRepository.saveAndFlush(user);
+		return user.isVotingBan();
+	}
+	
 }
