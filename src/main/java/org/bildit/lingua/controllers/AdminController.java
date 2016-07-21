@@ -23,6 +23,7 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
 	AdminService adminService;
 
 	/**
@@ -52,9 +53,9 @@ public class AdminController {
 	public String banUserRequest(@RequestParam("id") Long id, Model model) {
 		User user = userService.getOne(id);
 		model.addAttribute("user", user);
-		model.addAttribute("newEntryBan", true);
-		model.addAttribute("loginBan", false);
-		model.addAttribute("voteBan", true);
+		model.addAttribute("newEntryBan", user.isAddingBan());
+		model.addAttribute("loginBan", user.isLoginBan());
+		model.addAttribute("voteBan", user.isVotingBan());
 		return "fragments/ban-confirmation-modal-content";
 	}
 	
@@ -72,7 +73,8 @@ public class AdminController {
 			adminService.newEntryBan(id);
 		}
 		if(loginBan) {
-			adminService.loginBan(id);
+			adminService.loginBan(loginBan, id);
+			System.out.println("is user banned for login? " + adminService.loginBan(loginBan, id));
 		}
 		if(votingBan) {
 			adminService.voteBan(id);
@@ -97,8 +99,9 @@ public class AdminController {
 	 */
 	@RequestMapping("/login-ban")
 	@ResponseBody
-	public boolean loginBan(@RequestParam("userId") Long userId) {
-		return adminService.loginBan(userId);
+	public boolean loginBan(@RequestParam("userId") Long userId, @RequestParam boolean loginBan) {
+//		return adminService.loginBan(userId);
+		return adminService.loginBan(loginBan, userId);
 	}
 	/**
 	 * Vote ban
