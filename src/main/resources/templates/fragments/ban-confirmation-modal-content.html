@@ -28,9 +28,11 @@
 					<p th:text="${user.username}">Username</p>
 				</div>
 				<div class="col-md-10 ban-icons-group">
-					<span class="glyphicon glyphicon-plus-sign ban-icons"></span>
-					&nbsp; &nbsp; <span class="glyphicon glyphicon-log-in ban-icons"></span>
-					&nbsp; &nbsp; <span class="glyphicon glyphicon-thumbs-up ban-icons"></span>
+					<span class="glyphicon glyph-hover glyphicon-plus-sign ban-icons" id="new-entry-icon"></span>
+					&nbsp; &nbsp; 
+					<span class="glyphicon glyph-hover glyphicon-log-in ban-icons" id="login-ban-icon"></span>
+					&nbsp; &nbsp; 
+					<span class="glyphicon glyph-hover glyphicon-thumbs-up ban-icons" id="voting-ban-icon"></span>
 				</div>
 			</div>
 		</div>
@@ -38,23 +40,17 @@
 		<input type="hidden" id="ban-user-id" th:value="${user.id}" />
 	</div>
 	<div class="modal-footer">
-		<a th:href="@{/ban-user}" type="button" class="btn btn-sm btn-primary" id="ban-user">
+		<button class="btn btn-sm btn-primary" id="ban-submit">
 			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;
 			<span>Ban</span>
-		</a>
+		</button>
 		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
 			<span class="glyphicon glyphicon-remove"></span>&nbsp; <span>Cancel</span>
 		</button>
 	</div>
 	
-	<script>
-		$(document).ready(function() {
-			$("#ban-user").click(function(event) {
-				event.preventDefault();
-				var userId = $("#ban-user-id").val();
-			});
-		});
-	</script>
+	<!-- Include JavaScript for handling the ban options -->
+	<script type="text/javascript" th:src="@{/js/banConfirmationModal.js}"></script>
 
 </body>
 </html>

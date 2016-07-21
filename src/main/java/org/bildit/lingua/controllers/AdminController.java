@@ -52,7 +52,32 @@ public class AdminController {
 	public String banUserRequest(@RequestParam("id") Long id, Model model) {
 		User user = userService.getOne(id);
 		model.addAttribute("user", user);
+		model.addAttribute("newEntryBan", true);
+		model.addAttribute("loginBan", false);
+		model.addAttribute("voteBan", true);
 		return "fragments/ban-confirmation-modal-content";
+	}
+	
+	@RequestMapping("/ban-submit")
+	public String banSubmit(
+			@RequestParam Long id,
+			@RequestParam boolean entryBan, 
+			@RequestParam boolean loginBan,
+			@RequestParam boolean votingBan) {
+		System.out.println("userID: " + id);
+		System.out.println("entryBan: " + entryBan);
+		System.out.println("loginBan: " + loginBan);
+		System.out.println("votingaBan: " + votingBan);
+		if(entryBan) {
+			adminService.newEntryBan(id);
+		}
+		if(loginBan) {
+			adminService.loginBan(id);
+		}
+		if(votingBan) {
+			adminService.voteBan(id);
+		}
+		return "redirect:/";
 	}
 	
 	/**
