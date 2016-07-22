@@ -10,9 +10,10 @@
 			
 			$(document).ready(function(){
 			
-				var userId = 2;//$("user-id").val();
+				var userId = $("#user-id").val();
 				var message = "";
 				var icon = "glyphicon glyphicon-warning-sign";
+				console.log(userId);
 				
 				/* unban add new entry*/
 				$("#ban-add-new-yes").dblclick(function() {
