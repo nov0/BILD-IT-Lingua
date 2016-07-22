@@ -80,4 +80,8 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	@Query("SELECT u FROM User u WHERE u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
 	List<User> findAllByUsernameOrFirstNameOrLastName(String username, String firstName, String lastName);
 	
+	/** @author Mladen Todorovic */
+	@Query("SELECT u FROM User u WHERE u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 OR u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0 ORDER BY firstName ASC")
+	List<User> findByAllBans(String username, String firstName, String lastName);
+	
 }

@@ -52,6 +52,8 @@ public class AdminController {
 			users = userService.searchUsersByAddingBan(username, firstName, lastName);
 		} else if ("bannedLogin".equals(selectedBan)) {
 			users = userService.searchUsersByLoginBan(username, firstName, lastName);
+		} else if ("allUsers".equals(selectedBan)) {
+			users = userService.searchUsersByAllBans(username, firstName, lastName);
 		} else {
 			users = userService.searchUsers(username, firstName, lastName);
 		}

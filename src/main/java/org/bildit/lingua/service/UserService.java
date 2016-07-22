@@ -19,5 +19,6 @@ public interface UserService extends BaseService<User, Long> {
 	List<User> searchUsersByAddingBan(String username, String firstName, String lastName);
 	List<User> searchUsersByLoginBan(String username, String firstName, String lastName);
 	List<User> searchUsers(String username, String firstName, String lastName);
+	List<User> searchUsersByAllBans(String username, String firstName, String lastName);
 	
 }
