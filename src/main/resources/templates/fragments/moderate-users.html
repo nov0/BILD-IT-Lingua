@@ -1,34 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Moderate-users</title>
 </head>
+
 <body>
 
 	<!-- @author Bojan Aleksic -->
+	<!-- @edit Todorovic Mladen -->
 
 	<div class="test" th:fragment="moderate-users">
 		<div class="row">
 			<div class="col-md-4 search-user-wrapper">
 				<form th:action="@{/user-search}" method="GET">
 					<div class="form-group">
-						<input type="text" name="searchQuery" class="form-control" placeholder="Search..." />
+						<input type="text" name="username" class="form-control" placeholder="Username" />
 					</div>
-					<div class="checkbox" style="position: relative; bottom: 10px;">
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="username" name="username" />
-							Username
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="firstName" name="firstName" />
-							First name
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="lastName" name="lastName" />
-							Last name
-						</label>
+					<div class="form-group">
+						<input type="text" name="firstName" class="form-control" placeholder="First Name" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="lastName" class="form-control" placeholder="Last Name" />
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="selectedBan">
@@ -45,23 +39,24 @@
 					</button>
 				</form>
 			</div>
-			<div class="col-md-7 search-user-wrapper">
+			
+			<div th:if="${users eq null or users.isEmpty()}" class="col-md-7 search-user-wrapper-list">
 				<div class="col-md-12 user-container">
 					<div class="" style="float: left;">
 						<img src="images/user-icon.png" />
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<span style="font-size: 120%;">John Smith</span>
+							<span style="font-size: 120%;">No users available at this moment.</span>
 						</div>
 						<div class="col-md-4 votes-group">
 							<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
-							<span style="font-size: 110%;">35</span> &nbsp;
+							<span style="font-size: 110%;">0</span> &nbsp;
 							<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
-							<span style="font-size: 110%;">12</span>
+							<span style="font-size: 110%;">0</span>
 						</div>
 						<div class="col-md-10">
-							<p>johnny</p>
+							<p>No username</p>
 						</div>
 						<div class="col-md-10 ban-icons-group">
 							<span id="ban-add-new" data-toggle="tooltip" title="Ban add new entry" class="glyphicon glyphicon-plus-sign ban-icons"></span>
@@ -76,6 +71,41 @@
 					</div>
 				</div>
 				<input id="user-id" type="hidden" th:value="3" />
+			</div>
+			
+			<div th:if="${users ne null}" class="col-md-7 search-user-wrapper-list">
+				<div th:each="user : ${users}">
+				<div class="col-md-12 user-container">
+					<div class="" style="float: left;">
+						<img src="images/user-icon.png" />
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>
+						</div>
+						<div class="col-md-4 votes-group">
+							<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
+							<span style="font-size: 110%;">Not impl. yet</span> &nbsp;
+							<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
+							<span style="font-size: 110%;">Not impl. yet</span>
+						</div>
+						<div class="col-md-10">
+							<span th:text="${user.username}"></span>
+						</div>
+						<div class="col-md-10 ban-icons-group">
+							<span id="ban-add-new" data-toggle="tooltip" title="Ban add new entry" class="glyphicon glyphicon-plus-sign ban-icons"></span>
+							<span id="ban-add-new-yes" data-toggle="tooltip" title="Unban add new entry" class="ban-red glyphicon glyphicon-ban-circle"></span>
+							&nbsp; &nbsp; 
+							<span id="ban-login" data-toggle="tooltip" title="Ban login" class="glyphicon glyphicon-log-in ban-icons"></span>
+							<span id="ban-login-yes" data-toggle="tooltip" title="Unban login" class="ban-red glyphicon glyphicon-ban-circle"></span>
+							&nbsp; &nbsp; 
+							<span id="ban-vote" data-toggle="tooltip" title="Ban vote" class="glyphicon glyphicon-thumbs-up ban-icons"></span>
+							<span id="ban-vote-yes" data-toggle="tooltip" title="Unban vote" class="ban-red glyphicon glyphicon-ban-circle"></span>
+						</div>
+					</div>
+				</div>
+				<input id="user-id" type="hidden" th:value="3" />
+				</div>
 			</div>
 		</div>
 	</div>

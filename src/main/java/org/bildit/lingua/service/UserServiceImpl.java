@@ -46,7 +46,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long id) {
 		userRepository.delete(id);
 	}
-
+	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: find user by username
+	 * */
 	@Override
 	public User findUserByUsername(String username) {
 		return userRepository.findUserByUsername(username);
@@ -125,7 +129,37 @@ public class UserServiceImpl implements UserService {
 		userRepository.updateForeignLanguageForUser(foreignLanguage, user.getId());
 		userRepository.flush();
 	}
-
-	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and votingBan set to true
+	 * */
+	@Override
+	public List<User> searchUsersByVotingBan(String username, String firstName, String lastName) {
+		return userRepository.searchUsersByVotingBan(username, firstName, lastName);
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and addingBan set to true
+	 * */
+	@Override
+	public List<User> searchUsersByAddingBan(String username, String firstName, String lastName) {
+		return userRepository.searchUsersByAddingBan(username, firstName, lastName);
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and enabled set to false
+	 * */
+	@Override
+	public List<User> searchUsersByLoginBan(String username, String firstName, String lastName) {
+		return userRepository.searchUsersByLoginBan(username, firstName, lastName);
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName
+	 * */
+	@Override
+	public List<User> searchUsers(String username, String firstName, String lastName) {
+		return userRepository.findAllByUsernameOrFirstNameOrLastName(username, firstName, lastName);
+	}
 	
 }
