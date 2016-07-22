@@ -161,5 +161,14 @@ public class UserServiceImpl implements UserService {
 	public List<User> searchUsers(String username, String firstName, String lastName) {
 		return userRepository.findAllByUsernameOrFirstNameOrLastName(username, firstName, lastName);
 	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName
+	 *         and votingBan set to true or addingBan set to true or enabled set to false
+	 * */
+	@Override
+	public List<User> searchUsersByAllBans(String username, String firstName, String lastName) {
+		return userRepository.findByAllBans(username, firstName, lastName);
+	}
 	
 }
