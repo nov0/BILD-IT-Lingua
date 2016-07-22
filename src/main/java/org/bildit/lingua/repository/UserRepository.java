@@ -19,6 +19,7 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	
 	/** @author Mladen Todorovic */
 	User findUserByUsername(String username);
+	
 	/** @author Novislav Sekulic */
 	@Query("SELECT CASE WHEN COUNT(baseUser) > 0 THEN 'true' ELSE 'false' END FROM BaseUser baseUser WHERE baseUser.username = ?1")
 	boolean existByUsername(String username);
@@ -62,5 +63,21 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	@Transactional
 	@Query("update User u set u.votingBan = ?1 where u.id = ?2")
 	void updateVotingBan(boolean votingBan, Long id);
+	
+	/** @author Mladen Todorovic */
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 OR u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
+	List<User> searchUsersByVotingBan(String username, String firstName, String lastName);
+	
+	/** @author Mladen Todorovic */
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 OR u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
+	List<User> searchUsersByAddingBan(String username, String firstName, String lastName);
+	
+	/** @author Mladen Todorovic */
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 OR u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
+	List<User> searchUsersByLoginBan(String username, String firstName, String lastName);
+	
+	/** @author Mladen Todorovic */
+	@Query("SELECT u FROM User u WHERE u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
+	List<User> findAllByUsernameOrFirstNameOrLastName(String username, String firstName, String lastName);
 	
 }

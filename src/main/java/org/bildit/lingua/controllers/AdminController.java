@@ -1,5 +1,7 @@
 package org.bildit.lingua.controllers;
 
+import java.util.List;
+
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.service.UserService;
 import org.bildit.lingua.service.AdminService;
@@ -28,25 +30,35 @@ public class AdminController {
 	
 	/**
 	 * @author Bojan Aleksic
-	 * @param searchQuery
-	 * @param userCheckbox
+	 * @edit Mladen Todorovic
+	 * @param username
+	 * @param firstName
+	 * @param lastName
 	 * @param selectedBan
 	 * @return
-	 * note: this method is going to be moderated, by whoever is going to implement
-	 * method in the Service layer for search for users...
 	 */
 	@RequestMapping("/user-search")
-	public String searchForUser(@RequestParam("searchQuery") String searchQuery, 
+	public String searchUsers(Model model,
 			@RequestParam(value="username", required=false) String username,
 			@RequestParam(value="firstName", required=false) String firstName,
 			@RequestParam(value="lastName", required=false) String lastName,
 			@RequestParam(value="selectedBan", required=false) String selectedBan) {
-		System.out.println("Search query: " + searchQuery);
-		System.out.println("Search by: " + username);
-		System.out.println("Search by: " + firstName);
-		System.out.println("Search by: " + lastName);
-		System.out.println("Banned by: " + selectedBan);
-		return "redirect:/";
+		
+		List<User> users = null;
+		
+		if ("bannedVoting".equals(selectedBan)) {
+			users = userService.searchUsersByVotingBan(username, firstName, lastName);
+		} else if ("bannedAdding".equals(selectedBan)) {
+			users = userService.searchUsersByAddingBan(username, firstName, lastName);
+		} else if ("bannedLogin".equals(selectedBan)) {
+			users = userService.searchUsersByLoginBan(username, firstName, lastName);
+		} else {
+			users = userService.searchUsers(username, firstName, lastName);
+		}
+		
+		model.addAttribute("users", users);
+		
+		return "forward:/";
 	}
 	
 	/**
