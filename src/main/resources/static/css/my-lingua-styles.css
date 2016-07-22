@@ -208,7 +208,8 @@
 }
 
 .ban-icons-red {
-	color: #d9534f;
+/* 	color: #d9534f; */
+	color: #d2d2d2;
 	font-size: 20px;
 }
 

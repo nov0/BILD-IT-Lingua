@@ -79,6 +79,7 @@
 				<!-- Import fragment for handling bans that contain JavaScript -->
 				<div th:replace="fragments/ban-user :: banUser">...</div>
 			</div>
+			<!-- Kada Mladen zavrsi tiket, ubaciti ovde ID od usera ${user.id} -->
 			<a th:href="@{/ban-user-request(id=2)}" data-toggle="modal" data-target="#ban-confirmation-modal">Ban user</a>
 		</div>
 	</div>

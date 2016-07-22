@@ -34,6 +34,16 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	void updateForeignLanguageForUser(Language foreignLanguage, Long id);
 
 	/**
+	 * @author Bojan Aleksic
+	 * @param entryBan
+	 * @param id
+	 */
+	@Modifying
+	@Transactional
+	@Query("update User u set u.addingBan = ?1 where u.id = ?2")
+	void updateNewEntryBan(boolean entryBan, Long id);
+	
+	/**
 	 * @author Bojan ALeksic
 	 * @param loginBan
 	 * @param id
@@ -42,6 +52,15 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	@Transactional
 	@Query("update User u set u.loginBan = ?1 where u.id = ?2")
 	void updateLoginBan(boolean loginBan, Long id);
-	
+
+	/**
+	 * @author Bojan Aleksic
+	 * @param votingBan
+	 * @param id
+	 */
+	@Modifying
+	@Transactional
+	@Query("update User u set u.votingBan = ?1 where u.id = ?2")
+	void updateVotingBan(boolean votingBan, Long id);
 	
 }

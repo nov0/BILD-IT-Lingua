@@ -24,8 +24,8 @@ public class AdminController {
 	private UserService userService;
 
 	@Autowired
-	AdminService adminService;
-
+	private AdminService adminService;
+	
 	/**
 	 * @author Bojan Aleksic
 	 * @param searchQuery
@@ -49,34 +49,44 @@ public class AdminController {
 		return "redirect:/";
 	}
 	
+	/**
+	 * @author Bojan Aleksic
+	 * @param id
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/ban-user-request")
 	public String banUserRequest(@RequestParam("id") Long id, Model model) {
 		User user = userService.getOne(id);
 		model.addAttribute("user", user);
 		model.addAttribute("newEntryBan", user.isAddingBan());
-		model.addAttribute("loginBan", user.isLoginBan());
-		model.addAttribute("voteBan", user.isVotingBan());
+		model.addAttribute("loginBan", !user.isEnabled());
+		model.addAttribute("votingBan", user.isVotingBan());
 		return "fragments/ban-confirmation-modal-content";
 	}
 	
+	/**
+	 * @author Bojan Aleksic
+	 * @param id
+	 * @param entryBan
+	 * @param loginBan
+	 * @param votingBan
+	 * @return
+	 */
 	@RequestMapping("/ban-submit")
 	public String banSubmit(
 			@RequestParam Long id,
 			@RequestParam boolean entryBan, 
 			@RequestParam boolean loginBan,
 			@RequestParam boolean votingBan) {
-		System.out.println("userID: " + id);
-		System.out.println("entryBan: " + entryBan);
-		System.out.println("loginBan: " + loginBan);
-		System.out.println("votingaBan: " + votingBan);
-		if(entryBan) {
+		
+		if(userService.getOne(id).isAddingBan() != entryBan) {
 			adminService.newEntryBan(id);
 		}
-		if(loginBan) {
-			adminService.loginBan(loginBan, id);
-			System.out.println("is user banned for login? " + adminService.loginBan(loginBan, id));
+		if(!userService.getOne(id).isEnabled() != loginBan) {
+			adminService.loginBan(id);
 		}
-		if(votingBan) {
+		if(userService.getOne(id).isVotingBan() != votingBan) {
 			adminService.voteBan(id);
 		}
 		return "redirect:/";
@@ -99,9 +109,8 @@ public class AdminController {
 	 */
 	@RequestMapping("/login-ban")
 	@ResponseBody
-	public boolean loginBan(@RequestParam("userId") Long userId, @RequestParam boolean loginBan) {
-//		return adminService.loginBan(userId);
-		return adminService.loginBan(loginBan, userId);
+	public boolean loginBan(@RequestParam("userId") Long userId) {
+		return adminService.loginBan(userId);
 	}
 	/**
 	 * Vote ban

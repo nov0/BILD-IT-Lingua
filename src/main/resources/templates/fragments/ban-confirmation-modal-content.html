@@ -38,11 +38,14 @@
 		</div>
 		<!-- User's container End -->
 		<input type="hidden" id="ban-user-id" th:value="${user.id}" />
+		<input type="hidden" id="is-adding-ban" th:value="${newEntryBan}" />
+		<input type="hidden" id="is-login-ban" th:value="${loginBan}" />
+		<input type="hidden" id="is-voting-ban" th:value="${votingBan}" />
 	</div>
 	<div class="modal-footer">
 		<button class="btn btn-sm btn-primary" id="ban-submit">
-			<span class="glyphicon glyphicon-ban-circle"></span>&nbsp;
-			<span>Ban</span>
+			<span class="glyphicon glyphicon-ok"></span>&nbsp;
+			<span>Submit</span>
 		</button>
 		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
 			<span class="glyphicon glyphicon-remove"></span>&nbsp; <span>Cancel</span>
