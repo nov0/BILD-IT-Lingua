@@ -33,6 +33,36 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	@Transactional // @Modifying annotation requires @Transactional in order to work
 	@Query("update User u set u.foreignLanguage = ?1 where u.id = ?2")
 	void updateForeignLanguageForUser(Language foreignLanguage, Long id);
+
+	/**
+	 * @author Bojan Aleksic
+	 * @param entryBan
+	 * @param id
+	 */
+	@Modifying
+	@Transactional
+	@Query("update User u set u.addingBan = ?1 where u.id = ?2")
+	void updateNewEntryBan(boolean entryBan, Long id);
+	
+	/**
+	 * @author Bojan ALeksic
+	 * @param loginBan
+	 * @param id
+	 */
+	@Modifying
+	@Transactional
+	@Query("update User u set u.loginBan = ?1 where u.id = ?2")
+	void updateLoginBan(boolean loginBan, Long id);
+
+	/**
+	 * @author Bojan Aleksic
+	 * @param votingBan
+	 * @param id
+	 */
+	@Modifying
+	@Transactional
+	@Query("update User u set u.votingBan = ?1 where u.id = ?2")
+	void updateVotingBan(boolean votingBan, Long id);
 	
 	/** @author Mladen Todorovic */
 	@Query("SELECT u FROM User u WHERE u.votingBan = 1 OR u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<body>
+	<div th:fragment="banUser">
+		<script type="text/javascript" th:inline="javascript">
+			 /*<![CDATA[*/
+			 /** 
+			 * @author Goran Arsenic
+			 */
+			
+			$(document).ready(function(){
+			
+				var userId = 2;//$("user-id").val();
+				var message = "";
+				var icon = "glyphicon glyphicon-warning-sign";
+				
+				/* unban add new entry*/
+				$("#ban-add-new-yes").dblclick(function() {
+					$("#ban-add-new-yes").addClass("hide");
+					newEntryBan();
+				});
+				/* ban add new entry*/
+				$("#ban-add-new").dblclick(function() {
+					$("#ban-add-new-yes").removeClass("hide");
+					newEntryBan();
+				});
+				/* unban login */
+				$("#ban-login-yes").dblclick(function() {
+					$("#ban-login-yes").addClass("hide");
+					loginBan();
+				});
+				/* ban login */
+				$("#ban-login").dblclick(function() {
+					$("#ban-login-yes").removeClass("hide");
+					loginBan();
+				});
+				/* unban vote */
+				$("#ban-vote-yes").dblclick(function() {
+					$("#ban-vote-yes").addClass("hide");
+					voteBan();
+				});
+				/* ban vote */
+				$("#ban-vote").dblclick(function() {
+					$("#ban-vote-yes").removeClass("hide");
+					voteBan();
+				});
+				
+				function newEntryBan() {
+					$.post("new-entry-ban", {
+						userId : userId
+					})
+					.done(function(response) {
+						if(response) {
+							message = /*[[#{ban.add.new.entry}]]*/ "User is successfully banned - Add new entry";
+							showNotification(message, colorRed, icon);
+						} else {
+							message = /*[[#{unban.add.new.entry}]]*/"User is successfully unbanned - Add new entry";
+							showNotification(message, colorGreen, iconOk);
+						}
+					});
+				};
+				function loginBan() {
+					$.post("login-ban", {
+						userId : userId
+					})
+					.done(function(response) {
+						if(!response) { // because enabled is use for ban login, response must be inverted here
+							message = /*[[#{ban.login}]]*/"User is successfully banned - Login";
+							showNotification(message, colorRed, icon);
+						} else {
+							message = /*[[#{unban.login}]]*/"User is successfully unbanned - Login";
+							showNotification(message, colorGreen, iconOk);
+						}
+					});
+				};
+				function voteBan() {
+					$.post("vote-ban", {
+						userId : userId
+					})
+					.done(function(response) {
+						if(response) {
+							message = /*[[#{ban.vote}]]*/"User is successfully banned - Vote";
+							showNotification(message, colorRed, icon);
+						} else {
+							message = /*[[#{unban.vote}]]*/"User is successfully unbanned - Vote";
+							showNotification(message, colorGreen, iconOk);
+						}
+					});
+				};
+			});
+			/*]]>*/
+		</script>
+	</div>
+</body>
+</html>

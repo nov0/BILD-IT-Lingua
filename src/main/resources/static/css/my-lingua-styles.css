@@ -214,6 +214,13 @@
 	color: #1898b0;
 	font-size: 20px;
 }
+
+.ban-icons-red {
+/* 	color: #d9534f; */
+	color: #d2d2d2;
+	font-size: 20px;
+}
+
 .ban-red {
     color: red;
     z-index: 10;

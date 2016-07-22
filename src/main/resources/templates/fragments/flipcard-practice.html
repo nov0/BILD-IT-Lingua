@@ -86,6 +86,7 @@
 		<div id="test-flipcard"></div>
 		<input type="hidden" th:value="${stackSize}" id="stack-size" />
 		<input type="hidden" th:value="${ticket.id}" id="ticket-id-overview" />
+		<input type="hidden" th:value="${session.loggedUser.isVotingBan()}" id="user-voting-ban" />
 	    <!-- Import fragment for handling votes (likes/dislikes) that contain JavaScript -->
 		<div th:replace="fragments/overviewVote :: overviewVote">...</div>
 	    <script>
