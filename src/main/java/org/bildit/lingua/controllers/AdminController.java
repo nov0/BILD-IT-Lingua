@@ -1,8 +1,11 @@
 package org.bildit.lingua.controllers;
 
+import org.bildit.lingua.model.User;
+import org.bildit.lingua.service.UserService;
 import org.bildit.lingua.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,8 +21,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
 	
 	@Autowired
-	AdminService adminService;
+	private UserService userService;
 
+	@Autowired
+	private AdminService adminService;
+	
 	/**
 	 * @author Bojan Aleksic
 	 * @param searchQuery
@@ -40,6 +46,49 @@ public class AdminController {
 		System.out.println("Search by: " + firstName);
 		System.out.println("Search by: " + lastName);
 		System.out.println("Banned by: " + selectedBan);
+		return "redirect:/";
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/ban-user-request")
+	public String banUserRequest(@RequestParam("id") Long id, Model model) {
+		User user = userService.getOne(id);
+		model.addAttribute("user", user);
+		model.addAttribute("newEntryBan", user.isAddingBan());
+		model.addAttribute("loginBan", !user.isEnabled());
+		model.addAttribute("votingBan", user.isVotingBan());
+		return "fragments/ban-confirmation-modal-content";
+	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * @param id
+	 * @param entryBan
+	 * @param loginBan
+	 * @param votingBan
+	 * @return
+	 */
+	@RequestMapping("/ban-submit")
+	public String banSubmit(
+			@RequestParam Long id,
+			@RequestParam boolean entryBan, 
+			@RequestParam boolean loginBan,
+			@RequestParam boolean votingBan) {
+		
+		if(userService.getOne(id).isAddingBan() != entryBan) {
+			adminService.newEntryBan(id);
+		}
+		if(!userService.getOne(id).isEnabled() != loginBan) {
+			adminService.loginBan(id);
+		}
+		if(userService.getOne(id).isVotingBan() != votingBan) {
+			adminService.voteBan(id);
+		}
 		return "redirect:/";
 	}
 	
@@ -73,4 +122,5 @@ public class AdminController {
 	public boolean voteBan(@RequestParam("userId") Long userId) {
 		return adminService.voteBan(userId);
 	}
+	
 }
