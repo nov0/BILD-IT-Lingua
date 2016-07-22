@@ -153,16 +153,22 @@
         <div class="lingua-container-body">
             <div class="tab-content">
             	<div id="moderate-users" class="tab-pane fade in active">
+            	
             		<!-- Include Admin's Moderate Users - page -->
             		<div th:replace="fragments/moderate-users :: moderate-users">...</div>
+            		
                 </div>
                 <div id="moderate-lingua" class="tab-pane fade">
+                
                     <h3>Moderate Lingua</h3>
                     <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    
                 </div>
                 <div id="reports" class="tab-pane fade">
-                    <h3>Reports</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                
+                	<!-- Include Admin Reports - page -->
+                    <div th:replace="fragments/reports :: reports">...</div>
+                    
                 </div>
             </div>
             
