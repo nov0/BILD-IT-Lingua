@@ -141,7 +141,7 @@
 	<div class="container" th:fragment="admin-account">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#moderate-users">Moderate Users</a></li>
-            <li><a data-toggle="tab" href="#moderate-lingua">Moderate Lingua</a></li>
+            <li><a data-toggle="tab" href="#moderate-lingua" id="moderage-lingua-tab">Moderate Lingua</a></li>
             <li><a data-toggle="tab" href="#reports">Reports</a></li>
         </ul>
         <div class="lingua-container-body">
@@ -162,6 +162,9 @@
         </div>
         <!-- Script for ban users -->
         <script type="text/javascript" th:src="@{/js/ban-user.js}"></script>
+        
+<!--         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script> -->
+        <script type="text/javascript" th:src="@{/js/load-ticket-admin.js}"></script>
     </div>
 	
 </body>

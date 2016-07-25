@@ -235,4 +235,28 @@ public class TicketServiceImpl implements TicketService {
 		return ticketRepository.findAllByCategoryAndLearningLanguage(category, language);
 	}
 	
+	/**
+	 * @author Novislav Sekulic
+	 * Method returns all tickets sorted by dislikes value.
+	 */
+	@Override
+	public Page<Ticket> getAllTicketsSortedByDislike(Pageable pageable) {
+		return ticketRepository.getAllTicketOrderedByDislike(pageable);
+	}
+
+	/**
+	 * @author Novislav Sekulic
+	 * Method return all moderated tickets.
+	 */
+	@Override
+	public Page<Ticket> getAllModeratedTickets(Pageable pageable) {
+		return ticketRepository.findAllByEditedTrue(pageable);
+	}
+
+	@Override
+	public Page<Ticket> getAllDeactivatedTickets(Pageable pageable) {
+		return ticketRepository.findAllByDeactivatedNotNull(pageable);
+	}
+	
+	
 }

@@ -6,6 +6,10 @@
 <body>
 
 	<!--  @author Novislav Sekulic -->
+	
+	<!-- Import JavaScript for loading tickets and some basic functions -->
+	<!-- Import JavaScript for selecting ticket-category -->
+<!-- 	<script type="text/javascript" th:src="@{/js/selectCategory.js}"></script> -->
 
 	<div th:fragment="moderate-tickets">
 		<div class="row">
@@ -21,17 +25,17 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="li li-tickets active" id="tickets-disliked"><a href="#">
+							<li class="li li-tickets active" id="user-tickets-disliked"><a href="#">
 									<span class="glyphicon glyphicon-thumbs-down" style="color: white"
 									aria-hidden="true"></span>
 									<span th:text="#{tab.dislike}" class="tab-btn-group" >Disliked</span>
 							</a></li>
-							<li class="li li-tickets" id="ticket-moderated"><a href="#">
+							<li class="li li-tickets" id="user-ticket-moderated"><a href="#">
 									<span class="glyphicon glyphicon-pencil btn-glyphicons"
 									aria-hidden="true"></span> <span th:text="#{tab.moderated}"
 									class="tab-btn-group">Moderated</span>
 							</a></li>
-							<li class="li li-tickets" id="ticket-deleted"><a href="#">
+							<li class="li li-tickets" id="user-ticket-deleted"><a href="#">
 									<span class="glyphicon glyphicon-trash btn-glyphicons"
 									aria-hidden="true"></span>
 									<span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
@@ -68,19 +72,13 @@
 			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
 			<div th:replace="fragments/delete-ticket-modal :: modal-delete"></div>
 
-			<div class="tickets-content">
+			<div class="tickets-content-admin">
 
 				<!-- Here goes Tickets content loaded with AJAX -->
+				<div th:replace="fragments/get-tickets-admin :: tickets-admin"></div>
 
 			</div>
 		</div>
 	</div>
-
-	<!-- Import JavaScript for loading tickets and some basic functions -->
-	<script type="text/javascript" th:src="@{/js/showTickets.js}"></script>
-
-	<!-- Import JavaScript for selecting ticket-category -->
-	<script type="text/javascript" th:src="@{/js/selectCategory.js}"></script>
-
 </body>
 </html>

@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/fragments/overview-practice.html").authenticated()
 			.antMatchers("/fragments/flipcard-practice.html").authenticated()
 			.antMatchers("/fragments/edit-lingua-modal.html").authenticated()
+			.antMatchers("/fragments/get-tickets-admin").authenticated()
 			.antMatchers("/login-success").authenticated()
 			.anyRequest().denyAll()
 		.and()

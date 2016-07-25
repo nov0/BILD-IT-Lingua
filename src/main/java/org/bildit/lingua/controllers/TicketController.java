@@ -180,4 +180,41 @@ public class TicketController {
 		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
+	
+	
+	
+	@RequestMapping("/get-tickets-admin")
+	@ResponseBody
+	public String getTicketsAdmin() {
+		System.out.println("Opening get tickets admin");
+		return "test";
+		
+	}
+	
+	@RequestMapping("/fragments/get-tickets-admin")
+	@ResponseBody
+	public ModelAndView getTicketForAdmin(
+			ModelAndView model,
+			@RequestParam("urlData") String urlRequest,
+			@RequestParam(value="page", required=false) Integer page,
+			@PageableDefault(value=10) Pageable pageable
+			) {
+		
+//		Page<Ticket> tickets = ticketService.getAllTicketsByUsername("novos", "English", pageable);
+		Page<Ticket> tickets = null;
+		
+		if(urlRequest.equals("user-tickets-disliked")) {
+			tickets = ticketService.getAllTicketsSortedByDislike(pageable);
+		} else if (urlRequest.equals("user-ticket-moderated")){
+			tickets = ticketService.getAllModeratedTickets(pageable);
+		} else if(urlRequest.equals("user-ticket-deleted")){
+			tickets = ticketService.getAllDeactivatedTickets(pageable);
+		}
+				
+
+		model.addObject("totalPages", tickets.getTotalPages());
+		model.addObject(TICKETS, tickets);
+		
+		return model;
+	}
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+	
+	<!-- @author Bojan Aleksic -->
+	<!-- @edit Novislav Sekulic -->
+
+	<!-- Tickets fragment -->
+	<div class="my-lingua-content" th:fragment="tickets-admin">
+	
+<!-- 		Preloader -->
+		<div id="preloader"><img th:src="@{/images/preloader.gif}" /></div>
+		
+		<div th:if="${tickets != null}" class="tickets-wrapper">
+			<div th:each="ticket : ${tickets}">
+<!-- 				<div th:if="${ticket.deactivated == null}"> -->
+					<div class="ticket-container" th:classappend="${ticket.deactivated == null} ? 'alert-warning' : 'alert-danger'">
+						<div class="row ticket-header">
+							<div class="col-md-3">
+								<span class="glyphicon glyphicon-time"></span>
+								<span th:text="${#temporals.format(ticket.getLocalDateTime(), 'yyyy MMM dd, HH:mm') + 'h'}"></span>
+							</div>
+							<div class="col-md-2">
+								<span class="glyphicon glyphicon-tag"></span>
+								<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
+							</div>
+<!-- 							<div class="col-md-2"> -->
+<!-- 								<span class="glyphicon glyphicon-flag"></span> -->
+<!--  								<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span> -->
+<!-- 								<span th:text="#{language. + ${ticket.foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span> -->
+<!-- 							</div> -->
+							<div class="col-md-2">
+								<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
+									<span class="glyphicon glyphicon-pencil"></span>
+									<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
+								</a>
+							</div>							
+							<div class="col-md-2">
+								<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
+									<span class="glyphicon glyphicon-trash"></span> 
+									<span data-toggle="tooltip" th:attr="title=#{ticket.delete}" th:text="#{ticket.delete}">Delete</span>
+								</a>
+							</div>	
+							
+							<!-- Show ticket username -->
+							<div class="col-md-2">
+								<a href="#" id="ticket-user-id">								
+									<span class="glyphicon glyphicon-user"></span>
+									<span data-toggle="tooltip" th:text="${ticket.user.username}" id="ticket-username-value">Username</span>
+								</a>
+							</div>
+							
+							<div class="col-md-2 like-dislike-btn">
+								<span data-toggle="tooltip" title="Likes" class="glyphicon glyphicon-thumbs-up" style="color: green;"></span>
+								<span th:text="${ticket.ticketVotes.likes}"></span>
+								&nbsp;
+								<span data-toggle="tooltip" title="Dislikes" class="glyphicon glyphicon-thumbs-down" style="color: red;"></span>
+								<span th:text="${ticket.ticketVotes.dislikes}"></span>
+							</div>
+						</div>
+						<div class="row domestic-foreign-row">
+							<div th:text="${ticket.textDomestic}" id="domestic-text" class="col-md-6 domestic-foreign-text">Domestic Text</div>
+							<div th:text="${ticket.textForeign}" class="col-md-6 domestic-foreign-text">Foreign Text</div>
+						</div>
+					</div>
+				<input type="hidden" th:value="${totalPages}" id="total-pages" />
+				<input type="hidden" th:value="${ticket.id}" id="ticket-id" />
+				<input type="hidden" th:value="${ticket.textDomestic}" id="text-domestic-test" />
+				
+ 				<script th:inline="javascript">
+ 				/*<![CDATA[*/
+				           
+ 					$(document).ready(function() {
+						
+ 						/* Set alert-danger style for deleted tickets */
+ 						var urlRequest = $('.li-tickets.active').attr('id');
+ 						if(urlRequest === "ticket-deleted") {
+							/* Set deleted tickets to red color */
+							$('.ticket-container').addClass('alert-danger').siblings().removeClass('alert-warning');
+						}
+						
+						var ticketAdded;
+						
+						if(window.location.search.indexOf("?") >= 0) {
+							ticketAdded = window.location.href.split("?")[1];
+						}
+						
+						/* When ticket is created or edited, highlight the ticket */
+						if(ticketAdded === "ticket-added" || ticketAdded === "ticket-edited") {
+							$(".my-lingua-content .ticket-container").first().addClass("fade-out-on-create");
+							$(".ticket-container").removeClass("fade-out-on-create", 3000);
+						}
+						
+						/* Bootstrap's tooltip */
+						$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+						
+						$(".modal").on("hidden.bs.modal", function() {
+							$(this).removeData();
+						});
+					});
+					/*]]>*/
+				</script>
+			</div>
+		</div>
+		<div th:if="${tickets eq null}">
+			<div class="no-tickets-wrapper">
+				<span >Not tickets. Please select search criteria.</span>
+				<span>
+<!-- 					<a href="#" th:text="#{no.tickets.message.create.one}" data-toggle="modal" data-target="#gridSystemModal"> -->
+<!-- 						Create ticket here -->
+<!-- 					</a>. -->
+				</span>
+			</div>
+			<script th:inline="javascript">
+				/*<![CDATA[*/
+			           
+				if(window.totalPages == 0) {
+					var message = /*[[#{no.tickets.message.notification}]]*/ 'message';
+					var color = 'warning';
+					var icon = 'glyphicon glyphicon-warning-sign';
+					showNotification(message, color, icon);
+				}
+			
+				/*]]>*/
+			</script>
+		</div>
+	</div>
+	
+</body>
+</html>
