@@ -81,11 +81,4 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t ORDER BY t.ticketVotes.dislikes DESC")
 	Page<Ticket> getAllTicketOrderedByDislike(Pageable pageable);
 	
-//	/** @author Novislav Sekulic */
-//	@Query("SELECT t FROM Ticket t WHERE t.")
-//	Page<Ticket> getModeratedTickets(Pageable pageable);
-	
-	
-	
-	
 }

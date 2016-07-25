@@ -205,7 +205,7 @@ public class TicketController {
 			ModelAndView model,
 			@RequestParam("urlData") String urlRequest,
 			@RequestParam(value="page", required=false) Integer page,
-			@PageableDefault(value=10) Pageable pageable
+			@PageableDefault(value=4) Pageable pageable
 			) {
 		
 		Page<Ticket> tickets = null;
@@ -219,8 +219,10 @@ public class TicketController {
 		}
 				
 
-		model.addObject("totalPages", tickets.getTotalPages());
-		model.addObject(TICKETS, tickets);
+		if(tickets != null && tickets.getContent().size() > 0) {
+			model.addObject(TICKETS, tickets);
+			model.addObject("totalPages", tickets.getTotalPages());
+		}
 		
 		return model;
 	}

@@ -12,8 +12,7 @@ $(document).ready(function() {
 	});
 
 	// get ID value of active class
-	var urlRequest = $('.li.active').attr('id');
-//	var urlRequest = "tickets-disliked";
+	var urlRequest = $('.li.active').attr('id');;
 
 	window.page = 0;
 	window.totalPages = "";
@@ -66,7 +65,7 @@ $(document).ready(function() {
 
 	/* Function for loading tickets initially without scrolling */
 	function loadTicketsInitially(page) {
-		$(".tickets-content-admin").load("fragments/get-tickets-admin", { 
+		$(".tickets-content").load("fragments/get-tickets-admin", { 
 			"urlData" : urlRequest,
 			"page" : page,
 			"learningLanguage" : selectedLanguage
