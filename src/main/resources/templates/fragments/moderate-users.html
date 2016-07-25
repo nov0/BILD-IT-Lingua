@@ -69,30 +69,42 @@
 						</div>
 						<div class="col-md-10 ban-icons-group">
 							<span th:if="${user.addingBan}">
-								<span id="ban-add-new" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons"></span>
-								<span id="ban-add-new-yes" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle"></span>
+								<span th:id="ban-add-new + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons" 
+								th:ondblclick="'banAddNew('+${user.id}+')'"></span>
+								<span th:id="ban-add-new-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanAddNew('+${user.id}+')'"></span>
 							</span>
 							<span th:unless="${user.addingBan}">
-								<span id="ban-add-new" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons"></span>
-								<span id="ban-add-new-yes" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"></span>
+								<span th:id="ban-add-new + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons"
+								th:ondblclick="'banAddNew('+${user.id}+')'"></span>
+								<span th:id="ban-add-new-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanAddNew('+${user.id}+')'"></span>
 							</span>
 							&nbsp; &nbsp;
 							<span th:unless="${user.enabled}">
-								<span id="ban-login" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"></span>
-								<span id="ban-login-yes" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle"></span>
+								<span th:id="ban-login + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"
+								th:ondblclick="'banLogin('+${user.id}+')'"></span>
+								<span th:id="ban-login-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanLogin('+${user.id}+')'"></span>
 							</span> 
 							<span th:if="${user.enabled}">
-								<span id="ban-login" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"></span>
-								<span id="ban-login-yes" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"></span>
+								<span th:id="ban-login + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"
+								th:ondblclick="'banLogin('+${user.id}+')'"></span>
+								<span th:id="ban-login-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanLogin('+${user.id}+')'"></span>
 							</span> 
 							&nbsp; &nbsp; 
 							<span th:if="${user.votingBan}">
-								<span id="ban-vote" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"></span>
-								<span id="ban-vote-yes" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle"></span>
+								<span th:id="ban-vote + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"
+								th:ondblclick="'banVote('+${user.id}+')'"></span>
+								<span th:id="ban-vote-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanVote('+${user.id}+')'"></span>
 							</span>
 							<span th:unless="${user.votingBan}">
-								<span id="ban-vote" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"></span>
-								<span id="ban-vote-yes" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"></span>
+								<span th:id="ban-vote + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"
+								th:ondblclick="'banVote('+${user.id}+')'"></span>
+								<span th:id="ban-vote-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanVote('+${user.id}+')'"></span>
 							</span>
 						</div>
 						<div class="col-md-4">
@@ -100,12 +112,11 @@
 						</div>
 					</div>
 				</div>
-				<input id="user-id" type="hidden" th:value="${user.id}" />
 				</div>
-				<!-- Import fragment for handling bans that contain JavaScript -->
-				<div th:replace="fragments/ban-user :: banUser">...</div>
-			</div>	
-		</div>
+			</div>
+			<!-- Import fragment for handling bans that contain JavaScript -->
+			<div th:replace="fragments/ban-user :: banUser">...</div>
+		</div>	
 	</div>
 	
 </body>
