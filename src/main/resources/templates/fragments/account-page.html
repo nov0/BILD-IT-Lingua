@@ -54,7 +54,13 @@
 											<span th:text="#{tab.moderated}" class="tab-btn-group">Moderated</span>
 										</a>
 									</li>
-									<li>
+									<li th:if="${session.loggedUser.isAddingBan()}">
+										<a href="#" onclick="showNotificationAddNewBan()"> 
+											<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> 
+											<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
+										</a>
+									</li>
+									<li th:unless="${session.loggedUser.isAddingBan()}">
 										<a href="#" data-toggle="modal" data-target="#gridSystemModal" id="addnewlingua"> 
 											<span class="glyphicon glyphicon-plus-sign btn-glyphicons" aria-hidden="true"></span> 
 											<span th:text="#{tab.add.new.lingua}" class="tab-btn-group">Add new Lingua</span>
@@ -147,18 +153,26 @@
         <div class="lingua-container-body">
             <div class="tab-content">
             	<div id="moderate-users" class="tab-pane fade in active">
+            	
             		<!-- Include Admin's Moderate Users - page -->
             		<div th:replace="fragments/moderate-users :: moderate-users">...</div>
+            		
                 </div>
                 <div id="moderate-lingua" class="tab-pane fade">
                     <!-- Include Admin's Moderate Tickets - page -->
-            		<div th:replace="fragments/moderate-tickets :: moderate-tickets">...</div>
+            		<div th:replace="fragments/moderate-tickets :: moderate-tickets">...</div>                    
                 </div>
                 <div id="reports" class="tab-pane fade">
-                    <h3>Reports</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                
+                	<!-- Include Admin Reports - page -->
+                    <div th:replace="fragments/reports :: reports">...</div>
+                    
                 </div>
             </div>
+            
+            <!-- Include modal from fragments for "ban confirmation" -->
+            <div th:replace="fragments/ban-confirmation-modal :: ban-confirmation-modal"></div>
+            
         </div>
         <!-- Script for ban users -->
         <script type="text/javascript" th:src="@{/js/ban-user.js}"></script>

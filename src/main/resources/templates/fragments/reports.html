@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<div th:fragment="reports">
+		
+		<!-- Top 20 Users -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/users-icon.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5>Top 20 Users ordered by reputation (total vote on their entries).</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 lang-and-btn-group" style="text-align: right;">
+                        <!-- Language -->
+                        <div class="dropdown">
+                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-users"> 
+                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+                                <span th:if="${session.foreignLanguage eq null}"
+                                    th:text="#{tab.choose.language}"
+                                    class="tab-btn-group select-practice-lang"> &nbsp;
+                                    Select Language
+                                </span> 
+                                <span th:if="${session.foreignLanguage ne null}"
+                                    th:text="#{language. + ${session.foreignLanguage}}"
+                                    class="tab-btn-group select-practice-lang">
+                                </span> 
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu lingua-language select-language" aria-labelledby="top-users">
+                                <li th:each="language : ${languages}">
+                                    <a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Language End -->
+                    </div>
+                    <div class="col-md-3 download-report">
+                        <small>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                                Download
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top 20 Users End -->
+        
+        <!-- Top 20 Entries -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/top-entries.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5>Top 20 entries for selected language, based on reputation.</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 lang-and-btn-group">
+                        <!-- Language -->
+                        <div class="dropdown">
+                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-entries"> 
+                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+                                <span th:if="${session.foreignLanguage eq null}"
+                                    th:text="#{tab.choose.language}"
+                                    class="tab-btn-group select-practice-lang"> &nbsp;
+                                    Select Language
+                                </span> 
+                                <span th:if="${session.foreignLanguage ne null}"
+                                    th:text="#{language. + ${session.foreignLanguage}}"
+                                    class="tab-btn-group select-practice-lang">
+                                </span> 
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu lingua-language select-language" aria-labelledby="top-entries">
+                                <li th:each="language : ${languages}">
+                                    <a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Language End -->
+                    </div>
+                    <div class="col-md-3 download-report">
+                        <small>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                                Download
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top 20 Entries -->
+        
+        <!-- Banned Users -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/user-ban-report.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5>Banned users.</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 lang-and-btn-group">
+                        <!-- Button Group -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-primary">All</button>
+                            <button type="button" class="btn btn-sm btn-primary">Login</button>
+                            <button type="button" class="btn btn-sm btn-primary">Adding</button>
+                            <button type="button" class="btn btn-sm btn-primary">Voting</button>
+                        </div>
+                        <!-- Button Group End -->
+                    </div>
+                    <div class="col-md-3 download-report">
+                        <small>
+                            <a href="#">
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                                Download
+                            </a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Banned Users End -->
+        
+        <!-- General Statistic -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/pie-chart.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5>General statistic of application. How many entries for which language.</h5>
+                </div>
+                <div class="col-md-3 download-report">
+                    <small>
+                        <a href="#">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                            Download
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <!-- General Statistic End -->
+		
+	</div>
+	
+</body>
+</html>

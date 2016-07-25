@@ -99,16 +99,18 @@ public class AdminServiceImpl implements AdminService {
 		userRepository.saveAndFlush(user);
 		return user.isAddingBan();
 	}
+	
 	/**
 	 * @author Goran Arsenic
 	 */
 	@Override
 	public boolean loginBan(Long userId) {
 		User user = userRepository.findOne(userId);
-		user.setLoginBan(!user.isLoginBan());
+		user.setEnabled(!user.isEnabled());
 		userRepository.saveAndFlush(user);
-		return user.isLoginBan();
+		return user.isEnabled();
 	}
+	
 	/**
 	 * @author Goran Arsenic
 	 */
@@ -119,5 +121,23 @@ public class AdminServiceImpl implements AdminService {
 		userRepository.saveAndFlush(user);
 		return user.isVotingBan();
 	}
+	
+//	@Override
+//	public boolean newEntryBan(boolean entryBan, Long id) {
+//		userRepository.updateNewEntryBan(entryBan, id);
+//		return userRepository.getOne(id).isAddingBan();
+//	}
+	
+//	@Override
+//	public boolean loginBan(boolean loginBan, Long id) {
+//		userRepository.updateLoginBan(loginBan, id);
+//		return userRepository.getOne(id).isLoginBan();
+//	}
+	
+//	@Override
+//	public boolean voteBan(boolean votingBan, Long id) {
+//		userRepository.updateVotingBan(votingBan, id);
+//		return userRepository.getOne(id).isVotingBan();
+//	}
 	
 }
