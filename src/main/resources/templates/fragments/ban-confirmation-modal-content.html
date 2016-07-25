@@ -20,9 +20,9 @@
 				</div>
 				<div class="col-md-4 votes-group">
 					<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
-					<span style="font-size: 110%;">35</span> &nbsp; 
+					<span th:text="${user.sumOfAllUserTicketsLikes()}"></span> &nbsp; 
 					<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
-					<span style="font-size: 110%;">12</span>
+					<span th:text="${user.sumOfAllUserTicketsDislikes()}"></span>
 				</div>
 				<div class="col-md-10">
 					<p th:text="${user.username}">Username</p>

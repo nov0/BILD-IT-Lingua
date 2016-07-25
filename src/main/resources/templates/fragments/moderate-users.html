@@ -9,7 +9,7 @@
 <body>
 
 	<!-- @author Bojan Aleksic -->
-	<!-- @edit Todorovic Mladen -->
+	<!-- @author Mladen Todorovic -->
 
 	<div class="test" th:fragment="moderate-users">
 		<div class="row">
@@ -60,9 +60,9 @@
 						</div>
 						<div class="col-md-4 votes-group">
 							<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
-							<span style="font-size: 110%;">Not impl. yet</span> &nbsp;
+							<span th:text="${user.sumOfAllUserTicketsLikes()}"></span>
 							<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
-							<span style="font-size: 110%;">Not impl. yet</span>
+							<span th:text="${user.sumOfAllUserTicketsDislikes()}"></span>
 						</div>
 						<div class="col-md-10">
 							<span th:text="${user.username}"></span>
@@ -107,16 +107,16 @@
 								th:ondblclick="'unbanVote('+${user.id}+')'"></span>
 							</span>
 						</div>
+						<div class="col-md-4">
+							<a th:href="@{/ban-user-request(id=${user.id})}" data-toggle="modal" data-target="#ban-confirmation-modal">Ban user</a>
+						</div>
 					</div>
 				</div>
 				</div>
 			</div>
-				
 			<!-- Import fragment for handling bans that contain JavaScript -->
-			<div th:replace="fragments/ban-user :: banUser">ban user fragment</div>
-			<!-- Kada Mladen zavrsi tiket, ubaciti ovde ID od usera ${user.id} -->
-			<a th:href="@{/ban-user-request(id=2)}" data-toggle="modal" data-target="#ban-confirmation-modal">Ban user</a>
-		</div>
+			<div th:replace="fragments/ban-user :: banUser">...</div>
+		</div>	
 	</div>
 	
 </body>
