@@ -159,6 +159,24 @@ public class TicketController {
 	}
 	
 	/**
+	 * @author Novislav Sekulic
+	 * @param ticket
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/disable-ticket")
+	public String disableTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id) {
+		ticketService.disableTicketByAdmin(id);
+		return REDIRECT;
+	}
+	
+	@RequestMapping("/enable-ticket")
+	public String enableTicket(@RequestParam("id") Long id) {
+		ticketService.enableTicket(id);
+		return REDIRECT;
+	}
+	
+	/**
 	 * @author Mladen Todorovic
 	 * Method: add like to ticket by ticket-id and user's username
 	 */
@@ -181,16 +199,6 @@ public class TicketController {
 	}
 	
 	
-	
-	
-	@RequestMapping("/get-tickets-admin")
-	@ResponseBody
-	public String getTicketsAdmin() {
-		System.out.println("Opening get tickets admin");
-		return "test";
-		
-	}
-	
 	@RequestMapping("/fragments/get-tickets-admin")
 	@ResponseBody
 	public ModelAndView getTicketForAdmin(
@@ -200,7 +208,6 @@ public class TicketController {
 			@PageableDefault(value=10) Pageable pageable
 			) {
 		
-//		Page<Ticket> tickets = ticketService.getAllTicketsByUsername("novos", "English", pageable);
 		Page<Ticket> tickets = null;
 		
 		if(urlRequest.equals("user-tickets-disliked")) {

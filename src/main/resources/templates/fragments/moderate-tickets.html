@@ -41,29 +41,6 @@
 									<span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
 							</a></li>
 						</ul>
-						
-						<!-- Language selection -->
-						<ul class="nav navbar-nav navbar-right">
-							<li class="dropdown"><a class="dropdown-toggle"
-								data-toggle="dropdown" href="#"> <span
-									class="glyphicon glyphicon-flag btn-glyphicons"
-									aria-hidden="true"></span> <span
-									th:if="${session.foreignLanguage eq null}"
-									th:text="#{tab.all}"
-									class="tab-btn-group select-practice-lang">All </span>
-									<span th:if="${session.foreignLanguage ne null}"
-									th:text="#{language. + ${session.foreignLanguage}}"
-									class="tab-btn-group select-practice-lang"> </span>
-									<span class="caret"></span>
-							</a>
-								<ul class="dropdown-menu lingua-language select-language"
-									onclick="showNotificationTicketsLanguageChange()">
-									<li th:each="language : ${languages}"><a
-										id="selected-lang" href="#"
-										th:text="#{language. + ${language}}">Language</a></li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 				</div>
 			</nav>
@@ -71,6 +48,8 @@
 			<!-- Include Modal from fragments -->
 			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
 			<div th:replace="fragments/delete-ticket-modal :: modal-delete"></div>
+			<!-- Import fragment for handling bans that contain JavaScript -->
+			<div th:replace="fragments/ban-user :: banUser">ban user fragment</div>
 
 			<div class="tickets-content-admin">
 

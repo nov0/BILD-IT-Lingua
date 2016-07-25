@@ -26,6 +26,8 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	String addDislikeToTicket(Long id, String username);
 	
 	void deleteTicket(Long id, String username);
+	void disableTicketByAdmin(Long id);
+	void enableTicket(Long id);
 	
 	List<Ticket> getTicketsByCategory(String category);
 	

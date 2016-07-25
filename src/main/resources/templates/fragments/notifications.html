@@ -41,6 +41,12 @@
 					} else if(localStorage.getItem('admin-register')) {
 						showNotificationAdminRegister();
 						localStorage.removeItem('admin-register');
+					} else if(localStorage.getItem('ticket-disabled')) {
+						showNotificationTicketDisabled();
+						localStorage.removeItem('ticket-disabled');
+					} else if(localStorage.getItem('ticket-enabled')) {
+						showNotificationTicketEnabled();
+						localStorage.removeItem('ticket-enabled');
 					}
 					
 				}); // end ready
@@ -95,6 +101,16 @@
 				
 				function showNotificationAdminRegister() {
 					message = /*[[#{register.success.message.admin}]]*/ 'Admin Created';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationTicketDisabled() {
+					message = /*[[#{modal.ticket.disabled}]]*/ 'Ticket Disabled';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationTicketEnabled() {
+					message = /*[[#{modal.ticket.enabled}]]*/ 'Ticket Enabled';
 					showNotification(message, colorGreen, iconOk);
 				}
 				

@@ -35,17 +35,25 @@
 									<span class="glyphicon glyphicon-pencil"></span>
 									<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
 								</a>
-							</div>							
+							</div>
 							<div class="col-md-2">
-								<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
-									<span class="glyphicon glyphicon-trash"></span> 
-									<span data-toggle="tooltip" th:attr="title=#{ticket.delete}" th:text="#{ticket.delete}">Delete</span>
-								</a>
+								<span th:if="${ticket.deactivated == null}">
+									<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
+										<span class="glyphicon glyphicon-remove-circle"></span> 
+										<span data-toggle="tooltip" th:attr="title=#{ticket.disable}" th:text="#{ticket.disable}">Delete</span>
+									</a>
+								</span>
+								<span th:unless="${ticket.deactivated == null}">
+									<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
+										<span class="glyphicon glyphicon-ok-circle"></span> 
+										<span data-toggle="tooltip" th:attr="title=#{ticket.enable}" th:text="#{ticket.enable}">Enable</span>
+									</a>
+								</span>
 							</div>	
 							
 							<!-- Show ticket username -->
 							<div class="col-md-2">
-								<a href="#" id="ticket-user-id">								
+								<a th:href="@{/ban-user-request(id=${ticket.user.id})}" id="ticket-user-id" data-toggle="modal" data-target="#ban-confirmation-modal">								
 									<span class="glyphicon glyphicon-user"></span>
 									<span data-toggle="tooltip" th:text="${ticket.user.username}" id="ticket-username-value">Username</span>
 								</a>

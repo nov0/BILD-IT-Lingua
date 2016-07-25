@@ -1,16 +1,4 @@
 $(document).ready(function() {
-//	$(".li-tickets").click(function() {
-//		$(this).addClass("active").siblings().removeClass("active");
-//	}); // end click .li-tickets
-//	
-//	$("#ticket-user-id").click(function() {
-//		var ticketUsername = $("#ticket-username-value").text();
-//		console.log(ticketUsername);
-//	}); // end ticket-user-id
-
-
-
-
 //	/* Check on load page if localStorage is set, if true, redirect to "Practice Lingua" page */
 //	if(localStorage.getItem("practicePage")) {
 //		document.getElementById("practice-reload").click();
@@ -31,42 +19,16 @@ $(document).ready(function() {
 	window.totalPages = "";
 
 	var selectedLanguage = "English";
-//	var selectedLanguageTemp = "";
-//	$(".select-language li > a").click(function() {
+
+//	/* 
+//	 * When user is logged in, populate page with all tickets by default 
+//	 */
+//	if(urlRequest === "user-tickets-disliked") {
 //		$("#preloader").show();
-//		$(".select-practice-lang").text(this.innerHTML);
-//		selectedLanguageTemp = this.innerHTML;
-//		/**
-//		 * This is not good solution, but it's easiest for now. 
-//		 * Language title must be converted in English.
-//		 */
-//		/***** If you add new localization language, you must update this.*****/
-//		if(selectedLanguageTemp === "English" || selectedLanguageTemp === "Engleski" || selectedLanguageTemp === "Englisch") {
-//			selectedLanguage = "English";
-//		} else if(selectedLanguageTemp === "Bosnian" || selectedLanguageTemp === "Bosanski" || selectedLanguageTemp === "Bosnisch") {
-//			selectedLanguage = "Bosnian";
-//		} else if(selectedLanguageTemp ==="Serbian" || selectedLanguageTemp === "Srpski" || selectedLanguageTemp === "Serbisch") {
-//			selectedLanguage = "Serbian";
-//		} else if(selectedLanguageTemp === "Croatian" || selectedLanguageTemp === "Hrvatski" || selectedLanguageTemp === "Kroatisch") {
-//			selectedLanguage = "Croatian";
-//		} else {
-//			selectedLanguage = "German";
-//		}
 //		window.page = 0;
 //		loadTicketsInitially(window.page);
 //		window.page++;
-//
-//	});
-
-	/* 
-	 * When user is logged in, populate page with all tickets by default 
-	 */
-	if(urlRequest === "user-tickets-disliked") {
-		$("#preloader").show();
-		window.page = 0;
-		loadTicketsInitially(window.page);
-		window.page++;
-	}
+//	}
 	
 	// When user clicked on moderate tab in navigation menu load default disliked users tickets
 	

@@ -1,6 +1,7 @@
 package org.bildit.lingua.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -189,6 +190,27 @@ public class TicketServiceImpl implements TicketService {
 	}
 	
 	/**
+	 * @author Novislav Sekulic
+	 * Method for deleting ticket by admin.
+	 */
+	@Override
+	public void disableTicketByAdmin(Long id) {
+		Ticket ticket = ticketRepository.findOne(id);
+		ticket.setDeactivated(new Date());
+		ticketRepository.save(ticket);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 */
+	@Override
+	public void enableTicket(Long id) {
+		Ticket ticket = ticketRepository.findOne(id);
+		ticket.setDeactivated(null);
+		ticketRepository.save(ticket);
+	}
+	
+	/**
 	 * @author Bojan Aleksic
 	 * Method returns all tickets by provided category
 	 */
@@ -257,6 +279,6 @@ public class TicketServiceImpl implements TicketService {
 	public Page<Ticket> getAllDeactivatedTickets(Pageable pageable) {
 		return ticketRepository.findAllByDeactivatedNotNull(pageable);
 	}
-	
+
 	
 }
