@@ -14,6 +14,12 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	Page<Ticket> getAllActiveTicketsByUsername(String username, String learningLanguage, Pageable pageable);
 	Page<Ticket> getAllDeactivatedTicketsByUsername(String username, String learningLanguage, Pageable pageable);
 	Page<Ticket> getAllModeratedTicketsByUsername(String username, String learningLanguage, Pageable pageable);
+	Page<Ticket> findAll(Pageable pageable);
+	Page<Ticket> getAllTicketsSortedByDislike(Pageable pageable);
+	Page<Ticket> getAllModeratedTickets(Pageable pageable);
+	Page<Ticket> getAllDeactivatedTickets(Pageable pageable);
+	Page<Ticket> getAllTicketOrderedByLike(Pageable pageable);
+	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
 	
 	Ticket saveTicket(Ticket ticket, String username);
 	
@@ -23,6 +29,8 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	String addDislikeToTicket(Long id, String username);
 	
 	void deleteTicket(Long id, String username);
+	void disableTicketByAdmin(Long id);
+	void enableTicket(Long id);
 	
 	List<Ticket> getTicketsByCategory(String category);
 	
