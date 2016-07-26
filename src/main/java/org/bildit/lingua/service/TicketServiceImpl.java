@@ -1,6 +1,7 @@
 package org.bildit.lingua.service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -189,6 +190,27 @@ public class TicketServiceImpl implements TicketService {
 	}
 	
 	/**
+	 * @author Novislav Sekulic
+	 * Method for deleting ticket by admin.
+	 */
+	@Override
+	public void disableTicketByAdmin(Long id) {
+		Ticket ticket = ticketRepository.findOne(id);
+		ticket.setDeactivated(new Date());
+		ticketRepository.save(ticket);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 */
+	@Override
+	public void enableTicket(Long id) {
+		Ticket ticket = ticketRepository.findOne(id);
+		ticket.setDeactivated(null);
+		ticketRepository.save(ticket);
+	}
+	
+	/**
 	 * @author Bojan Aleksic
 	 * Method returns all tickets by provided category
 	 */
@@ -234,5 +256,60 @@ public class TicketServiceImpl implements TicketService {
 	public List<Ticket> getTicketsByCategoryAndLanguage(String category, Language language) {
 		return ticketRepository.findAllByCategoryAndLearningLanguage(category, language);
 	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Method returns all tickets sorted by dislikes value.
+	 */
+	@Override
+	public Page<Ticket> getAllTicketsSortedByDislike(Pageable pageable) {
+		return ticketRepository.getAllTicketOrderedByDislike(pageable);
+	}
+
+	/**
+	 * @author Novislav Sekulic
+	 * Method return all moderated tickets.
+	 */
+	@Override
+	public Page<Ticket> getAllModeratedTickets(Pageable pageable) {
+		return ticketRepository.findAllByEditedTrueAndDeactivatedIsNull(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all deactivated tickets.
+	 */
+	@Override
+	public Page<Ticket> getAllDeactivatedTickets(Pageable pageable) {
+		return ticketRepository.findAllByDeactivatedNotNull(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all tickets.
+	 */
+	@Override
+	public Page<Ticket> findAll(Pageable pageable) {
+		return ticketRepository.findAll(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all liked sorted by likes.
+	 */
+	@Override
+	public Page<Ticket> getAllTicketOrderedByLike(Pageable pageable) {
+		return ticketRepository.getAllTicketOrderedByLike(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all diabled tickets sorted by dislike.
+	 */
+	@Override
+	public Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable) {
+		return ticketRepository.getAllDeactivatedSortedByDislike(pageable);
+	}
+
 	
 }
