@@ -1,3 +1,10 @@
+/**
+ * @author Bojan Aleksic
+ * @author Novislav Sekulic
+ * 
+ * This is modified JS for admin search tickets.
+ */
+
 $(document).ready(function() {
 
 	/* Select category */

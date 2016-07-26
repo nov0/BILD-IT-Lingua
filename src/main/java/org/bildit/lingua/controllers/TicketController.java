@@ -200,10 +200,13 @@ public class TicketController {
 		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
-	
+	/**
+	 * @author Novislav Sekulic
+	 * Method for showing ticket for admin.
+	 */
 	@RequestMapping("/fragments/get-tickets-admin")
 	@ResponseBody
-	public ModelAndView getTicketForAdmin(
+	public ModelAndView getTicketsForAdmin(
 			ModelAndView model,
 			@RequestParam("urlData") String urlRequest,
 			@RequestParam(value="page", required=false) Integer page,
