@@ -51,6 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/user-search").authenticated()
 			.antMatchers("/ban-user-request").authenticated()
 			.antMatchers("/ban-submit").authenticated()
+			.antMatchers("/download").authenticated()
 			.antMatchers("/fragments/get-tickets.html").authenticated()
 			.antMatchers("/fragments/overview-practice.html").authenticated()
 			.antMatchers("/fragments/flipcard-practice.html").authenticated()
