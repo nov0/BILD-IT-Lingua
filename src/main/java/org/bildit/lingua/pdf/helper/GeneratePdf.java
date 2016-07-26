@@ -12,6 +12,7 @@ import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
 
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -24,10 +25,11 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public class GeneratePdf {
 	
-	private static Font TIME_ROMAN = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
-	private static Font TIME_ROMAN_SMALL = new Font(Font.FontFamily.TIMES_ROMAN, 12, Font.BOLD);
+	private static Font PDF_TITLE = new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD);
+	private static Font PDF_TITLE_SMALL = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+	private static Font TABLE_HEADER = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
 
-	public static Document createPdf(String file, String downloadRequest, List<Ticket> records) {
+	public static Document createPdf(String file, String downloadRequest, List<?> records, String pdfTitle) {
 		
 		Document document = null;
 		
@@ -37,7 +39,7 @@ public class GeneratePdf {
 			document.open();
 			
 			addMetaData(document);
-			addTitlePage(document);
+			addTitlePage(document, pdfTitle);
 			
 			if("top-users".equals(downloadRequest)) {
 				// invoke method for top users here
@@ -61,14 +63,14 @@ public class GeneratePdf {
 		document.addAuthor("author name");
 	}
 	
-	private static void addTitlePage(Document document) throws DocumentException {
+	private static void addTitlePage(Document document, String pdfTitle) throws DocumentException {
 		Paragraph preface = new Paragraph();
 		createEmptyLine(preface, 1);
-		preface.add(new Paragraph("PDF Report", TIME_ROMAN));
+		preface.add(new Paragraph(pdfTitle.split("\\.")[0], PDF_TITLE));
 		
 		createEmptyLine(preface, 1);
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-		preface.add(new Paragraph("Report created on " + sdf.format(new java.util.Date()), TIME_ROMAN_SMALL));
+		preface.add(new Paragraph("Report created on " + sdf.format(new java.util.Date()), PDF_TITLE_SMALL));
 		document.add(preface);
 	}
 	
@@ -81,15 +83,18 @@ public class GeneratePdf {
 	/**
 	 * @author Bojan Aleksic
 	 * @param document
-	 * @param topEntries
+	 * @param records
 	 * @throws DocumentException
 	 */
-	public static void createTableTopEntries(Document document, List<Ticket> topEntries) throws DocumentException {
+	@SuppressWarnings("unchecked")
+	public static void createTableTopEntries(Document document, List<?> records) throws DocumentException {
+
+		List<Ticket> tickets = (List<Ticket>) records;
 		
 		int numberOfRecords = 20;
 		
-		if(topEntries.size() < 20) {
-			numberOfRecords = topEntries.size();
+		if(records.size() < 20) {
+			numberOfRecords = records.size();
 		}
 		
 		Paragraph paragraph = new Paragraph();
@@ -97,37 +102,46 @@ public class GeneratePdf {
 		document.add(paragraph);
 		
 		PdfPTable table = new PdfPTable(8);
+		table.setWidths(new int[] {40, 150, 100, 100, 100, 50, 50, 130});
 		
-		PdfPCell cell = new PdfPCell(new Phrase("#"));
+		PdfPCell cell = new PdfPCell(new Phrase("#", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Author"));
+		cell = new PdfPCell(new Phrase("Author", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Domestic Text"));
+		cell = new PdfPCell(new Phrase("Domestic Text", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Foreign Text"));
+		cell = new PdfPCell(new Phrase("Foreign Text", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Category"));
+		cell = new PdfPCell(new Phrase("Category", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Likes"));
+		cell = new PdfPCell(new Phrase("Likes", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Dislikes"));
+		cell = new PdfPCell(new Phrase("Dislikes", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		
-		cell = new PdfPCell(new Phrase("Date of created"));
+		cell = new PdfPCell(new Phrase("Date of created", TABLE_HEADER));
 		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 		table.addCell(cell);
 		table.setHeaderRows(1);
 		
@@ -138,13 +152,13 @@ public class GeneratePdf {
 			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
 			table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
 			table.addCell(String.valueOf(i + 1));
-			table.addCell(topEntries.get(i).getUser().getFirstName() + " " + topEntries.get(i).getUser().getLastName());
-			table.addCell(topEntries.get(i).getTextDomestic());
-			table.addCell(topEntries.get(i).getTextForeign());
-			table.addCell(topEntries.get(i).getCategory());
-			table.addCell(String.valueOf(topEntries.get(i).getTicketVotes().getLikes()));
-			table.addCell(String.valueOf(topEntries.get(i).getTicketVotes().getDislikes()));
-			table.addCell(topEntries.get(i).getLocalDateTime().format(formatter));
+			table.addCell(tickets.get(i).getUser().getFirstName() + " " + tickets.get(i).getUser().getLastName());
+			table.addCell(tickets.get(i).getTextDomestic());
+			table.addCell(tickets.get(i).getTextForeign());
+			table.addCell(tickets.get(i).getCategory());
+			table.addCell(String.valueOf(tickets.get(i).getTicketVotes().getLikes()));
+			table.addCell(String.valueOf(tickets.get(i).getTicketVotes().getDislikes()));
+			table.addCell(tickets.get(i).getLocalDateTime().format(formatter));
 		}
 		
 		document.add(table);
