@@ -66,6 +66,22 @@ public class User extends BaseUser {
 		this.addingBan = addingBan;
 		this.loginBan = loginBan;
 	}
+	/** Method: sum of all user's tikets votes (likes) */
+	public int sumOfAllUserTicketsLikes() {
+		int sum = 0;
+		for (Ticket ticket: this.getTickets()) {
+			sum += ticket.getTicketVotes().getLikes();
+		}
+		return sum;
+	}
+	/** Method: sum of all user's tikets votes (dislikes) */
+	public int sumOfAllUserTicketsDislikes() {
+		int sum = 0;
+		for (Ticket ticket: this.getTickets()) {
+			sum += ticket.getTicketVotes().getDislikes();
+		}
+		return sum;
+	}
 	
 	/** Getters and Setters */
 	public Language getDomesticLanguage() {
