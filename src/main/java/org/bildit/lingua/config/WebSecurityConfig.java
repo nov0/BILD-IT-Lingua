@@ -53,6 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/ban-submit").authenticated()
 			.antMatchers("/disable-ticket").hasAuthority("ADMIN")
 			.antMatchers("/enable-ticket").hasAuthority("ADMIN")
+			.antMatchers("/download").authenticated()
 			.antMatchers("/fragments/get-tickets.html").authenticated()
 			.antMatchers("/fragments/overview-practice.html").authenticated()
 			.antMatchers("/fragments/flipcard-practice.html").authenticated()

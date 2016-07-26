@@ -72,24 +72,18 @@
 			<artifactId>thymeleaf-extras-java8time</artifactId>
 			<version>2.1.0.RELEASE</version>
 		</dependency>
+	    
 		<dependency>
-	        <groupId>com.itextpdf</groupId>
-	        <artifactId>kernel</artifactId>
-	        <version>7.0.0</version>
-	        <scope>compile</scope>
-	    </dependency>
-	    <dependency>
-	        <groupId>com.itextpdf</groupId>
-	        <artifactId>io</artifactId>
-	        <version>7.0.0</version>
-	        <scope>compile</scope>
-	    </dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>4.2.1</version>
+		</dependency>
 		<dependency>
-	        <groupId>com.itextpdf</groupId>
-	        <artifactId>layout</artifactId>
-	        <version>7.0.0</version>
-	        <scope>compile</scope>
-	    </dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itext-pdfa</artifactId>
+			<version>5.5.9</version>
+		</dependency>
+		
 	</dependencies>
 	
 	<build>
