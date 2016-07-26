@@ -80,10 +80,9 @@
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
-			<artifactId>itext-pdfa</artifactId>
-			<version>5.5.9</version>
+			<artifactId>pdfa</artifactId>
+			<version>7.0.0</version>
 		</dependency>
-		
 	</dependencies>
 	
 	<build>
