@@ -161,6 +161,7 @@
                 <div id="moderate-lingua" class="tab-pane fade">
                     <!-- Include Admin's Moderate Tickets - page -->
             		<div th:replace="fragments/moderate-tickets :: moderate-tickets">...</div>                    
+        			<script type="text/javascript" th:src="@{/js/load-ticket-admin.js}"></script>
                 </div>
                 <div id="reports" class="tab-pane fade">
                 
@@ -175,10 +176,7 @@
             
         </div>
         <!-- Script for ban users -->
-        <script type="text/javascript" th:src="@{/js/ban-user.js}"></script>
-        
-<!--         <script type="text/javascript" th:src="@{/js/showTickets.js}"></script> -->
-        <script type="text/javascript" th:src="@{/js/load-ticket-admin.js}"></script>
+<!--         <script type="text/javascript" th:src="@{/js/ban-user.js}"></script> -->
     </div>
 	
 </body>

@@ -34,7 +34,10 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	Page<Ticket> findAllByUserIdAndLearningLanguageOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	
 	/** @author Novislav Sekulic */
-	Page<Ticket> findAllByEditedTrue(Pageable pageable);
+	Page<Ticket> findAllByEditedTrueAndDeactivatedIsNull(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	Page<Ticket> findAll(Pageable pageable);
 	
 	/** @author Novislav Sekulic */
 	Page<Ticket> findAllByDeactivatedNotNull(Pageable pageable);
@@ -78,7 +81,15 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
 	/** @author Novislav Sekulic */
-	@Query("SELECT t FROM Ticket t ORDER BY t.ticketVotes.dislikes DESC")
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.dislikes DESC")
 	Page<Ticket> getAllTicketOrderedByDislike(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.likes DESC")
+	Page<Ticket> getAllTicketOrderedByLike(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NOT NULL ORDER BY t.ticketVotes.dislikes DESC")
+	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
 	
 }

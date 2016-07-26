@@ -87,8 +87,11 @@ $(document).ready(function() {
 			votingBan : votingBan
 		})
 		.done(function() {
+			localStorage.setItem('user-ban-status-change', true);
 			location.reload();
 		});
+		
+		localStorage.setItem("tabId", $(".li-tickets.active").attr('id'));
 	});
 
 	$('.modal').on('hidden.bs.modal', function() {

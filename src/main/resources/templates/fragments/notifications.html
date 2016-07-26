@@ -47,6 +47,9 @@
 					} else if(localStorage.getItem('ticket-enabled')) {
 						showNotificationTicketEnabled();
 						localStorage.removeItem('ticket-enabled');
+					} else if(localStorage.getItem('user-ban-status-change')) {
+						showMessageUserBanStatusChange();
+						localStorage.removeItem('user-ban-status-change');
 					}
 					
 				}); // end ready
@@ -148,6 +151,11 @@
 				function showNotificationAddNewBan() {
 					message = /*[[#{notification.add.new.entry.ban}]]*/"notification";
 					showNotification(message, colorRed, iconWarning);
+				}
+				
+				function showMessageUserBanStatusChange() {
+					message = /*[[#{notification.user.bans}]]*/ "User ban status changed";
+					showNotification(message, colorGreen, iconOk);
 				}
 				
 				/**

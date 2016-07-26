@@ -14,7 +14,6 @@
 		
 		<div th:if="${tickets != null}" class="tickets-wrapper">
 			<div th:each="ticket : ${tickets}">
-<!-- 				<div th:if="${ticket.deactivated == null}"> -->
 					<div class="ticket-container" th:classappend="${ticket.deactivated == null} ? 'alert-warning' : 'alert-danger'">
 						<div class="row ticket-header">
 							<div class="col-md-3">
@@ -25,22 +24,17 @@
 								<span class="glyphicon glyphicon-tag"></span>
 								<span th:text="#{modal.categories. + ${ticket.category}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.category}">Verbs</span>
 							</div>
-<!-- 							<div class="col-md-2"> -->
-<!-- 								<span class="glyphicon glyphicon-flag"></span> -->
-<!--  								<span th:text="#{language. + ${foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span> -->
-<!-- 								<span th:text="#{language. + ${ticket.foreignLanguage}}" data-toggle="tooltip" th:attr="title=#{tooltip.ticket.foreign.language}">Foreign</span> -->
-<!-- 							</div> -->
 							<div class="col-md-2">
 								<a th:href="@{/edit-ticket(id=${ticket.id})}" class="ticket-edit" data-toggle="modal" data-target="#gridSystemModalEdit">
 									<span class="glyphicon glyphicon-pencil"></span>
 									<span data-toggle="tooltip" th:attr="title=#{ticket.edit}" th:text="#{ticket.edit}">Edit</span>
 								</a>
 							</div>
-							<div class="col-md-2">
+							<div class="col-md-2" style="padding: 0px 5px 0px 5px">
 								<span th:if="${ticket.deactivated == null}">
 									<a th:href="@{/delete-confirmation(id=${ticket.id})}" class="ticket-delete" id="delete-ticket" data-toggle="modal" data-target="#delete-confirm-modal">
 										<span class="glyphicon glyphicon-remove-circle"></span> 
-										<span data-toggle="tooltip" th:attr="title=#{ticket.disable}" th:text="#{ticket.disable}">Delete</span>
+										<span data-toggle="tooltip" th:attr="title=#{ticket.disable}" th:text="#{ticket.disable}">Disable</span>
 									</a>
 								</span>
 								<span th:unless="${ticket.deactivated == null}">
@@ -53,9 +47,9 @@
 							
 							<!-- Show ticket username -->
 							<div class="col-md-2">
-								<a th:href="@{/ban-user-request(id=${ticket.user.id})}" id="ticket-user-id" data-toggle="modal" data-target="#ban-confirmation-modal">								
+								<a th:href="@{/ban-user-request(id=${ticket.user.id})}" class="ticket-delete" id="ticket-user-id" data-toggle="modal" data-target="#ban-confirmation-modal">								
 									<span class="glyphicon glyphicon-user"></span>
-									<span data-toggle="tooltip" th:text="${ticket.user.username}" id="ticket-username-value">Username</span>
+									<span data-toggle="tooltip" th:attr="title=#{form.field.username}" th:text="${ticket.user.username}" id="ticket-username-value">Username</span>
 								</a>
 							</div>
 							
@@ -95,7 +89,7 @@
 						}
 						
 						/* When ticket is created or edited, highlight the ticket */
-						if(ticketAdded === "ticket-added" || ticketAdded === "ticket-edited") {
+						if(ticketAdded === "ticket-enable-disable" || ticketAdded === "ticket-edited") {
 							$(".my-lingua-content .ticket-container").first().addClass("fade-out-on-create");
 							$(".ticket-container").removeClass("fade-out-on-create", 3000);
 						}
@@ -113,7 +107,7 @@
 		</div>
 		<div th:if="${tickets eq null}">
 			<div class="no-tickets-wrapper">
-				<span >Not tickets. Please select search criteria.</span>
+				<span th:text="#{no.tickets.select.option}">No tickets. Please select another option.</span>
 				<span>
 <!-- 					<a href="#" th:text="#{no.tickets.message.create.one}" data-toggle="modal" data-target="#gridSystemModal"> -->
 <!-- 						Create ticket here -->

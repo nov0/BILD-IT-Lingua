@@ -272,12 +272,43 @@ public class TicketServiceImpl implements TicketService {
 	 */
 	@Override
 	public Page<Ticket> getAllModeratedTickets(Pageable pageable) {
-		return ticketRepository.findAllByEditedTrue(pageable);
+		return ticketRepository.findAllByEditedTrueAndDeactivatedIsNull(pageable);
 	}
-
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all deactivated tickets.
+	 */
 	@Override
 	public Page<Ticket> getAllDeactivatedTickets(Pageable pageable) {
 		return ticketRepository.findAllByDeactivatedNotNull(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all tickets.
+	 */
+	@Override
+	public Page<Ticket> findAll(Pageable pageable) {
+		return ticketRepository.findAll(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all liked sorted by likes.
+	 */
+	@Override
+	public Page<Ticket> getAllTicketOrderedByLike(Pageable pageable) {
+		return ticketRepository.getAllTicketOrderedByLike(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Return all diabled tickets sorted by dislike.
+	 */
+	@Override
+	public Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable) {
+		return ticketRepository.getAllDeactivatedSortedByDislike(pageable);
 	}
 
 	

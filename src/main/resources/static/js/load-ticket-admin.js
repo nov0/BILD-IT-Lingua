@@ -1,9 +1,4 @@
 $(document).ready(function() {
-//	/* Check on load page if localStorage is set, if true, redirect to "Practice Lingua" page */
-//	if(localStorage.getItem("practicePage")) {
-//		document.getElementById("practice-reload").click();
-//		localStorage.clear();
-//	}
 
 	/* Select category */
 	$(".select-category li > a").click(function() {
@@ -12,22 +7,24 @@ $(document).ready(function() {
 	});
 
 	// get ID value of active class
-	var urlRequest = $('.li.active').attr('id');;
+	var urlRequest = $('.li.active').attr('id');
 
 	window.page = 0;
 	window.totalPages = "";
 
 	var selectedLanguage = "English";
-
-//	/* 
-//	 * When user is logged in, populate page with all tickets by default 
-//	 */
-//	if(urlRequest === "user-tickets-disliked") {
-//		$("#preloader").show();
-//		window.page = 0;
-//		loadTicketsInitially(window.page);
-//		window.page++;
-//	}
+	
+	/* Check for refresh parameter if ticket edited, enabled, disabled, and user baned */
+	if(localStorage.getItem('tabId') != null) {
+		urlRequest = localStorage.getItem('tabId');
+		localStorage.removeItem('tabId');
+		document.getElementById("moderage-lingua-tab").click();
+		$("#" + urlRequest).addClass('active').siblings().removeClass('active');
+		$("#preloader").show();
+		window.page = 0;
+		loadTicketsInitially(window.page);
+		window.page++;
+	}
 	
 	// When user clicked on moderate tab in navigation menu load default disliked users tickets
 	

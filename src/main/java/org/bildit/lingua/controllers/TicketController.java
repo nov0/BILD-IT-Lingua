@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.LanguageService;
@@ -112,9 +113,10 @@ public class TicketController {
 	 * @return
 	 */
 	@RequestMapping("/edit-ticket")
-	public String editTicket(Model model, @RequestParam("id") Long id) {
+	public String editTicket(Model model, @RequestParam("id") Long id, Authentication auth) {
 		model.addAttribute("ticket", ticketService.getOne(id));
 		model.addAttribute("languages", languageService.getAllLanguages());
+		model.addAttribute("authority", auth.getAuthorities().toString());
 		return "fragments/edit-ticket-modal-content";
 	}
 	
@@ -210,12 +212,16 @@ public class TicketController {
 		
 		Page<Ticket> tickets = null;
 		
-		if(urlRequest.equals("user-tickets-disliked")) {
+		if(urlRequest.equals("user-tickets-all")) {
+			tickets = ticketService.findAll(pageable);
+		} else if (urlRequest.equals("user-tickets-liked")) {
+			tickets = ticketService.getAllTicketOrderedByLike(pageable);
+		} else if(urlRequest.equals("user-tickets-disliked")) {
 			tickets = ticketService.getAllTicketsSortedByDislike(pageable);
 		} else if (urlRequest.equals("user-ticket-moderated")){
 			tickets = ticketService.getAllModeratedTickets(pageable);
 		} else if(urlRequest.equals("user-ticket-deleted")){
-			tickets = ticketService.getAllDeactivatedTickets(pageable);
+			tickets = ticketService.getAllDeactivatedSortedByDislike(pageable);
 		}
 				
 

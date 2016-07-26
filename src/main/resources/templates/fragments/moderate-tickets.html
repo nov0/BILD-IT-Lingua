@@ -25,7 +25,17 @@
 					</div>
 					<div class="collapse navbar-collapse" id="myNavbar">
 						<ul class="nav navbar-nav">
-							<li class="li li-tickets active" id="user-tickets-disliked"><a href="#">
+							<li class="li li-tickets active" id="user-tickets-all"><a href="#">
+									<span class="glyphicon glyphicon-list btn-glyphicons" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.all}" class="tab-btn-group" >All</span>
+							</a></li>
+							<li class="li li-tickets" id="user-tickets-liked"><a href="#">
+									<span class="glyphicon glyphicon-thumbs-up" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.like}" class="tab-btn-group" >Liked</span>
+							</a></li>
+							<li class="li li-tickets" id="user-tickets-disliked"><a href="#">
 									<span class="glyphicon glyphicon-thumbs-down" style="color: white"
 									aria-hidden="true"></span>
 									<span th:text="#{tab.dislike}" class="tab-btn-group" >Disliked</span>
@@ -48,13 +58,10 @@
 			<!-- Include Modal from fragments -->
 			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
 			<div th:replace="fragments/delete-ticket-modal :: modal-delete"></div>
-			<!-- Import fragment for handling bans that contain JavaScript -->
-			<div th:replace="fragments/ban-user :: banUser">ban user fragment</div>
 
 			<div class="tickets-content">
 
 				<!-- Here goes Tickets content loaded with AJAX -->
-				<div th:replace="fragments/get-tickets-admin :: tickets-admin"></div>
 
 			</div>
 		</div>
