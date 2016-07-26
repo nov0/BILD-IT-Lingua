@@ -10,7 +10,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.pdf.helper.GeneratePdf;
 import org.bildit.lingua.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +39,7 @@ public class ReportController {
 		
 		languageRequest = "English"; // dok se ne popravi jezik u reports.html-u
 		
-		List<Ticket> topEntries = null;
+		List<?> topEntries = null;
 		
 		String fileName = "";
 		
