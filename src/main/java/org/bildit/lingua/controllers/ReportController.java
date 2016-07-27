@@ -39,7 +39,7 @@ public class ReportController {
 		
 		languageRequest = "English"; // dok se ne popravi jezik u reports.html-u
 		
-		List<?> topEntries = null;
+		List<?> records = null;
 		
 		String fileName = "";
 		
@@ -48,7 +48,7 @@ public class ReportController {
 			// implement top users here
 		} else if("top-entries".equals(downloadRequest)) {
 			fileName = "Top 20 entries for selected language based on reputation.pdf";
-			topEntries = reportService.getTopEntries(languageRequest);
+			records = reportService.getTopEntries(languageRequest);
 		} else if("banned-users".equals(downloadRequest)) {
 			fileName = "Banned users.pdf";
 			// implement banned users here
@@ -65,7 +65,7 @@ public class ReportController {
 		response.setHeader("Content-disposition", "attachment; filename=" + fileName);
 		
 		try {
-			GeneratePdf.createPdf(tempFilePath + "\\" + fileName, downloadRequest, topEntries, fileName);
+			GeneratePdf.createPdf(tempFilePath + "\\" + fileName, downloadRequest, records, fileName);
 			ByteArrayOutputStream byteOutStream = GeneratePdf.convertPdfToByteArrayOutputStream(tempFilePath + "\\" + fileName);
 			OutputStream outputStream = response.getOutputStream();
 			byteOutStream.writeTo(outputStream);
