@@ -6,19 +6,49 @@
 <body>
 
 	<!-- @author Bojan Aleksic -->
+	<!-- @edit Novislav Sekulic -->
 	
 	<!-- Content for Delete Modal returned by TicketController -->
-	<div th:text="#{confirm.delete.dialog}" class="modal-body">Are you sure?</div>
+	<div th:text="#{confirm.dialog}" class="modal-body">Are you sure?</div>
 	<div class="modal-footer">
-		<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}"
-			onclick="localStorage.setItem('ticket-deleted', true)"
-			type="button" class="btn btn-sm btn-primary" id="delete-confirm">
-			<span class="glyphicon glyphicon-trash"></span>&nbsp;<span th:text="#{ticket.delete}">Delete</span>
-		</a>
+		<span sec:authorize="hasAuthority('ADMIN')">
+		
+			<span th:if="${ticket.deactivated == null}">
+				<a th:href="@{/disable-ticket(ticket-enable-disable, id=${ticket.id})}"
+					onclick="localStorage.setItem('ticket-disabled', true)"
+					type="button" class="btn btn-sm btn-primary" id="delete-confirm-admin">
+					<span class="glyphicon glyphicon-remove"></span>&nbsp;<span th:text="#{ticket.disable}">Disable</span>
+				</a>
+			</span>
+			<span th:unless="${ticket.deactivated == null}">
+				<a th:href="@{/enable-ticket(ticket-enable-disable, id=${ticket.id})}"
+					onclick="localStorage.setItem('ticket-enabled', true)"
+					type="button" class="btn btn-sm btn-primary" id="delete-confirm-admin">
+					<span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<span th:text="#{ticket.enable}">Disable</span>
+				</a>
+			</span>
+			
+		</span>
+		
+		<span sec:authorize="hasAuthority('USER')">
+			<a th:href="@{/delete-ticket(ticket-deleted, id=${ticket.id})}"
+				onclick="localStorage.setItem('ticket-deleted', true)"
+				type="button" class="btn btn-sm btn-primary" id="delete-confirm">
+				<span class="glyphicon glyphicon-trash"></span>&nbsp;<span th:text="#{ticket.delete}">Delete</span>
+			</a>
+		</span>
 		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
 			<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span th:text="#{form.field.button.cancel}">Cancel</span>
 		</button>
 	</div>
+	
+	<script th:inline="javascript">
+		$(document).ready(function() {
+			$("#delete-confirm-admin").click(function() {
+				localStorage.setItem("tabId", $(".li-tickets.active").attr('id'));
+			}); // end click #delete-confirm
+		}); // end ready
+	</script>
 	
 </body>
 </html>

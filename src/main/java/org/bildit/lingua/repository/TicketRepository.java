@@ -33,6 +33,16 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	Page<Ticket> findAllByUserIdAndLearningLanguageOrderByLocalDateTimeDesc(Long id, Language learningLanguage, Pageable pageable);
 	
+	/** @author Novislav Sekulic */
+	Page<Ticket> findAllByEditedTrueAndDeactivatedIsNull(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	Page<Ticket> findAll(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	Page<Ticket> findAllByDeactivatedNotNull(Pageable pageable);
+	
+	
 	/**
 	 * @author Bojan Aleksic
 	 * Obtain all tickets by this user, with specific category selected.
@@ -83,5 +93,17 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Goran Arsenic */
 	@Query("SELECT t FROM Ticket t WHERE t.learningLanguage = ?1 AND t.domesticLanguage = ?2 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.dislikes DESC")
+	Page<Ticket> getAllTicketOrderedByDislike(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.likes DESC")
+	Page<Ticket> getAllTicketOrderedByLike(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NOT NULL ORDER BY t.ticketVotes.dislikes DESC")
+	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
 	
 }
