@@ -78,22 +78,27 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("UPDATE Ticket t SET t.textDomestic = ?1, t.textForeign = ?2, t.category = ?3, t.edited = 1 WHERE t.id = ?4")
 	void update(String textDomestic, String textForeign, String category, Long ticketId);	
 	
-	/** @author Goran Arsenic */
+	/** @author Goran Arsenic **/
 	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2 AND t.learningLanguage = ?3 AND t.domesticLanguage = ?4 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getMyTicketsForPractice(User user, String category, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
-	/** @author Goran Arsenic */
+	/** @author Goran Arsenic **/
 	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2 AND t.domesticLanguage = ?3 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getMyTicketsForPractice(User user, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
-	/** @author Goran Arsenic */
+	/** @author Goran Arsenic **/
 	@Query("SELECT t FROM Ticket t WHERE t.category = ?1 AND t.learningLanguage = ?2 AND t.domesticLanguage = ?3 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(String category, Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
-	/** @author Goran Arsenic */
+	/** @author Goran Arsenic **/
 	@Query("SELECT t FROM Ticket t WHERE t.learningLanguage = ?1 AND t.domesticLanguage = ?2 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
+
+	/** @author Goran Arsenic **/
+	@Query("SELECT COUNT(t) FROM Ticket t WHERE t.learningLanguage = ?1")
+	int getNumberOfTicketsForLanguage(Language learningLanguage);
+
 	/** @author Novislav Sekulic */
 	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.dislikes DESC")
 	Page<Ticket> getAllTicketOrderedByDislike(Pageable pageable);
