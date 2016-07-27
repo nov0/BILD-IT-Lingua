@@ -54,7 +54,7 @@ public class ReportController {
 			// implement banned users here
 		} else if("statistic".equals(downloadRequest)) {
 			fileName = "General statistic of application.pdf";
-			// implement statistic here
+			topEntries = reportService.getDataForPieChart();
 		}
 		
 		final ServletContext servletContext = request.getSession().getServletContext();

@@ -7,5 +7,6 @@ import org.bildit.lingua.model.Ticket;
 public interface ReportService {
 
 	List<Ticket> getTopEntries(String languageRequest);
+	List<Object> getDataForPieChart();
 	
 }
