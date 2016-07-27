@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
@@ -18,6 +19,7 @@ import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
  * Spring Boot class with locale configuration.
  */
 @SpringBootApplication
+@EnableScheduling
 public class BildItLinguaApplication extends WebMvcConfigurerAdapter {
 
 	public static void main(String[] args) {

@@ -8,6 +8,7 @@ import org.bildit.lingua.model.User;
 public interface ReportService {
 
 	List<Ticket> getTopEntries(String languageRequest);
+	List<Object> getDataForPieChart();
 	
 	List<User> getTopUsersByReputationAndLanguage(String languageRequest);
 	List<User> getTopUsersByReputation();

@@ -1,5 +1,6 @@
 package org.bildit.lingua.pdf.helper;
 
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -11,12 +12,16 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.DefaultPieDataset;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
@@ -35,7 +40,7 @@ public class GeneratePdf {
 		
 		try {
 			document = new Document();
-			PdfWriter.getInstance(document, new FileOutputStream(file));
+			PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(file));
 			document.open();
 			
 			addMetaData(document);
@@ -48,10 +53,10 @@ public class GeneratePdf {
 			} else if("banned-users".equals(downloadRequest)) {
 				// invoked method for banned users here
 			} else if("statistic".equals(downloadRequest)) {
-				// invoked statistic here...
+				createPieChart(document, records, writer);
 			}
 			document.close();
-		} catch (FileNotFoundException | DocumentException e) {
+		} catch (DocumentException | IOException e) {
 			e.printStackTrace();
 		}
 		
@@ -272,6 +277,63 @@ public class GeneratePdf {
 		}
 		
 		return byteOutStream;
+	}
+	
+	/**
+	 * Method for adding chart image to document
+	 * 
+	 * @author Goran Arsenic
+	 * @param document
+	 * @param records
+	 * @param writer
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
+	@SuppressWarnings("unchecked")
+	private static void createPieChart(Document document, List<?> records, PdfWriter writer) throws IOException, DocumentException {
+
+		List<Object> data = (List<Object>) records;
+		int width = 525;
+        int height = 525; 
+        
+		JFreeChart chart = getChart(data);
+        BufferedImage bufferedImage = chart.createBufferedImage(width, height);
+        Image image = Image.getInstance(writer, bufferedImage, 1.0f);
+
+        // add empty space before chart
+        Paragraph paragraph = new Paragraph();
+        createEmptyLine(paragraph, 2);
+        document.add(paragraph);
+        document.add(image);
+	}
+	
+	/**
+	 * Method for creating chart
+	 * 
+	 * @author Goran Arsenic
+	 * @param data
+	 * @return
+	 */
+	private static JFreeChart getChart(List<Object> data) {
+
+		DefaultPieDataset dataset = new DefaultPieDataset();
+		
+		int i = 0;
+		String languageTitle = "";
+		int numberOfTickets = 0;
+		// language title and number of tickets are in the same list, so i use this to separate them
+		for(Object object : data) {
+			if(i % 2 == 0) {
+				languageTitle = (String) object;
+			} else {
+				numberOfTickets = (int) object;
+				dataset.setValue(languageTitle, numberOfTickets);
+			}
+			i++;
+		}	
+		// BUG: tooltips are set to false, but they are visible on the chart
+		JFreeChart chart = ChartFactory.createPieChart("Percent of entries for every language", dataset, true, false, false);
+		return chart;
 	}
 	
 }
