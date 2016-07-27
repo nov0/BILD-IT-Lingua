@@ -66,7 +66,7 @@ public class GeneratePdf {
 	private static void addTitlePage(Document document, String pdfTitle) throws DocumentException {
 		Paragraph preface = new Paragraph();
 		createEmptyLine(preface, 1);
-		preface.add(new Paragraph(pdfTitle.split("\\.")[0], PDF_TITLE));
+		preface.add(new Paragraph(pdfTitle.split("\\.")[0].replaceAll("-", " "), PDF_TITLE));
 		
 		createEmptyLine(preface, 1);
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
