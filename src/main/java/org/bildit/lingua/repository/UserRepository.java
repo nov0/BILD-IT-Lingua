@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 
 import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.User;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
@@ -83,5 +84,13 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	/** @author Mladen Todorovic */
 	@Query("SELECT u FROM User u WHERE u.username = ?1 OR u.firstName = ?2 OR u.lastName = ?3 ORDER BY firstName ASC")
 	List<User> findAllByUsernameOrFirstNameOrLastName(String username, String firstName, String lastName);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT DISTINCT u FROM User u left join u.tickets t WHERE t.learningLanguage = ?1 AND t.user = u GROUP BY t.ticketVotes ORDER BY SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) DESC") 
+	List<User> findAllByTotalVotesEntriesByLanguage(Language language, Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT DISTINCT u FROM User u left join u.tickets t WHERE t.user = u GROUP BY t.ticketVotes ORDER BY SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) DESC") 
+	List<User> findAllByTotalVotesEntries(Pageable pageable);
 	
 }

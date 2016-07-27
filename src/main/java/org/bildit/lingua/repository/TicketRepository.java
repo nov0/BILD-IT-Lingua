@@ -115,4 +115,12 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NOT NULL ORDER BY t.ticketVotes.dislikes DESC")
 	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
 	
+	/** @author Novislav Sekulic */
+	@Query("SELECT SUM(t.ticketVotes.dislikes) FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2")
+	Integer getSumOfTicketDislikesFromUserAndLanguage(User user, Language language);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT SUM(t.ticketVotes.likes) FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2")
+	Integer getSumOfTicketLikesFromUserAndLanguage(User user, Language language);
+	
 }
