@@ -1,5 +1,6 @@
 package org.bildit.lingua.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.bildit.lingua.model.Language;
@@ -94,10 +95,13 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t WHERE t.learningLanguage = ?1 AND t.domesticLanguage = ?2 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
-
 	/** @author Goran Arsenic **/
 	@Query("SELECT COUNT(t) FROM Ticket t WHERE t.learningLanguage = ?1")
 	int getNumberOfTicketsForLanguage(Language learningLanguage);
+
+	/** @author Goran Arsenic **/
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated <= ?1")
+	List<Ticket> getTicketsForScheduledDelete(Date date);
 
 	/** @author Novislav Sekulic */
 	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.dislikes DESC")
