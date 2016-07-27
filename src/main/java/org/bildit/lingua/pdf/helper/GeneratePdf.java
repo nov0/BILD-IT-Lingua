@@ -29,7 +29,7 @@ public class GeneratePdf {
 	private static Font PDF_TITLE_SMALL = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
 	private static Font TABLE_HEADER = new Font(Font.FontFamily.HELVETICA, 11, Font.BOLD);
 
-	public static Document createPdf(String file, String downloadRequest, List<Ticket> records, String pdfTitle) {
+	public static Document createPdf(String file, String downloadRequest, List<Ticket> topEntries, String pdfTitle) {
 		
 		Document document = null;
 		
@@ -44,7 +44,7 @@ public class GeneratePdf {
 			if("top-users".equals(downloadRequest)) {
 				// invoke method for top users here
 			} else if("top-entries".equals(downloadRequest)) {
-				createTableTopEntries(document, records);
+				createTableTopEntries(document, topEntries);
 			} else if("banned-users".equals(downloadRequest)) {
 				// invoked method for banned users here
 			} else if("statistic".equals(downloadRequest)) {

@@ -48,6 +48,20 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	List<Ticket> findAllByLearningLanguage(Language language);
 	List<Ticket> findAllByCategoryAndLearningLanguage(String category, Language language);
 	
+	/**
+	 * @author Bojan Aleksic
+	 * @param language
+	 * @param pageable
+	 * @return
+	 */
+	@Query("SELECT t FROM Ticket t "
+		 + "WHERE t.learningLanguage = ?1 "
+		 + "GROUP BY t.ticketVotes "
+		 + "ORDER BY "
+		 + "SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) "
+		 + "DESC")
+	List<Ticket> findAllByLanguageAndTicketRating(Language language, Pageable pageable);
+	
 	/** @author Mladen Todorovic */
 	@Transactional
 	@Modifying(clearAutomatically = true)
