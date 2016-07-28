@@ -58,7 +58,7 @@ public class ReportController {
 			fileName = "Banned-users.pdf";
 			// implement banned users here
 		} else if("statistic".equals(downloadRequest)) {
-			fileName = "General statistic of application.pdf";
+			fileName = "General-statistic-of-application.pdf";
 			records = reportService.getDataForPieChart();
 		}
 		
