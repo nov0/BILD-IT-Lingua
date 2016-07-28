@@ -29,3 +29,9 @@
 	padding-right: 0px;
 	margin-top: 5px;
 }
+
+.lang-report {
+	position: absolute;
+	right: 0px;
+	float: right;
+}
