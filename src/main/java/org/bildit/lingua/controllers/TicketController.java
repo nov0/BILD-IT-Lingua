@@ -216,7 +216,7 @@ public class TicketController {
 		Page<Ticket> tickets = null;
 		
 		if(urlRequest.equals("user-tickets-all")) {
-			tickets = ticketService.findAll(pageable);
+			tickets = ticketService.findAllOrderByDislike(pageable);
 		} else if (urlRequest.equals("user-tickets-liked")) {
 			tickets = ticketService.getAllTicketOrderedByLike(pageable);
 		} else if(urlRequest.equals("user-tickets-disliked")) {
