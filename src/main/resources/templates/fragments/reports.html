@@ -18,7 +18,7 @@
                     <img th:src="@{/images/users-icon.png}" />
                 </div>
                 <div class="col-md-7 report-description">
-                    <h5>Top 20 Users ordered by reputation (total vote on their entries).</h5>
+                    <h5 th:text="#{report.top.users}">Top 20 Users ordered by reputation (total vote on their entries).</h5>
                 </div>
                 <div class="row">
                     <div class="col-md-3 lang-and-btn-group" style="text-align: right;">
@@ -49,7 +49,7 @@
                         <small>
                             <a th:href="@{/download(request=top-users)}">
                                 <span class="glyphicon glyphicon-download-alt"></span>
-                                Download
+                                <span th:text="#{report.download.link}">Download</span>
                             </a>
                         </small>
                     </div>
@@ -65,7 +65,7 @@
                     <img th:src="@{/images/top-entries.png}" />
                 </div>
                 <div class="col-md-7 report-description">
-                    <h5>Top 20 entries for selected language, based on reputation.</h5>
+                    <h5 th:text="#{report.top.entries}">Top 20 entries for selected language, based on reputation.</h5>
                 </div>
                 <form th:action="@{/download}" id="form-entries">
                 	<div class="row">
@@ -93,7 +93,7 @@
 	                        <small>
 	                            <a href="#" id="download-entries" type="submit">
 	                                <span class="glyphicon glyphicon-download-alt"></span>
-	                                Download
+	                                <span th:text="#{report.download.link}">Download</span>
 	                            </a>
 	                        </small>
 	                    </div>
@@ -135,16 +135,16 @@
                     <img th:src="@{/images/user-ban-report.png}" />
                 </div>
                 <div class="col-md-7 report-description">
-                    <h5>Banned users.</h5>
+                    <h5 th:text="#{report.banned.users}">Banned users.</h5>
                 </div>
                 <div class="row">
                     <div class="col-md-3 lang-and-btn-group">
                         <!-- Button Group -->
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-primary">All</button>
-                            <button type="button" class="btn btn-sm btn-primary">Login</button>
-                            <button type="button" class="btn btn-sm btn-primary">Adding</button>
-                            <button type="button" class="btn btn-sm btn-primary">Voting</button>
+                            <button th:text="#{report.btn.all}" type="button" class="btn btn-sm btn-primary">All</button>
+                            <button th:text="#{report.btn.login}" type="button" class="btn btn-sm btn-primary">Login</button>
+                            <button th:text="#{report.btn.adding}" type="button" class="btn btn-sm btn-primary">Adding</button>
+                            <button th:text="#{report.btn.voting}" type="button" class="btn btn-sm btn-primary">Voting</button>
                         </div>
                         <!-- Button Group End -->
                     </div>
@@ -152,7 +152,7 @@
                         <small>
                             <a th:href="@{/download(request=banned-users)}">
                                 <span class="glyphicon glyphicon-download-alt"></span>
-                                Download
+                                <span th:text="#{report.download.link}">Download</span>
                             </a>
                         </small>
                     </div>
@@ -168,13 +168,13 @@
                     <img th:src="@{/images/pie-chart.png}" />
                 </div>
                 <div class="col-md-7 report-description">
-                    <h5>General statistic of application. How many entries for which language.</h5>
+                    <h5 th:text="#{report.general.statistic}">General statistic of application. How many entries for which language.</h5>
                 </div>
                 <div class="col-md-3 download-report">
                     <small>
                         <a th:href="@{/download(request=statistic)}">
                             <span class="glyphicon glyphicon-download-alt"></span>
-                            Download
+                            <span th:text="#{report.download.link}">Download</span>
                         </a>
                     </small>
                 </div>
