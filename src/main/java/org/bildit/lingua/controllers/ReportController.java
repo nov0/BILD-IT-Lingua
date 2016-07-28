@@ -37,8 +37,6 @@ public class ReportController {
 			@RequestParam("request") String downloadRequest, 
 			@RequestParam(value="languageRequest", required=false) String languageRequest) throws IOException {
 		
-		languageRequest = "English"; // dok se ne popravi jezik u reports.html-u
-		
 		List<?> records = null;
 		
 		String fileName = "";

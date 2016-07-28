@@ -82,7 +82,7 @@
 											<span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu lingua-language select-language" onclick="showNotificationTicketsLanguageChange()">
-											<li th:each="language : ${languages}">
+											<li th:each="language : ${session.languages}">
 												<a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
 											</li>
 										</ul>
