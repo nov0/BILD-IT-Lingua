@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.bildit.lingua.model.Ticket;
+import org.bildit.lingua.model.User;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.DefaultPieDataset;
@@ -51,7 +52,7 @@ public class GeneratePdf {
 			} else if("top-entries".equals(downloadRequest)) {
 				createTableTopEntries(document, records);
 			} else if("banned-users".equals(downloadRequest)) {
-				// invoked method for banned users here
+				createTableBannedUsers(document, records);
 			} else if("statistic".equals(downloadRequest)) {
 				createPieChart(document, records, writer);
 			}
@@ -164,6 +165,82 @@ public class GeneratePdf {
 			table.addCell(String.valueOf(tickets.get(i).getTicketVotes().getLikes()));
 			table.addCell(String.valueOf(tickets.get(i).getTicketVotes().getDislikes()));
 			table.addCell(tickets.get(i).getLocalDateTime().format(formatter));
+		}
+		
+		document.add(table);
+	}
+	
+	/**
+	 * @author Mladen Todorovic
+	 * @param document
+	 * @param records
+	 * @throws DocumentException
+	 */
+	@SuppressWarnings("unchecked")
+	public static void createTableBannedUsers(Document document, List<?> records) throws DocumentException {
+		
+		List<User> users = (List<User>) records;
+		
+		int numberOfRecords = 20;
+		
+		if(users.size() < 20) {
+			numberOfRecords = users.size();
+		}
+		
+		Paragraph paragraph = new Paragraph();
+		createEmptyLine(paragraph, 2);
+		document.add(paragraph);
+		
+		PdfPTable table = new PdfPTable(7);
+		table.setWidths(new int[] {40, 150, 100, 100, 60, 60, 60});
+		
+		PdfPCell cell = new PdfPCell(new Phrase("#", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("User", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Domestic Language", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Learning Language", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Total Likes", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Total Dislikes", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		
+		cell = new PdfPCell(new Phrase("Total Tickets", TABLE_HEADER));
+		cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+		cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+		table.addCell(cell);
+		table.setHeaderRows(1);
+		
+		for(int i = 0; i < numberOfRecords; i++) {
+			table.setWidthPercentage(100);
+			table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+			table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+			table.addCell(String.valueOf(i + 1));
+			table.addCell(users.get(i).getFirstName() + " " + users.get(i).getLastName());
+			table.addCell(users.get(i).getDomesticLanguage().getLanguageTitle());
+			table.addCell(users.get(i).getForeignLanguage().getLanguageTitle());
+			table.addCell(String.valueOf(users.get(i).sumOfAllUserTicketsLikes()));
+			table.addCell(String.valueOf(users.get(i).sumOfAllUserTicketsDislikes()));
+			table.addCell(String.valueOf(users.get(i).sumOfAllUserTickets()));
 		}
 		
 		document.add(table);
