@@ -38,7 +38,7 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	Page<Ticket> findAllByEditedTrueAndDeactivatedIsNull(Pageable pageable);
 	
 	/** @author Novislav Sekulic */
-	Page<Ticket> findAll(Pageable pageable);
+	Page<Ticket> findAllByOrderByLocalDateTimeDesc(Pageable pageable);
 	
 	/** @author Novislav Sekulic */
 	Page<Ticket> findAllByDeactivatedNotNull(Pageable pageable);
