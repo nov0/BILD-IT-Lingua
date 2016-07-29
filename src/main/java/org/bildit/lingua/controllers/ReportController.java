@@ -48,7 +48,7 @@ public class ReportController {
 			fileName = "Top-20-Users-Ordered-by-" + ("all".equals(languageRequest) ? "" : languageRequest + "-Language-And") + "-Reputation.pdf";
 			records = prepareListOfTopUsers(languageRequest);
 		} else if("top-entries".equals(downloadRequest)) {
-			fileName = "Top-20-entries-for-selected-language-based-on-reputation.pdf";
+			fileName = "Top-20-entries-for-" + languageRequest + "-language-based-on-reputation.pdf";
 			records = reportService.getTopEntries(languageRequest);
 		} else if("banned-users".equals(downloadRequest)) {
 			if ("all".equals(bannedUsers)) {
