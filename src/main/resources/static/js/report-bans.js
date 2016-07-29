@@ -1,5 +1,6 @@
 /**
  * @author Mladen Todorovic
+ * @author Novislav Sekulic
  */
 $(document).ready (function() {
 	
@@ -12,12 +13,21 @@ $(document).ready (function() {
 	});
 	
 	$("#download-banned-users").click(function(event) {
-		
 		event.preventDefault();
-		var message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
 		$("#form-banned-users").submit();
-		showNotification(message, "success", "glyphicon glyphicon-ok");
+		showMessageDownloadReport();
 		
 	});
+	
+	$(".dropdown-language-select").click(function() {
+		$(".selected-language-users").text(this.innerHTML);
+		$("#input-language-users").attr("value", this.innerHTML);
+	}); // end click .dropdown-language-select
+	
+	$("#download-users").click(function(evnt) {
+		evnt.preventDefault();
+		$("#form-users").submit();
+		showMessageDownloadReport();
+	}); // end click #download-users
 	
 });
