@@ -163,10 +163,10 @@
      				<script type="text/javascript" th:src="@{/js/load-ticket-admin.js}"></script>                    
                 </div>
                 <div id="reports" class="tab-pane fade">
-                
                 	<!-- Include Admin Reports - page -->
                     <div th:replace="fragments/reports :: reports">...</div>
-                    
+                    <!-- Import JavaScript for ban-reports -->
+                    <script type="text/javascript" th:src="@{/js/report-bans.js}"></script>  
                 </div>
             </div>
             

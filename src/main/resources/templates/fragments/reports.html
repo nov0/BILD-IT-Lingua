@@ -3,7 +3,7 @@
 	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Reports</title>
 </head>
 <body>
 
@@ -137,26 +137,30 @@
                 <div class="col-md-7 report-description">
                     <h5 th:text="#{report.banned.users}">Banned users.</h5>
                 </div>
-                <div class="row">
-                    <div class="col-md-3 lang-and-btn-group">
-                        <!-- Button Group -->
-                        <div class="btn-group">
-                            <button th:text="#{report.btn.all}" type="button" class="btn btn-sm btn-primary">All</button>
-                            <button th:text="#{report.btn.login}" type="button" class="btn btn-sm btn-primary">Login</button>
-                            <button th:text="#{report.btn.adding}" type="button" class="btn btn-sm btn-primary">Adding</button>
-                            <button th:text="#{report.btn.voting}" type="button" class="btn btn-sm btn-primary">Voting</button>
-                        </div>
-                        <!-- Button Group End -->
-                    </div>
-                    <div class="col-md-3 download-report">
-                        <small>
-                            <a th:href="@{/download(request=banned-users)}">
-                                <span class="glyphicon glyphicon-download-alt"></span>
-                                <span th:text="#{report.download.link}">Download</span>
-                            </a>
-                        </small>
-                    </div>
-                </div>
+                <form th:action="@{/download}" id="form-banned-users">
+	                <div class="row">
+	                    <div class="col-md-3 lang-and-btn-group">
+	                    	<!-- Button Group -->
+	                        <div class="btn-group">
+	                        	<button th:text="#{report.btn.all}" type="button" class="btn btn-sm btn-primary ban-user" id="all">All</button>
+	                            <button th:text="#{report.btn.login}" type="button" class="btn btn-sm btn-primary ban-user" id="login">Login</button>
+	                            <button th:text="#{report.btn.adding}" type="button" class="btn btn-sm btn-primary ban-user" id="adding">Adding</button>
+	                            <button th:text="#{report.btn.voting}" type="button" class="btn btn-sm btn-primary ban-user" id="voting">Voting</button>
+	                        </div>
+							<!-- Button Group End -->
+	                    </div>
+	                    <input type="hidden" th:value="banned-users" name="request" />
+	                    <input type="hidden" value="" id="banned-users-id" name="bannedUsers" />
+	                    <div class="col-md-3 download-report">
+	                        <small>
+	                             <a href="#" id="download-banned-users" type="submit">
+	                                <span class="glyphicon glyphicon-download-alt"></span>
+	                                <span th:text="#{report.download.link}">Download</span>
+	                            </a>
+	                        </small>
+	                    </div>
+	                </div>
+                </form>
             </div>
         </div>
         <!-- Banned Users End -->
@@ -181,7 +185,6 @@
             </div>
         </div>
         <!-- General Statistic End -->
-		
 	</div>
 	
 </body>
