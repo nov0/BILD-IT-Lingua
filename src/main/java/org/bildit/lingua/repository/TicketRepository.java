@@ -1,5 +1,6 @@
 package org.bildit.lingua.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.bildit.lingua.model.Language;
@@ -37,7 +38,7 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	Page<Ticket> findAllByEditedTrueAndDeactivatedIsNull(Pageable pageable);
 	
 	/** @author Novislav Sekulic */
-	Page<Ticket> findAll(Pageable pageable);
+	Page<Ticket> findAllByOrderByLocalDateTimeDesc(Pageable pageable);
 	
 	/** @author Novislav Sekulic */
 	Page<Ticket> findAllByDeactivatedNotNull(Pageable pageable);
@@ -94,10 +95,13 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	@Query("SELECT t FROM Ticket t WHERE t.learningLanguage = ?1 AND t.domesticLanguage = ?2 AND t.deactivated IS NULL ORDER BY RAND()")
 	List<Ticket> getTicketsForPractice(Language learningLanguage, Language domesticLanguage, Pageable pageable);
 	
-
 	/** @author Goran Arsenic **/
 	@Query("SELECT COUNT(t) FROM Ticket t WHERE t.learningLanguage = ?1")
 	int getNumberOfTicketsForLanguage(Language learningLanguage);
+
+	/** @author Goran Arsenic **/
+	@Query("SELECT t FROM Ticket t WHERE t.deactivated <= ?1")
+	List<Ticket> getTicketsForScheduledDelete(Date date);
 
 	/** @author Novislav Sekulic */
 	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NULL ORDER BY t.ticketVotes.dislikes DESC")
@@ -110,5 +114,13 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Novislav Sekulic */
 	@Query("SELECT t FROM Ticket t WHERE t.deactivated IS NOT NULL ORDER BY t.ticketVotes.dislikes DESC")
 	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT SUM(t.ticketVotes.dislikes) FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2")
+	Integer getSumOfTicketDislikesFromUserAndLanguage(User user, Language language);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT SUM(t.ticketVotes.likes) FROM Ticket t WHERE t.user = ?1 AND t.learningLanguage = ?2")
+	Integer getSumOfTicketLikesFromUserAndLanguage(User user, Language language);
 	
 }

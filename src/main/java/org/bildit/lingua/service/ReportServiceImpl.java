@@ -24,7 +24,7 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private UserRepository userRepository;
-
+	
 	/**
 	 * @author Bojan Aleksic
 	 * Top 20 Entries Selected by Language, based on Reputation
@@ -34,6 +34,43 @@ public class ReportServiceImpl implements ReportService {
 		return ticketRepository.findAllByLanguageAndTicketRating(languageRepository.getOneByLanguageTitle(languageRequest), new PageRequest(0, 20));
 	}
 	
+	/**
+	 * @author Novislav Sekulic
+	 * Get top 20 users by reputation and specified language.
+	 */
+	@Override
+	public List<User> getTopUsersByReputationAndLanguage(String languageRequest) {
+		return userRepository.findAllByTotalVotesEntriesByLanguage(languageRepository.getOneByLanguageTitle(languageRequest), new PageRequest(0, 20));
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Get top 20 users by reputation.
+	 */
+	@Override
+	public List<User> getTopUsersByReputation() {
+		return userRepository.findAllByTotalVotesEntries(new PageRequest(0, 20));
+	}
+	/**
+	 * @author Novislav Sekulic
+	 * Get sum of all dislikes from user in specified language.
+	 */
+	@Override
+	public Integer getUsersDislikesByLanguage(User user, String language) {
+		Integer sumOfDislikes = ticketRepository.getSumOfTicketDislikesFromUserAndLanguage(user, languageRepository.getOneByLanguageTitle(language));
+		return sumOfDislikes != null ? sumOfDislikes : 0;
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Get sum of all likes from user in specified language.
+	 */
+	@Override
+	public Integer getUsersLikesByLanguages(User user, String language) {
+		Integer sumOfLikes = ticketRepository.getSumOfTicketLikesFromUserAndLanguage(user, languageRepository.getOneByLanguageTitle(language));
+		return sumOfLikes != null ? sumOfLikes : 0;
+	}
+
 	/**
 	 * Method for getting data for general statistic report
 	 * 

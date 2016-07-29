@@ -11,4 +11,10 @@ public interface ReportService {
 	List<Object> getDataForPieChart();
 	List<User> getBannedUsers(String bannedUsers);
 	
+	List<User> getTopUsersByReputationAndLanguage(String languageRequest);
+	List<User> getTopUsersByReputation();
+	
+	Integer getUsersDislikesByLanguage(User user, String language);
+	Integer getUsersLikesByLanguages(User user, String language);
+	
 }

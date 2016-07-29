@@ -146,4 +146,12 @@ public interface UserRepository extends BaseRepository <User, Long> {
 			+ "AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
 	List<User> findByAllBansAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
+	/** @author Novislav Sekulic */
+	@Query("SELECT DISTINCT u FROM User u left join u.tickets t WHERE t.learningLanguage = ?1 AND t.user = u GROUP BY t.ticketVotes ORDER BY SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) DESC") 
+	List<User> findAllByTotalVotesEntriesByLanguage(Language language, Pageable pageable);
+	
+	/** @author Novislav Sekulic */
+	@Query("SELECT DISTINCT u FROM User u left join u.tickets t WHERE t.user = u GROUP BY t.ticketVotes ORDER BY SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) DESC") 
+	List<User> findAllByTotalVotesEntries(Pageable pageable);
+	
 }

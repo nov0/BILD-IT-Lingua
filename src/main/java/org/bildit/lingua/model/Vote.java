@@ -27,7 +27,7 @@ public class Vote extends BaseEntity {
 	private int likes;
 	private int dislikes;
 	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinTable(name="votes_users", 
 	   joinColumns=@JoinColumn(name="vote_id"),
 	   inverseJoinColumns=@JoinColumn(name="user_id"))

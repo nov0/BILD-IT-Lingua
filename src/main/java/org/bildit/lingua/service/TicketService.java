@@ -20,6 +20,7 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	Page<Ticket> getAllDeactivatedTickets(Pageable pageable);
 	Page<Ticket> getAllTicketOrderedByLike(Pageable pageable);
 	Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable);
+	Page<Ticket> findAllOrderByDislike(Pageable pageable);
 	
 	Ticket saveTicket(Ticket ticket, String username);
 	

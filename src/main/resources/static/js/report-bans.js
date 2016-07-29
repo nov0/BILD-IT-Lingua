@@ -3,10 +3,10 @@
  */
 $(document).ready (function() {
 	
-	$(".btn-primary").click(function() {
+	$(".ban-user").click(function() {
 		
 		$(this).addClass('active').siblings().removeClass('active');
-		var activeId = $('.btn.active').attr('id');
+		var activeId = $('.ban-user.active').attr('id');
 		$("#banned-users-id").attr("value", activeId);
 		
 	});

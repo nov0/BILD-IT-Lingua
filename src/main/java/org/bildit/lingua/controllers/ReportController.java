@@ -4,12 +4,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.bildit.lingua.model.User;
 import org.bildit.lingua.pdf.helper.GeneratePdf;
 import org.bildit.lingua.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +24,7 @@ public class ReportController {
 	
 	@Autowired
 	private ReportService reportService;
-
+	
 	/**
 	 * @author Bojan Aleksic
 	 * @param request
@@ -35,33 +37,32 @@ public class ReportController {
 	public void downloadPdf(HttpServletRequest request, 
 			HttpServletResponse response, 
 			@RequestParam("request") String downloadRequest,
-			@RequestParam("bannedUsers") String bannedUsers,
+			@RequestParam(value="bannedUsers", required=false) String bannedUsers,
 			@RequestParam(value="languageRequest", required=false) String languageRequest) throws IOException {
 		
-		languageRequest = "English"; // dok se ne popravi jezik u reports.html-u
-		
 		List<?> records = null;
-		
+		System.out.println(bannedUsers);
 		String fileName = "";
 		
 		if("top-users".equals(downloadRequest)) {
-			
+			fileName = "Top-20-Users-Ordered-by-" + ("all".equals(languageRequest) ? "" : languageRequest + "-Language-And") + "-Reputation.pdf";
+			records = prepareListOfTopUsers(languageRequest);
 		} else if("top-entries".equals(downloadRequest)) {
 			fileName = "Top-20-entries-for-selected-language-based-on-reputation.pdf";
 			records = reportService.getTopEntries(languageRequest);
 		} else if("banned-users".equals(downloadRequest)) {
 			if ("all".equals(bannedUsers)) {
-				fileName = "First 0-20 Banned Users by all three criteries.pdf";				
+				fileName = "First 20 Banned Users by all three criteries.pdf";				
 			} else if ("voting".equals(bannedUsers)) {
-				fileName = "First 0-20 Banned Users by Voting-Ban criteria.pdf";
+				fileName = "First 20 Banned Users by Voting-Ban criteria.pdf";
 			} else if ("adding".equals(bannedUsers)) {
-				fileName = "First 0-20 Banned Users by Adding-Ban criteria.pdf";
+				fileName = "First 20 Banned Users by Adding-Ban criteria.pdf";
 			} else if ("login".equals(bannedUsers)) {
-				fileName = "First 0-20 Banned Users by Login-Ban criteria.pdf";
+				fileName = "First 20 Banned Users by Login-Ban criteria.pdf";
 			}
 			records = reportService.getBannedUsers(bannedUsers);
 		} else if("statistic".equals(downloadRequest)) {
-			fileName = "General statistic of application.pdf";
+			fileName = "General-statistic-of-application.pdf";
 			records = reportService.getDataForPieChart();
 		}
 		
@@ -82,6 +83,42 @@ public class ReportController {
 			ex.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * @param language
+	 * @return
+	 */
+	private List<String> prepareListOfTopUsers(String language){
+		List<String> report = new ArrayList<>();
+		List<User> users = new ArrayList<>();
+		if(language.equals("all")) {
+			users =  reportService.getTopUsersByReputation();
+		} else {
+			users = reportService.getTopUsersByReputationAndLanguage(language);
+		}
+		String reportStatus = "";
+		
+		int likes = 0;
+		int dislikes = 0;
+		
+		for(User u : users) {
+			reportStatus += u.getFirstName() + " " + u.getLastName() + "_";
+			reportStatus += u.getDomesticLanguage().getLanguageTitle() + "_" + u.getForeignLanguage().getLanguageTitle() + "_";
+			if(language.equals("all")) {
+				likes = u.sumOfAllUserTicketsLikes();
+				dislikes = u.sumOfAllUserTicketsDislikes();
+			} else {
+				likes = reportService.getUsersLikesByLanguages(u, language);
+				dislikes = reportService.getUsersDislikesByLanguage(u, language);
+			}
+			reportStatus += likes + "_" + dislikes + "_" + (likes - dislikes);
+			report.add(reportStatus);
+			reportStatus = "";
+		}
+		
+		return report;
 	}
 	
 }

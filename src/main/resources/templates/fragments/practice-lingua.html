@@ -31,7 +31,7 @@
 							class="caret"></span>
 					</button>
 					<ul class="dropdown-menu lingua-language select-language">
-						<li th:each="language : ${languages}"><a id="selected-lang"
+						<li th:each="language : ${session.languages}"><a id="selected-lang"
 							href="#" th:text="${language}">Language</a></li>
 					</ul>
 				</div>

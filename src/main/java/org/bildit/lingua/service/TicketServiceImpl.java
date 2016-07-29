@@ -295,6 +295,15 @@ public class TicketServiceImpl implements TicketService {
 	
 	/**
 	 * @author Novislav Sekulic
+	 * Return all tickets sorted by date.
+	 */
+	@Override
+	public Page<Ticket> findAllOrderByDislike(Pageable pageable) {
+		return ticketRepository.findAllByOrderByLocalDateTimeDesc(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
 	 * Return all liked sorted by likes.
 	 */
 	@Override
