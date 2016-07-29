@@ -45,7 +45,6 @@ public class ReportController {
 		String fileName = "";
 		
 		if("top-users".equals(downloadRequest)) {
-			System.out.println("Language: " + languageRequest);
 			if(languageRequest.equals("Svi")) {
 				languageRequest = "All";
 			}
