@@ -20,16 +20,13 @@
                 <div class="col-md-7 report-description">
                     <h5 th:text="#{report.top.users}">Top 20 Users ordered by reputation (total vote on their entries).</h5>
                 </div>
-                <form th:action="@{/download}" id="form-users" >
+                <form th:action="@{/download}" id="form-users">
                 <div class="row">
                     <div class="col-md-3 lang-and-btn-group" style="text-align: right;">
-                        <!-- Language -->
 						<div class="dropdown">
 	                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-users"> 
 	                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
-	                                <span th:text="#{tab.choose.language}" class="tab-btn-group selected-language-users"> 
-	                                	&nbsp; Select Language
-	                                </span> 
+	                                <span th:text="#{tab.choose.language}" class="tab-btn-group selected-language-users">Language</span> 
 	                                <span class="caret"></span>
 	                            </button>
 	                            <ul class="dropdown-menu lingua-language select-language-users lang-report" aria-labelledby="top-users">
@@ -39,7 +36,6 @@
 	                                </li>
 	                            </ul>
 	                        </div>
-                        <!-- Language End -->
                     </div>
                     <input type="hidden" th:value="top-users" name="request" />
                 	<input type="hidden" value="All" id="input-language-users" name="languageRequest" />
@@ -55,20 +51,18 @@
               </form>
             </div>
             <script type="text/javascript" th:inline="javascript">
-            /*<![CDATA[*/
             	$(document).ready(function() {
-            		
             		$(".dropdown-language-select").click(function() {
             			$(".selected-language-users").text(this.innerHTML);
             			$("#input-language-users").attr("value", this.innerHTML);
-            		}); // end click
+            		}); // end click .dropdown-language-select
             		
             		$("#download-users").click(function() {
             			$("#form-users").submit();
-            		});
+            			showMessageDownloadReport();
+            		}); // end click #download-users
             	});
-            /*]]>*/
-            </script>>
+            </script>
         </div>
         <!-- Top 20 Users End -->
         
@@ -130,9 +124,8 @@
             				message = /*[[#{error.entries.select.language}]]*/ 'Please select language.'; 
             				showNotification(message, "danger", "glyphicon glyphicon-warning-sign");
             			} else {
-            				message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
             				$("#form-entries").submit();
-            				showNotification(message, "success", "glyphicon glyphicon-ok");
+            				showMessageDownloadReport();
             			}
             		});
             		
