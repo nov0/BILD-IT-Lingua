@@ -158,6 +158,11 @@
 					showNotification(message, colorGreen, iconOk);
 				}
 				
+				function showMessageDownloadReport() {
+					message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
+    				showNotification(message, colorGreen, iconOk);
+				}
+				
 				/**
 				 * Function for showing notification. This function is called form others functions.
 				 *
