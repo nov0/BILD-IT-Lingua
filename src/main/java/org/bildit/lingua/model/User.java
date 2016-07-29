@@ -66,7 +66,12 @@ public class User extends BaseUser {
 		this.addingBan = addingBan;
 		this.loginBan = loginBan;
 	}
-	/** Method: sum of all user's tikets votes (likes) */
+	/** Method: return total number of all user's tickets */
+	public int sumOfAllUserTickets() {
+		return this.getTickets().size();
+	}
+	
+	/** Method: return sum of all user's tikets votes (likes) */
 	public int sumOfAllUserTicketsLikes() {
 		int sum = 0;
 		for (Ticket ticket: this.getTickets()) {
@@ -74,7 +79,7 @@ public class User extends BaseUser {
 		}
 		return sum;
 	}
-	/** Method: sum of all user's tikets votes (dislikes) */
+	/** Method: return sum of all user's tikets votes (dislikes) */
 	public int sumOfAllUserTicketsDislikes() {
 		int sum = 0;
 		for (Ticket ticket: this.getTickets()) {

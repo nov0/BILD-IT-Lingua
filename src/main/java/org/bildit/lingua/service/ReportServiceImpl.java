@@ -24,9 +24,10 @@ public class ReportServiceImpl implements ReportService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
 	/**
 	 * @author Bojan Aleksic
-	 * Top 20 Entries Selected by Language, baseded on Reputation
+	 * Top 20 Entries Selected by Language, based on Reputation
 	 */
 	@Override
 	public List<Ticket> getTopEntries(String languageRequest) {
@@ -88,6 +89,27 @@ public class ReportServiceImpl implements ReportService {
 		}
 		
 		return data;
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: Get banned users by all criteria
+	 * */
+	@Override
+	public List<User> getBannedUsers(String bannedUsers) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if ("all".equals(bannedUsers)) {
+			users = userRepository.findAllBannedUsers(new PageRequest(0, 20));
+		} else if ("voting".equals(bannedUsers)) {
+			users = userRepository.findAllVotingBanUsers(new PageRequest(0, 20));
+		} else if ("adding".equals(bannedUsers)) {
+			users = userRepository.findAllAddingBanUsers(new PageRequest(0, 20));
+		} else if ("login".equals(bannedUsers)) {
+			users = userRepository.findAllLoginBanUsers(new PageRequest(0, 20));
+		}
+		
+		return users;
 	}
 	
 }

@@ -36,7 +36,8 @@ public class ReportController {
 	@RequestMapping(value="/download")
 	public void downloadPdf(HttpServletRequest request, 
 			HttpServletResponse response, 
-			@RequestParam("request") String downloadRequest, 
+			@RequestParam("request") String downloadRequest,
+			@RequestParam(value="bannedUsers", required=false) String bannedUsers,
 			@RequestParam(value="languageRequest", required=false) String languageRequest) throws IOException {
 		
 		List<?> records = null;
@@ -50,8 +51,16 @@ public class ReportController {
 			fileName = "Top-20-entries-for-selected-language-based-on-reputation.pdf";
 			records = reportService.getTopEntries(languageRequest);
 		} else if("banned-users".equals(downloadRequest)) {
-			fileName = "Banned-users.pdf";
-			// implement banned users here
+			if ("all".equals(bannedUsers)) {
+				fileName = "First 20 Banned Users by all three criteries.pdf";				
+			} else if ("voting".equals(bannedUsers)) {
+				fileName = "First 20 Banned Users by Voting-Ban criteria.pdf";
+			} else if ("adding".equals(bannedUsers)) {
+				fileName = "First 20 Banned Users by Adding-Ban criteria.pdf";
+			} else if ("login".equals(bannedUsers)) {
+				fileName = "First 20 Banned Users by Login-Ban criteria.pdf";
+			}
+			records = reportService.getBannedUsers(bannedUsers);
 		} else if("statistic".equals(downloadRequest)) {
 			fileName = "General-statistic-of-application.pdf";
 			records = reportService.getDataForPieChart();

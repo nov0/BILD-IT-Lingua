@@ -9,6 +9,7 @@ public interface ReportService {
 
 	List<Ticket> getTopEntries(String languageRequest);
 	List<Object> getDataForPieChart();
+	List<User> getBannedUsers(String bannedUsers);
 	
 	List<User> getTopUsersByReputationAndLanguage(String languageRequest);
 	List<User> getTopUsersByReputation();
