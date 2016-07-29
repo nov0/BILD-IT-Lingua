@@ -50,19 +50,6 @@
                 </div>
               </form>
             </div>
-            <script type="text/javascript" th:inline="javascript">
-            	$(document).ready(function() {
-            		$(".dropdown-language-select").click(function() {
-            			$(".selected-language-users").text(this.innerHTML);
-            			$("#input-language-users").attr("value", this.innerHTML);
-            		}); // end click .dropdown-language-select
-            		
-            		$("#download-users").click(function() {
-            			$("#form-users").submit();
-            			showMessageDownloadReport();
-            		}); // end click #download-users
-            	});
-            </script>
         </div>
         <!-- Top 20 Users End -->
         
