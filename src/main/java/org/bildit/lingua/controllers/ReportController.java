@@ -62,6 +62,8 @@ public class ReportController {
 				fileName = "First 20 Banned Users by Adding-Ban criteria.pdf";
 			} else if ("login".equals(bannedUsers)) {
 				fileName = "First 20 Banned Users by Login-Ban criteria.pdf";
+			} else {
+				fileName = "First 20 Banned Users by all three criteries.pdf";	
 			}
 			records = reportService.getBannedUsers(bannedUsers);
 		} else if("statistic".equals(downloadRequest)) {
