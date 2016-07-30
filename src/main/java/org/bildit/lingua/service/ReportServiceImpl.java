@@ -107,6 +107,8 @@ public class ReportServiceImpl implements ReportService {
 			users = userRepository.findAllAddingBanUsers(new PageRequest(0, 20));
 		} else if ("login".equals(bannedUsers)) {
 			users = userRepository.findAllLoginBanUsers(new PageRequest(0, 20));
+		} else {
+			users = userRepository.findAllBannedUsers(new PageRequest(0, 20));
 		}
 		
 		return users;
