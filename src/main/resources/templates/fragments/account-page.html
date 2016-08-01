@@ -146,9 +146,9 @@
     <!-- Administrator Account fragment -->
 	<div class="container" th:fragment="admin-account">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#moderate-users">Moderate Users</a></li>
-            <li><a data-toggle="tab" href="#moderate-lingua" id="moderage-lingua-tab">Moderate Lingua</a></li>
-            <li><a data-toggle="tab" href="#reports">Reports</a></li>
+            <li class="active"><a data-toggle="tab" href="#moderate-users" th:text="#{tab.moderate.users}">Moderate Users</a></li>
+            <li><a data-toggle="tab" href="#moderate-lingua" id="moderage-lingua-tab" th:text="#{tab.moderate.lingua}">Moderate Lingua</a></li>
+            <li><a data-toggle="tab" href="#reports" th:text="#{tab.reports}">Reports</a></li>
         </ul>
         <div class="lingua-container-body">
             <div class="tab-content">

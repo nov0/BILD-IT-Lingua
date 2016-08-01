@@ -45,7 +45,10 @@ public class ReportController {
 		String fileName = "";
 		
 		if("top-users".equals(downloadRequest)) {
-			fileName = "Top-20-Users-Ordered-by-" + ("all".equals(languageRequest) ? "" : languageRequest + "-Language-And") + "-Reputation.pdf";
+			if(languageRequest.equals("Svi")) {
+				languageRequest = "All";
+			}
+			fileName = "Top-20-Users-Ordered-by-" + (languageRequest.contains("All") ? "" : languageRequest + "-Language-And-") + "Reputation.pdf";
 			records = prepareListOfTopUsers(languageRequest);
 		} else if("top-entries".equals(downloadRequest)) {
 			fileName = "Top-20-entries-for-" + languageRequest + "-language-based-on-reputation.pdf";
@@ -85,7 +88,7 @@ public class ReportController {
 	private List<String> prepareListOfTopUsers(String language){
 		List<String> report = new ArrayList<>();
 		List<User> users = new ArrayList<>();
-		if(language.equals("all")) {
+		if(language.contains("All")) {
 			users =  reportService.getTopUsersByReputation();
 		} else {
 			users = reportService.getTopUsersByReputationAndLanguage(language);
@@ -98,7 +101,7 @@ public class ReportController {
 		for(User u : users) {
 			reportStatus += u.getFirstName() + " " + u.getLastName() + "_";
 			reportStatus += u.getDomesticLanguage().getLanguageTitle() + "_" + u.getForeignLanguage().getLanguageTitle() + "_";
-			if(language.equals("all")) {
+			if(language.contains("All")) {
 				likes = u.sumOfAllUserTicketsLikes();
 				dislikes = u.sumOfAllUserTicketsDislikes();
 			} else {

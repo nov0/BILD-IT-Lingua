@@ -16,26 +16,26 @@
 			<div class="col-md-4 search-user-wrapper">
 				<form th:action="@{/user-search}" method="GET">
 					<div class="form-group">
-						<input type="text" name="username" class="form-control" placeholder="Username" />
+						<input type="text" name="username" class="form-control" th:placeholder="#{form.field.username}" />
 					</div>
 					<div class="form-group">
-						<input type="text" name="firstName" class="form-control" placeholder="First Name" />
+						<input type="text" name="firstName" class="form-control" th:placeholder="#{form.field.name}" />
 					</div>
 					<div class="form-group">
-						<input type="text" name="lastName" class="form-control" placeholder="Last Name" />
+						<input type="text" name="lastName" class="form-control" th:placeholder="#{form.field.lastname}" />
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="selectedBan">
-							<option selected="selected" disabled="disabled" style="font-style: italic;">Show...</option>
-							<option th:value="allUsers">All users</option>
-							<option th:value="bannedVoting">Banned - Voting</option>
-							<option th:value="bannedAdding">Banned - Adding</option>
-							<option th:value="bannedLogin">Banned - Login</option>
+							<option selected="selected" disabled="disabled" style="font-style: italic;" th:text="#{filter.list.show}">Show...</option>
+							<option th:value="allUsers" th:text="#{filter.list.all}">All users</option>
+							<option th:value="bannedVoting" th:text="#{filter.list.banned.voting}">Banned - Voting</option>
+							<option th:value="bannedAdding" th:text="#{filter.list.banned.adding}">Banned - Adding</option>
+							<option th:value="bannedLogin" th:text="#{filter.list.banned.login}">Banned - Login</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block"
 						style="margin-top: 100px;">
-						<span class="glyphicon glyphicon-search"></span> Search
+						<span class="glyphicon glyphicon-search"></span>&nbsp;<span th:text="#{button.search}">Search</span>
 					</button>
 				</form>
 			</div>

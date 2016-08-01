@@ -66,84 +66,84 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	void updateVotingBan(boolean votingBan, Long id);
 	
 	/** @author Mladen Todorovic of all these methods below */
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.addingBan = 1 AND u.enabled = 0 ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0")
 	List<User> findAllBannedUsers(Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 ORDER BY firstName, lastName")
 	List<User> findAllVotingBanUsers(Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.addingBan = 1 ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 ORDER BY firstName, lastName")
 	List<User> findAllAddingBanUsers(Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.enabled = 0 ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 ORDER BY firstName, lastName")
 	List<User> findAllLoginBanUsers(Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.username LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.username LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByUsernameOrderByAsc(String username, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByVotingBanAndUsernameOrderByAsc(String username, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByAddingBanAndUsernameOrderByAsc(String username, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByLoginBanAndUsernameOrderByAsc(String username, Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE "
 			+ "(u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
-			+ "AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+			+ "AND u.username LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findByAllBansAndUsernameOrderByAsc(String username, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByFirstNameOrderByAsc(String firstName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByVotingBanAndFirstNameOrderByAsc(String firstName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByAddingBanAndFirstNameOrderByAsc(String firstName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByLoginBanAndFirstNameOrderByAsc(String firstName, Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE "
 			+ "(u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
-			+ "AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+			+ "AND u.firstName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findByAllBansAndFirstNameOrderByAsc(String firstName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByLastNameOrderByAsc(String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByVotingBanAndLastNameOrderByAsc(String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByAddingBanAndLastNameOrderByAsc(String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findAllByLoginBanAndLastNameOrderByAsc(String lastName, Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE "
 			+ "(u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
-			+ "AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName ASC")
+			+ "AND u.lastName LIKE CONCAT(?1, '%') ORDER BY firstName, lastName")
 	List<User> findByAllBansAndLastNameOrderByAsc(String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findAllByFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.votingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findAllByVotingBanAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.addingBan = 1 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findAllByAddingBanAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
-	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
+	@Query("SELECT u FROM User u WHERE u.enabled = 0 AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findAllByLoginBanAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE "
 			+ "(u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
-			+ "AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName ASC")
+			+ "AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findByAllBansAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
 	
 	/** @author Novislav Sekulic */

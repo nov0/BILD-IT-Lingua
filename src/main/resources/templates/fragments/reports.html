@@ -20,40 +20,35 @@
                 <div class="col-md-7 report-description">
                     <h5 th:text="#{report.top.users}">Top 20 Users ordered by reputation (total vote on their entries).</h5>
                 </div>
+                <form th:action="@{/download}" id="form-users">
                 <div class="row">
                     <div class="col-md-3 lang-and-btn-group" style="text-align: right;">
-                        <!-- Language -->
-                        <div class="dropdown">
-                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-users"> 
-                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
-                                <span th:if="${session.foreignLanguage eq null}"
-                                    th:text="#{tab.choose.language}"
-                                    class="tab-btn-group select-practice-lang"> &nbsp;
-                                    Select Language
-                                </span> 
-                                <span th:if="${session.foreignLanguage ne null}"
-                                    th:text="#{language. + ${session.foreignLanguage}}"
-                                    class="tab-btn-group select-practice-lang">
-                                </span> 
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu lingua-language select-language" aria-labelledby="top-users">
-                                <li th:each="language : ${languages}">
-                                    <a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- Language End -->
+						<div class="dropdown">
+	                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-users"> 
+	                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+	                                <span th:text="#{tab.choose.language}" class="tab-btn-group selected-language-users">Language</span> 
+	                                <span class="caret"></span>
+	                            </button>
+	                            <ul class="dropdown-menu lingua-language select-language-users lang-report" aria-labelledby="top-users">
+	                            	<li><a class="dropdown-language-select" href="#" th:text="#{report.button.all}">All</a></li>
+	                                <li th:each="language : ${session.languages}">
+	                                    <a class="dropdown-language-select" href="#" th:text="${language}">Language</a>
+	                                </li>
+	                            </ul>
+	                        </div>
                     </div>
+                    <input type="hidden" th:value="top-users" name="request" />
+                	<input type="hidden" value="All" id="input-language-users" name="languageRequest" />
                     <div class="col-md-3 download-report">
                         <small>
-                            <a th:href="@{/download(request=top-users)}">
+                            <a href="#" id="download-users" type="submit" >
                                 <span class="glyphicon glyphicon-download-alt"></span>
                                 <span th:text="#{report.download.link}">Download</span>
                             </a>
                         </small>
                     </div>
                 </div>
+              </form>
             </div>
         </div>
         <!-- Top 20 Users End -->
@@ -108,7 +103,7 @@
 						$(".selected-language-entries").text(this.innerHTML);
 						$("#language-entries").attr("value", this.innerHTML);
             		});
-            		
+            		            		
             		$("#download-entries").click(function(event) {
             			event.preventDefault();
             			var message;
@@ -116,9 +111,8 @@
             				message = /*[[#{error.entries.select.language}]]*/ 'Please select language.'; 
             				showNotification(message, "danger", "glyphicon glyphicon-warning-sign");
             			} else {
-            				message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
             				$("#form-entries").submit();
-            				showNotification(message, "success", "glyphicon glyphicon-ok");
+            				showMessageDownloadReport();
             			}
             		});
             		
