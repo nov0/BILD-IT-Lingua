@@ -16,13 +16,13 @@
 			<div class="col-md-4 search-user-wrapper">
 				<form th:action="@{/user-search}" method="GET">
 					<div class="form-group">
-						<input type="text" name="username" class="form-control" placeholder="Username" />
+						<input type="text" name="username" class="form-control" th:placeholder="#{form.field.username}" />
 					</div>
 					<div class="form-group">
-						<input type="text" name="firstName" class="form-control" placeholder="First Name" />
+						<input type="text" name="firstName" class="form-control" th:placeholder="#{form.field.name}" />
 					</div>
 					<div class="form-group">
-						<input type="text" name="lastName" class="form-control" placeholder="Last Name" />
+						<input type="text" name="lastName" class="form-control" th:placeholder="#{form.field.lastname}" />
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="selectedBan">
@@ -35,7 +35,7 @@
 					</div>
 					<button type="submit" class="btn btn-primary btn-block"
 						style="margin-top: 100px;">
-						<span class="glyphicon glyphicon-search"></span> Search
+						<span class="glyphicon glyphicon-search"></span>&nbsp;<span th:text="#{button.search}">Search</span>
 					</button>
 				</form>
 			</div>
