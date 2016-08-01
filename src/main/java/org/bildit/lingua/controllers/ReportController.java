@@ -41,7 +41,7 @@ public class ReportController {
 			@RequestParam(value="languageRequest", required=false) String languageRequest) throws IOException {
 		
 		List<?> records = null;
-		System.out.println(bannedUsers);
+		
 		String fileName = "";
 		
 		if("top-users".equals(downloadRequest)) {
