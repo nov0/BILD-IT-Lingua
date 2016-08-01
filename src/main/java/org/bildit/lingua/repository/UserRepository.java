@@ -66,7 +66,9 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	void updateVotingBan(boolean votingBan, Long id);
 	
 	/** @author Mladen Todorovic of all these methods below */
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0")
+	@Query("SELECT u FROM User u WHERE (u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
+			+ "ORDER BY IFNULL(u.votingBan, 0) DESC, u.votingBan ASC, "
+			+ "IFNULL(u.addingBan, 0) DESC, u.addingBan ASC, IFNULL(1, 0) DESC, u.enabled ASC")
 	List<User> findAllBannedUsers(Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE u.votingBan = 1 ORDER BY firstName, lastName")
