@@ -54,7 +54,11 @@ public class ReportController {
 			fileName = "Top-20-entries-for-" + languageRequest + "-language-based-on-reputation.pdf";
 			records = reportService.getTopEntries(languageRequest);
 		} else if("banned-users".equals(downloadRequest)) {
-			fileName = "First-20-Banned-Users-by-" + bannedUsers + "-Ban-Criteria.pdf";
+			if (!bannedUsers.isEmpty()) {
+				fileName = "First-20-Banned-Users-by-" + bannedUsers + "-Ban-Criteria.pdf";			
+			} else {
+				fileName = "First-20-Banned-Users-by-All-Ban-Criteria.pdf";	
+			}
 			records = reportService.getBannedUsers(bannedUsers);
 		} else if("statistic".equals(downloadRequest)) {
 			fileName = "General-statistic-of-application.pdf";
