@@ -26,11 +26,11 @@
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="selectedBan">
-							<option selected="selected" disabled="disabled" style="font-style: italic;">Show...</option>
-							<option th:value="allUsers">All users</option>
-							<option th:value="bannedVoting">Banned - Voting</option>
-							<option th:value="bannedAdding">Banned - Adding</option>
-							<option th:value="bannedLogin">Banned - Login</option>
+							<option selected="selected" disabled="disabled" style="font-style: italic;" th:text="#{filter.list.show}">Show...</option>
+							<option th:value="allUsers" th:text="#{filter.list.all}">All users</option>
+							<option th:value="bannedVoting" th:text="#{filter.list.banned.voting}">Banned - Voting</option>
+							<option th:value="bannedAdding" th:text="#{filter.list.banned.adding}">Banned - Adding</option>
+							<option th:value="bannedLogin" th:text="#{filter.list.banned.login}">Banned - Login</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block"
