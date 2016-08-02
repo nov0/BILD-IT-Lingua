@@ -17,4 +17,6 @@ public interface ReportService {
 	Integer getUsersDislikesByLanguage(User user, String language);
 	Integer getUsersLikesByLanguages(User user, String language);
 	
+	List<String> prepareListOfTopUsers(String language);
+	
 }
