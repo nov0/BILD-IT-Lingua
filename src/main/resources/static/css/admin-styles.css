@@ -35,3 +35,13 @@
 	right: 0px;
 	float: right;
 }
+
+/* Admin Registration */
+.form-control-lg {
+    height: 40px;
+    border-radius: 0px;
+}
+
+.registration-fields {
+    margin-left: 50px;
+}

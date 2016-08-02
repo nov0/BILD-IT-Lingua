@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Register Admin</title>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<div th:fragment="register-admin" id="register-admin">
+		<div class="container rowpadding container-reg-admin">
+			<div class="row">
+				<form role="form" action="#" th:action="@{/register-admin}"
+					th:object="${baseUser}" method="post" id="register">
+					<div class="col-md-10" style="background-color: #f1f1f1; padding-top: 40px; margin-left: 30px;">
+						<div class="row" style="">
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.name}" for="firstname">First name:</label>:
+                                    <input type="text" th:field="*{firstName}"
+								        th:placeholder="#{form.field.name}" class="form-control form-control-lg" id="firstname" />
+                                        <label th:if="${#fields.hasErrors('firstName')}"
+								            th:errors="*{firstName}" class="error">
+                                        </label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.lastname}" for="lastname">Last name:</label>:
+                                    <input type="text" th:field="*{lastName}"
+                                        th:placeholder="#{form.field.lastname}" class="form-control form-control-lg"
+                                        id="lastname" /> <label
+                                        th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"
+                                        class="error"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.username}" for="username">Username:</label>:
+                                    <input type="text" th:field="*{username}"
+                                        th:placeholder="#{form.field.username}" class="form-control form-control-lg"
+                                        id='username' /> <label th:if="${#fields.hasErrors('username')}"
+                                        th:errors="*{username}" class="error"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.password}" for="password">Password:</label>:
+                                    <input type="password" th:field="*{password}"
+                                        th:placeholder="#{form.field.password}" class="form-control form-control-lg"
+                                        id="password" /> <label
+                                        th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                        class="error"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.passwordre}" for="re-pass">Repeat password:</label>:
+                                    <input type="password" name="repeatpassword"
+                                        th:placeholder="#{form.field.passwordre}" class="form-control form-control-lg"
+                                        id="re-pass" /> <label th:if="${repassword}"
+                                        th:text="#{form.invalid.password.match}" class="error"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-5 registration-fields">
+                                <div class="form-group">
+                                    <label th:text="#{form.field.email}" for="email">Email:</label>:
+                                    <input type="text" th:field="*{email}"
+                                        th:placeholder="#{form.field.email}" class="form-control form-control-lg"
+                                        id="email" /> <label th:if="${#fields.hasErrors('email')}"
+                                        th:errors="*{email}" class="error"></label>
+                                </div>
+                            </div>
+                            <div class="col-md-11" style="margin-left: 20px; margin-top: 10px;">
+                                <div class="form-group" style="float: right; padding-left: 20px;">
+                                    <button type="submit"
+                                        class="btn btn-primary form-control" id="register-button">
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                        <span th:text="#{form.field.button.register}">Register</span>
+                                    </button>
+                                </div>
+                                <div class="form-group" style="float: right;">
+                                    <a class="btn btn-danger form-control" href="/" th:href="@{/}">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        <span th:text="#{form.field.button.cancel}">Cancel</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
