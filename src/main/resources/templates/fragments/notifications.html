@@ -159,8 +159,10 @@
 				}
 				
 				function showMessageDownloadReport() {
-					message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
-    				showNotification(message, colorGreen, iconOk);
+					setTimeout(function() {
+						message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
+    					showNotification(message, colorGreen, iconOk);
+					}, 2000);
 				}
 				
 				/**

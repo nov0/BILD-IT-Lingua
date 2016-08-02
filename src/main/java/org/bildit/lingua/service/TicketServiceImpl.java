@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 @Service
 public class TicketServiceImpl implements TicketService {
@@ -318,6 +319,37 @@ public class TicketServiceImpl implements TicketService {
 	@Override
 	public Page<Ticket> getAllDeactivatedSortedByDislike(Pageable pageable) {
 		return ticketRepository.getAllDeactivatedSortedByDislike(pageable);
+	}
+	
+	/**
+	 * @author Novislav Sekulic
+	 * Method for showing ticket for admin.
+	 */
+	@Override
+	public ModelAndView getTicketsForAdmin(
+			ModelAndView model, String urlRequest, Integer page, Pageable pageable) {
+		
+		Page<Ticket> tickets = null;
+		
+		if(urlRequest.equals("user-tickets-all")) {
+			tickets = findAllOrderByDislike(pageable);
+		} else if (urlRequest.equals("user-tickets-liked")) {
+			tickets = getAllTicketOrderedByLike(pageable);
+		} else if(urlRequest.equals("user-tickets-disliked")) {
+			tickets = getAllTicketsSortedByDislike(pageable);
+		} else if (urlRequest.equals("user-ticket-moderated")){
+			tickets = getAllModeratedTickets(pageable);
+		} else if(urlRequest.equals("user-ticket-deleted")){
+			tickets = getAllDeactivatedSortedByDislike(pageable);
+		}
+				
+
+		if(tickets != null && tickets.getContent().size() > 0) {
+			model.addObject("tickets", tickets);
+			model.addObject("totalPages", tickets.getTotalPages());
+		}
+		
+		return model;
 	}
 
 	
