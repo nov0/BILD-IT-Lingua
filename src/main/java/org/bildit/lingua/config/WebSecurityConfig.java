@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.antMatchers("/logout").authenticated()
 			.antMatchers("/register").authenticated()
 			.antMatchers("/register-admin").authenticated()
+			.antMatchers("/fragments/register-new-admin.html").authenticated()
 			.antMatchers("/registration-page").authenticated()
 			.antMatchers("/ticket-all").authenticated()
 			.antMatchers("/ticket-active").authenticated()
