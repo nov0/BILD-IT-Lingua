@@ -1,5 +1,6 @@
 package org.bildit.lingua.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.bildit.lingua.model.Language;
@@ -24,7 +25,7 @@ public interface TicketService extends BaseService<Ticket, Long> {
 	
 	Ticket saveTicket(Ticket ticket, String username);
 	
-	void updateTicket(String textDomestic, String textForeign, String category, Long ticketId);
+	void updateTicket(String textDomestic, String textForeign, String category, LocalDateTime localDateTime, Long ticketId);
 	
 	String addLikeToTicket(Long id, String username);
 	String addDislikeToTicket(Long id, String username);
