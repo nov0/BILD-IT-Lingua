@@ -4,14 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.bildit.lingua.model.User;
 import org.bildit.lingua.pdf.helper.GeneratePdf;
 import org.bildit.lingua.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +47,7 @@ public class ReportController {
 				languageRequest = "All";
 			}
 			fileName = "Top-20-Users-Ordered-by-" + (languageRequest.contains("All") ? "" : languageRequest + "-Language-And-") + "Reputation.pdf";
-			records = prepareListOfTopUsers(languageRequest);
+			records = reportService.prepareListOfTopUsers(languageRequest);
 		} else if("top-entries".equals(downloadRequest)) {
 			fileName = "Top-20-entries-for-" + languageRequest + "-language-based-on-reputation.pdf";
 			records = reportService.getTopEntries(languageRequest);
@@ -82,42 +80,6 @@ public class ReportController {
 			ex.printStackTrace();
 		}
 		
-	}
-	
-	/**
-	 * @author Novislav Sekulic
-	 * @param language
-	 * @return
-	 */
-	private List<String> prepareListOfTopUsers(String language){
-		List<String> report = new ArrayList<>();
-		List<User> users = new ArrayList<>();
-		if(language.contains("All")) {
-			users =  reportService.getTopUsersByReputation();
-		} else {
-			users = reportService.getTopUsersByReputationAndLanguage(language);
-		}
-		String reportStatus = "";
-		
-		int likes = 0;
-		int dislikes = 0;
-		
-		for(User u : users) {
-			reportStatus += u.getFirstName() + " " + u.getLastName() + "_";
-			reportStatus += u.getDomesticLanguage().getLanguageTitle() + "_" + u.getForeignLanguage().getLanguageTitle() + "_";
-			if(language.contains("All")) {
-				likes = u.sumOfAllUserTicketsLikes();
-				dislikes = u.sumOfAllUserTicketsDislikes();
-			} else {
-				likes = reportService.getUsersLikesByLanguages(u, language);
-				dislikes = reportService.getUsersDislikesByLanguage(u, language);
-			}
-			reportStatus += likes + "_" + dislikes + "_" + (likes - dislikes);
-			report.add(reportStatus);
-			reportStatus = "";
-		}
-		
-		return report;
 	}
 	
 }
