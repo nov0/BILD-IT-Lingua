@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-md-3 download-report">
                     <small>
-                        <a th:href="@{/download(request=statistic)}">
+                        <a th:href="@{/download(request=statistic)}" onclick="showMessageDownloadReport()">
                             <span class="glyphicon glyphicon-download-alt"></span>
                             <span th:text="#{report.download.link}">Download</span>
                         </a>
