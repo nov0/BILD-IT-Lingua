@@ -149,6 +149,7 @@
             <li class="active"><a data-toggle="tab" href="#moderate-users" th:text="#{tab.moderate.users}">Moderate Users</a></li>
             <li><a data-toggle="tab" href="#moderate-lingua" id="moderage-lingua-tab" th:text="#{tab.moderate.lingua}">Moderate Lingua</a></li>
             <li><a data-toggle="tab" href="#reports" th:text="#{tab.reports}">Reports</a></li>
+            <li><a data-toggle="tab" id="register-admin" href="#register-new-admin" th:text="#{tab.register.new.admin}">Register new Admin</a></li>
         </ul>
         <div class="lingua-container-body">
             <div class="tab-content">
@@ -167,6 +168,15 @@
                     <div th:replace="fragments/reports :: reports">...</div>
                     <!-- Import JavaScript for ban-reports -->
                     <script type="text/javascript" th:src="@{/js/report-bans.js}"></script>  
+                </div>
+                <div id="register-new-admin" class="tab-pane fade">
+                	<!-- Load Register Admin - page -->
+                    <div id="register-admin-frag">...</div>
+                    <script type="text/javascript">
+                    	$("#register-admin").click(function() {
+                        	$("#register-admin-frag").load("fragments/register-new-admin.html #register-admin");
+                        });
+                    </script>
                 </div>
             </div>
             
