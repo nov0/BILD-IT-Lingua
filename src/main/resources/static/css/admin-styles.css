@@ -36,10 +36,12 @@
 	float: right;
 }
 
-.container-reg-admin {
-	max-width: 400px;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
-    padding: 50px;
-    background-color: #f1f1f1;
+/* Admin Registration */
+.form-control-lg {
+    height: 40px;
+    border-radius: 0px;
+}
+
+.registration-fields {
+    margin-left: 50px;
 }

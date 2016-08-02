@@ -271,7 +271,7 @@ public class GeneratePdf {
 		document.add(paragraph);
 		PdfPTable table = null;
 		
-		if ("First 20 Banned Users by all three criteries.pdf".matches(pdfTitle)) {
+		if ("First-20-Banned-Users-by-All-Ban-Criteria.pdf".matches(pdfTitle)) {
 			
 			table = new PdfPTable(10);
 			table.setWidths(new int[] {40, 150, 90, 90, 60, 65, 60, 60, 60, 60});

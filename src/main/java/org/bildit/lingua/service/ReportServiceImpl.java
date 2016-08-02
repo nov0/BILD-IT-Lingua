@@ -99,13 +99,13 @@ public class ReportServiceImpl implements ReportService {
 		
 		List<User> users = new ArrayList<>();
 		
-		if ("all".equals(bannedUsers)) {
+		if ("All".equals(bannedUsers)) {
 			users = userRepository.findAllBannedUsers(new PageRequest(0, 20));
-		} else if ("voting".equals(bannedUsers)) {
+		} else if ("Voting".equals(bannedUsers)) {
 			users = userRepository.findAllVotingBanUsers(new PageRequest(0, 20));
-		} else if ("adding".equals(bannedUsers)) {
+		} else if ("Adding".equals(bannedUsers)) {
 			users = userRepository.findAllAddingBanUsers(new PageRequest(0, 20));
-		} else if ("login".equals(bannedUsers)) {
+		} else if ("Login".equals(bannedUsers)) {
 			users = userRepository.findAllLoginBanUsers(new PageRequest(0, 20));
 		} else {
 			users = userRepository.findAllBannedUsers(new PageRequest(0, 20));

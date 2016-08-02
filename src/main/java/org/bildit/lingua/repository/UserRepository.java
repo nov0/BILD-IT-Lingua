@@ -65,8 +65,17 @@ public interface UserRepository extends BaseRepository <User, Long> {
 	@Query("update User u set u.votingBan = ?1 where u.id = ?2")
 	void updateVotingBan(boolean votingBan, Long id);
 	
-	/** @author Mladen Todorovic of all these methods below */
-	@Query("SELECT u FROM User u WHERE u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0")
+	/** 
+	 * @author Mladen Todorovic
+	 * 
+	 *  Methods: find all users by username or firstName or lastName 
+	 *  		 using search like % order by firstName and lastName
+	 *           and find all users by username or firstName or lastName
+	 *           and all ban-criteria order by ban-criteria
+	 *  */
+	@Query("SELECT u FROM User u WHERE (u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
+			+ "ORDER BY IFNULL(u.votingBan, 0) DESC, u.votingBan ASC, "
+			+ "IFNULL(u.addingBan, 0) DESC, u.addingBan ASC, IFNULL(1, 0) DESC, u.enabled ASC")
 	List<User> findAllBannedUsers(Pageable pageable);
 	
 	@Query("SELECT u FROM User u WHERE u.votingBan = 1 ORDER BY firstName, lastName")
@@ -145,6 +154,7 @@ public interface UserRepository extends BaseRepository <User, Long> {
 			+ "(u.votingBan = 1 OR u.addingBan = 1 OR u.enabled = 0) "
 			+ "AND u.firstName LIKE CONCAT(?1, '%') AND u.lastName LIKE CONCAT(?2, '%') ORDER BY firstName, lastName")
 	List<User> findByAllBansAndFirstNameAndLastNameOrderByAsc(String firstName, String lastName, Pageable pageable);
+	/** The end of list of methods */
 	
 	/** @author Novislav Sekulic */
 	@Query("SELECT DISTINCT u FROM User u left join u.tickets t WHERE t.learningLanguage = ?1 AND t.user = u GROUP BY t.ticketVotes ORDER BY SUM(t.ticketVotes.likes - t.ticketVotes.dislikes) DESC") 
