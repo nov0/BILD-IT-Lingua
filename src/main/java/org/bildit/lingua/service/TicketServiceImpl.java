@@ -172,8 +172,8 @@ public class TicketServiceImpl implements TicketService {
 	 * Method: update ticket's parameters using ticket-id
 	 * */
 	@Override
-	public void updateTicket(String textDomestic, String textForeign, String category, Long ticketId) {
-		ticketRepository.update(textDomestic, textForeign, category, ticketId);
+	public void updateTicket(String textDomestic, String textForeign, String category, LocalDateTime localDateTime, Long ticketId) {
+		ticketRepository.update(textDomestic, textForeign, category, LocalDateTime.now(), ticketId);
 	}
 	
 	/**

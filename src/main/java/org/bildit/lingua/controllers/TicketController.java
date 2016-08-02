@@ -134,7 +134,7 @@ public class TicketController {
 				logger.error(error);
 			}
 		}
-		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
+		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getLocalDateTime(), id);
 		return REDIRECT + "?ticket-edited";
 	}
 	
