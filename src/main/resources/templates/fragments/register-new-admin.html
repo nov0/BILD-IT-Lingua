@@ -18,7 +18,7 @@
 						<div class="row" style="">
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.name}" for="firstname">First name:</label>
+                                    <label th:text="#{form.field.name}" for="firstname">First name:</label>:
                                     <input type="text" th:field="*{firstName}"
 								        th:placeholder="#{form.field.name}" class="form-control form-control-lg" id="firstname" />
                                         <label th:if="${#fields.hasErrors('firstName')}"
@@ -28,7 +28,7 @@
                             </div>
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.lastname}" for="lastname">Last name:</label>
+                                    <label th:text="#{form.field.lastname}" for="lastname">Last name:</label>:
                                     <input type="text" th:field="*{lastName}"
                                         th:placeholder="#{form.field.lastname}" class="form-control form-control-lg"
                                         id="lastname" /> <label
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.username}" for="username">Username:</label>
+                                    <label th:text="#{form.field.username}" for="username">Username:</label>:
                                     <input type="text" th:field="*{username}"
                                         th:placeholder="#{form.field.username}" class="form-control form-control-lg"
                                         id='username' /> <label th:if="${#fields.hasErrors('username')}"
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.password}" for="password">Password:</label>
+                                    <label th:text="#{form.field.password}" for="password">Password:</label>:
                                     <input type="password" th:field="*{password}"
                                         th:placeholder="#{form.field.password}" class="form-control form-control-lg"
                                         id="password" /> <label
@@ -57,7 +57,7 @@
                             </div>
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.passwordre}" for="re-pass">Repeat password:</label>
+                                    <label th:text="#{form.field.passwordre}" for="re-pass">Repeat password:</label>:
                                     <input type="password" name="repeatpassword"
                                         th:placeholder="#{form.field.passwordre}" class="form-control form-control-lg"
                                         id="re-pass" /> <label th:if="${repassword}"
@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-md-5 registration-fields">
                                 <div class="form-group">
-                                    <label th:text="#{form.field.email}" for="email">Email:</label>
+                                    <label th:text="#{form.field.email}" for="email">Email:</label>:
                                     <input type="text" th:field="*{email}"
                                         th:placeholder="#{form.field.email}" class="form-control form-control-lg"
                                         id="email" /> <label th:if="${#fields.hasErrors('email')}"
