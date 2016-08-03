@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
  * @author Goran Arsenic
  * 
  * This class delete ticket from data base that administrator is mark as deactivated
- * Because of poor design of models/system, tickets can't be deleted easy, so implementation is pretty bad
  * 
  */
 @Component
