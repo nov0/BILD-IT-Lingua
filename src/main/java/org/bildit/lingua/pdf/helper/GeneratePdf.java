@@ -346,8 +346,8 @@ public class GeneratePdf {
 			
 		} else {
 			
-			table = new PdfPTable(7);
-			table.setWidths(new int[] {40, 150, 100, 100, 60, 60, 60});
+			table = new PdfPTable(8);
+			table.setWidths(new int[] {40, 150, 100, 100, 60, 65, 60, 100});
 			
 			PdfPCell cell = new PdfPCell(new Phrase("#", TABLE_HEADER));
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -383,7 +383,14 @@ public class GeneratePdf {
 			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
 			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
 			table.addCell(cell);
+			
+			cell = new PdfPCell(new Phrase("Date of Ban", TABLE_HEADER));
+			cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+			cell.setBackgroundColor(BaseColor.LIGHT_GRAY);
+			table.addCell(cell);
 			table.setHeaderRows(1);
+			
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 			
 			for(int i = 0; i < numberOfRecords; i++) {
 				table.setWidthPercentage(100);
@@ -396,6 +403,13 @@ public class GeneratePdf {
 				table.addCell(String.valueOf(users.get(i).sumOfAllUserTicketsLikes()));
 				table.addCell(String.valueOf(users.get(i).sumOfAllUserTicketsDislikes()));
 				table.addCell(String.valueOf(users.get(i).sumOfAllUserTickets()));
+				if ("First-20-Banned-Users-by-Voting-Ban-Criteria.pdf".matches(pdfTitle)) {
+					table.addCell(users.get(i).getDateOfVotingBan().format(formatter));
+				} else if ("First-20-Banned-Users-by-Adding-Ban-Criteria.pdf".matches(pdfTitle)) {
+					table.addCell(users.get(i).getDateOfAddingBan().format(formatter));
+				} else if ("First-20-Banned-Users-by-Login-Ban-Criteria.pdf".matches(pdfTitle)) {
+					table.addCell(users.get(i).getDateOfLoginBan().format(formatter));					
+				}
 			}
 		}
 		
