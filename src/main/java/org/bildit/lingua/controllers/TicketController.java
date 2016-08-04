@@ -134,7 +134,7 @@ public class TicketController {
 				logger.error(error);
 			}
 		}
-		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
+		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getLocalDateTime(), id);
 		return REDIRECT + "?ticket-edited";
 	}
 	
@@ -213,26 +213,6 @@ public class TicketController {
 			@PageableDefault(value=4) Pageable pageable
 			) {
 		
-		Page<Ticket> tickets = null;
-		
-		if(urlRequest.equals("user-tickets-all")) {
-			tickets = ticketService.findAllOrderByDislike(pageable);
-		} else if (urlRequest.equals("user-tickets-liked")) {
-			tickets = ticketService.getAllTicketOrderedByLike(pageable);
-		} else if(urlRequest.equals("user-tickets-disliked")) {
-			tickets = ticketService.getAllTicketsSortedByDislike(pageable);
-		} else if (urlRequest.equals("user-ticket-moderated")){
-			tickets = ticketService.getAllModeratedTickets(pageable);
-		} else if(urlRequest.equals("user-ticket-deleted")){
-			tickets = ticketService.getAllDeactivatedSortedByDislike(pageable);
-		}
-				
-
-		if(tickets != null && tickets.getContent().size() > 0) {
-			model.addObject(TICKETS, tickets);
-			model.addObject("totalPages", tickets.getTotalPages());
-		}
-		
-		return model;
+		return ticketService.getTicketsForAdmin(model, urlRequest, page, pageable);
 	}
 }

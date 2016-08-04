@@ -1,5 +1,6 @@
 package org.bildit.lingua.repository;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -76,8 +77,8 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
 	/** @author Mladen Todorovic */
 	@Transactional
 	@Modifying(clearAutomatically = true)
-	@Query("UPDATE Ticket t SET t.textDomestic = ?1, t.textForeign = ?2, t.category = ?3, t.edited = 1 WHERE t.id = ?4")
-	void update(String textDomestic, String textForeign, String category, Long ticketId);	
+	@Query("UPDATE Ticket t SET t.textDomestic = ?1, t.textForeign = ?2, t.category = ?3, t.localDateTime = ?4, t.edited = 1 WHERE t.id = ?5")
+	void update(String textDomestic, String textForeign, String category, LocalDateTime localDateTime, Long ticketId);	
 	
 	/** @author Goran Arsenic **/
 	@Query("SELECT t FROM Ticket t WHERE t.user = ?1 AND t.category = ?2 AND t.learningLanguage = ?3 AND t.domesticLanguage = ?4 AND t.deactivated IS NULL ORDER BY RAND()")

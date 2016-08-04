@@ -114,4 +114,41 @@ public class ReportServiceImpl implements ReportService {
 		return users;
 	}
 	
+	/**
+	 * @author Novislav Sekulic
+	 * @param language
+	 * @return
+	 */
+	@Override
+	public List<String> prepareListOfTopUsers(String language){
+		List<String> report = new ArrayList<>();
+		List<User> users = new ArrayList<>();
+		if(language.contains("All")) {
+			users = getTopUsersByReputation();
+		} else {
+			users = getTopUsersByReputationAndLanguage(language);
+		}
+		String reportStatus = "";
+		
+		int likes = 0;
+		int dislikes = 0;
+		
+		for(User u : users) {
+			reportStatus += u.getFirstName() + " " + u.getLastName() + "_";
+			reportStatus += u.getDomesticLanguage().getLanguageTitle() + "_" + u.getForeignLanguage().getLanguageTitle() + "_";
+			if(language.contains("All")) {
+				likes = u.sumOfAllUserTicketsLikes();
+				dislikes = u.sumOfAllUserTicketsDislikes();
+			} else {
+				likes = getUsersLikesByLanguages(u, language);
+				dislikes = getUsersDislikesByLanguage(u, language);
+			}
+			reportStatus += likes + "_" + dislikes + "_" + (likes - dislikes);
+			report.add(reportStatus);
+			reportStatus = "";
+		}
+		
+		return report;
+	}
+	
 }
