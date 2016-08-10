@@ -1,5 +1,6 @@
 package org.bildit.lingua.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.bildit.lingua.model.Admin;
@@ -40,11 +41,9 @@ public class AdminServiceImpl implements AdminService {
 		adminRepository.delete(id);
 	}
 	/**
-	 * 
 	 * @author Mladen Todorovic
-	 * 
+	 * @edit Novislav Sekulic
 	 * Method for registering administrator 
-	 * 
 	 * */
 	public String registerAdmin(
 			String repeatPassword,
@@ -96,6 +95,7 @@ public class AdminServiceImpl implements AdminService {
 	public boolean newEntryBan(long userId) {
 		User user = userRepository.findOne(userId);
 		user.setAddingBan(!user.isAddingBan());
+		user.setDateOfAddingBan(LocalDateTime.now());
 		userRepository.saveAndFlush(user);
 		return user.isAddingBan();
 	}
@@ -107,6 +107,7 @@ public class AdminServiceImpl implements AdminService {
 	public boolean loginBan(Long userId) {
 		User user = userRepository.findOne(userId);
 		user.setEnabled(!user.isEnabled());
+		user.setDateOfLoginBan(LocalDateTime.now());
 		userRepository.saveAndFlush(user);
 		return user.isEnabled();
 	}
@@ -118,6 +119,7 @@ public class AdminServiceImpl implements AdminService {
 	public boolean voteBan(Long userId) {
 		User user = userRepository.findOne(userId);
 		user.setVotingBan(!user.isVotingBan());
+		user.setDateOfVotingBan(LocalDateTime.now());
 		userRepository.saveAndFlush(user);
 		return user.isVotingBan();
 	}
