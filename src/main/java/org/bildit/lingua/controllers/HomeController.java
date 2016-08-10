@@ -33,13 +33,13 @@ public class HomeController {
 	public String goToHome(Model model, Authentication auth, HttpSession session, Ticket ticket) {
 		if(auth != null) {
 			model.addAttribute("authority", auth.getAuthorities().toString());
+			session.setAttribute("languages", languageService.getAllLanguages());
 			if("[USER]".equals(auth.getAuthorities().toString())) {
 				User user = userService.findUserByUsername(auth.getName());
 				session.setAttribute("loggedUser", user);
 				if(user.getForeignLanguage() != null) {
 					session.setAttribute("foreignLanguage", user.getForeignLanguage().getLanguageTitle());
 				}
-				model.addAttribute("languages", languageService.getAllLanguages());
 				model.addAttribute("ticket", ticket);
 			}
 		}

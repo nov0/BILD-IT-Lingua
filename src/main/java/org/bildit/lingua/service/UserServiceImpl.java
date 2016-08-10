@@ -1,5 +1,6 @@
 package org.bildit.lingua.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.bildit.lingua.model.BaseUser;
@@ -7,6 +8,7 @@ import org.bildit.lingua.model.Language;
 import org.bildit.lingua.model.User;
 import org.bildit.lingua.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -46,7 +48,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long id) {
 		userRepository.delete(id);
 	}
-
+	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: find user by username
+	 * */
 	@Override
 	public User findUserByUsername(String username) {
 		return userRepository.findUserByUsername(username);
@@ -125,7 +131,126 @@ public class UserServiceImpl implements UserService {
 		userRepository.updateForeignLanguageForUser(foreignLanguage, user.getId());
 		userRepository.flush();
 	}
-
-	
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and votingBan set to true
+	 * */
+	@Override
+	public List<User> searchUsersByVotingBan(String username, String firstName, String lastName) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if (!username.isEmpty()) {
+			users = userRepository.findAllByVotingBanAndUsernameOrderByAsc(username, new PageRequest(0, 10));
+		} else {
+			if (!firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByVotingBanAndFirstNameAndLastNameOrderByAsc(firstName, lastName, new PageRequest(0, 10));
+			} else if (!firstName.isEmpty() && lastName.isEmpty()) {
+				users = userRepository.findAllByVotingBanAndFirstNameOrderByAsc(firstName, new PageRequest(0, 10));
+			} else if (firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByVotingBanAndLastNameOrderByAsc(lastName, new PageRequest(0, 10));
+			} else {
+				users = null;
+			}
+		}
+		return users;
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and addingBan set to true
+	 * */
+	@Override
+	public List<User> searchUsersByAddingBan(String username, String firstName, String lastName) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if (!username.isEmpty()) {
+			users = userRepository.findAllByAddingBanAndUsernameOrderByAsc(username, new PageRequest(0, 10));
+		} else {
+			if (!firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByAddingBanAndFirstNameAndLastNameOrderByAsc(firstName, lastName, new PageRequest(0, 10));
+			} else if (!firstName.isEmpty() && lastName.isEmpty()) {
+				users = userRepository.findAllByAddingBanAndFirstNameOrderByAsc(firstName, new PageRequest(0, 10));
+			} else if (firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByAddingBanAndLastNameOrderByAsc(lastName, new PageRequest(0, 10));
+			} else {
+				users = null;
+			}
+		}
+		return users;
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName and enabled set to false
+	 * */
+	@Override
+	public List<User> searchUsersByLoginBan(String username, String firstName, String lastName) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if (!username.isEmpty()) {
+			users = userRepository.findAllByLoginBanAndUsernameOrderByAsc(username, new PageRequest(0, 10));
+		} else {
+			if (!firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByLoginBanAndFirstNameAndLastNameOrderByAsc(firstName, lastName, new PageRequest(0, 10));
+			} else if (!firstName.isEmpty() && lastName.isEmpty()) {
+				users = userRepository.findAllByLoginBanAndFirstNameOrderByAsc(firstName, new PageRequest(0, 10));
+			} else if (firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByLoginBanAndLastNameOrderByAsc(lastName, new PageRequest(0, 10));
+			} else {
+				users = null;
+			}
+		}
+		return users;
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName
+	 * */
+	@Override
+	public List<User> searchUsers(String username, String firstName, String lastName) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if (!username.isEmpty()) {
+			users = userRepository.findAllByUsernameOrderByAsc(username, new PageRequest(0, 10));
+		} else {
+			if (!firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByFirstNameAndLastNameOrderByAsc(firstName, lastName, new PageRequest(0, 10));
+			} else if (!firstName.isEmpty() && lastName.isEmpty()) {
+				users = userRepository.findAllByFirstNameOrderByAsc(firstName, new PageRequest(0, 10));
+			} else if (firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findAllByLastNameOrderByAsc(lastName, new PageRequest(0, 10));
+			} else {
+				users = null;
+			}
+		}
+		return users;
+	}
+	/**
+	 * @author Mladen Todorovic
+	 * Method: return list of users found by username or firstName or lastName
+	 *         and votingBan set to true or addingBan set to true or enabled set to false
+	 * */
+	@Override
+	public List<User> searchUsersByAllBans(String username, String firstName, String lastName) {
+		
+		List<User> users = new ArrayList<>();
+		
+		if (!username.isEmpty()) {
+			users = userRepository.findByAllBansAndUsernameOrderByAsc(username, new PageRequest(0, 10));
+		} else {
+			if (!firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findByAllBansAndFirstNameAndLastNameOrderByAsc(firstName, lastName, new PageRequest(0, 10));
+			} else if (!firstName.isEmpty() && lastName.isEmpty()) {
+				users = userRepository.findByAllBansAndFirstNameOrderByAsc(firstName, new PageRequest(0, 10));
+			} else if (firstName.isEmpty() && !lastName.isEmpty()) {
+				users = userRepository.findByAllBansAndLastNameOrderByAsc(lastName, new PageRequest(0, 10));
+			} else {
+				users = null;
+			}
+		}
+		return users;
+	}
 	
 }

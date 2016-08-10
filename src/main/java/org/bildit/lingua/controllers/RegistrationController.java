@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RegistrationController {
@@ -47,6 +48,20 @@ public class RegistrationController {
 		model.addAttribute("baseUser", baseUser);
 		return "registration-page";
 	}
+	
+	/**
+	 * @author Bojan Aleksic
+	 * @param baseUser
+	 * @param modelAndView
+	 * @return
+	 */
+	@RequestMapping(value="/fragments/register-new-admin.html", method=RequestMethod.GET)
+	@ResponseBody
+	public ModelAndView registerNewAdmin(BaseUser baseUser, ModelAndView modelAndView) {
+		modelAndView.addObject("baseUser", baseUser);
+		return modelAndView;
+	}
+	
 	/**
 	 * @author Mladen Todorovic
 	 * @edit Novislav Sekulic

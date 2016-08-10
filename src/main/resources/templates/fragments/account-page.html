@@ -82,7 +82,7 @@
 											<span class="caret"></span>
 										</a>
 										<ul class="dropdown-menu lingua-language select-language" onclick="showNotificationTicketsLanguageChange()">
-											<li th:each="language : ${languages}">
+											<li th:each="language : ${session.languages}">
 												<a id="selected-lang" href="#" th:text="#{language. + ${language}}">Language</a>
 											</li>
 										</ul>
@@ -146,9 +146,10 @@
     <!-- Administrator Account fragment -->
 	<div class="container" th:fragment="admin-account">
         <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#moderate-users">Moderate Users</a></li>
-            <li><a data-toggle="tab" href="#moderate-lingua">Moderate Lingua</a></li>
-            <li><a data-toggle="tab" href="#reports">Reports</a></li>
+            <li class="active"><a data-toggle="tab" href="#moderate-users" th:text="#{tab.moderate.users}">Moderate Users</a></li>
+            <li><a data-toggle="tab" href="#moderate-lingua" id="moderage-lingua-tab" th:text="#{tab.moderate.lingua}">Moderate Lingua</a></li>
+            <li><a data-toggle="tab" href="#reports" th:text="#{tab.reports}">Reports</a></li>
+            <li><a data-toggle="tab" id="register-admin" href="#register-new-admin" th:text="#{tab.register.new.admin}">Register new Admin</a></li>
         </ul>
         <div class="lingua-container-body">
             <div class="tab-content">
@@ -157,18 +158,32 @@
             		<div th:replace="fragments/moderate-users :: moderate-users">...</div>
                 </div>
                 <div id="moderate-lingua" class="tab-pane fade">
-                    <h3>Moderate Lingua</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                    <!-- Include Admin's Moderate Tickets - page -->
+            		<div th:replace="fragments/moderate-tickets :: moderate-tickets">...</div>
+            		<!-- Import JavaScript for loading tickets -->
+     				<script type="text/javascript" th:src="@{/js/load-ticket-admin.js}"></script>                    
                 </div>
                 <div id="reports" class="tab-pane fade">
-                    <h3>Reports</h3>
-                    <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+                	<!-- Include Admin Reports - page -->
+                    <div th:replace="fragments/reports :: reports">...</div>
+                    <!-- Import JavaScript for ban-reports -->
+                    <script type="text/javascript" th:src="@{/js/report-bans.js}"></script>  
+                </div>
+                <div id="register-new-admin" class="tab-pane fade">
+                	<!-- Load Register Admin - page -->
+                    <div id="register-admin-frag">...</div>
+                    <script type="text/javascript">
+                    	$("#register-admin").click(function() {
+                        	$("#register-admin-frag").load("fragments/register-new-admin.html #register-admin");
+                        });
+                    </script>
                 </div>
             </div>
+            
+            <!-- Include modal from fragments for "ban confirmation" -->
+            <div th:replace="fragments/ban-confirmation-modal :: ban-confirmation-modal"></div>
+            
         </div>
-        <!-- Script for ban users -->
-        <script type="text/javascript" th:src="@{/js/ban-user.js}"></script>
     </div>
-	
 </body>
 </html>

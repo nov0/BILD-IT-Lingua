@@ -12,4 +12,8 @@ public interface AdminService extends BaseService<Admin, Long> {
 	public boolean loginBan(Long userId);
 	public boolean voteBan(Long userId);
 	
+//	public boolean newEntryBan(boolean entryBan, Long id);
+//	public boolean loginBan(boolean loginBan, Long id);
+//	public boolean voteBan(boolean votingBan, Long id);
+	
 }

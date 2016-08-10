@@ -1,0 +1,47 @@
+/* @author Bojan Aleksic */
+
+.reports-group-container {
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: white;
+    margin-top: 20px;
+    margin-left: 40px;
+}
+
+.glyphicon-download-alt {
+    color: #6ba6d6;
+}
+
+.download-report {
+    text-align: right;
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+}
+
+.report-description {
+	padding: 28px;
+}
+
+.lang-and-btn-group {
+	text-align: right;
+	padding-right: 0px;
+	margin-top: 5px;
+}
+
+.lang-report {
+	position: absolute;
+	right: 0px;
+	float: right;
+}
+
+/* Admin Registration */
+.form-control-lg {
+    height: 40px;
+    border-radius: 0px;
+}
+
+.registration-fields {
+    margin-left: 50px;
+}

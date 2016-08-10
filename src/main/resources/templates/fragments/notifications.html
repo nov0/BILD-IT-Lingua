@@ -41,6 +41,15 @@
 					} else if(localStorage.getItem('admin-register')) {
 						showNotificationAdminRegister();
 						localStorage.removeItem('admin-register');
+					} else if(localStorage.getItem('ticket-disabled')) {
+						showNotificationTicketDisabled();
+						localStorage.removeItem('ticket-disabled');
+					} else if(localStorage.getItem('ticket-enabled')) {
+						showNotificationTicketEnabled();
+						localStorage.removeItem('ticket-enabled');
+					} else if(localStorage.getItem('user-ban-status-change')) {
+						showMessageUserBanStatusChange();
+						localStorage.removeItem('user-ban-status-change');
 					}
 					
 				}); // end ready
@@ -98,6 +107,16 @@
 					showNotification(message, colorGreen, iconOk);
 				}
 				
+				function showNotificationTicketDisabled() {
+					message = /*[[#{modal.ticket.disabled}]]*/ 'Ticket Disabled';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showNotificationTicketEnabled() {
+					message = /*[[#{modal.ticket.enabled}]]*/ 'Ticket Enabled';
+					showNotification(message, colorGreen, iconOk);
+				}
+				
 				/* notifications for selection practice if tickets not available */
 				
 				function showNotificationNoTicketAvailable() {
@@ -130,10 +149,21 @@
 				/* notifications for ban user */
 				/********* by goran ***********/
 				function showNotificationAddNewBan() {
-					message = "You can not add new entry. Add new entry ban is active.";
+					message = /*[[#{notification.add.new.entry.ban}]]*/"notification";
 					showNotification(message, colorRed, iconWarning);
 				}
 				
+				function showMessageUserBanStatusChange() {
+					message = /*[[#{notification.user.bans}]]*/ "User ban status changed";
+					showNotification(message, colorGreen, iconOk);
+				}
+				
+				function showMessageDownloadReport() {
+					setTimeout(function() {
+						message = /*[[#{report.downloaded}]]*/ 'Report successfully downloaded.';
+    					showNotification(message, colorGreen, iconOk);
+					}, 2000);
+				}
 				
 				/**
 				 * Function for showing notification. This function is called form others functions.

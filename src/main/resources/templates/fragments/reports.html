@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Reports</title>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+
+	<div th:fragment="reports">
+		
+		<!-- Top 20 Users -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/users-icon.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5 th:text="#{report.top.users}">Top 20 Users ordered by reputation (total vote on their entries).</h5>
+                </div>
+                <form th:action="@{/download}" id="form-users">
+                <div class="row">
+                    <div class="col-md-3 lang-and-btn-group" style="text-align: right;">
+						<div class="dropdown">
+	                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-users"> 
+	                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+	                                <span th:text="#{tab.choose.language}" class="tab-btn-group selected-language-users">Language</span> 
+	                                <span class="caret"></span>
+	                            </button>
+	                            <ul class="dropdown-menu lingua-language select-language-users lang-report" aria-labelledby="top-users">
+	                            	<li><a class="dropdown-language-select" href="#" th:text="#{report.button.all}">All</a></li>
+	                                <li th:each="language : ${session.languages}">
+	                                    <a class="dropdown-language-select" href="#" th:text="${language}">Language</a>
+	                                </li>
+	                            </ul>
+	                        </div>
+                    </div>
+                    <input type="hidden" th:value="top-users" name="request" />
+                	<input type="hidden" value="All" id="input-language-users" name="languageRequest" />
+                    <div class="col-md-3 download-report">
+                        <small>
+                            <a href="#" id="download-users" type="submit" >
+                                <span class="glyphicon glyphicon-download-alt"></span>
+                                <span th:text="#{report.download.link}">Download</span>
+                            </a>
+                        </small>
+                    </div>
+                </div>
+              </form>
+            </div>
+        </div>
+        <!-- Top 20 Users End -->
+        
+        <!-- Top 20 Entries -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/top-entries.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5 th:text="#{report.top.entries}">Top 20 entries for selected language, based on reputation.</h5>
+                </div>
+                <form th:action="@{/download}" id="form-entries">
+                	<div class="row">
+	                    <div class="col-md-3 lang-and-btn-group">
+	                        <!-- Language -->
+	                        <div class="dropdown">
+	                            <button class="dropdown-toggle btn btn-sm btn-primary" data-toggle="dropdown" id="top-entries"> 
+	                                <span class="glyphicon glyphicon-flag btn-glyphicons" aria-hidden="true"></span> 
+	                                <span th:text="#{tab.choose.language}" class="tab-btn-group selected-language-entries"> 
+	                                	&nbsp; Select Language
+	                                </span> 
+	                                <span class="caret"></span>
+	                            </button>
+	                            <ul class="dropdown-menu lingua-language select-language lang-report" aria-labelledby="top-entries">
+	                                <li th:each="language : ${session.languages}">
+	                                    <a class="selected-lang" href="#" th:text="${language}">Language</a>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                        <!-- Language End -->
+	                    </div>
+	                    <input type="hidden" th:value="top-entries" name="request" />
+                		<input type="hidden" value="" id="language-entries" name="languageRequest" />
+	                    <div class="col-md-3 download-report">
+	                        <small>
+	                            <a href="#" id="download-entries" type="submit">
+	                                <span class="glyphicon glyphicon-download-alt"></span>
+	                                <span th:text="#{report.download.link}">Download</span>
+	                            </a>
+	                        </small>
+	                    </div>
+                	</div>
+                </form>
+            </div>
+            <script type="text/javascript" th:inline="javascript">
+            /*<![CDATA[*/
+            	$(document).ready(function() {
+            		
+            		$(".selected-lang").click(function() {
+						$(".selected-language-entries").text(this.innerHTML);
+						$("#language-entries").attr("value", this.innerHTML);
+            		});
+            		            		
+            		$("#download-entries").click(function(event) {
+            			event.preventDefault();
+            			var message;
+            			if($("#language-entries").attr("value") == "" || $("#language-entries").attr("value") == undefined) {
+            				message = /*[[#{error.entries.select.language}]]*/ 'Please select language.'; 
+            				showNotification(message, "danger", "glyphicon glyphicon-warning-sign");
+            			} else {
+            				$("#form-entries").submit();
+            				showMessageDownloadReport();
+            			}
+            		});
+            		
+            	});
+            /*]]>*/
+            </script>
+        </div>
+        <!-- Top 20 Entries End -->
+        
+        <!-- Banned Users -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/user-ban-report.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5 th:text="#{report.banned.users}">Banned users.</h5>
+                </div>
+                <form th:action="@{/download}" id="form-banned-users">
+	                <div class="row">
+	                    <div class="col-md-3 lang-and-btn-group">
+	                    	<!-- Button Group -->
+	                        <div class="btn-group">
+	                        	<button th:text="#{report.btn.all}" type="button" class="btn btn-sm btn-primary ban-user" id="All">All</button>
+	                            <button th:text="#{report.btn.login}" type="button" class="btn btn-sm btn-primary ban-user" id="Login">Login</button>
+	                            <button th:text="#{report.btn.adding}" type="button" class="btn btn-sm btn-primary ban-user" id="Adding">Adding</button>
+	                            <button th:text="#{report.btn.voting}" type="button" class="btn btn-sm btn-primary ban-user" id="Voting">Voting</button>
+	                        </div>
+							<!-- Button Group End -->
+	                    </div>
+	                    <input type="hidden" th:value="banned-users" name="request" />
+	                    <input type="hidden" value="" id="banned-users-id" name="bannedUsers" />
+	                    <div class="col-md-3 download-report">
+	                        <small>
+	                             <a href="#" id="download-banned-users" type="submit">
+	                                <span class="glyphicon glyphicon-download-alt"></span>
+	                                <span th:text="#{report.download.link}">Download</span>
+	                            </a>
+	                        </small>
+	                    </div>
+	                </div>
+                </form>
+            </div>
+        </div>
+        <!-- Banned Users End -->
+        
+        <!-- General Statistic -->
+        <div class="row">
+            <div class="col-md-11 reports-group-container">
+                <div class="col-md-2">
+                    <img th:src="@{/images/pie-chart.png}" />
+                </div>
+                <div class="col-md-7 report-description">
+                    <h5 th:text="#{report.general.statistic}">General statistic of application. How many entries for which language.</h5>
+                </div>
+                <div class="col-md-3 download-report">
+                    <small>
+                        <a th:href="@{/download(request=statistic)}" onclick="showMessageDownloadReport()">
+                            <span class="glyphicon glyphicon-download-alt"></span>
+                            <span th:text="#{report.download.link}">Download</span>
+                        </a>
+                    </small>
+                </div>
+            </div>
+        </div>
+        <!-- General Statistic End -->
+	</div>
+	
+</body>
+</html>

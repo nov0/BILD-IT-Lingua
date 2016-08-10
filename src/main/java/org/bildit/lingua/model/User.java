@@ -1,5 +1,6 @@
 package org.bildit.lingua.model;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,12 @@ public class User extends BaseUser {
 	@Column(columnDefinition = "BIT", length = 1)
 	private boolean loginBan = false;
 	
+	private LocalDateTime dateOfVotingBan;
+	
+	private LocalDateTime dateOfAddingBan;
+	
+	private LocalDateTime dateOfLoginBan;
+	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, orphanRemoval=true)
 	@JoinTable(name="user_tickets", 
 	   joinColumns=@JoinColumn(name="user_id"),
@@ -65,6 +72,27 @@ public class User extends BaseUser {
 		this.votingBan = votingBan;
 		this.addingBan = addingBan;
 		this.loginBan = loginBan;
+	}
+	/** Method: return total number of all user's tickets */
+	public int sumOfAllUserTickets() {
+		return this.getTickets().size();
+	}
+	
+	/** Method: return sum of all user's tikets votes (likes) */
+	public int sumOfAllUserTicketsLikes() {
+		int sum = 0;
+		for (Ticket ticket: this.getTickets()) {
+			sum += ticket.getTicketVotes().getLikes();
+		}
+		return sum;
+	}
+	/** Method: return sum of all user's tikets votes (dislikes) */
+	public int sumOfAllUserTicketsDislikes() {
+		int sum = 0;
+		for (Ticket ticket: this.getTickets()) {
+			sum += ticket.getTicketVotes().getDislikes();
+		}
+		return sum;
 	}
 	
 	/** Getters and Setters */
@@ -112,4 +140,28 @@ public class User extends BaseUser {
 		this.foreignLanguage = foreignLanguage;
 	}
 
+	public LocalDateTime getDateOfVotingBan() {
+		return dateOfVotingBan;
+	}
+
+	public void setDateOfVotingBan(LocalDateTime dateOfVotingBan) {
+		this.dateOfVotingBan = dateOfVotingBan;
+	}
+
+	public LocalDateTime getDateOfAddingBan() {
+		return dateOfAddingBan;
+	}
+
+	public void setDateOfAddingBan(LocalDateTime dateOfAddingBan) {
+		this.dateOfAddingBan = dateOfAddingBan;
+	}
+
+	public LocalDateTime getDateOfLoginBan() {
+		return dateOfLoginBan;
+	}
+
+	public void setDateOfLoginBan(LocalDateTime dateOfLoginBan) {
+		this.dateOfLoginBan = dateOfLoginBan;
+	}
+	
 }

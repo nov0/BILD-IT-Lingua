@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!-- @author Bojan Aleksic -->
+	
+	<!-- Content for Ban Confirmation returned by TicketController -->
+	<div class="modal-body" style="min-height: 140px;">
+		<div class="col-md-12 user-container">
+			<!-- User's container -->
+			<div class="" style="float: left;">
+				<img src="images/user-icon.png" />
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<span th:text="${user.firstName} + ' ' + ${user.lastName} " style="font-size: 120%;">User's full name</span>
+				</div>
+				<div class="col-md-4 votes-group">
+					<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
+					<span th:text="${user.sumOfAllUserTicketsLikes()}"></span> &nbsp; 
+					<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
+					<span th:text="${user.sumOfAllUserTicketsDislikes()}"></span>
+				</div>
+				<div class="col-md-10">
+					<p th:text="${user.username}">Username</p>
+				</div>
+				<div class="col-md-10 ban-icons-group">
+					<span class="glyphicon glyph-hover glyphicon-plus-sign ban-icons" id="new-entry-icon"></span>
+					&nbsp; &nbsp; 
+					<span class="glyphicon glyph-hover glyphicon-log-in ban-icons" id="login-ban-icon"></span>
+					&nbsp; &nbsp; 
+					<span class="glyphicon glyph-hover glyphicon-thumbs-up ban-icons" id="voting-ban-icon"></span>
+				</div>
+			</div>
+		</div>
+		<!-- User's container End -->
+		<input type="hidden" id="ban-user-id" th:value="${user.id}" />
+		<input type="hidden" id="is-adding-ban" th:value="${newEntryBan}" />
+		<input type="hidden" id="is-login-ban" th:value="${loginBan}" />
+		<input type="hidden" id="is-voting-ban" th:value="${votingBan}" />
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-sm btn-primary" id="ban-submit">
+			<span class="glyphicon glyphicon-ok"></span>&nbsp;
+			<span>Submit</span>
+		</button>
+		<button type="button" data-dismiss="modal" class="btn btn-sm btn-danger">
+			<span class="glyphicon glyphicon-remove"></span>&nbsp; <span>Cancel</span>
+		</button>
+	</div>
+	
+	<!-- Include JavaScript for handling the ban options -->
+	<script type="text/javascript" th:src="@{/js/banConfirmationModal.js}"></script>
+
+</body>
+</html>

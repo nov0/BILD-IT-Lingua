@@ -68,7 +68,7 @@
 			<button type="button" class="btn btn-danger" data-dismiss="modal">
 				<span class="glyphicon glyphicon-remove-circle"></span>&nbsp;<span th:text="#{form.field.button.cancel}">Cancel</span>
 			</button>
-			<button type="submit" class="btn btn-success" id="ticket-edited">
+			<button type="submit" class="btn btn-success" id="ticket-edited" th:classappend="${authority == '[ADMIN]' ? 'delete-confirm-admin' : ''}">
 				<span class="glyphicon glyphicon-floppy-disk"></span>&nbsp;<span th:text="#{save.changes}">Save changes</span>
 			</button>
 		</div>
@@ -80,7 +80,7 @@
 	<script th:inline="javascript">
 		/*<![CDATA[*/
 		$(document).ready(function() {
-			
+
 			/*
 			 * Edit Ticket Validation
 			 * @author: Bojan Aleksic
@@ -126,6 +126,10 @@
 				if(domesticText.length > 0 && domesticText.length <= 100
 						&& foreignText.length > 0 && foreignText.length <= 100) {
 					localStorage.setItem("ticket-edited", true);
+					
+					if($(this).hasClass("delete-confirm-admin")) {
+						localStorage.setItem("tabId", $(".li-tickets.active").attr('id'));
+					}
 				}
 			}); // end click
 				
@@ -138,6 +142,7 @@
 			$('.modal').on('hidden.bs.modal', function() { 
 				$(this).removeData(); 
 			});
+			
 			
 		}); // end ready
 		/*]]>*/

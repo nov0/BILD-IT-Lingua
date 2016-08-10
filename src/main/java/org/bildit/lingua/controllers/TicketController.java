@@ -5,6 +5,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.Authentication;
 import org.bildit.lingua.model.Ticket;
 import org.bildit.lingua.repository.UserRepository;
 import org.bildit.lingua.service.LanguageService;
@@ -112,9 +113,10 @@ public class TicketController {
 	 * @return
 	 */
 	@RequestMapping("/edit-ticket")
-	public String editTicket(Model model, @RequestParam("id") Long id) {
+	public String editTicket(Model model, @RequestParam("id") Long id, Authentication auth) {
 		model.addAttribute("ticket", ticketService.getOne(id));
 		model.addAttribute("languages", languageService.getAllLanguages());
+		model.addAttribute("authority", auth.getAuthorities().toString());
 		return "fragments/edit-ticket-modal-content";
 	}
 	
@@ -132,7 +134,7 @@ public class TicketController {
 				logger.error(error);
 			}
 		}
-		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), id);
+		ticketService.updateTicket(ticket.getTextDomestic(), ticket.getTextForeign(), ticket.getCategory(), ticket.getLocalDateTime(), id);
 		return REDIRECT + "?ticket-edited";
 	}
 	
@@ -159,6 +161,24 @@ public class TicketController {
 	}
 	
 	/**
+	 * @author Novislav Sekulic
+	 * @param ticket
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/disable-ticket")
+	public String disableTicket(@ModelAttribute Ticket ticket, @RequestParam("id") Long id) {
+		ticketService.disableTicketByAdmin(id);
+		return REDIRECT;
+	}
+	
+	@RequestMapping("/enable-ticket")
+	public String enableTicket(@RequestParam("id") Long id) {
+		ticketService.enableTicket(id);
+		return REDIRECT;
+	}
+	
+	/**
 	 * @author Mladen Todorovic
 	 * Method: add like to ticket by ticket-id and user's username
 	 */
@@ -180,4 +200,19 @@ public class TicketController {
 		return ticketService.addDislikeToTicket(id, principal.getName());
 	}
 	
+	/**
+	 * @author Novislav Sekulic
+	 * Method for showing ticket for admin.
+	 */
+	@RequestMapping("/fragments/get-tickets-admin")
+	@ResponseBody
+	public ModelAndView getTicketsForAdmin(
+			ModelAndView model,
+			@RequestParam("urlData") String urlRequest,
+			@RequestParam(value="page", required=false) Integer page,
+			@PageableDefault(value=4) Pageable pageable
+			) {
+		
+		return ticketService.getTicketsForAdmin(model, urlRequest, page, pageable);
+	}
 }

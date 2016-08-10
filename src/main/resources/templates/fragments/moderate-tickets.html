@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleag.org"
+	xmlns:sec="http://www.thymeleaf.org/tymeleaf-extras-springsecurity4">
+<head>
+</head>
+<body>
+
+	<!--  @author Novislav Sekulic -->
+
+	<div th:fragment="moderate-tickets">
+		<div class="row">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<button style="float: left; background-color: #efefef"
+							type="button" class="navbar-toggle" data-toggle="collapse"
+							data-target="#myNavbar">
+							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+								class="icon-bar"></span>
+						</button>
+					</div>
+					<div class="collapse navbar-collapse" id="myNavbar">
+						<ul class="nav navbar-nav">
+							<li class="li li-tickets active" id="user-tickets-all"><a href="#">
+									<span class="glyphicon glyphicon-list btn-glyphicons" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.all}" class="tab-btn-group" >All</span>
+							</a></li>
+							<li class="li li-tickets" id="user-tickets-liked"><a href="#">
+									<span class="glyphicon glyphicon-thumbs-up" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.like}" class="tab-btn-group" >Liked</span>
+							</a></li>
+							<li class="li li-tickets" id="user-tickets-disliked"><a href="#">
+									<span class="glyphicon glyphicon-thumbs-down" style="color: white"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.dislike}" class="tab-btn-group" >Disliked</span>
+							</a></li>
+							<li class="li li-tickets" id="user-ticket-moderated"><a href="#">
+									<span class="glyphicon glyphicon-pencil btn-glyphicons"
+									aria-hidden="true"></span> <span th:text="#{tab.moderated}"
+									class="tab-btn-group">Moderated</span>
+							</a></li>
+							<li class="li li-tickets" id="user-ticket-deleted"><a href="#">
+									<span class="glyphicon glyphicon-trash btn-glyphicons"
+									aria-hidden="true"></span>
+									<span th:text="#{tab.deleted}" class="tab-btn-group">Deleted</span>
+							</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+
+			<!-- Include Modal from fragments -->
+			<div th:replace="fragments/edit-lingua-modal :: modal-edit"></div>
+			<div th:replace="fragments/delete-ticket-modal :: modal-delete"></div>
+
+			<div class="tickets-content">
+
+				<!-- Here goes Tickets content loaded with AJAX -->
+
+			</div>
+		</div>
+	</div>
+</body>
+</html>

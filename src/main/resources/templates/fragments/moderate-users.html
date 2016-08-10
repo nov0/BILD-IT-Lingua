@@ -1,83 +1,122 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 <meta charset="UTF-8" />
-<title>Insert title here</title>
+<title>Moderate-users</title>
 </head>
+
 <body>
 
 	<!-- @author Bojan Aleksic -->
+	<!-- @edit Mladen Todorovic -->
 
 	<div class="test" th:fragment="moderate-users">
 		<div class="row">
 			<div class="col-md-4 search-user-wrapper">
 				<form th:action="@{/user-search}" method="GET">
 					<div class="form-group">
-						<input type="text" name="searchQuery" class="form-control" placeholder="Search..." />
+						<input type="text" name="username" class="form-control" th:placeholder="#{form.field.username}" />
 					</div>
-					<div class="checkbox" style="position: relative; bottom: 10px;">
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="username" name="username" />
-							Username
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="firstName" name="firstName" />
-							First name
-						</label>
-						<label class="checkbox-inline">
-							<input type="checkbox" th:value="lastName" name="lastName" />
-							Last name
-						</label>
+					<div class="form-group">
+						<input type="text" name="firstName" class="form-control" th:placeholder="#{form.field.name}" />
+					</div>
+					<div class="form-group">
+						<input type="text" name="lastName" class="form-control" th:placeholder="#{form.field.lastname}" />
 					</div>
 					<div class="form-group">
 						<select class="form-control" name="selectedBan">
-							<option selected="selected" disabled="disabled" style="font-style: italic;">Show...</option>
-							<option th:value="allUsers">All users</option>
-							<option th:value="bannedVoting">Banned - Voting</option>
-							<option th:value="bannedAdding">Banned - Adding</option>
-							<option th:value="bannedLogin">Banned - Login</option>
+							<option selected="selected" disabled="disabled" style="font-style: italic;" th:text="#{filter.list.show}">Show...</option>
+							<option th:value="allUsers" th:text="#{filter.list.all}">All users</option>
+							<option th:value="bannedVoting" th:text="#{filter.list.banned.voting}">Banned - Voting</option>
+							<option th:value="bannedAdding" th:text="#{filter.list.banned.adding}">Banned - Adding</option>
+							<option th:value="bannedLogin" th:text="#{filter.list.banned.login}">Banned - Login</option>
 						</select>
 					</div>
 					<button type="submit" class="btn btn-primary btn-block"
 						style="margin-top: 100px;">
-						<span class="glyphicon glyphicon-search"></span> Search
+						<span class="glyphicon glyphicon-search"></span>&nbsp;<span th:text="#{button.search}">Search</span>
 					</button>
 				</form>
 			</div>
-			<div class="col-md-7 search-user-wrapper">
+			
+			<div th:if="${users eq null or users.isEmpty()}" class="col-md-7 search-user-wrapper-list">
+				<div class="col-md-12 user-container">
+					<div style="margin-top:30px; margin-bottom: 30px; text-align: center;">
+						<span th:text="#{search.no.users}">No users available. Use search to find users.</span>
+					</div>
+				</div>
+			</div>
+			
+			<div th:if="${users ne null}" class="col-md-7 search-user-wrapper-list">
+				<div th:each="user : ${users}">
 				<div class="col-md-12 user-container">
 					<div class="" style="float: left;">
 						<img src="images/user-icon.png" />
 					</div>
 					<div class="row">
 						<div class="col-md-6">
-							<span style="font-size: 120%;">John Smith</span>
+							<span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>
 						</div>
 						<div class="col-md-4 votes-group">
 							<span style="font-size: 110%; color: green;" class="glyphicon glyphicon-thumbs-up"></span>
-							<span style="font-size: 110%;">35</span> &nbsp;
+							<span th:text="${user.sumOfAllUserTicketsLikes()}"></span>
 							<span style="font-size: 110%; color: red;" class="glyphicon glyphicon-thumbs-down"></span>
-							<span style="font-size: 110%;">12</span>
+							<span th:text="${user.sumOfAllUserTicketsDislikes()}"></span>
 						</div>
 						<div class="col-md-10">
-							<p>johnny</p>
+							<span th:text="${user.username}"></span>
 						</div>
 						<div class="col-md-10 ban-icons-group">
-							<span id="ban-add-new" data-toggle="tooltip" title="Ban add new entry" class="glyphicon glyphicon-plus-sign ban-icons"></span>
-							<span id="ban-add-new-yes" data-toggle="tooltip" title="Unban add new entry" class="ban-red glyphicon glyphicon-ban-circle"></span>
+							<span th:if="${user.addingBan}">
+								<span th:id="ban-add-new + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons" 
+								th:ondblclick="'banAddNew('+${user.id}+')'"></span>
+								<span th:id="ban-add-new-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanAddNew('+${user.id}+')'"></span>
+							</span>
+							<span th:unless="${user.addingBan}">
+								<span th:id="ban-add-new + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.ban}" class="glyphicon glyphicon-plus-sign ban-icons"
+								th:ondblclick="'banAddNew('+${user.id}+')'"></span>
+								<span th:id="ban-add-new-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.new.entry.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanAddNew('+${user.id}+')'"></span>
+							</span>
+							&nbsp; &nbsp;
+							<span th:unless="${user.enabled}">
+								<span th:id="ban-login + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"
+								th:ondblclick="'banLogin('+${user.id}+')'"></span>
+								<span th:id="ban-login-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanLogin('+${user.id}+')'"></span>
+							</span> 
+							<span th:if="${user.enabled}">
+								<span th:id="ban-login + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.ban}" class="glyphicon glyphicon-log-in ban-icons"
+								th:ondblclick="'banLogin('+${user.id}+')'"></span>
+								<span th:id="ban-login-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.login.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanLogin('+${user.id}+')'"></span>
+							</span> 
 							&nbsp; &nbsp; 
-							<span id="ban-login" data-toggle="tooltip" title="Ban login" class="glyphicon glyphicon-log-in ban-icons"></span>
-							<span id="ban-login-yes" data-toggle="tooltip" title="Unban login" class="ban-red glyphicon glyphicon-ban-circle"></span>
-							&nbsp; &nbsp; 
-							<span id="ban-vote" data-toggle="tooltip" title="Ban vote" class="glyphicon glyphicon-thumbs-up ban-icons"></span>
-							<span id="ban-vote-yes" data-toggle="tooltip" title="Unban vote" class="ban-red glyphicon glyphicon-ban-circle"></span>
+							<span th:if="${user.votingBan}">
+								<span th:id="ban-vote + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"
+								th:ondblclick="'banVote('+${user.id}+')'"></span>
+								<span th:id="ban-vote-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle"
+								th:ondblclick="'unbanVote('+${user.id}+')'"></span>
+							</span>
+							<span th:unless="${user.votingBan}">
+								<span th:id="ban-vote + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.ban}" class="glyphicon glyphicon-thumbs-up ban-icons"
+								th:ondblclick="'banVote('+${user.id}+')'"></span>
+								<span th:id="ban-vote-yes + ${user.id}" data-toggle="tooltip" th:attr="title=#{tooltip.vote.unban}" class="ban-red glyphicon glyphicon-ban-circle hide"
+								th:ondblclick="'unbanVote('+${user.id}+')'"></span>
+							</span>
+						</div>
+						<div class="col-md-4">
+							<a th:href="@{/ban-user-request(id=${user.id})}" data-toggle="modal" data-target="#ban-confirmation-modal">Ban user</a>
 						</div>
 					</div>
 				</div>
-				<input id="user-id" type="hidden" th:value="3" />
+				</div>
 			</div>
-		</div>
+			<!-- Import fragment for handling bans that contain JavaScript -->
+			<div th:replace="fragments/ban-user :: banUser">...</div>
+		</div>	
 	</div>
 	
 </body>
